@@ -6,7 +6,7 @@ package org.hamcrest.date;
 
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.core.IsNot.*;
-import static org.hamcrest.date.IsSameInstant.*;
+import static org.hamcrest.date.DateMatchers.*;
 import java.util.Date;
 import org.junit.Test;
 

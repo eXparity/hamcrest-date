@@ -8,7 +8,7 @@ import static java.util.Calendar.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.core.IsNot.*;
 import static org.hamcrest.date.AbstractDateMatcherTestUtils.*;
-import static org.hamcrest.date.IsWithin.*;
+import static org.hamcrest.date.DateMatchers.*;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import org.junit.Test;
