@@ -22,12 +22,12 @@ public class IsSameDayOfTheWeekTest {
 	@Test
 	public void canCompareTheSameDayOfWeek() {
 		Date date = new Date(), other = new Date(date.getTime());
-		assertThat(other, sameDayOfTheWeek(date));
+		assertThat(other, sameWeekday(date));
 	}
 
 	@Test
 	public void canDetectDifferentDaysOfTheWeek() {
 		Date date = new Date(), other = addDateField(date, DAY_OF_MONTH, 1);
-		assertThat(other, not(sameDayOfTheWeek(date)));
+		assertThat(other, not(sameWeekday(date)));
 	}
 }

@@ -11,9 +11,9 @@ import org.hamcrest.Matcher;
  * 
  * @author Stewart Bissett
  */
-public class IsSameDayOfTheYear extends AbstractDatePartMatcher {
+public class IsSameDay extends AbstractDatePartMatcher {
 
-	public IsSameDayOfTheYear(final Date date) {
+	public IsSameDay(final Date date) {
 		super(date, Calendar.DAY_OF_YEAR, "day of the year");
 	}
 
@@ -29,8 +29,8 @@ public class IsSameDayOfTheYear extends AbstractDatePartMatcher {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> sameDayOfTheYear(final Date date) {
-		return new IsSameDayOfTheYear(date);
+	public static Matcher<Date> sameDay(final Date date) {
+		return new IsSameDay(date);
 	}
 
 }

@@ -22,13 +22,13 @@ public class IsSameDayOfTheYearTest {
 	@Test
 	public void canCompareTheSameDayOfYear() {
 		Date date = new Date(), other = new Date(date.getTime());
-		assertThat(other, sameDayOfTheYear(date));
+		assertThat(other, sameDay(date));
 	}
 
 	@Test
 	public void canDetectDifferentDaysOfTheYear() {
 		Date date = new Date(), other = addDateField(date, DAY_OF_YEAR, 1);
-		assertThat(other, not(sameDayOfTheYear(date)));
+		assertThat(other, not(sameDay(date)));
 	}
 
 }
