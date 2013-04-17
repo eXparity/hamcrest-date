@@ -22,10 +22,11 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-
+  
 	<scm>
-		<url>https://github.com/modularit/hamcrest-date</url>
-		<connection>scm:git://github.com/modularit/hamcrest-date.git</connection>
+		<connection>scm:git:@github.com:modularit/hamcrest-date.git</connection>
+    <developerConnection>scm:git:git@github.com:modularit/hamcrest-date.git</developerConnection>
+    <url>git@github.com:modularit/hamcrest-date.git</url>
 	</scm>
 
 	<developers>
@@ -51,14 +52,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 	
 </project>
