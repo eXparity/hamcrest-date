@@ -9,6 +9,12 @@
 	<url>https://github.com/modularit/hamcrest-date</url>
 	<description>Hamcrest Date matchers for Java</description>
 
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+
 	<licenses>
 		<license>
 			<name>New BSD License</name>
@@ -45,5 +51,14 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	  
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	
 </project>
