@@ -12,15 +12,15 @@ You can obtain Hamcrest binaries from [maven central][]. To include your project
 
 A maven project
 
-``<dependency>
-	<groupId>uk.co.it.modular</groupId>
-	<artifactId>hamcrest-date</artifactId>
-	<version>0.9.1</version>
-</dependency>``
+    <dependency>
+        <groupId>uk.co.it.modular</groupId>
+        <artifactId>hamcrest-date</artifactId>
+        <version>0.9.1</version>
+    </dependency>
 
 A project which uses ivy for dependency management
 
-``<dependency org="uk.co.it.modular" name="hamcrest-date" rev="0.9.1"/>``
+    <dependency org="uk.co.it.modular" name="hamcrest-date" rev="0.9.1"/>
             
 Binaries
 --------
@@ -31,13 +31,18 @@ Usage
 
 The matchers are exposed as static methods on the DateMatchers class. For Example
 
-``Date today = new Date(); myBirthday = new Date()
-MatcherAssert.assertThat(today, DateMatchers.sameDate(myBirthday));``
+    Date today = new Date(); myBirthday = new Date()
+    MatcherAssert.assertThat(today, DateMatchers.sameDate(myBirthday));
 
 or
 
-``Date today = new Date(); myBirthday = new Date()
-MatcherAssert.assertThat(today, DateMatchers.within(1, TimeUnit.DAY, myBirthday));``
+    Date today = new Date(); myBirthday = new Date()
+    MatcherAssert.assertThat(today, DateMatchers.within(1, TimeUnit.DAY, myBirthday));
+
+or after static importing
+
+    Date today = new Date(); myBirthday = new Date()
+    assertThat(today, within(1, DAY, myBirthday));
 
 The libary includes date matchers for:
 
