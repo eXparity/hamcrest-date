@@ -31,7 +31,7 @@ Usage
 
 The matchers are exposed as static methods on the DateMatchers class. For Example
 
-    Date today = new Date(); myBirthday = new Date()
+    Date today = new Date(); myBirthday = new Date();
     MatcherAssert.assertThat(today, DateMatchers.sameDate(myBirthday));
 
 or
@@ -41,7 +41,7 @@ or
 
 or after static importing
 
-    Date today = new Date(); myBirthday = new Date()
+    Date today = new Date(); myBirthday = new Date();
     assertThat(today, within(1, DAY, myBirthday));
 
 The libary includes date matchers for:
