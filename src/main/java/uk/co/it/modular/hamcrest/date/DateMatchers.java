@@ -5,6 +5,7 @@
 package uk.co.it.modular.hamcrest.date;
 
 import java.util.Date;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import org.hamcrest.Matcher;
 
@@ -92,7 +93,45 @@ public abstract class DateMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameDay(final Date date) {
-		return IsSameDay.sameDay(date);
+		return sameDay(date, TimeZone.getDefault());
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same day of the year as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameDay(new Date()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 * @param timezone
+	 *            the timezone to use for the comparison
+	 */
+	public static Matcher<Date> sameDay(final Date date, final TimeZone timezone) {
+		return IsSameDay.sameDay(date, timezone);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same day of the year as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameDayOfTheYear(2012, Month.JAN, 1))
+	 * </pre>
+	 * 
+	 * @param day
+	 *            the reference day of the month against which the examined date is checked
+	 * @param month
+	 *            the reference month against which the examined date is checked
+	 * @param year
+	 *            the reference year against which the examined date is checked
+	 */
+	public static Matcher<Date> sameDay(final int year, final Month month, final int day) {
+		return IsSameDay.sameDay(year, month, day);
 	}
 
 	/**
