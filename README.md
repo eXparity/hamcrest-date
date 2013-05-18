@@ -1,5 +1,8 @@
-Hamcrest Date (a date matching library for [Java Hamcrest][])
+Hamcrest Date
 =============
+
+A date matching library for [Java Hamcrest][]
+
 Licensed under [BSD License][].
 
 What is Hamcrest Date?
@@ -13,14 +16,14 @@ You can obtain Hamcrest binaries from [maven central][]. To include your project
 A maven project
 
     <dependency>
-        <groupId>uk.co.it.modular</groupId>
+        <groupId>uk.co.modular-it</groupId>
         <artifactId>hamcrest-date</artifactId>
         <version>0.9.1</version>
     </dependency>
 
 A project which uses ivy for dependency management
 
-    <dependency org="uk.co.it.modular" name="hamcrest-date" rev="0.9.1"/>
+    <dependency org="uk.co.modular-it" name="hamcrest-date" rev="0.9.1"/>
             
 Binaries
 --------
