@@ -33,6 +33,52 @@ public abstract class DateMatchers {
 	}
 
 	/**
+	 * Creates a matcher that matches when the examined date is after the end of the reference year
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, after(2012, Month.MAY, 12));
+	 * </pre>
+	 * 
+	 * @param year
+	 *            the year against which the examined date is checked
+	 * @param month
+	 *            the month against which the examined date is checked
+	 * @param day
+	 *            the day of the month against which the examined date is checked
+	 */
+	public static Matcher<Date> after(final int year, final Month month, final int day) {
+		return IsAfter.after(year, month, day);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is after the end of the reference year
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, after(2012, Month.MAY, 12, 23, 00, 01));
+	 * </pre>
+	 * 
+	 * @param year
+	 *            the year against which the examined date is checked
+	 * @param month
+	 *            the month against which the examined date is checked
+	 * @param day
+	 *            the day of the month against which the examined date is checked
+	 * @param hour
+	 *            the hour of the day against which the examined date is checked
+	 * @param minute
+	 *            the minute of the hour against which the examined date is checked
+	 * @param second
+	 *            the second of the minute against which the examined date is checked
+	 */
+	public static Matcher<Date> after(final int year, final Month month, final int date, final int hour, final int minute, final int second) {
+		return IsAfter.after(year, month, date, hour, minute, second);
+	}
+
+	/**
 	 * Creates a matcher that matches when the examined date is before the reference date
 	 * <p/>
 	 * For example:
@@ -46,6 +92,52 @@ public abstract class DateMatchers {
 	 */
 	public static Matcher<Date> before(final Date date) {
 		return IsBefore.before(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is before the start of reference day
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, before(2012, Month.MAY, 12));
+	 * </pre>
+	 * 
+	 * @param year
+	 *            the year against which the examined date is checked
+	 * @param month
+	 *            the month against which the examined date is checked
+	 * @param day
+	 *            the day of the month against which the examined date is checked
+	 */
+	public static Matcher<Date> before(final int year, final Month month, final int day) {
+		return IsBefore.before(year, month, day);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is before the start of the reference date and time
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, before(2012, Month.MAY, 12, 23, 00, 01));
+	 * </pre>
+	 * 
+	 * @param year
+	 *            the year against which the examined date is checked
+	 * @param month
+	 *            the month against which the examined date is checked
+	 * @param day
+	 *            the day of the month against which the examined date is checked
+	 * @param hour
+	 *            the hour of the day against which the examined date is checked
+	 * @param minute
+	 *            the minute of the hour against which the examined date is checked
+	 * @param second
+	 *            the second of the minute against which the examined date is checked
+	 */
+	public static Matcher<Date> before(final int year, final Month month, final int date, final int hour, final int minute, final int second) {
+		return IsBefore.before(year, month, date, hour, minute, second);
 	}
 
 	/**

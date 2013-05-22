@@ -1,7 +1,9 @@
 
 package uk.co.it.modular.hamcrest.date;
 
+import static java.util.Calendar.getInstance;
 import static uk.co.it.modular.hamcrest.date.DateFormatter.*;
+import java.util.Calendar;
 import java.util.Date;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
@@ -44,11 +46,63 @@ public class IsAfter extends TypeSafeDiagnosingMatcher<Date> {
 	 * assertThat(myDate, after(new Date()))
 	 * </pre>
 	 * 
-	 * @param date the reference date against which the examined date is checked
+	 * @param date
+	 *            the reference date against which the examined date is checked
 	 */
 	@Factory
 	public static Matcher<Date> after(final Date date) {
 		return new IsAfter(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is after the end of the reference year
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, after(2012, Month.MAY, 12));
+	 * </pre>
+	 * 
+	 * @param year
+	 *            the year against which the examined date is checked
+	 * @param month
+	 *            the month against which the examined date is checked
+	 * @param day
+	 *            the day of the month against which the examined date is checked
+	 */
+	@Factory
+	public static Matcher<Date> after(final int year, final Month month, final int day) {
+		return after(year, month, day, 23, 59, 59);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is after the end of the reference year
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, after(2012, Month.MAY, 12, 23, 00, 01));
+	 * </pre>
+	 * 
+	 * @param year
+	 *            the year against which the examined date is checked
+	 * @param month
+	 *            the month against which the examined date is checked
+	 * @param day
+	 *            the day of the month against which the examined date is checked
+	 * @param hour
+	 *            the hour of the day against which the examined date is checked
+	 * @param minute
+	 *            the minute of the hour against which the examined date is checked
+	 * @param second
+	 *            the second of the minute against which the examined date is checked
+	 */
+	@Factory
+	public static Matcher<Date> after(final int year, final Month month, final int date, final int hour, final int minute, final int second) {
+		Calendar calendar = getInstance();
+		calendar.set(year, month.getAsCalendarConstant(), date, hour, minute, second);
+		calendar.set(Calendar.MILLISECOND, 999);
+		return new IsAfter(calendar.getTime());
 	}
 
 }
