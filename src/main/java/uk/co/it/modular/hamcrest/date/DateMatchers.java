@@ -259,6 +259,22 @@ public abstract class DateMatchers {
 	}
 
 	/**
+	 * Creates a matcher that matches when the examined date is on the same UTC instant as the reference UTC epoch time supplied
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameInstant(1325415600000L))
+	 * </pre>
+	 * 
+	 * @param timestamp
+	 *            the time as milliseconds since the Unix epoch time
+	 */
+	public static Matcher<Date> sameInstant(final long timestamp) {
+		return IsSameInstant.sameInstant(timestamp);
+	}
+
+	/**
 	 * Creates a matcher that matches when the examined date is on the same minute as the reference date
 	 * <p/>
 	 * For example:

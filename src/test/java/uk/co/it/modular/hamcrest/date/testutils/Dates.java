@@ -33,6 +33,7 @@ public abstract class Dates {
 		Calendar cal = Calendar.getInstance();
 		cal.setTimeZone(tz);
 		cal.set(year, month.getAsCalendarConstant(), date, hour, minute, second);
+		cal.set(Calendar.MILLISECOND, 0);
 		return cal.getTime();
 	}
 

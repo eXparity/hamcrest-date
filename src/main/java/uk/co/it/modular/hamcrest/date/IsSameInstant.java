@@ -44,11 +44,29 @@ public class IsSameInstant extends TypeSafeDiagnosingMatcher<Date> {
 	 * assertThat(myDate, sameInstant(new Date()))
 	 * </pre>
 	 * 
-	 * @param date the reference date against which the examined date is checked
+	 * @param date
+	 *            the reference date against which the examined date is checked
 	 */
 	@Factory
 	public static Matcher<Date> sameInstant(final Date date) {
 		return new IsSameInstant(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same UTC instant as the reference UTC epoch time supplied
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameInstant(1325415600000L))
+	 * </pre>
+	 * 
+	 * @param timestamp
+	 *            the time as milliseconds since the Unix epoch time
+	 */
+	@Factory
+	public static Matcher<Date> sameInstant(final long timestamp) {
+		return new IsSameInstant(new Date(timestamp));
 	}
 
 }
