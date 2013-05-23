@@ -52,7 +52,6 @@ The libary includes date matchers for:
 * __after__ - Test if the actual date is after the reference date
 * __before__ - Test if the actual date is before the reference date
 * __sameDay__ - Test if the actual date is on the same day as the reference date
-* __sameDayOfTheMonth__ - Test if the actual date is on the same day of the month as the reference date
 * __sameHour__ - Test if the actual date is on the same hour of the day as the reference date
 * __sameInstant__ - Test if the actual date is the same, down to the millisecond, as the reference date
 * __sameMinute__ - Test if the actual date is on the same minute of the hour as the reference date
