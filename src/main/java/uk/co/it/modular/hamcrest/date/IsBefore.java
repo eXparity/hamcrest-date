@@ -60,7 +60,7 @@ public class IsBefore extends TypeSafeDiagnosingMatcher<Date> {
 	 * For example:
 	 * 
 	 * <pre>
-	 * assertThat(myDate, before(2012, Month.MAY, 12));
+	 * assertThat(myDate, before(2012, Months.MAY, 12));
 	 * </pre>
 	 * 
 	 * @param year
@@ -81,7 +81,7 @@ public class IsBefore extends TypeSafeDiagnosingMatcher<Date> {
 	 * For example:
 	 * 
 	 * <pre>
-	 * assertThat(myDate, before(2012, Month.MAY, 12, 23, 00, 01));
+	 * assertThat(myDate, before(2012, Months.MAY, 12, 23, 00, 01));
 	 * </pre>
 	 * 
 	 * @param year

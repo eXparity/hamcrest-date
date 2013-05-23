@@ -60,7 +60,7 @@ public class IsAfter extends TypeSafeDiagnosingMatcher<Date> {
 	 * For example:
 	 * 
 	 * <pre>
-	 * assertThat(myDate, after(2012, Month.MAY, 12));
+	 * assertThat(myDate, after(2012, Months.MAY, 12));
 	 * </pre>
 	 * 
 	 * @param year
@@ -81,7 +81,7 @@ public class IsAfter extends TypeSafeDiagnosingMatcher<Date> {
 	 * For example:
 	 * 
 	 * <pre>
-	 * assertThat(myDate, after(2012, Month.MAY, 12, 23, 00, 01));
+	 * assertThat(myDate, after(2012, Months.MAY, 12, 23, 00, 01));
 	 * </pre>
 	 * 
 	 * @param year

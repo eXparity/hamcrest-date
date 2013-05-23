@@ -77,7 +77,7 @@ public class IsSameInstant extends TypeSafeDiagnosingMatcher<Date> {
 	 * For example:
 	 * 
 	 * <pre>
-	 * assertThat(myDate, sameInstance(2012, Month.MAY, 12, 23, 00, 01, 123));
+	 * assertThat(myDate, sameInstance(2012, Months.MAY, 12, 23, 00, 01, 123));
 	 * </pre>
 	 * 
 	 * @param year

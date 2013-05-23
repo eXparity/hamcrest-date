@@ -7,6 +7,7 @@ package uk.co.it.modular.hamcrest.date;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 /**
@@ -38,7 +39,7 @@ public abstract class DateMatchers {
 	 * For example:
 	 * 
 	 * <pre>
-	 * assertThat(myDate, after(2012, Month.MAY, 12));
+	 * assertThat(myDate, after(2012, Months.MAY, 12));
 	 * </pre>
 	 * 
 	 * @param year
@@ -58,7 +59,7 @@ public abstract class DateMatchers {
 	 * For example:
 	 * 
 	 * <pre>
-	 * assertThat(myDate, after(2012, Month.MAY, 12, 23, 00, 01));
+	 * assertThat(myDate, after(2012, Months.MAY, 12, 23, 00, 01));
 	 * </pre>
 	 * 
 	 * @param year
@@ -100,7 +101,7 @@ public abstract class DateMatchers {
 	 * For example:
 	 * 
 	 * <pre>
-	 * assertThat(myDate, before(2012, Month.MAY, 12));
+	 * assertThat(myDate, before(2012, Months.MAY, 12));
 	 * </pre>
 	 * 
 	 * @param year
@@ -120,7 +121,7 @@ public abstract class DateMatchers {
 	 * For example:
 	 * 
 	 * <pre>
-	 * assertThat(myDate, before(2012, Month.MAY, 12, 23, 00, 01));
+	 * assertThat(myDate, before(2012, Months.MAY, 12, 23, 00, 01));
 	 * </pre>
 	 * 
 	 * @param year
@@ -314,7 +315,7 @@ public abstract class DateMatchers {
 	 * For example:
 	 * 
 	 * <pre>
-	 * assertThat(myDate, sameInstant(2012, Month.MAY, 12, 23, 00, 01, 123));
+	 * assertThat(myDate, sameInstant(2012, Months.MAY, 12, 23, 00, 01, 123));
 	 * </pre>
 	 * 
 	 * @param year
@@ -478,6 +479,65 @@ public abstract class DateMatchers {
 	 */
 	public static Matcher<Date> within(final long period, final TimeUnit unit, final Date date) {
 		return IsWithin.within(period, unit, date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is within a given period of the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, within(5, TimeUnit.DAYS, 2012, Months.MAY, 12));
+	 * </pre>
+	 * 
+	 * @param period
+	 *            the timeunit interval the examined date should be with
+	 * @param unit
+	 *            the timeunit to define the length of the period
+	 * @param year
+	 *            the year against which the examined date is checked
+	 * @param month
+	 *            the month against which the examined date is checked
+	 * @param day
+	 *            the day of the month against which the examined date is checked
+	 */
+	@Factory
+	public static Matcher<Date> within(final long period, final TimeUnit unit, final int year, final Months month, final int day) {
+		return IsWithin.within(period, unit, year, month, day);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is within a given period of the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, within(1, TimeUnit.MINUTES, 2012, Months.MAY, 12, 23, 00, 01));
+	 * </pre>
+	 * 
+	 * @param period
+	 *            the timeunit interval the examined date should be with
+	 * @param unit
+	 *            the timeunit to define the length of the period
+	 * @param year
+	 *            the year against which the examined date is checked
+	 * @param month
+	 *            the month against which the examined date is checked
+	 * @param day
+	 *            the day of the month against which the examined date is checked
+	 * @param hour
+	 *            the hour of the day against which the examined date is checked
+	 * @param minute
+	 *            the minute of the hour against which the examined date is checked
+	 * @param second
+	 *            the second of the minute against which the examined date is checked
+	 * @param second
+	 *            the millisecond of the second against which the examined date is checked
+	 */
+	@Factory
+	public static Matcher<Date> within(final long period, final TimeUnit unit, final int year, final Months month, final int date, final int hour, final int minute,
+			final int second, final int milliseconds) {
+		return IsWithin.within(period, unit, year, month, date, hour, minute, second, milliseconds);
 	}
 
 }
