@@ -9,6 +9,7 @@ import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.core.IsNot.*;
 import static uk.co.it.modular.hamcrest.date.DateMatchers.*;
 import static uk.co.it.modular.hamcrest.date.testutils.DateMatcherTestUtils.*;
+import static uk.co.it.modular.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_AM_GMT;
 import java.util.Date;
 import org.junit.Test;
 
@@ -29,6 +30,16 @@ public class IsSameSecondTest {
 	public void canDetectDifferentSecond() {
 		Date date = new Date(), other = addDateField(date, SECOND, 1);
 		assertThat(other, not(sameSecond(date)));
+	}
+
+	@Test
+	public void canCompareTheSameSecondInt() {
+		assertThat(JAN_1ST_2012_11_AM_GMT, sameSecond(0));
+	}
+
+	@Test
+	public void canDetectDifferentSecondInt() {
+		assertThat(JAN_1ST_2012_11_AM_GMT, not(sameSecond(1)));
 	}
 
 }

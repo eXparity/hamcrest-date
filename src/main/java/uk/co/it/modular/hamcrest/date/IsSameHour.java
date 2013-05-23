@@ -17,6 +17,10 @@ public class IsSameHour extends IsSameDatePart {
 		super(date, Calendar.HOUR_OF_DAY, "hour");
 	}
 
+	public IsSameHour(final int hour) {
+		super(hour, Calendar.HOUR_OF_DAY, "hour");
+	}
+
 	/**
 	 * Creates a matcher that matches when the examined date is on the same hour as the reference date
 	 * <p/>
@@ -32,6 +36,23 @@ public class IsSameHour extends IsSameDatePart {
 	@Factory
 	public static Matcher<Date> sameHour(final Date date) {
 		return new IsSameHour(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same hour as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameHour(12));
+	 * </pre>
+	 * 
+	 * @param hour
+	 *            the reference hour against which the examined date is checked
+	 */
+	@Factory
+	public static Matcher<Date> sameHour(final int hour) {
+		return new IsSameHour(hour);
 	}
 
 }

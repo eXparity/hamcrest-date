@@ -4,13 +4,14 @@
 
 package uk.co.it.modular.hamcrest.date;
 
-import static java.util.Calendar.*;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.core.IsNot.*;
-import static uk.co.it.modular.hamcrest.date.DateMatchers.*;
-import static uk.co.it.modular.hamcrest.date.testutils.DateMatcherTestUtils.*;
+import static java.util.Calendar.HOUR;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsNot.not;
+import static uk.co.it.modular.hamcrest.date.DateMatchers.sameHour;
+import static uk.co.it.modular.hamcrest.date.testutils.DateMatcherTestUtils.addDateField;
 import java.util.Date;
 import org.junit.Test;
+import uk.co.it.modular.hamcrest.date.testutils.Dates;
 
 /**
  * Unit Tests for the {@link IsSameHour} class
@@ -26,8 +27,19 @@ public class IsSameHourTest {
 	}
 
 	@Test
+	public void canCompareTheSameHourAsInt() {
+		assertThat(Dates.JAN_1ST_2012_11_AM_GMT, sameHour(11));
+	}
+
+	@Test
 	public void canDetectDifferentHour() {
 		Date date = new Date(), other = addDateField(date, HOUR, 1);
 		assertThat(other, not(sameHour(date)));
 	}
+
+	@Test
+	public void canDetectDifferentHourAsInt() {
+		assertThat(Dates.JAN_1ST_2012_11_AM_GMT, not(sameHour(12)));
+	}
+
 }

@@ -17,6 +17,10 @@ public class IsSameSecond extends IsSameDatePart {
 		super(date, Calendar.SECOND, "second");
 	}
 
+	public IsSameSecond(final int second) {
+		super(second, Calendar.SECOND, "second");
+	}
+
 	/**
 	 * Creates a matcher that matches when the examined date is on the same second as the reference date
 	 * <p/>
@@ -32,6 +36,23 @@ public class IsSameSecond extends IsSameDatePart {
 	@Factory
 	public static Matcher<Date> sameSecond(final Date date) {
 		return new IsSameSecond(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the reference second
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameSecond(33))
+	 * </pre>
+	 * 
+	 * @param second
+	 *            the reference date against which the examined date is checked
+	 */
+	@Factory
+	public static Matcher<Date> sameSecond(final int second) {
+		return new IsSameSecond(second);
 	}
 
 }

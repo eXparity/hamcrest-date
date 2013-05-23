@@ -34,16 +34,18 @@ public class IsSameDatePart extends TypeSafeDiagnosingMatcher<Date> {
 		return new IsSameDatePart(date, datePart);
 	}
 
-	private final Date expectedDate;
 	private final int datePart;
 	private final int expected;
 	private final String datePartLabel;
 
-	public IsSameDatePart(final Date date, final int datePart, final String datePartLabel) {
-		this.expectedDate = date;
+	public IsSameDatePart(final int expectedValue, final int datePart, final String datePartLabel) {
 		this.datePart = datePart;
-		this.expected = extractDatePart(date, datePart);
+		this.expected = expectedValue;
 		this.datePartLabel = datePartLabel;
+	}
+
+	public IsSameDatePart(final Date date, final int datePart, final String datePartLabel) {
+		this(extractDatePart(date, datePart), datePart, datePartLabel);
 	}
 
 	public IsSameDatePart(final Date date, final int datePart) {
@@ -54,7 +56,7 @@ public class IsSameDatePart extends TypeSafeDiagnosingMatcher<Date> {
 	protected boolean matchesSafely(final Date actual, final Description mismatchDesc) {
 		int actualDatePart = extractDatePart(actual, datePart);
 		if (expected != actualDatePart) {
-			mismatchDesc.appendText(String.valueOf(datePartLabel)).appendText(" is ").appendValue(describeDate(actual));
+			mismatchDesc.appendText(String.valueOf(datePartLabel)).appendText(" is ").appendValue(actualDatePart);
 			return false;
 		} else {
 			return true;
@@ -62,18 +64,14 @@ public class IsSameDatePart extends TypeSafeDiagnosingMatcher<Date> {
 	}
 
 	public void describeTo(final Description description) {
-		description.appendText("the same ").appendText(datePartLabel).appendText(" value as ").appendValue(describeDate(expectedDate));
+		description.appendText("a ").appendText(datePartLabel).appendText(" of ").appendValue(expected);
 	}
 
-	private String describeDate(final Date date) {
-		return date.toString();
-	}
-
-	private int extractDatePart(final Date date, final int part) {
+	private static int extractDatePart(final Date date, final int part) {
 		return convertDateToCalendar(date).get(part);
 	}
 
-	private Calendar convertDateToCalendar(final Date date) {
+	private static Calendar convertDateToCalendar(final Date date) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		return calendar;

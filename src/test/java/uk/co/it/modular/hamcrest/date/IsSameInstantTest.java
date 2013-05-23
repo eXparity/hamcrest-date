@@ -40,4 +40,14 @@ public class IsSameInstantTest {
 		assertThat(JAN_1ST_2012_11_AM_GMT, not(sameInstant(1L)));
 	}
 
+	@Test
+	public void canCompareTheSameFullTime() {
+		assertThat(JAN_1ST_2012_11_AM_GMT, sameInstant(2012, Months.JANUARY, 1, 11, 00, 00, 000));
+	}
+
+	@Test
+	public void canDetectDifferentFullTime() {
+		assertThat(JAN_1ST_2012_11_AM_GMT, not(sameInstant(2012, Months.JANUARY, 1, 11, 00, 00, 1)));
+	}
+
 }

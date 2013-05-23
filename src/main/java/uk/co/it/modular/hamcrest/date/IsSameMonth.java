@@ -17,6 +17,10 @@ public class IsSameMonth extends IsSameDatePart {
 		super(date, Calendar.MONTH, "month");
 	}
 
+	public IsSameMonth(final int month) {
+		super(month, Calendar.MONTH, "month");
+	}
+
 	/**
 	 * Creates a matcher that matches when the examined date is on the same month as the reference date
 	 * <p/>
@@ -32,6 +36,23 @@ public class IsSameMonth extends IsSameDatePart {
 	@Factory
 	public static Matcher<Date> sameMonth(final Date date) {
 		return new IsSameMonth(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same month as the reference month
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameMonth(Months.DECEMBER))
+	 * </pre>
+	 * 
+	 * @param month
+	 *            the reference month against which the examined date is checked
+	 */
+	@Factory
+	public static Matcher<Date> sameMonth(final Months month) {
+		return new IsSameMonth(month.getAsCalendarConstant());
 	}
 
 }

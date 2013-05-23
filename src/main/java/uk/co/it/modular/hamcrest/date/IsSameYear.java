@@ -17,6 +17,10 @@ public class IsSameYear extends IsSameDatePart {
 		super(date, Calendar.YEAR, "year");
 	}
 
+	public IsSameYear(final int year) {
+		super(year, Calendar.YEAR, "year");
+	}
+
 	/**
 	 * Creates a matcher that matches when the examined date is on the same year as the reference date
 	 * <p/>
@@ -32,6 +36,23 @@ public class IsSameYear extends IsSameDatePart {
 	@Factory
 	public static Matcher<Date> sameYear(final Date date) {
 		return new IsSameYear(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same year as the reference year
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameYear(2013))
+	 * </pre>
+	 * 
+	 * @param year
+	 *            the reference year against which the examined date is checked
+	 */
+	@Factory
+	public static Matcher<Date> sameYear(final int year) {
+		return new IsSameYear(year);
 	}
 
 }

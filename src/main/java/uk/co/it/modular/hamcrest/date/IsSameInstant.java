@@ -1,7 +1,9 @@
 
 package uk.co.it.modular.hamcrest.date;
 
+import static java.util.Calendar.getInstance;
 import static uk.co.it.modular.hamcrest.date.DateFormatter.*;
+import java.util.Calendar;
 import java.util.Date;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
@@ -67,6 +69,38 @@ public class IsSameInstant extends TypeSafeDiagnosingMatcher<Date> {
 	@Factory
 	public static Matcher<Date> sameInstant(final long timestamp) {
 		return new IsSameInstant(new Date(timestamp));
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same instance as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameInstance(2012, Month.MAY, 12, 23, 00, 01, 123));
+	 * </pre>
+	 * 
+	 * @param year
+	 *            the year against which the examined date is checked
+	 * @param month
+	 *            the month against which the examined date is checked
+	 * @param day
+	 *            the day of the month against which the examined date is checked
+	 * @param hour
+	 *            the hour of the day against which the examined date is checked
+	 * @param minute
+	 *            the minute of the hour against which the examined date is checked
+	 * @param second
+	 *            the second of the minute against which the examined date is checked
+	 * @param milliseconds
+	 *            the milliseconds of the second against which the examined date is checked
+	 */
+	@Factory
+	public static Matcher<Date> sameIntstance(final int year, final Months month, final int date, final int hour, final int minute, final int second, final int milliseconds) {
+		Calendar calendar = getInstance();
+		calendar.set(year, month.getAsCalendarConstant(), date, hour, minute, second);
+		calendar.set(Calendar.MILLISECOND, milliseconds);
+		return new IsSameInstant(calendar.getTime());
 	}
 
 }

@@ -42,4 +42,5 @@ public class IsSameDayTest {
 	public void canCompareADifferentDayWithFields() {
 		assertThat(Dates.JAN_1ST_2012_11_AM_GMT, not(sameDay(2012, JANUARY, 2)));
 	}
+
 }

@@ -17,6 +17,10 @@ public class IsSameMinute extends IsSameDatePart {
 		super(date, Calendar.MINUTE, "minute");
 	}
 
+	public IsSameMinute(final int minute) {
+		super(minute, Calendar.MINUTE, "minute");
+	}
+
 	/**
 	 * Creates a matcher that matches when the examined date is on the same minute as the reference date
 	 * <p/>
@@ -32,6 +36,23 @@ public class IsSameMinute extends IsSameDatePart {
 	@Factory
 	public static Matcher<Date> sameMinute(final Date date) {
 		return new IsSameMinute(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the reference minute
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameMinute(55))
+	 * </pre>
+	 * 
+	 * @param minute
+	 *            the reference minute against which the examined date is checked
+	 */
+	@Factory
+	public static Matcher<Date> sameMinute(final int minute) {
+		return new IsSameMinute(minute);
 	}
 
 }
