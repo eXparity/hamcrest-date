@@ -18,12 +18,12 @@ A maven project
     <dependency>
         <groupId>uk.co.modular-it</groupId>
         <artifactId>hamcrest-date</artifactId>
-        <version>0.9.1</version>
+        <version>0.9.2</version>
     </dependency>
 
 A project which uses ivy for dependency management
 
-    <dependency org="uk.co.modular-it" name="hamcrest-date" rev="0.9.1"/>
+    <dependency org="uk.co.modular-it" name="hamcrest-date" rev="0.9.2"/>
             
 Binaries
 --------
