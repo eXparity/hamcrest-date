@@ -71,7 +71,7 @@ public class IsAfter extends TypeSafeDiagnosingMatcher<Date> {
 	 *            the day of the month against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> after(final int year, final Month month, final int day) {
+	public static Matcher<Date> after(final int year, final Months month, final int day) {
 		return after(year, month, day, 23, 59, 59);
 	}
 
@@ -98,7 +98,7 @@ public class IsAfter extends TypeSafeDiagnosingMatcher<Date> {
 	 *            the second of the minute against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> after(final int year, final Month month, final int date, final int hour, final int minute, final int second) {
+	public static Matcher<Date> after(final int year, final Months month, final int date, final int hour, final int minute, final int second) {
 		Calendar calendar = getInstance();
 		calendar.set(year, month.getAsCalendarConstant(), date, hour, minute, second);
 		calendar.set(Calendar.MILLISECOND, 999);

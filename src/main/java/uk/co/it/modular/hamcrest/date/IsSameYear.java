@@ -11,7 +11,7 @@ import org.hamcrest.Matcher;
  * 
  * @author Stewart Bissett
  */
-public class IsSameYear extends AbstractDatePartMatcher {
+public class IsSameYear extends IsSameDatePart {
 
 	public IsSameYear(final Date date) {
 		super(date, Calendar.YEAR, "year");
@@ -26,7 +26,8 @@ public class IsSameYear extends AbstractDatePartMatcher {
 	 * assertThat(myDate, sameYear(new Date()))
 	 * </pre>
 	 * 
-	 * @param date the reference date against which the examined date is checked
+	 * @param date
+	 *            the reference date against which the examined date is checked
 	 */
 	@Factory
 	public static Matcher<Date> sameYear(final Date date) {

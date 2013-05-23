@@ -11,7 +11,7 @@ import org.hamcrest.Matcher;
  * 
  * @author Stewart Bissett
  */
-public class IsSameWeekday extends AbstractDatePartMatcher {
+public class IsSameWeekday extends IsSameDatePart {
 
 	public IsSameWeekday(final Date date) {
 		super(date, Calendar.DAY_OF_WEEK, "day of the week");
@@ -26,7 +26,8 @@ public class IsSameWeekday extends AbstractDatePartMatcher {
 	 * assertThat(myDate, sameDayOfTheWeek(new Date()))
 	 * </pre>
 	 * 
-	 * @param date the reference date against which the examined date is checked
+	 * @param date
+	 *            the reference date against which the examined date is checked
 	 */
 	@Factory
 	public static Matcher<Date> sameWeekday(final Date date) {

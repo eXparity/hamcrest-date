@@ -11,7 +11,7 @@ import java.util.Calendar;
  * 
  * @author Stewart Bissett
  */
-public enum Month {
+public enum Months {
 
 	JAN(Calendar.JANUARY),
 	JANUARY(Calendar.JANUARY),
@@ -39,7 +39,7 @@ public enum Month {
 
 	private final int calendarMonth;;
 
-	private Month(final int calendarMonth) {
+	private Months(final int calendarMonth) {
 		this.calendarMonth = calendarMonth;
 	}
 

@@ -11,7 +11,7 @@ import org.hamcrest.Matcher;
  * 
  * @author Stewart Bissett
  */
-public class IsSameSecond extends AbstractDatePartMatcher {
+public class IsSameSecond extends IsSameDatePart {
 
 	public IsSameSecond(final Date date) {
 		super(date, Calendar.SECOND, "second");
@@ -26,7 +26,8 @@ public class IsSameSecond extends AbstractDatePartMatcher {
 	 * assertThat(myDate, sameSecond(new Date()))
 	 * </pre>
 	 * 
-	 * @param date the reference date against which the examined date is checked
+	 * @param date
+	 *            the reference date against which the examined date is checked
 	 */
 	@Factory
 	public static Matcher<Date> sameSecond(final Date date) {

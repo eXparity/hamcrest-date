@@ -11,7 +11,7 @@ import org.hamcrest.Matcher;
  * 
  * @author Stewart Bissett
  */
-public class IsSameMinute extends AbstractDatePartMatcher {
+public class IsSameMinute extends IsSameDatePart {
 
 	public IsSameMinute(final Date date) {
 		super(date, Calendar.MINUTE, "minute");
@@ -26,7 +26,8 @@ public class IsSameMinute extends AbstractDatePartMatcher {
 	 * assertThat(myDate, sameMinute(new Date()))
 	 * </pre>
 	 * 
-	 * @param date the reference date against which the examined date is checked
+	 * @param date
+	 *            the reference date against which the examined date is checked
 	 */
 	@Factory
 	public static Matcher<Date> sameMinute(final Date date) {

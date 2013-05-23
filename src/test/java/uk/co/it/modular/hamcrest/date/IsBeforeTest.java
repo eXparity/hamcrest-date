@@ -42,31 +42,31 @@ public class IsBeforeTest {
 
 	@Test
 	public void canCompareIsNotBeforeDay() {
-		assertThat(JUN_15TH_2012_11_PM, not(before(2012, Month.JUNE, 14)));
+		assertThat(JUN_15TH_2012_11_PM, not(before(2012, Months.JUNE, 14)));
 	}
 
 	@Test
 	public void canCompareisBeforeDay() {
-		assertThat(JUN_15TH_2012_11_PM, before(2012, Month.JUNE, 16));
+		assertThat(JUN_15TH_2012_11_PM, before(2012, Months.JUNE, 16));
 	}
 
 	@Test
 	public void canCompareIsSameDay() {
-		assertThat(JUN_15TH_2012_11_PM, not(before(2012, Month.JUNE, 15)));
+		assertThat(JUN_15TH_2012_11_PM, not(before(2012, Months.JUNE, 15)));
 	}
 
 	@Test
 	public void canCompareIsNotBeforeDateTime() {
-		assertThat(JUN_15TH_2012_11_AM, not(before(2012, Month.JUNE, 15, 10, 59, 59)));
+		assertThat(JUN_15TH_2012_11_AM, not(before(2012, Months.JUNE, 15, 10, 59, 59)));
 	}
 
 	@Test
 	public void canCompareIsBeforeHour() {
-		assertThat(JUN_15TH_2012_11_AM, before(2012, Month.JUNE, 15, 11, 00, 01));
+		assertThat(JUN_15TH_2012_11_AM, before(2012, Months.JUNE, 15, 11, 00, 01));
 	}
 
 	@Test
 	public void canCompareIsSameHour() {
-		assertThat(JUN_15TH_2012_11_AM, not(before(2012, Month.JUNE, 15, 11, 00, 00)));
+		assertThat(JUN_15TH_2012_11_AM, not(before(2012, Months.JUNE, 15, 11, 00, 00)));
 	}
 }

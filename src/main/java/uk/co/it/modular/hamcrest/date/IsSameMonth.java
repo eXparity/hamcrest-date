@@ -11,7 +11,7 @@ import org.hamcrest.Matcher;
  * 
  * @author Stewart Bissett
  */
-public class IsSameMonth extends AbstractDatePartMatcher {
+public class IsSameMonth extends IsSameDatePart {
 
 	public IsSameMonth(final Date date) {
 		super(date, Calendar.MONTH, "month");
@@ -26,7 +26,8 @@ public class IsSameMonth extends AbstractDatePartMatcher {
 	 * assertThat(myDate, sameMonth(new Date()))
 	 * </pre>
 	 * 
-	 * @param date the reference date against which the examined date is checked
+	 * @param date
+	 *            the reference date against which the examined date is checked
 	 */
 	@Factory
 	public static Matcher<Date> sameMonth(final Date date) {

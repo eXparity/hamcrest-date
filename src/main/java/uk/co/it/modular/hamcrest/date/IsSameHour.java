@@ -11,7 +11,7 @@ import org.hamcrest.Matcher;
  * 
  * @author Stewart Bissett
  */
-public class IsSameHour extends AbstractDatePartMatcher {
+public class IsSameHour extends IsSameDatePart {
 
 	public IsSameHour(final Date date) {
 		super(date, Calendar.HOUR_OF_DAY, "hour");
@@ -26,7 +26,8 @@ public class IsSameHour extends AbstractDatePartMatcher {
 	 * assertThat(myDate, sameHour(new Date()))
 	 * </pre>
 	 * 
-	 * @param date the reference date against which the examined date is checked
+	 * @param date
+	 *            the reference date against which the examined date is checked
 	 */
 	@Factory
 	public static Matcher<Date> sameHour(final Date date) {

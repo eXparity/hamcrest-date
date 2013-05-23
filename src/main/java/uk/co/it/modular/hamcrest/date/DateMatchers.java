@@ -4,8 +4,8 @@
 
 package uk.co.it.modular.hamcrest.date;
 
+import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import org.hamcrest.Matcher;
 
@@ -48,7 +48,7 @@ public abstract class DateMatchers {
 	 * @param day
 	 *            the day of the month against which the examined date is checked
 	 */
-	public static Matcher<Date> after(final int year, final Month month, final int day) {
+	public static Matcher<Date> after(final int year, final Months month, final int day) {
 		return IsAfter.after(year, month, day);
 	}
 
@@ -74,7 +74,7 @@ public abstract class DateMatchers {
 	 * @param second
 	 *            the second of the minute against which the examined date is checked
 	 */
-	public static Matcher<Date> after(final int year, final Month month, final int date, final int hour, final int minute, final int second) {
+	public static Matcher<Date> after(final int year, final Months month, final int date, final int hour, final int minute, final int second) {
 		return IsAfter.after(year, month, date, hour, minute, second);
 	}
 
@@ -110,7 +110,7 @@ public abstract class DateMatchers {
 	 * @param day
 	 *            the day of the month against which the examined date is checked
 	 */
-	public static Matcher<Date> before(final int year, final Month month, final int day) {
+	public static Matcher<Date> before(final int year, final Months month, final int day) {
 		return IsBefore.before(year, month, day);
 	}
 
@@ -136,7 +136,7 @@ public abstract class DateMatchers {
 	 * @param second
 	 *            the second of the minute against which the examined date is checked
 	 */
-	public static Matcher<Date> before(final int year, final Month month, final int date, final int hour, final int minute, final int second) {
+	public static Matcher<Date> before(final int year, final Months month, final int date, final int hour, final int minute, final int second) {
 		return IsBefore.before(year, month, date, hour, minute, second);
 	}
 
@@ -151,9 +151,27 @@ public abstract class DateMatchers {
 	 * 
 	 * @param date
 	 *            the reference date against which the examined date is checked
+	 * @deprecated See {@link #sameDatePart(Date, int)}
 	 */
+	@Deprecated
 	public static Matcher<Date> sameDayOfTheMonth(final Date date) {
-		return IsSameDayOfTheMonth.sameDayOfTheMonth(date);
+		return sameDatePart(date, Calendar.DAY_OF_MONTH);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same day of the month as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameDayOfTheMonth(new Date()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	public static Matcher<Date> sameDatePart(final Date date, final int datePart) {
+		return IsSameDatePart.sameDatePart(date, datePart);
 	}
 
 	/**
@@ -185,25 +203,7 @@ public abstract class DateMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameDay(final Date date) {
-		return sameDay(date, TimeZone.getDefault());
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same day of the year as the reference date
-	 * <p/>
-	 * For example:
-	 * 
-	 * <pre>
-	 * assertThat(myDate, sameDay(new Date()))
-	 * </pre>
-	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
-	 * @param timezone
-	 *            the timezone to use for the comparison
-	 */
-	public static Matcher<Date> sameDay(final Date date, final TimeZone timezone) {
-		return IsSameDay.sameDay(date, timezone);
+		return IsSameDay.sameDay(date);
 	}
 
 	/**
@@ -222,7 +222,7 @@ public abstract class DateMatchers {
 	 * @param year
 	 *            the reference year against which the examined date is checked
 	 */
-	public static Matcher<Date> sameDay(final int year, final Month month, final int day) {
+	public static Matcher<Date> sameDay(final int year, final Months month, final int day) {
 		return IsSameDay.sameDay(year, month, day);
 	}
 
