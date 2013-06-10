@@ -51,6 +51,8 @@ The libary includes date matchers for:
 
 * __after__ - Test if the actual date is after the reference date
 * __before__ - Test if the actual date is before the reference date
+* __within__ - Test if the actual date is within a given period (before or after) of the reference date
+* __sameDatePart__ - Test if the actual date has the same date part as the reference date
 * __sameDay__ - Test if the actual date is on the same day as the reference date
 * __sameHour__ - Test if the actual date is on the same hour of the day as the reference date
 * __sameInstant__ - Test if the actual date is the same, down to the millisecond, as the reference date
@@ -59,8 +61,6 @@ The libary includes date matchers for:
 * __sameSecond__ - Test if the actual date is on the same second of the minute as the reference date
 * __sameWeekday__ - Test if the actual date is on the same week day as the reference date
 * __sameYear__ - Test if the actual date is on the same year as the reference date
-* __within__ - Test if the actual date is within a given period (before or after) of the reference date
-* __sameDatePart__ - Test if the actual date has the same date part as the reference date
 
 The Javadocs include examples on all methods so you can look there for examples for specific methods
 
