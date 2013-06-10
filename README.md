@@ -60,7 +60,7 @@ The libary includes date matchers for:
 * __sameWeekday__ - Test if the actual date is on the same week day as the reference date
 * __sameYear__ - Test if the actual date is on the same year as the reference date
 * __within__ - Test if the actual date is within a given period (before or after) of the reference date
-
+* __sameDatePart__ - Test if the actual date has the same date part as the reference date
 
 The Javadocs include examples on all methods so you can look there for examples for specific methods
 
