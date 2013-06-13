@@ -34,6 +34,25 @@ public class IsSameDatePart extends TypeSafeDiagnosingMatcher<Date> {
 		return new IsSameDatePart(date, datePart);
 	}
 
+	/**
+	 * Creates a matcher that matches when the examined date matches the date part on the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameDatePart(11, Calendar.MONTH))
+	 * </pre>
+	 * 
+	 * @param expectedValue
+	 *            the reference date part value against which the examined date is checked
+	 * @param datePart
+	 *            the part of the reference date to check
+	 */
+	@Factory
+	public static Matcher<Date> sameDatePart(final int expectedValue, final int datePart) {
+		return new IsSameDatePart(expectedValue, datePart);
+	}
+
 	private final int datePart;
 	private final int expected;
 	private final String datePartLabel;
@@ -49,7 +68,11 @@ public class IsSameDatePart extends TypeSafeDiagnosingMatcher<Date> {
 	}
 
 	public IsSameDatePart(final Date date, final int datePart) {
-		this(date, datePart, "date part " + datePart);
+		this(extractDatePart(date, datePart), datePart);
+	}
+
+	public IsSameDatePart(final int expectedValue, final int datePart) {
+		this(expectedValue, datePart, "date part " + datePart);
 	}
 
 	@Override

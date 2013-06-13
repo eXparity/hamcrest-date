@@ -569,4 +569,186 @@ public abstract class DateMatchers {
 		return IsWithin.within(period, unit, year, month, date, hour, minute, second, milliseconds);
 	}
 
+	/**
+	 * Creates a matcher that matches when the examined date is yesterday
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isToday());
+	 * </pre>
+	 */
+	public static Matcher<Date> isYesterday() {
+		return DayMatchers.isYesterday();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is today
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isToday());
+	 * </pre>
+	 */
+	public static Matcher<Date> isToday() {
+		return DayMatchers.isToday();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is tomorrow
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isTomorrow());
+	 * </pre>
+	 */
+	public static Matcher<Date> isTomorrow() {
+		return DayMatchers.isTomorrow();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on a monday
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isMonday());
+	 * </pre>
+	 */
+	public static Matcher<Date> isMonday() {
+		return DayMatchers.isMonday();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on a tuesday
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isTuesday());
+	 * </pre>
+	 */
+	public static Matcher<Date> isTuesday() {
+		return DayMatchers.isTuesday();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on a wednesday
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isWednesday());
+	 * </pre>
+	 */
+	public static Matcher<Date> isWednesday() {
+		return DayMatchers.isWednesday();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on a thursday
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isThursday());
+	 * </pre>
+	 */
+	public static Matcher<Date> isThursday() {
+		return DayMatchers.isThursday();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on a friday
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isFriday());
+	 * </pre>
+	 */
+	public static Matcher<Date> isFriday() {
+		return DayMatchers.isFriday();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on a saturday
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isSaturday());
+	 * </pre>
+	 */
+	public static Matcher<Date> isSaturday() {
+		return DayMatchers.isSaturday();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on a sunday
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isSunday());
+	 * </pre>
+	 */
+	public static Matcher<Date> isSunday() {
+		return DayMatchers.isSunday();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on a weekday
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isWeekday());
+	 * </pre>
+	 */
+	public static Matcher<Date> isWeekday() {
+		return DayMatchers.isWeekday();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on a weekend
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isWeekend());
+	 * </pre>
+	 */
+	public static Matcher<Date> isWeekend() {
+		return DayMatchers.isWeekend();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the first day of the month
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isFirstDayOfMonth());
+	 * </pre>
+	 */
+	public static Matcher<Date> isFirstDayOfMonth() {
+		return DayMatchers.isFirstDayOfMonth();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the first day of the month
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isFirstDayOfMonth());
+	 * </pre>
+	 */
+	public static Matcher<Date> isLastDayOfMonth() {
+		return DayMatchers.isLastDayOfMonth();
+	}
+
 }
