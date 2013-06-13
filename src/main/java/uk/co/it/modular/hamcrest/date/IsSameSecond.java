@@ -48,7 +48,7 @@ public class IsSameSecond extends IsSameDatePart {
 	 * </pre>
 	 * 
 	 * @param second
-	 *            the reference date against which the examined date is checked
+	 *            the reference second against which the examined date is checked
 	 */
 	@Factory
 	public static Matcher<Date> sameSecond(final int second) {

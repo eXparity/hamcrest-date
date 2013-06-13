@@ -7,7 +7,6 @@ package uk.co.it.modular.hamcrest.date;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 /**
@@ -434,6 +433,38 @@ public abstract class DateMatchers {
 	}
 
 	/**
+	 * Creates a matcher that matches when the examined date is on the same millisecond as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameMillisecond(new Date()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	public static Matcher<Date> sameMillisecond(final Date date) {
+		return IsSameMillisecond.sameMillisecond(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the reference second
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameMillisecond(123))
+	 * </pre>
+	 * 
+	 * @param millisecond
+	 *            the millisecond against which the examined date is checked
+	 */
+	public static Matcher<Date> sameMillisecond(final int millisecond) {
+		return IsSameMillisecond.sameMillisecond(millisecond);
+	}
+
+	/**
 	 * Creates a matcher that matches when the examined date is on the same year as the reference date
 	 * <p/>
 	 * For example:
@@ -501,7 +532,6 @@ public abstract class DateMatchers {
 	 * @param day
 	 *            the day of the month against which the examined date is checked
 	 */
-	@Factory
 	public static Matcher<Date> within(final long period, final TimeUnit unit, final int year, final Months month, final int day) {
 		return IsWithin.within(period, unit, year, month, day);
 	}
@@ -534,7 +564,6 @@ public abstract class DateMatchers {
 	 * @param second
 	 *            the millisecond of the second against which the examined date is checked
 	 */
-	@Factory
 	public static Matcher<Date> within(final long period, final TimeUnit unit, final int year, final Months month, final int date, final int hour, final int minute,
 			final int second, final int milliseconds) {
 		return IsWithin.within(period, unit, year, month, date, hour, minute, second, milliseconds);
