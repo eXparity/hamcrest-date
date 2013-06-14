@@ -14,11 +14,11 @@ import org.hamcrest.Matcher;
 public class IsSameYear extends IsSameDatePart {
 
 	public IsSameYear(final Date date) {
-		super(date, Calendar.YEAR, "year");
+		super(date, Calendar.YEAR, "year", "yyyy");
 	}
 
 	public IsSameYear(final int year) {
-		super(year, Calendar.YEAR, "year");
+		super(year, String.valueOf(year), Calendar.YEAR, "year", "yyyy");
 	}
 
 	/**

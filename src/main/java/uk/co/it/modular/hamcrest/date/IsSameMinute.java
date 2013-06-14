@@ -14,11 +14,11 @@ import org.hamcrest.Matcher;
 public class IsSameMinute extends IsSameDatePart {
 
 	public IsSameMinute(final Date date) {
-		super(date, Calendar.MINUTE, "minute");
+		super(date, Calendar.MINUTE, "minute", "m");
 	}
 
 	public IsSameMinute(final int minute) {
-		super(minute, Calendar.MINUTE, "minute");
+		super(minute, String.valueOf(minute), Calendar.MINUTE, "minute", "m");
 	}
 
 	/**

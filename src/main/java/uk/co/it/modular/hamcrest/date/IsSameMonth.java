@@ -14,11 +14,11 @@ import org.hamcrest.Matcher;
 public class IsSameMonth extends IsSameDatePart {
 
 	public IsSameMonth(final Date date) {
-		super(date, Calendar.MONTH, "month");
+		super(date, Calendar.MONTH, "month", "MMMMM");
 	}
 
-	public IsSameMonth(final int month) {
-		super(month, Calendar.MONTH, "month");
+	public IsSameMonth(final Months month) {
+		super(month.calendarConstant(), month.describe(), Calendar.MONTH, "month", "MMMMM");
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class IsSameMonth extends IsSameDatePart {
 	 */
 	@Factory
 	public static Matcher<Date> sameMonth(final Months month) {
-		return new IsSameMonth(month.getAsCalendarConstant());
+		return new IsSameMonth(month);
 	}
 
 }

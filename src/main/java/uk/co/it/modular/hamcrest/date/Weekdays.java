@@ -30,4 +30,8 @@ public enum Weekdays {
 	public int getAsCalendarConstant() {
 		return calendarDay;
 	}
+
+	public String describe() {
+		return name().toLowerCase();
+	}
 }

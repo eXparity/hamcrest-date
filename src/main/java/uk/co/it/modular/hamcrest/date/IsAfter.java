@@ -100,7 +100,7 @@ public class IsAfter extends TypeSafeDiagnosingMatcher<Date> {
 	@Factory
 	public static Matcher<Date> after(final int year, final Months month, final int date, final int hour, final int minute, final int second) {
 		Calendar calendar = getInstance();
-		calendar.set(year, month.getAsCalendarConstant(), date, hour, minute, second);
+		calendar.set(year, month.calendarConstant(), date, hour, minute, second);
 		calendar.set(Calendar.MILLISECOND, 999);
 		return new IsAfter(calendar.getTime());
 	}

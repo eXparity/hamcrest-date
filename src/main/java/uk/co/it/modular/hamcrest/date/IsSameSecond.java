@@ -14,11 +14,11 @@ import org.hamcrest.Matcher;
 public class IsSameSecond extends IsSameDatePart {
 
 	public IsSameSecond(final Date date) {
-		super(date, Calendar.SECOND, "second");
+		super(date, Calendar.SECOND, "second", "s");
 	}
 
 	public IsSameSecond(final int second) {
-		super(second, Calendar.SECOND, "second");
+		super(second, String.valueOf(second), Calendar.SECOND, "second", "s");
 	}
 
 	/**

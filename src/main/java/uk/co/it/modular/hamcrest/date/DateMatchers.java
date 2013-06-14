@@ -4,7 +4,6 @@
 
 package uk.co.it.modular.hamcrest.date;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import org.hamcrest.Matcher;
@@ -141,37 +140,41 @@ public abstract class DateMatchers {
 	}
 
 	/**
-	 * Creates a matcher that matches when the examined date is on the same day of the month as the reference date
+	 * Creates a matcher that matches when the examined date is on the same day of the week as the reference date
 	 * <p/>
 	 * For example:
 	 * 
 	 * <pre>
-	 * assertThat(myDate, sameDayOfTheMonth(new Date()))
+	 * assertThat(myDate, sameWeekday(new Date()))
 	 * </pre>
 	 * 
 	 * @param date
 	 *            the reference date against which the examined date is checked
-	 * @deprecated See {@link #sameDatePart(Date, int)}
+	 * 
+	 * @deprecated See {@link #sameDayOfWeek(Date)}
 	 */
 	@Deprecated
-	public static Matcher<Date> sameDayOfTheMonth(final Date date) {
-		return sameDatePart(date, Calendar.DAY_OF_MONTH);
+	public static Matcher<Date> sameWeekday(final Date date) {
+		return IsSameDayOfWeek.sameDayOfWeek(date);
 	}
 
 	/**
-	 * Creates a matcher that matches when the examined date is on the same day of the month as the reference date
+	 * Creates a matcher that matches when the examined date is on the same day of the week as the supplied day
 	 * <p/>
 	 * For example:
 	 * 
 	 * <pre>
-	 * assertThat(myDate, sameDayOfTheMonth(new Date()))
+	 * assertThat(myDate, sameDayOfTheWeek(Weekdays.MONDAY))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param weekday
+	 *            the reference weekday against which the examined date is checked
+	 * 
+	 * @deprecated See {@link #sameDayOfWeek(Weekdays)}
 	 */
-	public static Matcher<Date> sameDatePart(final Date date, final int datePart) {
-		return IsSameDatePart.sameDatePart(date, datePart);
+	@Deprecated
+	public static Matcher<Date> sameWeekday(final Weekdays weekday) {
+		return IsSameDayOfWeek.sameDayOfWeek(weekday);
 	}
 
 	/**
@@ -186,8 +189,8 @@ public abstract class DateMatchers {
 	 * @param date
 	 *            the reference date against which the examined date is checked
 	 */
-	public static Matcher<Date> sameWeekday(final Date date) {
-		return IsSameWeekday.sameWeekday(date);
+	public static Matcher<Date> sameDayOfWeek(final Date date) {
+		return IsSameDayOfWeek.sameDayOfWeek(date);
 	}
 
 	/**
@@ -202,9 +205,8 @@ public abstract class DateMatchers {
 	 * @param weekday
 	 *            the reference weekday against which the examined date is checked
 	 */
-
-	public static Matcher<Date> sameWeekday(final Weekdays weekday) {
-		return IsSameWeekday.sameWeekday(weekday);
+	public static Matcher<Date> sameDayOfWeek(final Weekdays weekday) {
+		return IsSameDayOfWeek.sameDayOfWeek(weekday);
 	}
 
 	/**
@@ -618,7 +620,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isMonday() {
-		return DayMatchers.isMonday();
+		return IsSameDayOfWeek.isMonday();
 	}
 
 	/**
@@ -631,7 +633,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isTuesday() {
-		return DayMatchers.isTuesday();
+		return IsSameDayOfWeek.isTuesday();
 	}
 
 	/**
@@ -644,7 +646,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isWednesday() {
-		return DayMatchers.isWednesday();
+		return IsSameDayOfWeek.isWednesday();
 	}
 
 	/**
@@ -657,7 +659,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isThursday() {
-		return DayMatchers.isThursday();
+		return IsSameDayOfWeek.isThursday();
 	}
 
 	/**
@@ -670,7 +672,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isFriday() {
-		return DayMatchers.isFriday();
+		return IsSameDayOfWeek.isFriday();
 	}
 
 	/**
@@ -683,7 +685,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isSaturday() {
-		return DayMatchers.isSaturday();
+		return IsSameDayOfWeek.isSaturday();
 	}
 
 	/**
@@ -696,7 +698,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isSunday() {
-		return DayMatchers.isSunday();
+		return IsSameDayOfWeek.isSunday();
 	}
 
 	/**
@@ -709,7 +711,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isWeekday() {
-		return DayMatchers.isWeekday();
+		return IsSameDayOfWeek.isWeekday();
 	}
 
 	/**
@@ -722,7 +724,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isWeekend() {
-		return DayMatchers.isWeekend();
+		return IsSameDayOfWeek.isWeekend();
 	}
 
 	/**

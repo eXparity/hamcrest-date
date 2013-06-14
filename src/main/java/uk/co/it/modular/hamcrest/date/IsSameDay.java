@@ -14,7 +14,7 @@ import org.hamcrest.Matcher;
 public class IsSameDay extends IsSameDatePart {
 
 	public IsSameDay(final Date date) {
-		super(date, Calendar.DAY_OF_YEAR, "day of the year");
+		super(date, Calendar.DAY_OF_YEAR, "day of the year", "d MMMMM yyyy");
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class IsSameDay extends IsSameDatePart {
 	@Factory
 	public static Matcher<Date> sameDay(final int year, final Months month, final int day) {
 		Calendar calendar = Calendar.getInstance();
-		calendar.set(year, month.getAsCalendarConstant(), day, 0, 0, 0);
+		calendar.set(year, month.calendarConstant(), day, 0, 0, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
 		return sameDay(calendar.getTime());
 	}

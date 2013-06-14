@@ -14,11 +14,11 @@ import org.hamcrest.Matcher;
 public class IsSameMillisecond extends IsSameDatePart {
 
 	public IsSameMillisecond(final Date date) {
-		super(date, Calendar.MILLISECOND, "millisecond");
+		super(date, Calendar.MILLISECOND, "millisecond", "S");
 	}
 
 	public IsSameMillisecond(final int millisecond) {
-		super(millisecond, Calendar.MILLISECOND, "millisecond");
+		super(millisecond, String.valueOf(millisecond), Calendar.MILLISECOND, "millisecond", "S");
 	}
 
 	/**

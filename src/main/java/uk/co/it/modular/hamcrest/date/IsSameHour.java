@@ -14,11 +14,11 @@ import org.hamcrest.Matcher;
 public class IsSameHour extends IsSameDatePart {
 
 	public IsSameHour(final Date date) {
-		super(date, Calendar.HOUR_OF_DAY, "hour");
+		super(date, Calendar.HOUR_OF_DAY, "hour", "k");
 	}
 
 	public IsSameHour(final int hour) {
-		super(hour, Calendar.HOUR_OF_DAY, "hour");
+		super(hour, String.valueOf(hour), Calendar.HOUR_OF_DAY, "hour", "k");
 	}
 
 	/**
