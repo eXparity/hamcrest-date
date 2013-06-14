@@ -753,4 +753,159 @@ public abstract class DateMatchers {
 		return DayMatchers.isLastDayOfMonth();
 	}
 
+	/**
+	 * Creates a matcher that matches when the examined date is in January
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isJanuary());
+	 * </pre>
+	 */
+	public static Matcher<Date> isJanuary() {
+		return IsSameMonth.isJanuary();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is in February
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isFebruary());
+	 * </pre>
+	 */
+	public static Matcher<Date> isFebruary() {
+		return IsSameMonth.isFebruary();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is in March
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isMarch());
+	 * </pre>
+	 */
+	public static Matcher<Date> isMarch() {
+		return IsSameMonth.isMarch();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is in April
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isApril());
+	 * </pre>
+	 */
+	public static Matcher<Date> isApril() {
+		return IsSameMonth.isApril();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is in May
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isMay());
+	 * </pre>
+	 */
+	public static Matcher<Date> isMay() {
+		return IsSameMonth.isMay();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is in June
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isJune());
+	 * </pre>
+	 */
+	public static Matcher<Date> isJune() {
+		return IsSameMonth.isJune();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is in July
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isJuly());
+	 * </pre>
+	 */
+	public static Matcher<Date> isJuly() {
+		return IsSameMonth.isJuly();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is in August
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isAugust());
+	 * </pre>
+	 */
+	public static Matcher<Date> isAugust() {
+		return IsSameMonth.isAugust();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is in September
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isSeptember());
+	 * </pre>
+	 */
+	public static Matcher<Date> isSeptember() {
+		return IsSameMonth.isSeptember();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is in October
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isOctober());
+	 * </pre>
+	 */
+	public static Matcher<Date> isOctober() {
+		return IsSameMonth.isOctober();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is in November
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isNovember());
+	 * </pre>
+	 */
+	public static Matcher<Date> isNovember() {
+		return IsSameMonth.isNovember();
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is in December
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isDecember());
+	 * </pre>
+	 */
+	public static Matcher<Date> isDecember() {
+		return IsSameMonth.isDecember();
+	}
 }

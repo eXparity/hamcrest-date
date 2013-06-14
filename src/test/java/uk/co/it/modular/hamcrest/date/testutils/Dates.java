@@ -28,8 +28,19 @@ public abstract class Dates {
 	public static final Date JAN_7TH_2012_11_AM_GMT = createDate(2012, Months.JAN, 7, 11, 00, 00, TimeZones.GMT);
 	public static final Date JAN_8TH_2012_11_AM_GMT = createDate(2012, Months.JAN, 8, 11, 00, 00, TimeZones.GMT);
 	public static final Date JAN_31ST_2012_11_AM_GMT = createDate(2012, Months.JAN, 31, 11, 00, 00);
+	public static final Date FEB_1ST_2012_11_AM_GMT = createDate(2012, Months.FEB, 1, 11, 00, 00, TimeZones.GMT);
+	public static final Date MAR_1ST_2012_11_AM_GMT = createDate(2012, Months.MAR, 1, 11, 00, 00, TimeZones.GMT);
+	public static final Date APR_1ST_2012_11_AM_GMT = createDate(2012, Months.APR, 1, 11, 00, 00, TimeZones.GMT);
+	public static final Date MAY_1ST_2012_11_AM_GMT = createDate(2012, Months.MAY, 1, 11, 00, 00, TimeZones.GMT);
+	public static final Date JUN_1ST_2012_11_AM_GMT = createDate(2012, Months.JUN, 1, 11, 00, 00, TimeZones.GMT);
 	public static final Date JUN_15TH_2012_11_AM = Dates.createDate(2012, Months.JUN, 15, 11, 00, 00);
 	public static final Date JUN_15TH_2012_11_PM = Dates.createDate(2012, Months.JUN, 15, 23, 00, 00);
+	public static final Date JUL_1ST_2012_11_AM_GMT = createDate(2012, Months.JUL, 1, 11, 00, 00, TimeZones.GMT);
+	public static final Date AUG_1ST_2012_11_AM_GMT = createDate(2012, Months.AUG, 1, 11, 00, 00, TimeZones.GMT);
+	public static final Date SEP_1ST_2012_11_AM_GMT = createDate(2012, Months.SEP, 1, 11, 00, 00, TimeZones.GMT);
+	public static final Date OCT_1ST_2012_11_AM_GMT = createDate(2012, Months.OCT, 1, 11, 00, 00, TimeZones.GMT);
+	public static final Date NOV_1ST_2012_11_AM_GMT = createDate(2012, Months.NOV, 1, 11, 00, 00, TimeZones.GMT);
+	public static final Date DEC_1ST_2012_11_AM_GMT = createDate(2012, Months.DEC, 1, 11, 00, 00, TimeZones.GMT);
 
 	public static Date createDate(final int year, final Months month, final int day, final int hour, final int minute, final int second) {
 		return Dates.createDate(year, month, day, hour, minute, second, TimeZone.getDefault());
