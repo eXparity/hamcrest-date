@@ -908,4 +908,18 @@ public abstract class DateMatchers {
 	public static Matcher<Date> isDecember() {
 		return IsSameMonth.isDecember();
 	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is a leap year
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isLeapYear());
+	 * </pre>
+	 */
+	public static Matcher<Date> isLeapYear() {
+		return IsLeapYear.isLeapYear();
+	}
+
 }

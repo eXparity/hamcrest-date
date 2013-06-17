@@ -16,6 +16,7 @@ import uk.co.it.modular.hamcrest.date.Months;
  */
 public abstract class Dates {
 
+	public static final Date JAN_1ST_2000_11_AM_GMT = createDate(2000, Months.JAN, 1, 11, 00, 00, TimeZones.GMT);
 	public static final Date JAN_1ST_2012_11_AM_GMT = createDate(2012, Months.JAN, 1, 11, 00, 00, TimeZones.GMT);
 	public static final Date JAN_1ST_2012_11_PM_GMT = createDate(2012, Months.JAN, 1, 23, 00, 00, TimeZones.GMT);
 	public static final Date JAN_1ST_2012_11_AM_PST = createDate(2012, Months.JAN, 1, 11, 00, 00, TimeZones.PST);
@@ -41,6 +42,8 @@ public abstract class Dates {
 	public static final Date OCT_1ST_2012_11_AM_GMT = createDate(2012, Months.OCT, 1, 11, 00, 00, TimeZones.GMT);
 	public static final Date NOV_1ST_2012_11_AM_GMT = createDate(2012, Months.NOV, 1, 11, 00, 00, TimeZones.GMT);
 	public static final Date DEC_1ST_2012_11_AM_GMT = createDate(2012, Months.DEC, 1, 11, 00, 00, TimeZones.GMT);
+	public static final Date JAN_1ST_2013_11_AM_GMT = createDate(2013, Months.JAN, 1, 11, 00, 00, TimeZones.GMT);
+	public static final Date JAN_1ST_2100_11_AM_GMT = createDate(2100, Months.JAN, 1, 11, 00, 00, TimeZones.GMT);
 
 	public static Date createDate(final int year, final Months month, final int day, final int hour, final int minute, final int second) {
 		return Dates.createDate(year, month, day, hour, minute, second, TimeZone.getDefault());
