@@ -18,12 +18,12 @@ A maven project
     <dependency>
         <groupId>uk.co.modular-it</groupId>
         <artifactId>hamcrest-date</artifactId>
-        <version>0.9.2</version>
+        <version>0.9.3</version>
     </dependency>
 
 A project which uses ivy for dependency management
 
-    <dependency org="uk.co.modular-it" name="hamcrest-date" rev="0.9.2"/>
+    <dependency org="uk.co.modular-it" name="hamcrest-date" rev="0.9.3"/>
             
 Binaries
 --------
@@ -61,6 +61,31 @@ The libary includes date matchers for:
 * __sameSecond__ - Test if the actual date is on the same second of the minute as the reference date
 * __sameWeekday__ - Test if the actual date is on the same week day as the reference date
 * __sameYear__ - Test if the actual date is on the same year as the reference date
+* __isYesterday__ - Test if the actual date is yesterday
+* __isToday__ - Test if the actual date is today
+* __isToday__ - Test if the actual date is tomorrow
+* __isMonday__ - Test if the actual date is on a monday
+* __isTuesday__ - Test if the actual date is on a tuesday
+* __isWednesday__ - Test if the actual date is on a wednesday
+* __isThursday__ - Test if the actual date is on a thursday
+* __isFriday__ - Test if the actual date is on a friday
+* __isSaturday__ - Test if the actual date is on a saturday
+* __isSunday__ - Test if the actual date is on a sunday
+* __isWeekday__ - Test if the actual date is on a weekday
+* __isWeekend__ - Test if the actual date is on a weekend
+* __isJanuary__ - Test if the actual date is in january
+* __isFebruary__ - Test if the actual date is in february
+* __isMarch__ - Test if the actual date is in march
+* __isApril__ - Test if the actual date is in april
+* __isMay__ - Test if the actual date is in may
+* __isJune__ - Test if the actual date is in june
+* __isJuly_ - Test if the actual date is in july
+* __isAugust__ - Test if the actual date is in august
+* __isSeptember__ - Test if the actual date is in september
+* __isOctober__ - Test if the actual date is in october
+* __isNovember__ - Test if the actual date is in november
+* __isDecember__ - Test if the actual date is in december
+* __isLeapYear__ - Test if the actual date is on a leap year
 
 The Javadocs include examples on all methods so you can look there for examples for specific methods
 
