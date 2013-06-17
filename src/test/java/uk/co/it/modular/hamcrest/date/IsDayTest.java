@@ -4,39 +4,20 @@
 
 package uk.co.it.modular.hamcrest.date;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.not;
-import static uk.co.it.modular.hamcrest.date.DateMatchers.*;
-import static uk.co.it.modular.hamcrest.date.testutils.DateMatcherTestUtils.addDateField;
-import static uk.co.it.modular.hamcrest.date.testutils.Dates.*;
 import java.util.Calendar;
 import java.util.Date;
 import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
+import static uk.co.it.modular.hamcrest.date.DateMatchers.isToday;
+import static uk.co.it.modular.hamcrest.date.DateMatchers.isTomorrow;
+import static uk.co.it.modular.hamcrest.date.DateMatchers.isYesterday;
+import static uk.co.it.modular.hamcrest.date.testutils.DateMatcherTestUtils.addDateField;
 
 /**
  * @author <a href="mailto:stewart@modular-it.co.uk">Stewart Bissett</a>
  */
-public class DayMatchersTest {
-
-	@Test
-	public void canMatchFirstDayOfMonth() {
-		assertThat(JAN_1ST_2012_11_AM_GMT, isFirstDayOfMonth());
-	}
-
-	@Test
-	public void canNotMatchFirstDayOfMonth() {
-		assertThat(JAN_31ST_2012_11_AM_GMT, not(isFirstDayOfMonth()));
-	}
-
-	@Test
-	public void canMatchLastDayOfMonth() {
-		assertThat(JAN_31ST_2012_11_AM_GMT, isLastDayOfMonth());
-	}
-
-	@Test
-	public void canNotMatchLastDayOfMonth() {
-		assertThat(JAN_1ST_2012_11_AM_GMT, not(isLastDayOfMonth()));
-	}
+public class IsDayTest {
 
 	@Test
 	public void canMatchYesterday() {

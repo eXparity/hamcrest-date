@@ -9,11 +9,11 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * A matcher that tests that the examined date has the maximum value for the given date part
+ * A base matcher that tests that the examined date has the maximum value for the given date part
  * 
  * @author Stewart Bissett
  */
-public class IsMaximumDatePart extends TypeSafeDiagnosingMatcher<Date> {
+class IsMaximumDatePart extends TypeSafeDiagnosingMatcher<Date> {
 
 	/**
 	 * Creates a matcher that matches when the examined date has the maximum value for the datePart
@@ -26,6 +26,8 @@ public class IsMaximumDatePart extends TypeSafeDiagnosingMatcher<Date> {
 	 * 
 	 * @param datePart
 	 *            the part of the reference date to check
+	 * @param descriptionOfDatepart
+	 *            the description of the date part under test e.g. "day of month", "week of year", etc
 	 */
 	@Factory
 	public static Matcher<Date> maximumDatePart(final int datePart, final String descriptionOfDatepart) {

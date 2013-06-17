@@ -9,11 +9,11 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * A matcher that tests that the examined date has the minimum value for the given date part
+ * A base matcher that tests that the examined date has the minimum value for the given date part
  * 
  * @author Stewart Bissett
  */
-public class IsMinimumDatePart extends TypeSafeDiagnosingMatcher<Date> {
+class IsMinimumDatePart extends TypeSafeDiagnosingMatcher<Date> {
 
 	/**
 	 * Creates a matcher that matches when the examined date has the minimum value for the datePart

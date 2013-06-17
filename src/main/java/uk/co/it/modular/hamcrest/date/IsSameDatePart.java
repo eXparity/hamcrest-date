@@ -8,7 +8,7 @@ import org.hamcrest.Description;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * A matcher that tests that the examined date has the same date part as the reference date.
+ * A base matcher that tests that the examined date has the same date part as the reference date.
  * 
  * @author Stewart Bissett
  */

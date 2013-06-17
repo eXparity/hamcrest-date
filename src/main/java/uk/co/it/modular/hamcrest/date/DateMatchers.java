@@ -581,7 +581,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isYesterday() {
-		return DayMatchers.isYesterday();
+		return IsDay.isYesterday();
 	}
 
 	/**
@@ -594,7 +594,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isToday() {
-		return DayMatchers.isToday();
+		return IsDay.isToday();
 	}
 
 	/**
@@ -607,7 +607,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isTomorrow() {
-		return DayMatchers.isTomorrow();
+		return IsDay.isTomorrow();
 	}
 
 	/**
@@ -737,7 +737,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isFirstDayOfMonth() {
-		return DayMatchers.isFirstDayOfMonth();
+		return IsDayOfMonth.isFirstDayOfMonth();
 	}
 
 	/**
@@ -750,7 +750,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isLastDayOfMonth() {
-		return DayMatchers.isLastDayOfMonth();
+		return IsDayOfMonth.isLastDayOfMonth();
 	}
 
 	/**
