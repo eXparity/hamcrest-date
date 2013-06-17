@@ -79,7 +79,7 @@ The libary includes date matchers for:
 * __isApril__ - Test if the actual date is in april
 * __isMay__ - Test if the actual date is in may
 * __isJune__ - Test if the actual date is in june
-* __isJuly_ - Test if the actual date is in july
+* __isJuly__ - Test if the actual date is in july
 * __isAugust__ - Test if the actual date is in august
 * __isSeptember__ - Test if the actual date is in september
 * __isOctober__ - Test if the actual date is in october
