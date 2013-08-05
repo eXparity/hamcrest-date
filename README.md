@@ -18,12 +18,12 @@ A maven project
     <dependency>
         <groupId>uk.co.modular-it</groupId>
         <artifactId>hamcrest-date</artifactId>
-        <version>0.9.3</version>
+        <version>0.9.4</version>
     </dependency>
 
 A project which uses ivy for dependency management
 
-    <dependency org="uk.co.modular-it" name="hamcrest-date" rev="0.9.3"/>
+    <dependency org="uk.co.modular-it" name="hamcrest-date" rev="0.9.4"/>
             
 Binaries
 --------
@@ -56,6 +56,8 @@ The libary includes date matchers for:
 * __sameDay__ - Test if the actual date is on the same day as the reference date
 * __sameHour__ - Test if the actual date is on the same hour of the day as the reference date
 * __sameInstant__ - Test if the actual date is the same, down to the millisecond, as the reference date
+* __sameOrBefore__ - Test if the actual date is the same or before the reference date
+* __sameOrAfter__ - Test if the actual date is the same or after the reference date
 * __sameMinute__ - Test if the actual date is on the same minute of the hour as the reference date
 * __sameMonth__ - Test if the actual date is on the same month of the year as the reference date
 * __sameSecond__ - Test if the actual date is on the same second of the minute as the reference date
