@@ -3,7 +3,7 @@
 
 	<groupId>uk.co.modular-it</groupId>
 	<artifactId>hamcrest-date</artifactId>
-	<version>0.9.4</version>
+	<version>0.9.5-SNAPSHOT</version>
 
 	<name>Hamcrest Date</name>
 	<url>https://github.com/modularit/hamcrest-date</url>
