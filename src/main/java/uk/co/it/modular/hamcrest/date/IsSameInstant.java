@@ -72,6 +72,14 @@ public class IsSameInstant extends TypeSafeDiagnosingMatcher<Date> {
 	}
 
 	/**
+	 * @deprecated See {@link #sameInstance(int, Months, int, int, int, int, int)}
+	 */
+	@Deprecated
+	public static Matcher<Date> sameIntstance(final int year, final Months month, final int date, final int hour, final int minute, final int second, final int milliseconds) {
+		return sameInstant(year, month, date, hour, minute, second, milliseconds);
+	}
+
+	/**
 	 * Creates a matcher that matches when the examined date is on the same instance as the reference date
 	 * <p/>
 	 * For example:
@@ -96,7 +104,7 @@ public class IsSameInstant extends TypeSafeDiagnosingMatcher<Date> {
 	 *            the milliseconds of the second against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> sameIntstance(final int year, final Months month, final int date, final int hour, final int minute, final int second, final int milliseconds) {
+	public static Matcher<Date> sameInstant(final int year, final Months month, final int date, final int hour, final int minute, final int second, final int milliseconds) {
 		Calendar calendar = getInstance();
 		calendar.set(year, month.calendarConstant(), date, hour, minute, second);
 		calendar.set(Calendar.MILLISECOND, milliseconds);
