@@ -18,12 +18,12 @@ A maven project
     <dependency>
         <groupId>uk.co.modular-it</groupId>
         <artifactId>hamcrest-date</artifactId>
-        <version>0.9.4</version>
+        <version>0.9.5</version>
     </dependency>
 
 A project which uses ivy for dependency management
 
-    <dependency org="uk.co.modular-it" name="hamcrest-date" rev="0.9.4"/>
+    <dependency org="uk.co.modular-it" name="hamcrest-date" rev="0.9.5"/>
             
 Binaries
 --------
@@ -46,6 +46,12 @@ or after static importing
 
     Date today = new Date(); myBirthday = new Date();
     assertThat(today, within(1, DAY, myBirthday));
+
+A factories is provided for commonly used moments in time. For Example
+
+    Date myBirthday = new Date();
+    MatcherAssert.assertThat(myBirthday, DateMatchers.sameDate(Moments.today()));
+
 
 The libary includes date matchers for:
 
