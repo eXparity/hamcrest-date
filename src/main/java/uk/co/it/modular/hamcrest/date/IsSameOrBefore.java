@@ -14,7 +14,7 @@ import static uk.co.it.modular.hamcrest.date.IsSameInstant.sameInstant;
  * 
  * @author Stewart Bissett
  */
-public class IsSameOrBefore {
+public abstract class IsSameOrBefore {
 
 	/**
 	 * Creates a matcher that matches when the examined date is at the same instant or before the reference date
@@ -29,8 +29,25 @@ public class IsSameOrBefore {
 	 *            the reference date against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> isSameOrBefore(final Date date) {
+	public static Matcher<Date> sameOrBefore(final Date date) {
 		return anyOf(sameInstant(date), before(date));
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is at the same instant or before the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isSameOrBefore(Moments.today()));
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	@Factory
+	public static Matcher<Date> sameOrBefore(final DayMonthYear date) {
+		return anyOf(sameDay(date), before(date));
 	}
 
 	/**
@@ -50,7 +67,7 @@ public class IsSameOrBefore {
 	 *            the day of the month against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> isSameOrBefore(final int year, final Months month, final int day) {
+	public static Matcher<Date> sameOrBefore(final int year, final Months month, final int day) {
 		return anyOf(sameDay(year, month, day), before(year, month, day));
 	}
 
@@ -77,7 +94,7 @@ public class IsSameOrBefore {
 	 *            the second of the minute against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> isSameOrBefore(final int year, final Months month, final int date, final int hour, final int minute, final int second) {
+	public static Matcher<Date> sameOrBefore(final int year, final Months month, final int date, final int hour, final int minute, final int second) {
 		return anyOf(sameInstant(year, month, date, hour, minute, second, 0), before(year, month, date, hour, minute, second));
 	}
 

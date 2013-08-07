@@ -37,6 +37,18 @@ public enum Months {
 	DEC(Calendar.DECEMBER, "December"),
 	DECEMBER(Calendar.DECEMBER, "December");
 
+	/**
+	 * Factory method to create a Months instance from a java calendar month value
+	 */
+	public static Months fromCalendar(final int calendarMonth) {
+		for (Months month : values()) {
+			if (calendarMonth == month.calendarMonth) {
+				return month;
+			}
+		}
+		throw new IllegalArgumentException("Unknown calendar month value '" + calendarMonth + "'");
+	}
+
 	private final int calendarMonth;;
 	private final String description;
 

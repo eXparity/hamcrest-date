@@ -35,6 +35,23 @@ public class IsSameDay extends IsSameDatePart {
 	}
 
 	/**
+	 * Creates a matcher that matches when the examined date is on the same day of the year as the reference date in the default timezone
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameDayOfTheYear(Moments.today()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	@Factory
+	public static Matcher<Date> sameDay(final DayMonthYear date) {
+		return sameDay(date.getYear(), date.getMonth(), date.getDay());
+	}
+
+	/**
 	 * Creates a matcher that matches when the examined date is on the same day of the year as the reference date
 	 * <p/>
 	 * For example:

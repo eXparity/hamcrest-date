@@ -55,6 +55,23 @@ public class IsBefore extends TypeSafeDiagnosingMatcher<Date> {
 	}
 
 	/**
+	 * Creates a matcher that matches when the examined date is before the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, before(Moments.today()));
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	@Factory
+	public static Matcher<Date> before(final DayMonthYear date) {
+		return before(date.getYear(), date.getMonth(), date.getDay());
+	}
+
+	/**
 	 * Creates a matcher that matches when the examined date is before the start of the reference date
 	 * <p/>
 	 * For example:

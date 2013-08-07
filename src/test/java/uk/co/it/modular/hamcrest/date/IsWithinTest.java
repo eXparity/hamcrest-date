@@ -56,6 +56,16 @@ public class IsWithinTest {
 	}
 
 	@Test
+	public void canCompareDatesWithinLimitDayMonthYear() {
+		assertThat(JAN_1ST_2012_11_AM_GMT, within(2, TimeUnit.DAYS, new DayMonthYear(2, Months.JAN, 2012)));
+	}
+
+	@Test
+	public void canCompareDatesNotWithinLimitDayMonthYear() {
+		assertThat(JAN_1ST_2012_11_AM_GMT, not(within(2, TimeUnit.DAYS, new DayMonthYear(6, Months.JAN, 2012))));
+	}
+
+	@Test
 	public void canCompareDatesWithinLimitTime() {
 		assertThat(JAN_1ST_2012_11_AM_GMT, within(10, TimeUnit.SECONDS, 2012, Months.JAN, 1, 11, 00, 00, 000));
 	}

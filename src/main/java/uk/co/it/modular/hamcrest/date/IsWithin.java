@@ -91,6 +91,27 @@ public class IsWithin extends TypeSafeDiagnosingMatcher<Date> {
 	 * For example:
 	 * 
 	 * <pre>
+	 * assertThat(myDate, within(2, TimeUnit.DAYS, Moments.today()))
+	 * </pre>
+	 * 
+	 * @param period
+	 *            the timeunit interval the examined date should be with
+	 * @param unit
+	 *            the timeunit to define the length of the period
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	@Factory
+	public static Matcher<Date> within(final long period, final TimeUnit unit, final DayMonthYear date) {
+		return within(period, unit, date.getYear(), date.getMonth(), date.getDay());
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is within a given period of the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
 	 * assertThat(myDate, within(5, TimeUnit.DAYS, 2012, Months.MAY, 12));
 	 * </pre>
 	 * 

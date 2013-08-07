@@ -13,7 +13,7 @@ import static uk.co.it.modular.hamcrest.date.IsMinimumDatePart.minimumDatePart;
 /**
  * @author Stewart Bissett
  */
-public class IsDayOfMonth {
+public abstract class IsDayOfMonth {
 
 	/**
 	 * Creates a matcher that matches when the examined date is on the first day of the month

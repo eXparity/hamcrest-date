@@ -55,6 +55,23 @@ public class IsAfter extends TypeSafeDiagnosingMatcher<Date> {
 	}
 
 	/**
+	 * Creates a matcher that matches when the examined date is after the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, after(Moments.today()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	@Factory
+	public static Matcher<Date> after(final DayMonthYear date) {
+		return after(date.getYear(), date.getMonth(), date.getDay());
+	}
+
+	/**
 	 * Creates a matcher that matches when the examined date is after the end of the reference year
 	 * <p/>
 	 * For example:

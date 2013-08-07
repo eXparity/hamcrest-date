@@ -1,18 +1,20 @@
 
 package uk.co.it.modular.hamcrest.date;
 
-import static uk.co.it.modular.hamcrest.date.IsSameDay.sameDay;
-import java.util.Calendar;
 import java.util.Date;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import static uk.co.it.modular.hamcrest.date.IsSameDay.sameDay;
+import static uk.co.it.modular.hamcrest.date.Moments.today;
+import static uk.co.it.modular.hamcrest.date.Moments.tomorrow;
+import static uk.co.it.modular.hamcrest.date.Moments.yesterday;
 
 /**
  * A set of matchers for testing the day portion of a {@link Date}
  * 
  * @author Stewart Bissett
  */
-public class IsDay {
+public abstract class IsDay {
 
 	/**
 	 * Creates a matcher that matches when the examined date is yesterday
@@ -25,10 +27,7 @@ public class IsDay {
 	 */
 	@Factory
 	public static Matcher<Date> isYesterday() {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(new Date());
-		cal.add(Calendar.DATE, -1);
-		return sameDay(cal.getTime());
+		return sameDay(yesterday());
 	}
 
 	/**
@@ -42,7 +41,7 @@ public class IsDay {
 	 */
 	@Factory
 	public static Matcher<Date> isToday() {
-		return sameDay(new Date());
+		return sameDay(today());
 	}
 
 	/**
@@ -56,10 +55,7 @@ public class IsDay {
 	 */
 	@Factory
 	public static Matcher<Date> isTomorrow() {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(new Date());
-		cal.add(Calendar.DATE, +1);
-		return sameDay(cal.getTime());
+		return sameDay(tomorrow());
 	}
 
 }

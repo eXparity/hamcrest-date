@@ -6,7 +6,7 @@ package uk.co.it.modular.hamcrest.date;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
-import static uk.co.it.modular.hamcrest.date.DateMatchers.sameDay;
+import static uk.co.it.modular.hamcrest.date.DateMatchers.*;
 import static uk.co.it.modular.hamcrest.date.Months.JANUARY;
 import org.junit.Test;
 import uk.co.it.modular.hamcrest.date.testutils.Dates;
@@ -41,6 +41,16 @@ public class IsSameDayTest {
 	@Test
 	public void canCompareADifferentDayWithFields() {
 		assertThat(Dates.JAN_1ST_2012_11_AM_GMT, not(sameDay(2012, JANUARY, 2)));
+	}
+
+	@Test
+	public void canCompareTheSameDayMonthYear() {
+		assertThat(Dates.JAN_1ST_2012_11_AM_GMT, sameDay(new DayMonthYear(1, JANUARY, 2012)));
+	}
+
+	@Test
+	public void canCompareADifferentDayMonthYear() {
+		assertThat(Dates.JAN_1ST_2012_11_AM_GMT, not(sameDay(new DayMonthYear(2, JANUARY, 2012))));
 	}
 
 }

@@ -6,7 +6,7 @@ package uk.co.it.modular.hamcrest.date;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
-import static uk.co.it.modular.hamcrest.date.DateMatchers.before;
+import static uk.co.it.modular.hamcrest.date.DateMatchers.*;
 import static uk.co.it.modular.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_AM_GMT;
 import static uk.co.it.modular.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_AM_PST;
 import static uk.co.it.modular.hamcrest.date.testutils.Dates.JUN_15TH_2012_11_AM;
@@ -53,6 +53,21 @@ public class IsBeforeTest {
 	@Test
 	public void canCompareIsSameDay() {
 		assertThat(JUN_15TH_2012_11_PM, not(before(2012, Months.JUNE, 15)));
+	}
+
+	@Test
+	public void canCompareIsNotBeforeDayMonthYear() {
+		assertThat(JUN_15TH_2012_11_PM, not(before(new DayMonthYear(14, Months.JUNE, 2012))));
+	}
+
+	@Test
+	public void canCompareisBeforeDayMonthYear() {
+		assertThat(JUN_15TH_2012_11_PM, before(new DayMonthYear(16, Months.JUNE, 2012)));
+	}
+
+	@Test
+	public void canCompareIsSameDayMonthYear() {
+		assertThat(JUN_15TH_2012_11_PM, not(before(new DayMonthYear(15, Months.JUNE, 2012))));
 	}
 
 	@Test

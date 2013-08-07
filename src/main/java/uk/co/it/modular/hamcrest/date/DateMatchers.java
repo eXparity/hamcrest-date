@@ -33,6 +33,22 @@ public abstract class DateMatchers {
 	}
 
 	/**
+	 * Creates a matcher that matches when the examined date is after the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, after(Moments.today()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	public static Matcher<Date> after(final DayMonthYear date) {
+		return IsAfter.after(date);
+	}
+
+	/**
 	 * Creates a matcher that matches when the examined date is after the end of the reference year
 	 * <p/>
 	 * For example:
@@ -91,6 +107,22 @@ public abstract class DateMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> before(final Date date) {
+		return IsBefore.before(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is before the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, before(Moments.today()));
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	public static Matcher<Date> before(final DayMonthYear date) {
 		return IsBefore.before(date);
 	}
 
@@ -232,6 +264,22 @@ public abstract class DateMatchers {
 	 * For example:
 	 * 
 	 * <pre>
+	 * assertThat(myDate, sameDay(Moments.today()));
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	public static Matcher<Date> sameDay(final DayMonthYear date) {
+		return IsSameDay.sameDay(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same day of the year as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
 	 * assertThat(myDate, sameDayOfTheYear(2012, Month.JAN, 1))
 	 * </pre>
 	 * 
@@ -351,8 +399,24 @@ public abstract class DateMatchers {
 	 * @param date
 	 *            the reference date against which the examined date is checked
 	 */
-	public static Matcher<Date> isSameOrBefore(final Date date) {
-		return isSameOrBefore(date);
+	public static Matcher<Date> sameOrBefore(final Date date) {
+		return IsSameOrBefore.sameOrBefore(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is at the same date or before the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isSameOrBefore(new Date()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	public static Matcher<Date> sameOrBefore(final DayMonthYear date) {
+		return IsSameOrBefore.sameOrBefore(date);
 	}
 
 	/**
@@ -372,8 +436,8 @@ public abstract class DateMatchers {
 	 *            the day of the month against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> isSameOrBefore(final int year, final Months month, final int day) {
-		return isSameOrBefore(year, month, day);
+	public static Matcher<Date> sameOrBefore(final int year, final Months month, final int day) {
+		return IsSameOrBefore.sameOrBefore(year, month, day);
 	}
 
 	/**
@@ -399,8 +463,87 @@ public abstract class DateMatchers {
 	 *            the second of the minute against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> isSameOrBefore(final int year, final Months month, final int date, final int hour, final int minute, final int second) {
-		return isSameOrBefore(year, month, date, hour, minute, second);
+	public static Matcher<Date> sameOrBefore(final int year, final Months month, final int date, final int hour, final int minute, final int second) {
+		return IsSameOrBefore.sameOrBefore(year, month, date, hour, minute, second);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is at the same instant or after the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isSameOrAfter(new Date()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	public static Matcher<Date> sameOrAfter(final Date date) {
+		return IsSameOrAfter.sameOrAfter(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is at the same instant or after the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isSameOrAfter(Moments.today()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	public static Matcher<Date> sameOrAfter(final DayMonthYear date) {
+		return IsSameOrAfter.sameOrAfter(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same day or after the start of the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isSameOrAfter(2012, Months.MAY, 12));
+	 * </pre>
+	 * 
+	 * @param year
+	 *            the year against which the examined date is checked
+	 * @param month
+	 *            the month against which the examined date is checked
+	 * @param day
+	 *            the day of the month against which the examined date is checked
+	 */
+	public static Matcher<Date> sameOrAfter(final int year, final Months month, final int day) {
+		return IsSameOrAfter.sameOrAfter(year, month, day);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same second or after the start of the reference date and time
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isSameOrAfter(2012, Months.MAY, 12, 23, 00, 01));
+	 * </pre>
+	 * 
+	 * @param year
+	 *            the year against which the examined date is checked
+	 * @param month
+	 *            the month against which the examined date is checked
+	 * @param day
+	 *            the day of the month against which the examined date is checked
+	 * @param hour
+	 *            the hour of the day against which the examined date is checked
+	 * @param minute
+	 *            the minute of the hour against which the examined date is checked
+	 * @param second
+	 *            the second of the minute against which the examined date is checked
+	 */
+	@Factory
+	public static Matcher<Date> sameOrAfter(final int year, final Months month, final int date, final int hour, final int minute, final int second) {
+		return IsSameOrAfter.sameOrAfter(year, month, date, hour, minute, second);
 	}
 
 	/**
@@ -576,6 +719,22 @@ public abstract class DateMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> within(final long period, final TimeUnit unit, final Date date) {
+		return IsWithin.within(period, unit, date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is within a defined period the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, within(10, TimeUnit.DAYS, Moments.today()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	public static Matcher<Date> within(final long period, final TimeUnit unit, final DayMonthYear date) {
 		return IsWithin.within(period, unit, date);
 	}
 

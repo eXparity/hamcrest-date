@@ -14,7 +14,7 @@ import static uk.co.it.modular.hamcrest.date.IsSameInstant.sameInstant;
  * 
  * @author Stewart Bissett
  */
-public class IsSameOrAfter {
+public abstract class IsSameOrAfter {
 
 	/**
 	 * Creates a matcher that matches when the examined date is at the same instant or after the reference date
@@ -29,8 +29,25 @@ public class IsSameOrAfter {
 	 *            the reference date against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> isSameOrAfter(final Date date) {
+	public static Matcher<Date> sameOrAfter(final Date date) {
 		return anyOf(sameInstant(date), after(date));
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is at the same instant or after the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isSameOrAfter(Moments.today()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	@Factory
+	public static Matcher<Date> sameOrAfter(final DayMonthYear date) {
+		return anyOf(sameDay(date), after(date));
 	}
 
 	/**
@@ -50,7 +67,7 @@ public class IsSameOrAfter {
 	 *            the day of the month against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> isSameOrAfter(final int year, final Months month, final int day) {
+	public static Matcher<Date> sameOrAfter(final int year, final Months month, final int day) {
 		return anyOf(sameDay(year, month, day), after(year, month, day));
 	}
 
@@ -77,7 +94,7 @@ public class IsSameOrAfter {
 	 *            the second of the minute against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> isSameOrAfter(final int year, final Months month, final int date, final int hour, final int minute, final int second) {
+	public static Matcher<Date> sameOrAfter(final int year, final Months month, final int date, final int hour, final int minute, final int second) {
 		return anyOf(sameInstant(year, month, date, hour, minute, second, 0), after(year, month, date, hour, minute, second));
 	}
 
