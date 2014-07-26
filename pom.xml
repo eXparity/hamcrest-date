@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>uk.co.modular-it</groupId>
+	<groupId>org.exparity</groupId>
 	<artifactId>hamcrest-date</artifactId>
-	<version>0.9.6-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 
 	<name>Hamcrest Date</name>
-	<url>https://github.com/modularit/hamcrest-date</url>
+	<url>https://github.com/exparity/hamcrest-date</url>
 	<description>Hamcrest Date matchers for Java</description>
 
 	<parent>
@@ -24,9 +24,9 @@
 	</licenses>
   
 	<scm>
-		<connection>scm:git:@github.com:modularit/hamcrest-date.git</connection>
-    <developerConnection>scm:git:git@github.com:modularit/hamcrest-date.git</developerConnection>
-    <url>git@github.com:modularit/hamcrest-date.git</url>
+		<connection>scm:git:@github.com:exparity/hamcrest-date.git</connection>
+    <developerConnection>scm:git:git@github.com:exparity/hamcrest-date.git</developerConnection>
+    <url>git@github.com:exparity/hamcrest-date.git</url>
 	</scm>
 
 	<developers>

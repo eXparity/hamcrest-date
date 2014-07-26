@@ -16,14 +16,14 @@ You can obtain Hamcrest binaries from [maven central][]. To include your project
 A maven project
 
     <dependency>
-        <groupId>uk.co.modular-it</groupId>
+        <groupId>org.exparity</groupId>
         <artifactId>hamcrest-date</artifactId>
-        <version>0.9.5</version>
+        <version>1.0.0</version>
     </dependency>
 
 A project which uses ivy for dependency management
 
-    <dependency org="uk.co.modular-it" name="hamcrest-date" rev="0.9.5"/>
+    <dependency org="org.exparity" name="hamcrest-date" rev="1.0.0"/>
             
 Binaries
 --------
@@ -35,7 +35,7 @@ Usage
 The matchers are exposed as static methods on the DateMatchers class. For Example
 
     Date today = new Date(); myBirthday = new Date();
-    MatcherAssert.assertThat(today, DateMatchers.sameDate(myBirthday));
+    MatcherAssert.assertThat(today, DateMatchers.sameDay(myBirthday));
 
 or
 
@@ -50,7 +50,7 @@ or after static importing
 A factories is provided for commonly used moments in time. For Example
 
     Date myBirthday = new Date();
-    MatcherAssert.assertThat(myBirthday, DateMatchers.sameDate(Moments.today()));
+    MatcherAssert.assertThat(myBirthday, DateMatchers.sameDay(Moments.today()));
 
 
 The libary includes date matchers for:
@@ -58,7 +58,6 @@ The libary includes date matchers for:
 * __after__ - Test if the actual date is after the reference date
 * __before__ - Test if the actual date is before the reference date
 * __within__ - Test if the actual date is within a given period (before or after) of the reference date
-* __sameDatePart__ - Test if the actual date has the same date part as the reference date
 * __sameDay__ - Test if the actual date is on the same day as the reference date
 * __sameHour__ - Test if the actual date is on the same hour of the day as the reference date
 * __sameInstant__ - Test if the actual date is the same, down to the millisecond, as the reference date
@@ -71,7 +70,7 @@ The libary includes date matchers for:
 * __sameYear__ - Test if the actual date is on the same year as the reference date
 * __isYesterday__ - Test if the actual date is yesterday
 * __isToday__ - Test if the actual date is today
-* __isToday__ - Test if the actual date is tomorrow
+* __isTomorrow__ - Test if the actual date is tomorrow
 * __isMonday__ - Test if the actual date is on a monday
 * __isTuesday__ - Test if the actual date is on a tuesday
 * __isWednesday__ - Test if the actual date is on a wednesday
