@@ -4,16 +4,14 @@
 
 package org.exparity.hamcrest.date;
 
-import static org.exparity.hamcrest.date.DateMatchers.*;
+import org.junit.Test;
+import static org.exparity.hamcrest.date.DateMatchers.before;
 import static org.exparity.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_AM_GMT;
 import static org.exparity.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_AM_PST;
 import static org.exparity.hamcrest.date.testutils.Dates.JUN_15TH_2012_11_AM;
 import static org.exparity.hamcrest.date.testutils.Dates.JUN_15TH_2012_11_PM;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
-import org.exparity.hamcrest.date.DayMonthYear;
-import org.exparity.hamcrest.date.Months;
-import org.junit.Test;
 
 /**
  * Unit Tests for the {@link IsBefore} class

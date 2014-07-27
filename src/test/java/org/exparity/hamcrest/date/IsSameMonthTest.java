@@ -8,7 +8,7 @@ import org.exparity.hamcrest.date.Months;
 import org.exparity.hamcrest.date.testutils.Dates;
 import org.junit.Test;
 import static org.exparity.hamcrest.date.DateMatchers.*;
-import static org.exparity.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_AM_GMT;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_AM;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNot.not;
 
@@ -21,82 +21,82 @@ public class IsSameMonthTest {
 
 	@Test
 	public void canMatchTheSameMonthOnDates() {
-		assertThat(Dates.JAN_1ST_2012_11_AM_GMT, sameMonth(Dates.JAN_2ND_2012_11_AM_GMT));
+		assertThat(Dates.JAN_1ST_2012_11_AM, sameMonth(Dates.JAN_2ND_2012_11_AM));
 	}
 
 	@Test
 	public void canMatchDifferentMonthsOnDates() {
-		assertThat(Dates.JAN_1ST_2012_11_AM_GMT, not(sameMonth(Dates.JUN_15TH_2012_11_AM)));
+		assertThat(Dates.JAN_1ST_2012_11_AM, not(sameMonth(Dates.JUN_15TH_2012_11_AM)));
 	}
 
 	@Test
 	public void canMatchTheSameMonth() {
-		assertThat(Dates.JAN_1ST_2012_11_AM_GMT, sameMonth(Months.JANUARY));
+		assertThat(Dates.JAN_1ST_2012_11_AM, sameMonth(Months.JANUARY));
 	}
 
 	@Test
 	public void canMatchDifferentMonth() {
-		assertThat(JAN_1ST_2012_11_AM_GMT, not(sameMonth(Months.FEBRUARY)));
+		assertThat(JAN_1ST_2012_11_AM, not(sameMonth(Months.FEBRUARY)));
 	}
 
 	@Test
 	public void canMatchJanuary() {
-		assertThat(Dates.JAN_1ST_2012_11_AM_GMT, isJanuary());
+		assertThat(Dates.JAN_1ST_2012_11_AM, isJanuary());
 	}
 
 	@Test
 	public void canMatchFebruary() {
-		assertThat(Dates.FEB_1ST_2012_11_AM_GMT, isFebruary());
+		assertThat(Dates.FEB_1ST_2012_11_AM, isFebruary());
 	}
 
 	@Test
 	public void canMatchMarch() {
-		assertThat(Dates.MAR_1ST_2012_11_AM_GMT, isMarch());
+		assertThat(Dates.MAR_1ST_2012_11_AM, isMarch());
 	}
 
 	@Test
 	public void canMatchApril() {
-		assertThat(Dates.APR_1ST_2012_11_AM_GMT, isApril());
+		assertThat(Dates.APR_1ST_2012_11_AM, isApril());
 	}
 
 	@Test
 	public void canMatchMay() {
-		assertThat(Dates.MAY_1ST_2012_11_AM_GMT, isMay());
+		assertThat(Dates.MAY_1ST_2012_11_AM, isMay());
 	}
 
 	@Test
 	public void canMatchJune() {
-		assertThat(Dates.JUN_1ST_2012_11_AM_GMT, isJune());
+		assertThat(Dates.JUN_1ST_2012_11_AM, isJune());
 	}
 
 	@Test
 	public void canMatchJuly() {
-		assertThat(Dates.JUL_1ST_2012_11_AM_GMT, isJuly());
+		assertThat(Dates.JUL_1ST_2012_11_AM, isJuly());
 	}
 
 	@Test
 	public void canMatchAugust() {
-		assertThat(Dates.AUG_1ST_2012_11_AM_GMT, isAugust());
+		assertThat(Dates.AUG_1ST_2012_11_AM, isAugust());
 	}
 
 	@Test
 	public void canMatchSeptember() {
-		assertThat(Dates.SEP_1ST_2012_11_AM_GMT, isSeptember());
+		assertThat(Dates.SEP_1ST_2012_11_AM, isSeptember());
 	}
 
 	@Test
 	public void canMatchOctober() {
-		assertThat(Dates.OCT_1ST_2012_11_AM_GMT, isOctober());
+		assertThat(Dates.OCT_1ST_2012_11_AM, isOctober());
 	}
 
 	@Test
 	public void canMatchNovember() {
-		assertThat(Dates.NOV_1ST_2012_11_AM_GMT, isNovember());
+		assertThat(Dates.NOV_1ST_2012_11_AM, isNovember());
 	}
 
 	@Test
 	public void canMatchDecember() {
-		assertThat(Dates.DEC_1ST_2012_11_AM_GMT, isDecember());
+		assertThat(Dates.DEC_1ST_2012_11_AM, isDecember());
 	}
 
 }
