@@ -18,12 +18,12 @@ A maven project
     <dependency>
         <groupId>org.exparity</groupId>
         <artifactId>hamcrest-date</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </dependency>
 
 A project which uses ivy for dependency management
 
-    <dependency org="org.exparity" name="hamcrest-date" rev="1.0.0"/>
+    <dependency org="org.exparity" name="hamcrest-date" rev="1.0.1"/>
             
 Binaries
 --------
@@ -107,6 +107,9 @@ The source includes a pom.xml for building with Maven
 
 Release Notes
 -------------
+Changes 1.0.0 -> 1.0.1
+  * Restore and deprecated uk.co.it.modular.hamcrest.date.DateMatchers for backwards compatibility with previous package structure.
+  
 Changes 0.9.5 -> 1.0.0
   * Package change to new organisation org.exparity from uk.co.it.modular
   * Fixup flaky tests by using local timezone in non-timezone tests
