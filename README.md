@@ -1,4 +1,4 @@
-Hamcrest Date [![Build Status](https://travis-ci.org/eXparity/hamcrest-date.svg?branch=master)](https://travis-ci.org/eXparity/hamcrest-date)
+Hamcrest Date  [![Build Status](https://travis-ci.org/eXparity/hamcrest-date.svg?branch=master)](https://travis-ci.org/eXparity/hamcrest-date) [![Coverage Status](https://coveralls.io/repos/eXparity/hamcrest-date/badge.png)](https://coveralls.io/r/eXparity/hamcrest-date)
 =============
 
 A date matching library for [Java Hamcrest][]
