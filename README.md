@@ -1,4 +1,4 @@
-Hamcrest Date  [![Build Status](https://travis-ci.org/eXparity/hamcrest-date.svg?branch=master)](https://travis-ci.org/eXparity/hamcrest-date) [![Coverage Status](https://coveralls.io/repos/eXparity/hamcrest-date/badge.png)](https://coveralls.io/r/eXparity/hamcrest-date)
+Hamcrest Date  [![Build Status](https://travis-ci.org/eXparity/hamcrest-date.svg?branch=master)](https://travis-ci.org/eXparity/hamcrest-date) [![Coverage Status](https://coveralls.io/repos/eXparity/hamcrest-date/badge.png?branch=master)](https://coveralls.io/r/eXparity/hamcrest-date?branch=master)
 =============
 
 A date matching library for [Java Hamcrest][]
@@ -7,7 +7,7 @@ Licensed under [BSD License][].
 
 What is Hamcrest Date?
 -----------------
-Hamcrest Date is an extension library for the [Java Hamcrest][] matcher library
+Hamcrest Date is an extension library for the [Java Hamcrest][] matcher library which provides Matcher implementations for dates.
 
 Downloads
 ---------
