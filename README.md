@@ -107,6 +107,9 @@ The source includes a pom.xml for building with Maven
 
 Release Notes
 -------------
+Changes 1.0.1 -> 1.1
+  * Remove deprecated uk.co.it.modular.hamcrest.date.DateMatchers.
+
 Changes 1.0.0 -> 1.0.1
   * Restore and deprecate uk.co.it.modular.hamcrest.date.DateMatchers for backwards compatibility with previous package structure.
   

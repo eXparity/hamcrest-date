@@ -1,7 +1,3 @@
-/*
- * Copyright (c) Modular IT Limited.
- */
-
 package org.exparity.hamcrest.date;
 
 import org.exparity.hamcrest.date.testutils.Dates;

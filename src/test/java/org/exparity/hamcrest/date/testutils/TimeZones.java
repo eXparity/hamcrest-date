@@ -1,7 +1,3 @@
-/*
- * Copyright (c) Modular IT Limited.
- */
-
 package org.exparity.hamcrest.date.testutils;
 
 import java.util.TimeZone;

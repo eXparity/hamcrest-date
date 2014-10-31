@@ -3,7 +3,7 @@
 
 	<groupId>org.exparity</groupId>
 	<artifactId>hamcrest-date</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.1.0-SNAPSHOT</version>
 
 	<name>Hamcrest Date</name>
 	<url>https://github.com/exparity/hamcrest-date</url>
@@ -54,6 +54,12 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.exparity</groupId>
+			<artifactId>fluent-date</artifactId>
+			<version>1.0.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

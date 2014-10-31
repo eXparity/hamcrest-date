@@ -1,15 +1,10 @@
-/*
- * Copyright (c) Modular IT Limited.
- */
-
 package org.exparity.hamcrest.date;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Formatter
- * 
+ * Helper class to format
  * @author Stewart Bissett
  */
 abstract class DateFormatter {
