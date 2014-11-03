@@ -6,7 +6,6 @@ import static org.exparity.hamcrest.date.DateMatchers.isLastDayOfMonth;
 import static org.exparity.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_AM;
 import static org.exparity.hamcrest.date.testutils.Dates.JAN_31ST_2012_11_AM;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.not;
 
 /**
  * @author <a href="mailto:stewart@modular-it.co.uk">Stewart Bissett</a>
@@ -18,9 +17,9 @@ public class IsDayOfMonthTest {
 		assertThat(JAN_1ST_2012_11_AM, isFirstDayOfMonth());
 	}
 
-	@Test
+	@Test(expected = AssertionError.class)
 	public void canNotMatchFirstDayOfMonth() {
-		assertThat(JAN_31ST_2012_11_AM, not(isFirstDayOfMonth()));
+		assertThat(JAN_31ST_2012_11_AM, isFirstDayOfMonth());
 	}
 
 	@Test
@@ -28,8 +27,8 @@ public class IsDayOfMonthTest {
 		assertThat(JAN_31ST_2012_11_AM, isLastDayOfMonth());
 	}
 
-	@Test
+	@Test(expected = AssertionError.class)
 	public void canNotMatchLastDayOfMonth() {
-		assertThat(JAN_1ST_2012_11_AM, not(isLastDayOfMonth()));
+		assertThat(JAN_1ST_2012_11_AM, isLastDayOfMonth());
 	}
 }

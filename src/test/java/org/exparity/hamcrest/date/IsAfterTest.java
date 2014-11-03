@@ -7,7 +7,6 @@ import static org.exparity.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_AM_GMT;
 import static org.exparity.hamcrest.date.testutils.Dates.JUN_15TH_2012_11_AM;
 import static org.exparity.hamcrest.date.testutils.Dates.JUN_15TH_2012_11_PM;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.not;
 
 /**
  * Unit Tests for the {@link IsSameYear} class
@@ -21,14 +20,14 @@ public class IsAfterTest {
 		assertThat(JUN_15TH_2012_11_PM, after(JUN_15TH_2012_11_AM));
 	}
 
-	@Test
+	@Test(expected = AssertionError.class)
 	public void canCompareIsNotAfter() {
-		assertThat(JUN_15TH_2012_11_AM, not(after(JUN_15TH_2012_11_PM)));
+		assertThat(JUN_15TH_2012_11_AM, after(JUN_15TH_2012_11_PM));
 	}
 
-	@Test
+	@Test(expected = AssertionError.class)
 	public void canCompareIsSame() {
-		assertThat(JUN_15TH_2012_11_PM, not(after(JUN_15TH_2012_11_PM)));
+		assertThat(JUN_15TH_2012_11_PM, after(JUN_15TH_2012_11_PM));
 	}
 
 	@Test
@@ -41,14 +40,14 @@ public class IsAfterTest {
 		assertThat(JUN_15TH_2012_11_PM, after(2012, Months.JUNE, 14));
 	}
 
-	@Test
+	@Test(expected = AssertionError.class)
 	public void canCompareIsNotAfterDay() {
-		assertThat(JUN_15TH_2012_11_PM, not(after(2012, Months.JUNE, 16)));
+		assertThat(JUN_15TH_2012_11_PM, after(2012, Months.JUNE, 16));
 	}
 
-	@Test
+	@Test(expected = AssertionError.class)
 	public void canCompareIsSameDay() {
-		assertThat(JUN_15TH_2012_11_PM, not(after(2012, Months.JUNE, 15)));
+		assertThat(JUN_15TH_2012_11_PM, after(2012, Months.JUNE, 15));
 	}
 
 	@Test
@@ -56,14 +55,14 @@ public class IsAfterTest {
 		assertThat(JUN_15TH_2012_11_PM, after(new DayMonthYear(14, Months.JUNE, 2012)));
 	}
 
-	@Test
+	@Test(expected = AssertionError.class)
 	public void canCompareIsNotAfterDayMonthYear() {
-		assertThat(JUN_15TH_2012_11_PM, not(after(new DayMonthYear(16, Months.JUNE, 2012))));
+		assertThat(JUN_15TH_2012_11_PM, after(new DayMonthYear(16, Months.JUNE, 2012)));
 	}
 
-	@Test
+	@Test(expected = AssertionError.class)
 	public void canCompareIsSameDayMonthYear() {
-		assertThat(JUN_15TH_2012_11_PM, not(after(new DayMonthYear(15, Months.JUNE, 2012))));
+		assertThat(JUN_15TH_2012_11_PM, after(new DayMonthYear(15, Months.JUNE, 2012)));
 	}
 
 	@Test
@@ -71,14 +70,14 @@ public class IsAfterTest {
 		assertThat(JUN_15TH_2012_11_AM, after(2012, Months.JUNE, 15, 10, 59, 59));
 	}
 
-	@Test
+	@Test(expected = AssertionError.class)
 	public void canCompareIsNotAfterHour() {
-		assertThat(JUN_15TH_2012_11_AM, not(after(2012, Months.JUNE, 15, 11, 00, 01)));
+		assertThat(JUN_15TH_2012_11_AM, after(2012, Months.JUNE, 15, 11, 00, 01));
 	}
 
-	@Test
+	@Test(expected = AssertionError.class)
 	public void canCompareIsSameHour() {
-		assertThat(JUN_15TH_2012_11_AM, not(after(2012, Months.JUNE, 15, 11, 00, 00)));
+		assertThat(JUN_15TH_2012_11_AM, after(2012, Months.JUNE, 15, 11, 00, 00));
 	}
 
 }

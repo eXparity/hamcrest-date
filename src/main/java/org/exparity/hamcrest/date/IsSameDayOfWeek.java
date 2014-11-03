@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import static org.hamcrest.Matchers.anyOf;
+import static org.hamcrest.core.AnyOf.anyOf;
 
 /**
  * A matcher that tests that the examined date is on the same day of the week as the reference date

@@ -7,7 +7,7 @@ import org.hamcrest.Matcher;
 import static org.exparity.hamcrest.date.IsBefore.before;
 import static org.exparity.hamcrest.date.IsSameDay.sameDay;
 import static org.exparity.hamcrest.date.IsSameInstant.sameInstant;
-import static org.hamcrest.Matchers.anyOf;
+import static org.hamcrest.core.AnyOf.anyOf;
 
 /**
  * A matcher that tests that the examined date is before or at the same instant as the reference date

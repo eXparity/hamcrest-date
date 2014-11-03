@@ -22,11 +22,11 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-  
+
 	<scm>
 		<connection>scm:git:@github.com:exparity/hamcrest-date.git</connection>
-    <developerConnection>scm:git:git@github.com:exparity/hamcrest-date.git</developerConnection>
-    <url>git@github.com:exparity/hamcrest-date.git</url>
+		<developerConnection>scm:git:git@github.com:exparity/hamcrest-date.git</developerConnection>
+		<url>git@github.com:exparity/hamcrest-date.git</url>
 	</scm>
 
 	<developers>
@@ -49,12 +49,25 @@
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-library</artifactId>
 			<version>1.3</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hamcrest</groupId>
+					<artifactId>hamcrest-core</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-		<dependency>
+		 <dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.10</version>
+			<version>4.11</version>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hamcrest</groupId>
+					<artifactId>hamcrest-core</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.exparity</groupId>
@@ -63,7 +76,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -86,5 +99,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 </project>

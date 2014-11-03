@@ -7,7 +7,6 @@ import static org.exparity.hamcrest.date.DateMatchers.*;
 import static org.exparity.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_AM;
 import static org.exparity.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_PM;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.not;
 
 /**
  * Unit Tests for the {@link IsSameOrBeforeTest} class
@@ -26,9 +25,9 @@ public class IsSameOrBeforeTest {
 		assertThat(JAN_1ST_2012_11_AM, sameOrBefore(JAN_1ST_2012_11_PM));
 	}
 
-	@Test
+	@Test(expected = AssertionError.class)
 	public void canCompareALaterDate() {
-		assertThat(JAN_1ST_2012_11_PM, not(sameOrBefore(JAN_1ST_2012_11_AM)));
+		assertThat(JAN_1ST_2012_11_PM, sameOrBefore(JAN_1ST_2012_11_AM));
 	}
 
 	@Test
@@ -41,9 +40,9 @@ public class IsSameOrBeforeTest {
 		assertThat(JAN_1ST_2012_11_AM, sameOrBefore(2012, Months.JAN, 2));
 	}
 
-	@Test
+	@Test(expected = AssertionError.class)
 	public void canCompareALaterDayMonthYearFields() {
-		assertThat(JAN_1ST_2012_11_PM, not(sameOrBefore(2011, Months.DEC, 31)));
+		assertThat(JAN_1ST_2012_11_PM, sameOrBefore(2011, Months.DEC, 31));
 	}
 
 	@Test
@@ -56,9 +55,9 @@ public class IsSameOrBeforeTest {
 		assertThat(JAN_1ST_2012_11_AM, sameOrBefore(new DayMonthYear(2, Months.JAN, 2012)));
 	}
 
-	@Test
+	@Test(expected = AssertionError.class)
 	public void canCompareALaterDayMonthYear() {
-		assertThat(JAN_1ST_2012_11_PM, not(sameOrBefore(new DayMonthYear(31, Months.DEC, 2011))));
+		assertThat(JAN_1ST_2012_11_PM, sameOrBefore(new DayMonthYear(31, Months.DEC, 2011)));
 	}
 
 	@Test
@@ -71,9 +70,9 @@ public class IsSameOrBeforeTest {
 		assertThat(JAN_1ST_2012_11_AM, sameOrBefore(2012, Months.JAN, 1, 12, 00, 00));
 	}
 
-	@Test
+	@Test(expected = AssertionError.class)
 	public void canCompareALaterDayMonthYearAndTime() {
-		assertThat(JAN_1ST_2012_11_PM, not(sameOrBefore(2012, Months.JAN, 1, 10, 00, 00)));
+		assertThat(JAN_1ST_2012_11_PM, sameOrBefore(2012, Months.JAN, 1, 10, 00, 00));
 	}
 
 }

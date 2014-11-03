@@ -1,9 +1,9 @@
+
 package org.exparity.hamcrest.date;
 
 import org.exparity.hamcrest.date.testutils.Dates;
 import org.junit.Test;
 import static org.exparity.hamcrest.date.DateMatchers.isLeapYear;
-import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -23,13 +23,13 @@ public class IsLeapYearTest {
 		assertThat(Dates.JAN_1ST_2000_11_AM, isLeapYear());
 	}
 
-	@Test
+	@Test(expected = AssertionError.class)
 	public void canMatch2013AsNotALeapYear() {
-		assertThat(Dates.JAN_1ST_2013_11_AM, not(isLeapYear()));
+		assertThat(Dates.JAN_1ST_2013_11_AM, isLeapYear());
 	}
 
-	@Test
+	@Test(expected = AssertionError.class)
 	public void canMatch2100AsNotALeapYear() {
-		assertThat(Dates.JAN_1ST_2100_11_AM, not(isLeapYear()));
+		assertThat(Dates.JAN_1ST_2100_11_AM, isLeapYear());
 	}
 }

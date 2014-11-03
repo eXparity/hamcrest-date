@@ -1,3 +1,4 @@
+
 package org.exparity.hamcrest.date;
 
 import java.util.Calendar;
@@ -8,7 +9,6 @@ import static org.exparity.hamcrest.date.DateMatchers.isTomorrow;
 import static org.exparity.hamcrest.date.DateMatchers.isYesterday;
 import static org.exparity.hamcrest.date.testutils.DateMatcherTestUtils.addDateField;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.not;
 
 /**
  * @author <a href="mailto:stewart@modular-it.co.uk">Stewart Bissett</a>
@@ -17,25 +17,55 @@ public class IsDayTest {
 
 	@Test
 	public void canMatchYesterday() {
-		Date today = new Date(), yesterday = addDateField(today, Calendar.DATE, -1), tomorrow = addDateField(today, Calendar.DATE, 1);
+		Date yesterday = addDateField(new Date(), Calendar.DATE, -1);
 		assertThat(yesterday, isYesterday());
-		assertThat(today, not(isYesterday()));
-		assertThat(tomorrow, not(isYesterday()));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canMatchTodayIsNotYesterday() {
+		Date today = new Date();
+		assertThat(today, isYesterday());
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canMatchTomorrowIsNotYesterday() {
+		Date tomorrow = addDateField(new Date(), Calendar.DATE, 1);
+		assertThat(tomorrow, isYesterday());
 	}
 
 	@Test
 	public void canMatchToday() {
-		Date today = new Date(), yesterday = addDateField(today, Calendar.DATE, -1), tomorrow = addDateField(today, Calendar.DATE, 1);
-		assertThat(yesterday, not(isToday()));
+		Date today = new Date();
 		assertThat(today, isToday());
-		assertThat(tomorrow, not(isToday()));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canMatchYesterdayIsNotToday() {
+		Date yesterday = addDateField(new Date(), Calendar.DATE, -1);
+		assertThat(yesterday, isToday());
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canMatchTomorrowIsNotToday() {
+		Date today = new Date(), tomorrow = addDateField(today, Calendar.DATE, 1);
+		assertThat(tomorrow, isToday());
 	}
 
 	@Test
 	public void canMatchTomorrow() {
-		Date today = new Date(), yesterday = addDateField(today, Calendar.DATE, -1), tomorrow = addDateField(today, Calendar.DATE, 1);
-		assertThat(yesterday, not(isTomorrow()));
-		assertThat(today, not(isTomorrow()));
+		Date tomorrow = addDateField(new Date(), Calendar.DATE, 1);
 		assertThat(tomorrow, isTomorrow());
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canMatchYesterdayIsNotTomorrow() {
+		Date yesterday = addDateField(new Date(), Calendar.DATE, -1);
+		assertThat(yesterday, isTomorrow());
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canMatchTodayIsNotTomorrow() {
+		Date today = new Date();
+		assertThat(today, isTomorrow());
 	}
 }

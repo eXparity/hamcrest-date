@@ -179,44 +179,6 @@ public abstract class DateMatchers {
 	 * 
 	 * @param date
 	 *            the reference date against which the examined date is checked
-	 * 
-	 * @deprecated See {@link #sameDayOfWeek(Date)}
-	 */
-	@Deprecated
-	public static Matcher<Date> sameWeekday(final Date date) {
-		return IsSameDayOfWeek.sameDayOfWeek(date);
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same day of the week as the supplied day
-	 * <p/>
-	 * For example:
-	 * 
-	 * <pre>
-	 * assertThat(myDate, sameDayOfTheWeek(Weekdays.MONDAY))
-	 * </pre>
-	 * 
-	 * @param weekday
-	 *            the reference weekday against which the examined date is checked
-	 * 
-	 * @deprecated See {@link #sameDayOfWeek(Weekdays)}
-	 */
-	@Deprecated
-	public static Matcher<Date> sameWeekday(final Weekdays weekday) {
-		return IsSameDayOfWeek.sameDayOfWeek(weekday);
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same day of the week as the reference date
-	 * <p/>
-	 * For example:
-	 * 
-	 * <pre>
-	 * assertThat(myDate, sameWeekday(new Date()))
-	 * </pre>
-	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameDayOfWeek(final Date date) {
 		return IsSameDayOfWeek.sameDayOfWeek(date);

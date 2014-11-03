@@ -72,14 +72,6 @@ public class IsSameInstant extends TypeSafeDiagnosingMatcher<Date> {
 	}
 
 	/**
-	 * @deprecated See {@link #sameInstance(int, Months, int, int, int, int, int)}
-	 */
-	@Deprecated
-	public static Matcher<Date> sameIntstance(final int year, final Months month, final int date, final int hour, final int minute, final int second, final int milliseconds) {
-		return sameInstant(year, month, date, hour, minute, second, milliseconds);
-	}
-
-	/**
 	 * Creates a matcher that matches when the examined date is on the same instance as the reference date
 	 * <p/>
 	 * For example:
