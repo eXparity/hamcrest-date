@@ -23,7 +23,7 @@ A maven project
 
 A project which uses ivy for dependency management
 
-    <dependency org="org.exparity" name="hamcrest-date" rev="1.0.1"/>
+    <dependency org="org.exparity" name="hamcrest-date" rev="1.1.0"/>
             
 Binaries
 --------
