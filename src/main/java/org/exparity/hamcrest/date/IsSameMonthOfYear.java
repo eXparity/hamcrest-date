@@ -11,7 +11,7 @@ import org.hamcrest.Matcher;
  * 
  * @author Stewart Bissett
  */
-public class IsSameMonth extends IsSameDatePart {
+public class IsSameMonthOfYear extends IsSameDateField {
 
 	/**
 	 * Creates a matcher that matches when the examined date is on the same month as the reference date
@@ -26,8 +26,8 @@ public class IsSameMonth extends IsSameDatePart {
 	 *            the reference date against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> sameMonth(final Date date) {
-		return new IsSameMonth(date);
+	public static Matcher<Date> sameMonthOfYear(final Date date) {
+		return new IsSameMonthOfYear(date);
 	}
 
 	/**
@@ -43,8 +43,8 @@ public class IsSameMonth extends IsSameDatePart {
 	 *            the reference month against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> sameMonth(final Months month) {
-		return new IsSameMonth(month);
+	public static Matcher<Date> sameMonthOfYear(final Months month) {
+		return new IsSameMonthOfYear(month);
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class IsSameMonth extends IsSameDatePart {
 	 */
 	@Factory
 	public static Matcher<Date> isJanuary() {
-		return sameMonth(Months.JANUARY);
+		return sameMonthOfYear(Months.JANUARY);
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class IsSameMonth extends IsSameDatePart {
 	 */
 	@Factory
 	public static Matcher<Date> isFebruary() {
-		return sameMonth(Months.FEBRUARY);
+		return sameMonthOfYear(Months.FEBRUARY);
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class IsSameMonth extends IsSameDatePart {
 	 */
 	@Factory
 	public static Matcher<Date> isMarch() {
-		return sameMonth(Months.MARCH);
+		return sameMonthOfYear(Months.MARCH);
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class IsSameMonth extends IsSameDatePart {
 	 */
 	@Factory
 	public static Matcher<Date> isApril() {
-		return sameMonth(Months.APRIL);
+		return sameMonthOfYear(Months.APRIL);
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class IsSameMonth extends IsSameDatePart {
 	 */
 	@Factory
 	public static Matcher<Date> isMay() {
-		return sameMonth(Months.MAY);
+		return sameMonthOfYear(Months.MAY);
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class IsSameMonth extends IsSameDatePart {
 	 */
 	@Factory
 	public static Matcher<Date> isJune() {
-		return sameMonth(Months.JUNE);
+		return sameMonthOfYear(Months.JUNE);
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class IsSameMonth extends IsSameDatePart {
 	 */
 	@Factory
 	public static Matcher<Date> isJuly() {
-		return sameMonth(Months.JULY);
+		return sameMonthOfYear(Months.JULY);
 	}
 
 	/**
@@ -156,7 +156,7 @@ public class IsSameMonth extends IsSameDatePart {
 	 */
 	@Factory
 	public static Matcher<Date> isAugust() {
-		return sameMonth(Months.AUGUST);
+		return sameMonthOfYear(Months.AUGUST);
 	}
 
 	/**
@@ -170,7 +170,7 @@ public class IsSameMonth extends IsSameDatePart {
 	 */
 	@Factory
 	public static Matcher<Date> isSeptember() {
-		return sameMonth(Months.SEPTEMBER);
+		return sameMonthOfYear(Months.SEPTEMBER);
 	}
 
 	/**
@@ -184,7 +184,7 @@ public class IsSameMonth extends IsSameDatePart {
 	 */
 	@Factory
 	public static Matcher<Date> isOctober() {
-		return sameMonth(Months.OCTOBER);
+		return sameMonthOfYear(Months.OCTOBER);
 	}
 
 	/**
@@ -198,7 +198,7 @@ public class IsSameMonth extends IsSameDatePart {
 	 */
 	@Factory
 	public static Matcher<Date> isNovember() {
-		return sameMonth(Months.NOVEMBER);
+		return sameMonthOfYear(Months.NOVEMBER);
 	}
 
 	/**
@@ -212,14 +212,14 @@ public class IsSameMonth extends IsSameDatePart {
 	 */
 	@Factory
 	public static Matcher<Date> isDecember() {
-		return sameMonth(Months.DECEMBER);
+		return sameMonthOfYear(Months.DECEMBER);
 	}
 
-	public IsSameMonth(final Date date) {
+	public IsSameMonthOfYear(final Date date) {
 		super(date, Calendar.MONTH, "month", "MMMMM");
 	}
 
-	public IsSameMonth(final Months month) {
+	public IsSameMonthOfYear(final Months month) {
 		super(month.calendarConstant(), month.describe(), Calendar.MONTH, "month", "MMMMM");
 	}
 

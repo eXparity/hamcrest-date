@@ -11,13 +11,13 @@ import org.hamcrest.Matcher;
  * 
  * @author Stewart Bissett
  */
-public class IsSameMinute extends IsSameDatePart {
+public class IsSameMinuteOfHour extends IsSameDateField {
 
-	public IsSameMinute(final Date date) {
+	public IsSameMinuteOfHour(final Date date) {
 		super(date, Calendar.MINUTE, "minute", "m");
 	}
 
-	public IsSameMinute(final int minute) {
+	public IsSameMinuteOfHour(final int minute) {
 		super(minute, String.valueOf(minute), Calendar.MINUTE, "minute", "m");
 	}
 
@@ -34,8 +34,8 @@ public class IsSameMinute extends IsSameDatePart {
 	 *            the reference date against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> sameMinute(final Date date) {
-		return new IsSameMinute(date);
+	public static Matcher<Date> sameMinuteOfHour(final Date date) {
+		return new IsSameMinuteOfHour(date);
 	}
 
 	/**
@@ -51,8 +51,8 @@ public class IsSameMinute extends IsSameDatePart {
 	 *            the reference minute against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> sameMinute(final int minute) {
-		return new IsSameMinute(minute);
+	public static Matcher<Date> sameMinuteOfHour(final int minute) {
+		return new IsSameMinuteOfHour(minute);
 	}
 
 }

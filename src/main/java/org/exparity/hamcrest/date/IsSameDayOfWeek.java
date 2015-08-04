@@ -12,7 +12,7 @@ import static org.hamcrest.core.AnyOf.anyOf;
  * 
  * @author Stewart Bissett
  */
-public class IsSameDayOfWeek extends IsSameDatePart {
+public class IsSameDayOfWeek extends IsSameDateField {
 
 	public IsSameDayOfWeek(final Date date) {
 		super(date, Calendar.DAY_OF_WEEK, "day of the week", "EEEE");

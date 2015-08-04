@@ -13,7 +13,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  * 
  * @author Stewart Bissett
  */
-class IsMinimumDatePart extends TypeSafeDiagnosingMatcher<Date> {
+class IsMinimum extends TypeSafeDiagnosingMatcher<Date> {
 
 	/**
 	 * Creates a matcher that matches when the examined date has the minimum value for the datePart
@@ -29,13 +29,13 @@ class IsMinimumDatePart extends TypeSafeDiagnosingMatcher<Date> {
 	 */
 	@Factory
 	public static Matcher<Date> minimumDatePart(final int datePart, final String descriptionOfDatepart) {
-		return new IsMinimumDatePart(datePart, descriptionOfDatepart);
+		return new IsMinimum(datePart, descriptionOfDatepart);
 	}
 
 	private final int datePart;
 	private final String datePartName;
 
-	public IsMinimumDatePart(final int datePart, final String datePartName) {
+	public IsMinimum(final int datePart, final String datePartName) {
 		this.datePart = datePart;
 		this.datePartName = datePartName;
 	}

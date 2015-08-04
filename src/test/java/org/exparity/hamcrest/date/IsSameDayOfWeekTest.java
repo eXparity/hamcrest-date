@@ -8,7 +8,7 @@ import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
- * Unit Tests for the {@link IsSameMonth} class
+ * Unit Tests for the {@link IsSameMonthOfYear} class
  * 
  * @author Stewart Bissett
  */

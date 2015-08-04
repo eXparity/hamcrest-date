@@ -11,7 +11,7 @@ import org.hamcrest.Matcher;
  * 
  * @author Stewart Bissett
  */
-public class IsSameYear extends IsSameDatePart {
+public class IsSameYear extends IsSameDateField {
 
 	public IsSameYear(final Date date) {
 		super(date, Calendar.YEAR, "year", "yyyy");

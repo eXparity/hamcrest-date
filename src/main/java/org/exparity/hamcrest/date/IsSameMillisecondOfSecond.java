@@ -11,13 +11,13 @@ import org.hamcrest.Matcher;
  * 
  * @author Stewart Bissett
  */
-public class IsSameMillisecond extends IsSameDatePart {
+public class IsSameMillisecondOfSecond extends IsSameDateField {
 
-	public IsSameMillisecond(final Date date) {
+	public IsSameMillisecondOfSecond(final Date date) {
 		super(date, Calendar.MILLISECOND, "millisecond", "S");
 	}
 
-	public IsSameMillisecond(final int millisecond) {
+	public IsSameMillisecondOfSecond(final int millisecond) {
 		super(millisecond, String.valueOf(millisecond), Calendar.MILLISECOND, "millisecond", "S");
 	}
 
@@ -34,8 +34,8 @@ public class IsSameMillisecond extends IsSameDatePart {
 	 *            the reference date against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> sameMillisecond(final Date date) {
-		return new IsSameMillisecond(date);
+	public static Matcher<Date> sameMillisecondOfSecond(final Date date) {
+		return new IsSameMillisecondOfSecond(date);
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class IsSameMillisecond extends IsSameDatePart {
 	 *            the millisecond against which the examined date is checked
 	 */
 	@Factory
-	public static Matcher<Date> sameMillisecond(final int millisecond) {
-		return new IsSameMillisecond(millisecond);
+	public static Matcher<Date> sameMillisecondOfSecond(final int millisecond) {
+		return new IsSameMillisecondOfSecond(millisecond);
 	}
 }

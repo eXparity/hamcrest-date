@@ -13,7 +13,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  * 
  * @author Stewart Bissett
  */
-class IsMaximumDatePart extends TypeSafeDiagnosingMatcher<Date> {
+class IsMaximum extends TypeSafeDiagnosingMatcher<Date> {
 
 	/**
 	 * Creates a matcher that matches when the examined date has the maximum value for the datePart
@@ -31,13 +31,13 @@ class IsMaximumDatePart extends TypeSafeDiagnosingMatcher<Date> {
 	 */
 	@Factory
 	public static Matcher<Date> maximumDatePart(final int datePart, final String descriptionOfDatepart) {
-		return new IsMaximumDatePart(datePart, descriptionOfDatepart);
+		return new IsMaximum(datePart, descriptionOfDatepart);
 	}
 
 	private final int datePart;
 	private final String datePartName;
 
-	public IsMaximumDatePart(final int datePart, final String datePartName) {
+	public IsMaximum(final int datePart, final String datePartName) {
 		this.datePart = datePart;
 		this.datePartName = datePartName;
 	}

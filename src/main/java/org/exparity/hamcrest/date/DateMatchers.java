@@ -263,9 +263,44 @@ public abstract class DateMatchers {
 	 * 
 	 * @param date
 	 *            the reference date against which the examined date is checked
+	 * @deprecated Use {@link #sameHourOfDay(Date)} instead
 	 */
 	public static Matcher<Date> sameHour(final Date date) {
-		return IsSameHour.sameHour(date);
+		return sameHourOfDay(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same hour as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameHourOfDay(new Date()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	public static Matcher<Date> sameHourOfDay(final Date date) {
+		return IsSameHourOfDay.sameHour(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same hour as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameHour(12));
+	 * </pre>
+	 * 
+	 * @param hour
+	 *            the reference hour against which the examined date is checked
+	 * @deprecated Use {@link #sameHourOfDay(int)} instead
+	 */
+	
+	public static Matcher<Date> sameHour(final int hour) {
+		return sameHourOfDay(hour);
 	}
 
 	/**
@@ -281,8 +316,8 @@ public abstract class DateMatchers {
 	 *            the reference hour against which the examined date is checked
 	 */
 
-	public static Matcher<Date> sameHour(final int hour) {
-		return IsSameHour.sameHour(hour);
+	public static Matcher<Date> sameHourOfDay(final int hour) {
+		return IsSameHourOfDay.sameHourOfDay(hour);
 	}
 
 	/**
@@ -515,9 +550,43 @@ public abstract class DateMatchers {
 	 * 
 	 * @param date
 	 *            the reference date against which the examined date is checked
+	 * @deprecated Use {@link #sameMinuteOfHour(Date)} instead
 	 */
 	public static Matcher<Date> sameMinute(final Date date) {
-		return IsSameMinute.sameMinute(date);
+		return sameMinuteOfHour(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same minute as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameMinute(new Date()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	public static Matcher<Date> sameMinuteOfHour(final Date date) {
+		return IsSameMinuteOfHour.sameMinuteOfHour(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the reference minute
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameMinute(55))
+	 * </pre>
+	 * 
+	 * @param minute
+	 *            the reference minute against which the examined date is checked
+	 * @deprecated Use {@link #sameMinuteOfHour(int)} instead
+	 */
+	public static Matcher<Date> sameMinute(final int minute) {
+		return sameMinuteOfHour(minute);
 	}
 
 	/**
@@ -532,8 +601,25 @@ public abstract class DateMatchers {
 	 * @param minute
 	 *            the reference minute against which the examined date is checked
 	 */
-	public static Matcher<Date> sameMinute(final int minute) {
-		return IsSameMinute.sameMinute(minute);
+	public static Matcher<Date> sameMinuteOfHour(final int minute) {
+		return IsSameMinuteOfHour.sameMinuteOfHour(minute);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same month as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameMonth(new Date()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 * @deprecated Use {@link #sameMonthOfYear(Date)} instead
+	 */
+	public static Matcher<Date> sameMonth(final Date date) {
+		return sameMonthOfYear(date);
 	}
 
 	/**
@@ -548,8 +634,25 @@ public abstract class DateMatchers {
 	 * @param date
 	 *            the reference date against which the examined date is checked
 	 */
-	public static Matcher<Date> sameMonth(final Date date) {
-		return IsSameMonth.sameMonth(date);
+	public static Matcher<Date> sameMonthOfYear(final Date date) {
+		return IsSameMonthOfYear.sameMonthOfYear(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same month as the reference month
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameMonth(Months.DECEMBER))
+	 * </pre>
+	 * 
+	 * @param month
+	 *            the reference month against which the examined date is checked
+	 * @deprecated Use {@link #sameMonthOfYear(Months)} instead
+	 */
+	public static Matcher<Date> sameMonth(final Months month) {
+		return sameMonthOfYear(month);
 	}
 
 	/**
@@ -564,8 +667,25 @@ public abstract class DateMatchers {
 	 * @param month
 	 *            the reference month against which the examined date is checked
 	 */
-	public static Matcher<Date> sameMonth(final Months month) {
-		return IsSameMonth.sameMonth(month);
+	public static Matcher<Date> sameMonthOfYear(final Months month) {
+		return IsSameMonthOfYear.sameMonthOfYear(month);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same second as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameSecond(new Date()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 * @deprecated Use {@link #sameSecondOfMinute(Date)} instead
+	 */
+	public static Matcher<Date> sameSecond(final Date date) {
+		return sameSecondOfMinute(date);
 	}
 
 	/**
@@ -580,8 +700,25 @@ public abstract class DateMatchers {
 	 * @param date
 	 *            the reference date against which the examined date is checked
 	 */
-	public static Matcher<Date> sameSecond(final Date date) {
-		return IsSameSecond.sameSecond(date);
+	public static Matcher<Date> sameSecondOfMinute(final Date date) {
+		return IsSameSecondOfMinute.sameSecondOfMinute(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the reference second
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameSecond(33))
+	 * </pre>
+	 * 
+	 * @param second
+	 *            the reference date against which the examined date is checked
+	 * @deprecated Use {@link #sameSecondOfMinute(int)} instead
+	 */
+	public static Matcher<Date> sameSecond(final int second) {
+		return sameSecondOfMinute(second);
 	}
 
 	/**
@@ -596,8 +733,25 @@ public abstract class DateMatchers {
 	 * @param second
 	 *            the reference date against which the examined date is checked
 	 */
-	public static Matcher<Date> sameSecond(final int second) {
-		return IsSameSecond.sameSecond(second);
+	public static Matcher<Date> sameSecondOfMinute(final int second) {
+		return IsSameSecondOfMinute.sameSecondOfMinute(second);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same millisecond as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameMillisecond(new Date()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 * @deprecated Use {@link #sameMillisecondOfSecond(Date)} instead
+	 */
+	public static Matcher<Date> sameMillisecond(final Date date) {
+		return sameMillisecondOfSecond(date);
 	}
 
 	/**
@@ -612,8 +766,25 @@ public abstract class DateMatchers {
 	 * @param date
 	 *            the reference date against which the examined date is checked
 	 */
-	public static Matcher<Date> sameMillisecond(final Date date) {
-		return IsSameMillisecond.sameMillisecond(date);
+	public static Matcher<Date> sameMillisecondOfSecond(final Date date) {
+		return IsSameMillisecondOfSecond.sameMillisecondOfSecond(date);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the reference second
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameMillisecond(123))
+	 * </pre>
+	 * 
+	 * @param millisecond
+	 *            the millisecond against which the examined date is checked
+	 * @deprecated Use {@link #sameMillisecondOfSecond(int)} instead
+	 */
+	public static Matcher<Date> sameMillisecond(final int millisecond) {
+		return sameMillisecondOfSecond(millisecond);
 	}
 
 	/**
@@ -628,8 +799,8 @@ public abstract class DateMatchers {
 	 * @param millisecond
 	 *            the millisecond against which the examined date is checked
 	 */
-	public static Matcher<Date> sameMillisecond(final int millisecond) {
-		return IsSameMillisecond.sameMillisecond(millisecond);
+	public static Matcher<Date> sameMillisecondOfSecond(final int millisecond) {
+		return IsSameMillisecondOfSecond.sameMillisecondOfSecond(millisecond);
 	}
 
 	/**
@@ -945,7 +1116,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isJanuary() {
-		return IsSameMonth.isJanuary();
+		return IsSameMonthOfYear.isJanuary();
 	}
 
 	/**
@@ -958,7 +1129,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isFebruary() {
-		return IsSameMonth.isFebruary();
+		return IsSameMonthOfYear.isFebruary();
 	}
 
 	/**
@@ -971,7 +1142,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isMarch() {
-		return IsSameMonth.isMarch();
+		return IsSameMonthOfYear.isMarch();
 	}
 
 	/**
@@ -984,7 +1155,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isApril() {
-		return IsSameMonth.isApril();
+		return IsSameMonthOfYear.isApril();
 	}
 
 	/**
@@ -997,7 +1168,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isMay() {
-		return IsSameMonth.isMay();
+		return IsSameMonthOfYear.isMay();
 	}
 
 	/**
@@ -1010,7 +1181,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isJune() {
-		return IsSameMonth.isJune();
+		return IsSameMonthOfYear.isJune();
 	}
 
 	/**
@@ -1023,7 +1194,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isJuly() {
-		return IsSameMonth.isJuly();
+		return IsSameMonthOfYear.isJuly();
 	}
 
 	/**
@@ -1036,7 +1207,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isAugust() {
-		return IsSameMonth.isAugust();
+		return IsSameMonthOfYear.isAugust();
 	}
 
 	/**
@@ -1049,7 +1220,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isSeptember() {
-		return IsSameMonth.isSeptember();
+		return IsSameMonthOfYear.isSeptember();
 	}
 
 	/**
@@ -1062,7 +1233,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isOctober() {
-		return IsSameMonth.isOctober();
+		return IsSameMonthOfYear.isOctober();
 	}
 
 	/**
@@ -1075,7 +1246,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isNovember() {
-		return IsSameMonth.isNovember();
+		return IsSameMonthOfYear.isNovember();
 	}
 
 	/**
@@ -1088,7 +1259,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isDecember() {
-		return IsSameMonth.isDecember();
+		return IsSameMonthOfYear.isDecember();
 	}
 
 	/**

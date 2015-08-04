@@ -10,7 +10,7 @@ import java.util.Date;
 import org.junit.Test;
 
 /**
- * Unit Tests for the {@link IsSameMinute} class
+ * Unit Tests for the {@link IsSameMinuteOfHour} class
  * 
  * @author Stewart Bissett
  */
@@ -19,22 +19,22 @@ public class IsSameMinuteTest {
 	@Test
 	public void canCompareTheSameMinute() {
 		Date date = new Date(), other = new Date(date.getTime());
-		assertThat(other, sameMinute(date));
+		assertThat(other, sameMinuteOfHour(date));
 	}
 
 	@Test
 	public void canDetectDifferentMinute() {
 		Date date = new Date(), other = addDateField(date, MINUTE, 1);
-		assertThat(other, not(sameMinute(date)));
+		assertThat(other, not(sameMinuteOfHour(date)));
 	}
 
 	@Test
 	public void canCompareTheSameMinuteInt() {
-		assertThat(JAN_1ST_2012_11_AM, sameMinute(0));
+		assertThat(JAN_1ST_2012_11_AM, sameMinuteOfHour(0));
 	}
 
 	@Test
 	public void canDetectDifferentMinuteInt() {
-		assertThat(JAN_1ST_2012_11_AM, not(sameMinute(1)));
+		assertThat(JAN_1ST_2012_11_AM, not(sameMinuteOfHour(1)));
 	}
 }

@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import static org.exparity.hamcrest.date.IsMinimumDatePart.minimumDatePart;
+import static org.exparity.hamcrest.date.IsMinimum.minimumDatePart;
 
 /**
  * @author Stewart Bissett
@@ -36,7 +36,7 @@ public abstract class IsDayOfMonth {
 	 */
 	@Factory
 	public static Matcher<Date> isLastDayOfMonth() {
-		return IsMaximumDatePart.maximumDatePart(Calendar.DAY_OF_MONTH, "day of month");
+		return IsMaximum.maximumDatePart(Calendar.DAY_OF_MONTH, "day of month");
 	}
 
 }

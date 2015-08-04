@@ -6,3 +6,4 @@
 *.ear
 /.settings
 /target
+/test-output

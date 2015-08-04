@@ -9,7 +9,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNot.not;
 
 /**
- * Unit Tests for the {@link IsSameMonth} class
+ * Unit Tests for the {@link IsSameMonthOfYear} class
  * 
  * @author Stewart Bissett
  */
@@ -17,22 +17,22 @@ public class IsSameMonthTest {
 
 	@Test
 	public void canMatchTheSameMonthOnDates() {
-		assertThat(Dates.JAN_1ST_2012_11_AM, sameMonth(Dates.JAN_2ND_2012_11_AM));
+		assertThat(Dates.JAN_1ST_2012_11_AM, sameMonthOfYear(Dates.JAN_2ND_2012_11_AM));
 	}
 
 	@Test
 	public void canMatchDifferentMonthsOnDates() {
-		assertThat(Dates.JAN_1ST_2012_11_AM, not(sameMonth(Dates.JUN_15TH_2012_11_AM)));
+		assertThat(Dates.JAN_1ST_2012_11_AM, not(sameMonthOfYear(Dates.JUN_15TH_2012_11_AM)));
 	}
 
 	@Test
 	public void canMatchTheSameMonth() {
-		assertThat(Dates.JAN_1ST_2012_11_AM, sameMonth(Months.JANUARY));
+		assertThat(Dates.JAN_1ST_2012_11_AM, sameMonthOfYear(Months.JANUARY));
 	}
 
 	@Test
 	public void canMatchDifferentMonth() {
-		assertThat(JAN_1ST_2012_11_AM, not(sameMonth(Months.FEBRUARY)));
+		assertThat(JAN_1ST_2012_11_AM, not(sameMonthOfYear(Months.FEBRUARY)));
 	}
 
 	@Test

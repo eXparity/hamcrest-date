@@ -10,7 +10,7 @@ import java.util.Date;
 import org.junit.Test;
 
 /**
- * Unit Tests for the {@link IsSameSecond} class
+ * Unit Tests for the {@link IsSameSecondOfMinute} class
  * 
  * @author Stewart Bissett
  */
@@ -19,23 +19,23 @@ public class IsSameSecondTest {
 	@Test
 	public void canCompareTheSameSecond() {
 		Date date = new Date(), other = new Date(date.getTime());
-		assertThat(other, sameSecond(date));
+		assertThat(other, sameSecondOfMinute(date));
 	}
 
 	@Test
 	public void canDetectDifferentSecond() {
 		Date date = new Date(), other = addDateField(date, SECOND, 1);
-		assertThat(other, not(sameSecond(date)));
+		assertThat(other, not(sameSecondOfMinute(date)));
 	}
 
 	@Test
 	public void canCompareTheSameSecondInt() {
-		assertThat(JAN_1ST_2012_11_AM, sameSecond(0));
+		assertThat(JAN_1ST_2012_11_AM, sameSecondOfMinute(0));
 	}
 
 	@Test
 	public void canDetectDifferentSecondInt() {
-		assertThat(JAN_1ST_2012_11_AM, not(sameSecond(1)));
+		assertThat(JAN_1ST_2012_11_AM, not(sameSecondOfMinute(1)));
 	}
 
 }

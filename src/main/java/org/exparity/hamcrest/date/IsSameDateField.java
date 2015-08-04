@@ -12,7 +12,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  * 
  * @author Stewart Bissett
  */
-abstract class IsSameDatePart extends TypeSafeDiagnosingMatcher<Date> {
+abstract class IsSameDateField extends TypeSafeDiagnosingMatcher<Date> {
 
 	private final int datePart;
 	private final int expected;
@@ -20,7 +20,7 @@ abstract class IsSameDatePart extends TypeSafeDiagnosingMatcher<Date> {
 	private final String dateFormat;
 	private final String expectedValueDescription;
 
-	public IsSameDatePart(final int expectedValue, final String expectedValueDescription, final int datePart, final String label, final String format) {
+	public IsSameDateField(final int expectedValue, final String expectedValueDescription, final int datePart, final String label, final String format) {
 		this.datePart = datePart;
 		this.expected = expectedValue;
 		this.expectedValueDescription = expectedValueDescription;
@@ -28,7 +28,7 @@ abstract class IsSameDatePart extends TypeSafeDiagnosingMatcher<Date> {
 		this.dateFormat = format;
 	}
 
-	public IsSameDatePart(final Date date, final int datePart, final String datePartLabel, final String format) {
+	public IsSameDateField(final Date date, final int datePart, final String datePartLabel, final String format) {
 		this(extractDatePart(date, datePart), format(date, format), datePart, datePartLabel, format);
 	}
 
