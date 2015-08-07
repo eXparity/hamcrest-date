@@ -12,7 +12,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  * 
  * @author Stewart Bissett
  */
-abstract class AbstractLocalDateTimeMatcher extends TypeSafeDiagnosingMatcher<LocalDateTime> {
+abstract class AbstractLocalDateTimeTimeMatcher extends TypeSafeDiagnosingMatcher<LocalDateTime> {
 
 	private static final DateTimeFormatter DATE_TIME_FORMAT = ofPattern("dd MMM yyyy HH:mm:ss SSS'ms'");
 
