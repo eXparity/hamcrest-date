@@ -25,6 +25,7 @@ import org.exparity.hamcrest.localdatetime.IsSame;
 import org.exparity.hamcrest.localdatetime.IsSameDay;
 import org.exparity.hamcrest.localdatetime.IsSameOrAfter;
 import org.exparity.hamcrest.localdatetime.IsSameOrBefore;
+import org.exparity.hamcrest.localdatetime.IsSecond;
 import org.exparity.hamcrest.localdatetime.IsWithin;
 import org.exparity.hamcrest.localdatetime.IsYear;
 import org.hamcrest.Factory;
@@ -1114,8 +1115,8 @@ public abstract class LocalDateTimeMatchers {
 	}
 
 	/**
-	 * Creates a matcher that matches when the examined date is on the same Minute
-	 * as the reference date
+	 * Creates a matcher that matches when the examined date is on the same
+	 * Minute as the reference date
 	 * <p/>
 	 * For example:
 	 * 
@@ -1131,8 +1132,8 @@ public abstract class LocalDateTimeMatchers {
 	}
 
 	/**
-	 * Creates a matcher that matches when the examined date is on the same minute
-	 * as the reference date
+	 * Creates a matcher that matches when the examined date is on the same
+	 * minute as the reference date
 	 * <p/>
 	 * For example:
 	 * 
@@ -1145,6 +1146,57 @@ public abstract class LocalDateTimeMatchers {
 	 */
 	public static Matcher<LocalDateTime> sameMinuteOfHour(final LocalDateTime date) {
 		return new IsMinute(date.getMinute());
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the expected
+	 * second (0-59)
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isSecond(12));
+	 * </pre>
+	 * 
+	 * @param Second
+	 *            the second of the day (0-59)
+	 */
+	public static Matcher<LocalDateTime> isSecond(final int Second) {
+		return new IsSecond(Second);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same
+	 * Second as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameSecondOfMinute(new Date()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	public static Matcher<LocalDateTime> sameSecondOfMinute(final Date date) {
+		return sameSecondOfMinute(toLocalDateTime(date));
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same
+	 * second as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameSecondOfMinute(LocalDateTime.now()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	public static Matcher<LocalDateTime> sameSecondOfMinute(final LocalDateTime date) {
+		return new IsSecond(date.getSecond());
 	}
 
 	private static LocalDateTime toLocalDateTime(final Date date) {
