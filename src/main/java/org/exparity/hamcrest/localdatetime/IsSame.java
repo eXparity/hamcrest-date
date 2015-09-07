@@ -1,6 +1,9 @@
 package org.exparity.hamcrest.localdatetime;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 import org.hamcrest.Description;
 
@@ -13,17 +16,26 @@ import org.hamcrest.Description;
 public class IsSame extends AbstractLocalDateTimeTimeMatcher {
 
 	private final LocalDateTime expected;
+	private final ChronoUnit truncatedTo;
 
 	public IsSame(final LocalDateTime expected) {
 		this.expected = expected;
+		this.truncatedTo = ChronoUnit.NANOS;
 	}
+	
+	public IsSame(final Date expected) {
+		this.expected = expected.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		this.truncatedTo = ChronoUnit.MILLIS;
+	}
+
 
 	@Override
 	protected boolean matchesSafely(final LocalDateTime actual, final Description mismatchDesc) {
-		if (expected.equals(actual)) {
+		LocalDateTime adjusted = actual.truncatedTo(truncatedTo);
+		if (expected.equals(adjusted)) {
 			return true;
 		} else {
-			mismatchDesc.appendText("date is ").appendValue(formatDate(actual));
+			mismatchDesc.appendText("date is ").appendValue(formatDate(adjusted));
 			return false;
 		}
 	}
