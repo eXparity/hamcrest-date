@@ -5,6 +5,7 @@ import static java.time.Month.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneId;
 import java.time.temporal.ChronoField;
@@ -14,6 +15,7 @@ import java.util.Date;
 
 import org.exparity.hamcrest.localdate.IsAfter;
 import org.exparity.hamcrest.localdate.IsBefore;
+import org.exparity.hamcrest.localdate.IsDayOfMonth;
 import org.exparity.hamcrest.localdate.IsDayOfWeek;
 import org.exparity.hamcrest.localdate.IsLeapYear;
 import org.exparity.hamcrest.localdate.IsMaximum;
@@ -348,6 +350,56 @@ public abstract class LocalDateMatchers {
 	 */
 	public static Matcher<LocalDate> sameMonthOfYear(final LocalDate date) {
 		return isMonth(date.getMonth());
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same
+	 * day of the month as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameDayOfMonth(new Date()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	public static Matcher<LocalDate> sameDayOfMonth(final Date date) {
+		return sameDayOfMonth(toLocalDate(date));
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same
+	 * day of the month as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameDayOfMonth(new Date()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	public static Matcher<LocalDate> sameDayOfMonth(final LocalDate date) {
+		return isDayOfMonth(date.getDayOfMonth());
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the expected day of the month
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isDayOfMonth(4))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the expected day of the month
+	 */
+	public static Matcher<LocalDate> isDayOfMonth(final int dayOfMonth) {
+		return new IsDayOfMonth(dayOfMonth);
 	}
 
 	/**

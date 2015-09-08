@@ -14,6 +14,7 @@ import java.util.Date;
 
 import org.exparity.hamcrest.localdatetime.IsAfter;
 import org.exparity.hamcrest.localdatetime.IsBefore;
+import org.exparity.hamcrest.localdatetime.IsDayOfMonth;
 import org.exparity.hamcrest.localdatetime.IsDayOfWeek;
 import org.exparity.hamcrest.localdatetime.IsHour;
 import org.exparity.hamcrest.localdatetime.IsLeapYear;
@@ -499,6 +500,56 @@ public abstract class LocalDateTimeMatchers {
 	 */
 	public static Matcher<LocalDateTime> sameMonthOfYear(final LocalDateTime date) {
 		return isMonth(date.getMonth());
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same
+	 * day of the month as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameDayOfMonth(new Date()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	public static Matcher<LocalDateTime> sameDayOfMonth(final Date date) {
+		return sameDayOfMonth(toLocalDateTime(date));
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same
+	 * day of the month as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameDayOfMonth(new Date()))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the reference date against which the examined date is checked
+	 */
+	public static Matcher<LocalDateTime> sameDayOfMonth(final LocalDateTime date) {
+		return isDayOfMonth(date.getDayOfMonth());
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the expected day of the month
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isDayOfMonth(4))
+	 * </pre>
+	 * 
+	 * @param date
+	 *            the expected day of the month
+	 */
+	public static Matcher<LocalDateTime> isDayOfMonth(final int dayOfMonth) {
+		return new IsDayOfMonth(dayOfMonth);
 	}
 
 	/**

@@ -13,6 +13,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 import org.exparity.dates.en.FluentDateTime;
+import org.exparity.hamcrest.date.IsDayOfMonth;
 import org.junit.Test;
 
 /**
@@ -31,7 +32,9 @@ public class LocalDateTimeMatchersTest {
 	private static final LocalDateTime JUL_1_2015_AT_12_00_00 = LocalDateTime.of(2015, Month.JULY, 1, 12, 0, 0);
 	private static final LocalDateTime AUG_1_2015_AT_12_00_00 = LocalDateTime.of(2015, Month.AUGUST, 1, 12, 0, 0);
 	private static final LocalDateTime AUG_3_2015_AT_12_00_00 = LocalDateTime.of(2015, Month.AUGUST, 3, 12, 0, 0);
+	private static final LocalDateTime AUG_4_2015_AT_11_59_59 = LocalDateTime.of(2015, Month.AUGUST, 4, 11, 59, 59);
 	private static final LocalDateTime AUG_4_2015_AT_12_00_00 = LocalDateTime.of(2015, Month.AUGUST, 4, 12, 0, 0);
+	private static final LocalDateTime AUG_4_2015_AT_12_00_01 = LocalDateTime.of(2015, Month.AUGUST, 4, 12, 0, 1);
 	private static final LocalDateTime AUG_5_2015_AT_12_00_00 = LocalDateTime.of(2015, Month.AUGUST, 5, 12, 0, 0);
 	private static final LocalDateTime AUG_6_2015_AT_12_00_00 = LocalDateTime.of(2015, Month.AUGUST, 6, 12, 0, 0);
 	private static final LocalDateTime AUG_7_2015_AT_12_00_00 = LocalDateTime.of(2015, Month.AUGUST, 7, 12, 0, 0);
@@ -44,15 +47,18 @@ public class LocalDateTimeMatchersTest {
 	private static final LocalDateTime NOV_1_2015_AT_12_00_00 = LocalDateTime.of(2015, Month.NOVEMBER, 1, 12, 0, 0);
 	private static final LocalDateTime DEC_1_2015_AT_12_00_00 = LocalDateTime.of(2015, Month.DECEMBER, 1, 12, 0, 0);
 	private static final LocalDateTime AUG_4_2016_AT_12_00_00 = LocalDateTime.of(2016, Month.AUGUST, 4, 1, 12, 0, 0);
+
 	private static final Date AUG_3_2015_AT_12_00_00_AS_DATE = FluentDateTime.AUG(3, 2015).at(12, 0, 0);
+	private static final Date AUG_4_2015_AT_11_59_59_AS_DATE = FluentDateTime.AUG(4, 2015).at(11, 59, 59);
 	private static final Date AUG_4_2015_AT_12_00_00_AS_DATE = FluentDateTime.AUG(4, 2015).at(12, 0, 0);
+	private static final Date AUG_4_2015_AT_12_00_01_AS_DATE = FluentDateTime.AUG(4, 2015).at(12, 0, 1);
 	private static final Date AUG_5_2015_AT_12_00_00_AS_DATE = FluentDateTime.AUG(5, 2015).at(12, 0, 0);
 	private static final Date SEP_4_2015_AT_12_00_00_AS_DATE = FluentDateTime.SEP(4, 2015).at(12, 0, 0);
 	private static final Date AUG_4_2016_AT_12_00_00_AS_DATE = FluentDateTime.AUG(4, 2016).at(12, 0, 0);
 
 	@Test
 	public void canTestAfterWithEarlierLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_3_2015_AT_12_00_00));
+		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_4_2015_AT_11_59_59));
 	}
 
 	@Test(expected = AssertionError.class)
@@ -62,12 +68,12 @@ public class LocalDateTimeMatchersTest {
 
 	@Test(expected = AssertionError.class)
 	public void canTestAfterWithLaterLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_5_2015_AT_12_00_00));
+		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_4_2015_AT_12_00_01));
 	}
 
 	@Test
 	public void canTestAfterWithEarlierDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_3_2015_AT_12_00_00_AS_DATE));
+		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_4_2015_AT_11_59_59_AS_DATE));
 	}
 
 	@Test(expected = AssertionError.class)
@@ -77,12 +83,12 @@ public class LocalDateTimeMatchersTest {
 
 	@Test(expected = AssertionError.class)
 	public void canTestAfterWithLaterDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_5_2015_AT_12_00_00_AS_DATE));
+		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_4_2015_AT_12_00_01_AS_DATE));
 	}
 
 	@Test
 	public void canTestAfterWithEarlierDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, after(2015, AUGUST, 3, 12, 0, 0));
+		assertThat(AUG_4_2015_AT_12_00_00, after(2015, AUGUST, 4, 11, 59, 59));
 	}
 
 	@Test(expected = AssertionError.class)
@@ -92,12 +98,12 @@ public class LocalDateTimeMatchersTest {
 
 	@Test(expected = AssertionError.class)
 	public void canTestAfterWithLaterDDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, after(2015, AUGUST, 5, 12, 0, 0));
+		assertThat(AUG_4_2015_AT_12_00_00, after(2015, AUGUST, 4, 12, 0, 1));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestBeforeWithEarlierLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_3_2015_AT_12_00_00));
+		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_4_2015_AT_11_59_59));
 	}
 
 	@Test(expected = AssertionError.class)
@@ -107,12 +113,12 @@ public class LocalDateTimeMatchersTest {
 
 	@Test
 	public void canTestBeforeWithLaterLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_5_2015_AT_12_00_00));
+		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_4_2015_AT_12_00_01));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestBeforeWithEarlierDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_3_2015_AT_12_00_00_AS_DATE));
+		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_4_2015_AT_11_59_59_AS_DATE));
 	}
 
 	@Test(expected = AssertionError.class)
@@ -122,12 +128,12 @@ public class LocalDateTimeMatchersTest {
 
 	@Test
 	public void canTestBeforeWithLaterDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_5_2015_AT_12_00_00_AS_DATE));
+		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_4_2015_AT_12_00_01_AS_DATE));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestBeforeWithEarlierDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, before(2015, AUGUST, 3, 12, 0, 0));
+		assertThat(AUG_4_2015_AT_12_00_00, before(2015, AUGUST, 4, 11, 59, 59));
 	}
 
 	@Test(expected = AssertionError.class)
@@ -137,7 +143,7 @@ public class LocalDateTimeMatchersTest {
 
 	@Test
 	public void canTestBeforeWithLaterDDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, before(2015, AUGUST, 5, 12, 0, 0));
+		assertThat(AUG_4_2015_AT_12_00_00, before(2015, AUGUST, 4, 12, 0, 1));
 	}
 
 	@Test(expected = AssertionError.class)
@@ -171,23 +177,68 @@ public class LocalDateTimeMatchersTest {
 	}
 
 	@Test(expected = AssertionError.class)
-	public void canTestSameInstantWithEarlierDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(2015, AUGUST, 3, 12, 0, 0));
+	public void canTestSameDayWithEarlierDMY() {
+		assertThat(AUG_4_2015_AT_12_00_00, sameDay(2015, AUGUST, 3));
 	}
 
 	@Test
 	public void canTestSameDayWithSameDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(2015, AUGUST, 4, 12, 0, 0));
+		assertThat(AUG_4_2015_AT_12_00_00, sameDay(2015, AUGUST, 4));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameDayWithLaterDDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(2015, AUGUST, 5, 12, 0, 0));
+		assertThat(AUG_4_2015_AT_12_00_00, sameDay(2015, AUGUST, 5));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestSameInstantWithEarlierLocalDateTime() {
+		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_3_2015_AT_12_00_00));
+	}
+
+	@Test
+	public void canTestSameInstantWithSameLocalDateTime() {
+		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_4_2015_AT_12_00_00));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestSameInstantWithLaterLocalDateTime() {
+		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_5_2015_AT_12_00_00));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestSameInstantWithEarlierDate() {
+		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_3_2015_AT_12_00_00_AS_DATE));
+	}
+
+	@Test
+	public void canTestSameInstantWithSameDate() {
+		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_4_2015_AT_12_00_00_AS_DATE));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestSameInstantWithLaterDate() {
+		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_5_2015_AT_12_00_00_AS_DATE));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestSameInstantWithEarlierDMY() {
+		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(2015, AUGUST, 4, 11, 59, 59));
+	}
+
+	@Test
+	public void canTestSameInstantWithSameDMY() {
+		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(2015, AUGUST, 4, 12, 0, 0));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestSameInstantWithLaterDDMY() {
+		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(2015, AUGUST, 4, 12, 0, 1));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameOrBeforeWithEarlierLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_3_2015_AT_12_00_00));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_4_2015_AT_11_59_59));
 	}
 
 	@Test
@@ -197,12 +248,12 @@ public class LocalDateTimeMatchersTest {
 
 	@Test
 	public void canTestSameOrBeforeWithLaterLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_5_2015_AT_12_00_00));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_4_2015_AT_12_00_01));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameOrBeforeWithEarlierDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_3_2015_AT_12_00_00_AS_DATE));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_4_2015_AT_11_59_59_AS_DATE));
 	}
 
 	@Test
@@ -212,7 +263,7 @@ public class LocalDateTimeMatchersTest {
 
 	@Test
 	public void canTestSameOrBeforeWithLaterDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_5_2015_AT_12_00_00_AS_DATE));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_4_2015_AT_12_00_01_AS_DATE));
 	}
 
 	@Test(expected = AssertionError.class)
@@ -232,7 +283,7 @@ public class LocalDateTimeMatchersTest {
 
 	@Test
 	public void canTestSameOrAfterWithEarlierLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_3_2015_AT_12_00_00));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_4_2015_AT_11_59_59));
 	}
 
 	@Test
@@ -242,12 +293,12 @@ public class LocalDateTimeMatchersTest {
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameOrAfterWithLaterLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_5_2015_AT_12_00_00));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_4_2015_AT_12_00_01));
 	}
 
 	@Test
 	public void canTestSameOrAfterWithEarlierDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_3_2015_AT_12_00_00_AS_DATE));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_4_2015_AT_11_59_59_AS_DATE));
 	}
 
 	@Test
@@ -257,12 +308,12 @@ public class LocalDateTimeMatchersTest {
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameOrAfterWithLaterDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_5_2015_AT_12_00_00_AS_DATE));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_4_2015_AT_12_00_01_AS_DATE));
 	}
 
 	@Test
 	public void canTestSameOrAfterWithEarlierDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(2015, AUGUST, 3, 12, 0, 0));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(2015, AUGUST, 4, 11, 59, 59));
 	}
 
 	@Test
@@ -272,7 +323,7 @@ public class LocalDateTimeMatchersTest {
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameOrAfterWithLaterDDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(2015, AUGUST, 5, 12, 0, 0));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(2015, AUGUST, 4, 12, 0, 1));
 	}
 
 	@Test
@@ -302,7 +353,7 @@ public class LocalDateTimeMatchersTest {
 
 	@Test
 	public void canTestSameMonthOfYearWithDifferentDateSameMonth() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(AUG_3_2015_AT_12_00_00_AS_DATE));
+		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(AUG_5_2015_AT_12_00_00_AS_DATE));
 	}
 
 	@Test
@@ -347,7 +398,7 @@ public class LocalDateTimeMatchersTest {
 
 	@Test
 	public void canTestSameYearWithDifferentDateSameYear() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameYear(AUG_3_2015_AT_12_00_00_AS_DATE));
+		assertThat(AUG_4_2015_AT_12_00_00, sameYear(AUG_5_2015_AT_12_00_00_AS_DATE));
 	}
 
 	@Test(expected = AssertionError.class)
@@ -393,6 +444,36 @@ public class LocalDateTimeMatchersTest {
 	@Test(expected = AssertionError.class)
 	public void canTestWithinOutsideIntervalDMY() {
 		assertThat(AUG_3_2015_AT_12_00_00, within(1, ChronoUnit.DAYS, 2015, AUGUST, 5, 12, 0, 0));
+	}
+
+	@Test
+	public void canTestWithinTimeIntervalLocalDateTime() {
+		assertThat(AUG_4_2015_AT_12_00_00, within(1, ChronoUnit.SECONDS, AUG_4_2015_AT_12_00_01));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestWithinOutsideTimeIntervalLocalDateTime() {
+		assertThat(AUG_4_2015_AT_11_59_59, within(1, ChronoUnit.SECONDS, AUG_4_2015_AT_12_00_01));
+	}
+
+	@Test
+	public void canTestWithinTimeIntervalDate() {
+		assertThat(AUG_4_2015_AT_12_00_00, within(1, ChronoUnit.SECONDS, AUG_4_2015_AT_12_00_01_AS_DATE));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestWithinOutsideTimeIntervalDate() {
+		assertThat(AUG_4_2015_AT_11_59_59, within(1, ChronoUnit.SECONDS, AUG_4_2015_AT_12_00_01_AS_DATE));
+	}
+
+	@Test
+	public void canTestWithinTimeIntervalDMY() {
+		assertThat(AUG_4_2015_AT_12_00_00, within(1, ChronoUnit.SECONDS, 2015, AUGUST, 4, 12, 0, 1));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestWithinOutsideTimeIntervalDMY() {
+		assertThat(AUG_4_2015_AT_12_00_00, within(1, ChronoUnit.SECONDS, 2015, AUGUST, 4, 12, 0, 2));
 	}
 
 	@Test
@@ -738,6 +819,26 @@ public class LocalDateTimeMatchersTest {
 	@Test(expected = AssertionError.class)
 	public void canTestIsNotLeapYear() {
 		assertThat(AUG_4_2015_AT_12_00_00, isLeapYear());
+	}
+
+	@Test
+	public void canTestIsYear() {
+		assertThat(AUG_4_2015_AT_12_00_00, isYear(2015));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestIsNotYear() {
+		assertThat(AUG_4_2015_AT_12_00_00, isYear(2014));
+	}
+
+	@Test
+	public void canTestIsDayOfMonth() {
+		assertThat(AUG_4_2015_AT_12_00_00, isDayOfMonth(2015));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestIsNotDayOfMonth() {
+		assertThat(AUG_4_2015_AT_12_00_00, isDayOfMonth(5));
 	}
 
 	private LocalDateTime yesterday() {
