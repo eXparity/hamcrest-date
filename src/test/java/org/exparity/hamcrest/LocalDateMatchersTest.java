@@ -750,6 +750,26 @@ public class LocalDateMatchersTest {
 		assertThat(AUG_4_2015, isDayOfMonth(5));
 	}
 
+	@Test
+	public void canTestSameDayOfMonth() {
+		assertThat(AUG_4_2015, sameDayOfMonth(AUG_4_2015));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestNotSameDayOfMonth() {
+		assertThat(AUG_4_2015, sameDayOfMonth(AUG_5_2015));
+	}
+
+	@Test
+	public void canTestSameDayOfMonthAsDate() {
+		assertThat(AUG_4_2015, sameDayOfMonth(AUG_4_2015_AS_DATE));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestNotSameDayOfMonthAsDate() {
+		assertThat(AUG_4_2015, sameDayOfMonth(AUG_5_2015_AS_DATE));
+	}
+
 
 	private LocalDate yesterday() {
 		return LocalDate.now().minusDays(1);
