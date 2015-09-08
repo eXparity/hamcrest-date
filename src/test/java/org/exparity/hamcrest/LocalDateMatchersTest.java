@@ -394,6 +394,36 @@ public class LocalDateMatchersTest {
 	public void canTestWithinOutsideIntervalDMY() {
 		assertThat(AUG_3_2015, within(1, ChronoUnit.DAYS, 2015, AUGUST, 5));
 	}
+	
+	@Test
+	public void canTestWithinTimeIntervalLocalDateTime() {
+		assertThat(AUG_4_2015, within(1, ChronoUnit.SECONDS, AUG_4_2015));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestWithinOutsideTimeIntervalLocalDateTime() {
+		assertThat(AUG_4_2015, within(1, ChronoUnit.SECONDS, AUG_5_2015));
+	}
+
+	@Test
+	public void canTestWithinTimeIntervalDate() {
+		assertThat(AUG_4_2015, within(1, ChronoUnit.SECONDS, AUG_4_2015_AS_DATE));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestWithinOutsideTimeIntervalDate() {
+		assertThat(AUG_4_2015, within(1, ChronoUnit.SECONDS, AUG_5_2015_AS_DATE));
+	}
+
+	@Test
+	public void canTestWithinTimeIntervalDMY() {
+		assertThat(AUG_4_2015, within(1, ChronoUnit.SECONDS, 2015, AUGUST, 4));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestWithinOutsideTimeIntervalDMY() {
+		assertThat(AUG_4_2015, within(1, ChronoUnit.SECONDS, 2015, AUGUST, 5));
+	}
 
 	@Test
 	public void canTestIsYesterday() {

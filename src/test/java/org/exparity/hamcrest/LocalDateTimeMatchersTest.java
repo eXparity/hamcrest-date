@@ -861,6 +861,96 @@ public class LocalDateTimeMatchersTest {
 		assertThat(AUG_4_2015_AT_12_00_00, sameDayOfMonth(AUG_5_2015_AT_12_00_00_AS_DATE));
 	}
 
+	@Test
+	public void canTestIsHour() {
+		assertThat(AUG_4_2015_AT_12_00_00, isHour(12));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestIsNotHour() {
+		assertThat(AUG_4_2015_AT_12_00_00, isHour(13));
+	}
+
+	@Test
+	public void canTestSameHourOfDay() {
+		assertThat(AUG_4_2015_AT_12_00_00, sameHourOfDay(AUG_4_2015_AT_12_00_00));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestNotSameHourOfDay() {
+		assertThat(AUG_4_2015_AT_12_00_00, sameHourOfDay(AUG_4_2015_AT_11_59_59));
+	}
+
+	@Test
+	public void canTestSameHourOfDayAsDate() {
+		assertThat(AUG_4_2015_AT_12_00_00, sameHourOfDay(AUG_4_2015_AT_12_00_00_AS_DATE));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestNotSameHourOfDayAsDate() {
+		assertThat(AUG_4_2015_AT_12_00_00, sameHourOfDay(AUG_4_2015_AT_11_59_59_AS_DATE));
+	}
+
+	@Test
+	public void canTestIsMinute() {
+		assertThat(AUG_4_2015_AT_11_59_59, isMinute(59));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestIsNotMinute() {
+		assertThat(AUG_4_2015_AT_11_59_59, isMinute(58));
+	}
+
+	@Test
+	public void canTestSameMinuteOfHour() {
+		assertThat(AUG_4_2015_AT_11_59_59, sameMinuteOfHour(AUG_4_2015_AT_11_59_59));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestNotSameMinuteOfHour() {
+		assertThat(AUG_4_2015_AT_11_59_59, sameMinuteOfHour(AUG_4_2015_AT_12_00_00));
+	}
+
+	@Test
+	public void canTestSameMinuteOfHourAsDate() {
+		assertThat(AUG_4_2015_AT_11_59_59, sameMinuteOfHour(AUG_4_2015_AT_11_59_59_AS_DATE));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestNotSameMinuteOfHourAsDate() {
+		assertThat(AUG_4_2015_AT_11_59_59, sameMinuteOfHour(AUG_4_2015_AT_12_00_00_AS_DATE));
+	}
+
+	@Test
+	public void canTestIsSecond() {
+		assertThat(AUG_4_2015_AT_11_59_59, isSecond(59));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestIsNotSecond() {
+		assertThat(AUG_4_2015_AT_11_59_59, isSecond(58));
+	}
+
+	@Test
+	public void canTestSameSecondOfMinute() {
+		assertThat(AUG_4_2015_AT_11_59_59, sameSecondOfMinute(AUG_4_2015_AT_11_59_59));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestNotSameSecondOfMinute() {
+		assertThat(AUG_4_2015_AT_11_59_59, sameSecondOfMinute(AUG_4_2015_AT_12_00_00));
+	}
+
+	@Test
+	public void canTestSameSecondOfMinuteAsDate() {
+		assertThat(AUG_4_2015_AT_11_59_59, sameSecondOfMinute(AUG_4_2015_AT_11_59_59_AS_DATE));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestNotSameSecondOfMinuteAsDate() {
+		assertThat(AUG_4_2015_AT_11_59_59, sameSecondOfMinute(AUG_4_2015_AT_12_00_00_AS_DATE));
+	}
+
 	private LocalDateTime yesterday() {
 		return LocalDateTime.now().minusDays(1);
 	}
