@@ -1,8 +1,8 @@
-package org.exparity.hamcrest;
+package org.exparity.hamcrest.date;
 
 import static java.time.DayOfWeek.MONDAY;
 import static java.time.Month.*;
-import static org.exparity.hamcrest.LocalDateMatchers.*;
+import static org.exparity.hamcrest.date.LocalDateMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.DayOfWeek;
@@ -10,16 +10,18 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.UnsupportedTemporalTypeException;
 import java.util.Date;
 
 import org.exparity.dates.en.FluentDate;
+import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.junit.Test;
 
 /**
  * Unit Test for {@link LocalDateMatchers}
  * 
  * @author Stewart Bissett
- */
+ */ 
 public class LocalDateMatchersTest {
 
 	private static final LocalDate JAN_1_2015 = LocalDate.of(2015, Month.JANUARY, 1);
@@ -395,34 +397,19 @@ public class LocalDateMatchersTest {
 		assertThat(AUG_3_2015, within(1, ChronoUnit.DAYS, 2015, AUGUST, 5));
 	}
 	
-	@Test
+	@Test(expected = UnsupportedTemporalTypeException.class)
 	public void canTestWithinTimeIntervalLocalDateTime() {
 		assertThat(AUG_4_2015, within(1, ChronoUnit.SECONDS, AUG_4_2015));
 	}
 
-	@Test(expected = AssertionError.class)
-	public void canTestWithinOutsideTimeIntervalLocalDateTime() {
-		assertThat(AUG_4_2015, within(1, ChronoUnit.SECONDS, AUG_5_2015));
-	}
-
-	@Test
+	@Test(expected = UnsupportedTemporalTypeException.class)
 	public void canTestWithinTimeIntervalDate() {
 		assertThat(AUG_4_2015, within(1, ChronoUnit.SECONDS, AUG_4_2015_AS_DATE));
 	}
 
-	@Test(expected = AssertionError.class)
-	public void canTestWithinOutsideTimeIntervalDate() {
-		assertThat(AUG_4_2015, within(1, ChronoUnit.SECONDS, AUG_5_2015_AS_DATE));
-	}
-
-	@Test
+	@Test(expected = UnsupportedTemporalTypeException.class)
 	public void canTestWithinTimeIntervalDMY() {
 		assertThat(AUG_4_2015, within(1, ChronoUnit.SECONDS, 2015, AUGUST, 4));
-	}
-
-	@Test(expected = AssertionError.class)
-	public void canTestWithinOutsideTimeIntervalDMY() {
-		assertThat(AUG_4_2015, within(1, ChronoUnit.SECONDS, 2015, AUGUST, 5));
 	}
 
 	@Test
