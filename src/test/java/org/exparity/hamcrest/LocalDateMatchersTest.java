@@ -739,6 +739,17 @@ public class LocalDateMatchersTest {
 	public void canTestIsNotLeapYear() {
 		assertThat(AUG_4_2015, isLeapYear());
 	}
+	
+	@Test
+	public void canTestIsDayOfMonth() {
+		assertThat(AUG_4_2015, isDayOfMonth(4));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void canTestIsNotDayOfMonth() {
+		assertThat(AUG_4_2015, isDayOfMonth(5));
+	}
+
 
 	private LocalDate yesterday() {
 		return LocalDate.now().minusDays(1);

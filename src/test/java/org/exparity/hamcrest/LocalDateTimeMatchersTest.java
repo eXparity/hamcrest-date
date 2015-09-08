@@ -833,7 +833,7 @@ public class LocalDateTimeMatchersTest {
 
 	@Test
 	public void canTestIsDayOfMonth() {
-		assertThat(AUG_4_2015_AT_12_00_00, isDayOfMonth(2015));
+		assertThat(AUG_4_2015_AT_12_00_00, isDayOfMonth(4));
 	}
 
 	@Test(expected = AssertionError.class)
