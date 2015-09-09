@@ -1,7 +1,5 @@
 package org.exparity.hamcrest.date.core;
 
-import java.time.LocalDate;
-
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 

@@ -13,7 +13,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 import org.exparity.dates.en.FluentDateTime;
-import org.exparity.hamcrest.date.IsDayOfMonth;
 import org.junit.Test;
 
 /**

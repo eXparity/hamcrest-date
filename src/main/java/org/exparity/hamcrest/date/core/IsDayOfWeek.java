@@ -3,9 +3,8 @@ package org.exparity.hamcrest.date.core;
 import static java.util.stream.Collectors.joining;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.temporal.ChronoField;
-import java.time.temporal.Temporal;
+import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +19,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  * 
  * @author Stewart Bissett
  */
-public class IsDayOfWeek<T extends Temporal> extends TypeSafeDiagnosingMatcher<T> {
+public class IsDayOfWeek<T extends TemporalAccessor> extends TypeSafeDiagnosingMatcher<T> {
 
 	private final Set<DayOfWeek> daysOfWeeks = new HashSet<>();
 	private final String description;

@@ -12,23 +12,23 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalField;
 import java.util.Date;
 
-import org.exparity.hamcrest.localdatetime.IsAfter;
-import org.exparity.hamcrest.localdatetime.IsBefore;
-import org.exparity.hamcrest.localdatetime.IsDayOfMonth;
-import org.exparity.hamcrest.localdatetime.IsDayOfWeek;
-import org.exparity.hamcrest.localdatetime.IsHour;
-import org.exparity.hamcrest.localdatetime.IsLeapYear;
-import org.exparity.hamcrest.localdatetime.IsMaximum;
-import org.exparity.hamcrest.localdatetime.IsMinimum;
-import org.exparity.hamcrest.localdatetime.IsMinute;
-import org.exparity.hamcrest.localdatetime.IsMonth;
+import org.exparity.hamcrest.date.core.IsAfter;
+import org.exparity.hamcrest.date.core.IsBefore;
+import org.exparity.hamcrest.date.core.IsDayOfMonth;
+import org.exparity.hamcrest.date.core.IsDayOfWeek;
+import org.exparity.hamcrest.date.core.IsHour;
+import org.exparity.hamcrest.date.core.IsLeapYear;
+import org.exparity.hamcrest.date.core.IsMaximum;
+import org.exparity.hamcrest.date.core.IsMinimum;
+import org.exparity.hamcrest.date.core.IsMinute;
+import org.exparity.hamcrest.date.core.IsMonth;
+import org.exparity.hamcrest.date.core.IsSameOrAfter;
+import org.exparity.hamcrest.date.core.IsSameOrBefore;
+import org.exparity.hamcrest.date.core.IsSecond;
+import org.exparity.hamcrest.date.core.IsWithin;
+import org.exparity.hamcrest.date.core.IsYear;
 import org.exparity.hamcrest.localdatetime.IsSame;
 import org.exparity.hamcrest.localdatetime.IsSameDay;
-import org.exparity.hamcrest.localdatetime.IsSameOrAfter;
-import org.exparity.hamcrest.localdatetime.IsSameOrBefore;
-import org.exparity.hamcrest.localdatetime.IsSecond;
-import org.exparity.hamcrest.localdatetime.IsWithin;
-import org.exparity.hamcrest.localdatetime.IsYear;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
@@ -71,7 +71,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> after(final LocalDateTime date) {
-		return new IsAfter(date);
+		return new IsAfter<LocalDateTime>(date);
 	}
 
 	/**
@@ -138,7 +138,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> before(final LocalDateTime date) {
-		return new IsBefore(date);
+		return new IsBefore<LocalDateTime>(date);
 	}
 
 	/**
@@ -347,7 +347,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameOrBefore(final LocalDateTime date) {
-		return new IsSameOrBefore(date);
+		return new IsSameOrBefore<LocalDateTime>(date);
 	}
 
 	/**
@@ -364,7 +364,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameOrBefore(final Date date) {
-		return new IsSameOrBefore(toLocalDateTime(date));
+		return sameOrBefore(toLocalDateTime(date));
 	}
 
 	/**
@@ -432,7 +432,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameOrAfter(final LocalDateTime date) {
-		return new IsSameOrAfter(date);
+		return new IsSameOrAfter<LocalDateTime>(date);
 	}
 
 	/**
@@ -503,8 +503,8 @@ public abstract class LocalDateTimeMatchers {
 	}
 
 	/**
-	 * Creates a matcher that matches when the examined date is on the same
-	 * day of the month as the reference date
+	 * Creates a matcher that matches when the examined date is on the same day
+	 * of the month as the reference date
 	 * <p/>
 	 * For example:
 	 * 
@@ -520,8 +520,8 @@ public abstract class LocalDateTimeMatchers {
 	}
 
 	/**
-	 * Creates a matcher that matches when the examined date is on the same
-	 * day of the month as the reference date
+	 * Creates a matcher that matches when the examined date is on the same day
+	 * of the month as the reference date
 	 * <p/>
 	 * For example:
 	 * 
@@ -537,7 +537,8 @@ public abstract class LocalDateTimeMatchers {
 	}
 
 	/**
-	 * Creates a matcher that matches when the examined date is on the expected day of the month
+	 * Creates a matcher that matches when the examined date is on the expected
+	 * day of the month
 	 * <p/>
 	 * For example:
 	 * 
@@ -549,7 +550,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the expected day of the month
 	 */
 	public static Matcher<LocalDateTime> isDayOfMonth(final int dayOfMonth) {
-		return new IsDayOfMonth(dayOfMonth);
+		return new IsDayOfMonth<LocalDateTime>(dayOfMonth);
 	}
 
 	/**
@@ -583,7 +584,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameYear(final LocalDateTime date) {
-		return new IsYear(date.getYear());
+		return isYear(date.getYear());
 	}
 
 	/**
@@ -600,7 +601,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the reference year against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> isYear(final int year) {
-		return new IsYear(year);
+		return new IsYear<LocalDateTime>(year);
 	}
 
 	/**
@@ -634,7 +635,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> within(final long period, final ChronoUnit unit, final LocalDateTime date) {
-		return new IsWithin(period, unit, date);
+		return new IsWithin<LocalDateTime>(period, unit, date);
 	}
 
 	/**
@@ -732,7 +733,7 @@ public abstract class LocalDateTimeMatchers {
 	 * </pre>
 	 */
 	public static Matcher<LocalDateTime> isDayOfWeek(final DayOfWeek... dayOfWeek) {
-		return new IsDayOfWeek(dayOfWeek);
+		return new IsDayOfWeek<LocalDateTime>(dayOfWeek);
 	}
 
 	/**
@@ -880,7 +881,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the temporal field to check
 	 */
 	public static Matcher<LocalDateTime> isMinimum(final TemporalField field) {
-		return new IsMinimum(field);
+		return new IsMinimum<LocalDateTime>(field);
 	}
 
 	/**
@@ -911,7 +912,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the temporal field to check
 	 */
 	public static Matcher<LocalDateTime> isMaximum(final TemporalField field) {
-		return new IsMaximum(field);
+		return new IsMaximum<LocalDateTime>(field);
 	}
 
 	/**
@@ -925,7 +926,7 @@ public abstract class LocalDateTimeMatchers {
 	 * </pre>
 	 */
 	public static Matcher<LocalDateTime> isMonth(final Month month) {
-		return new IsMonth(month);
+		return new IsMonth<LocalDateTime>(month);
 	}
 
 	/**
@@ -1094,7 +1095,7 @@ public abstract class LocalDateTimeMatchers {
 	 * </pre>
 	 */
 	public static Matcher<LocalDateTime> isLeapYear() {
-		return new IsLeapYear();
+		return new IsLeapYear<LocalDateTime>();
 	}
 
 	/**
@@ -1111,7 +1112,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the hour of the day (0-23)
 	 */
 	public static Matcher<LocalDateTime> isHour(final int hour) {
-		return new IsHour(hour);
+		return new IsHour<LocalDateTime>(hour);
 	}
 
 	/**
@@ -1145,7 +1146,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameHourOfDay(final LocalDateTime date) {
-		return new IsHour(date.getHour());
+		return isHour(date.getHour());
 	}
 
 	/**
@@ -1161,8 +1162,8 @@ public abstract class LocalDateTimeMatchers {
 	 * @param Minute
 	 *            the minute of the day (0-59)
 	 */
-	public static Matcher<LocalDateTime> isMinute(final int Minute) {
-		return new IsMinute(Minute);
+	public static Matcher<LocalDateTime> isMinute(final int minute) {
+		return new IsMinute<LocalDateTime>(minute);
 	}
 
 	/**
@@ -1196,7 +1197,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameMinuteOfHour(final LocalDateTime date) {
-		return new IsMinute(date.getMinute());
+		return isMinute(date.getMinute());
 	}
 
 	/**
@@ -1213,7 +1214,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the second of the day (0-59)
 	 */
 	public static Matcher<LocalDateTime> isSecond(final int Second) {
-		return new IsSecond(Second);
+		return new IsSecond<LocalDateTime>(Second);
 	}
 
 	/**
@@ -1247,7 +1248,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameSecondOfMinute(final LocalDateTime date) {
-		return new IsSecond(date.getSecond());
+		return isSecond(date.getSecond());
 	}
 
 	private static LocalDateTime toLocalDateTime(final Date date) {
