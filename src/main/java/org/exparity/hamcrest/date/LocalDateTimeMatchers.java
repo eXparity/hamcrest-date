@@ -1,4 +1,4 @@
-package org.exparity.hamcrest;
+package org.exparity.hamcrest.date;
 
 import static java.time.DayOfWeek.*;
 import static java.time.Month.*;
@@ -22,13 +22,13 @@ import org.exparity.hamcrest.date.core.IsMaximum;
 import org.exparity.hamcrest.date.core.IsMinimum;
 import org.exparity.hamcrest.date.core.IsMinute;
 import org.exparity.hamcrest.date.core.IsMonth;
+import org.exparity.hamcrest.date.core.IsSameDay;
 import org.exparity.hamcrest.date.core.IsSameInstant;
 import org.exparity.hamcrest.date.core.IsSameOrAfter;
 import org.exparity.hamcrest.date.core.IsSameOrBefore;
 import org.exparity.hamcrest.date.core.IsSecond;
 import org.exparity.hamcrest.date.core.IsWithin;
 import org.exparity.hamcrest.date.core.IsYear;
-import org.exparity.hamcrest.localdatetime.IsSameDay;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 

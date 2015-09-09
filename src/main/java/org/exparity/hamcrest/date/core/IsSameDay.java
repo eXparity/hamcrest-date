@@ -1,8 +1,9 @@
-package org.exparity.hamcrest.localdatetime;
+package org.exparity.hamcrest.date.core;
 
 import java.time.LocalDateTime;
 
 import org.hamcrest.Description;
+import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * A matcher that tests that the examined date is the same date as the reference
@@ -10,7 +11,7 @@ import org.hamcrest.Description;
  * 
  * @author Stewart Bissett
  */
-public class IsSameDay extends AbstractLocalDateTimeTimeMatcher {
+public class IsSameDay extends TypeSafeDiagnosingMatcher<LocalDateTime> {
 
 	private final LocalDateTime expected;
 
@@ -23,12 +24,12 @@ public class IsSameDay extends AbstractLocalDateTimeTimeMatcher {
 		if (expected.toLocalDate().equals(actual.toLocalDate())) {
 			return true;
 		} else {
-			mismatchDesc.appendText("date is ").appendValue(formatDate(actual));
+			mismatchDesc.appendText("date is " + actual);
 			return false;
 		}
 	}
 
 	public void describeTo(final Description description) {
-		description.appendText("the same date as ").appendValue(formatDate(expected));
+		description.appendText("the same date as " + expected);
 	}
 }

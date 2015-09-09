@@ -2,7 +2,7 @@ package org.exparity.hamcrest;
 
 import static java.time.DayOfWeek.MONDAY;
 import static java.time.Month.*;
-import static org.exparity.hamcrest.LocalDateTimeMatchers.*;
+import static org.exparity.hamcrest.date.LocalDateTimeMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.DayOfWeek;
@@ -13,6 +13,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 import org.exparity.dates.en.FluentDateTime;
+import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.junit.Test;
 
 /**
