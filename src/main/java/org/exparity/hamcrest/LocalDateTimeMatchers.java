@@ -22,12 +22,12 @@ import org.exparity.hamcrest.date.core.IsMaximum;
 import org.exparity.hamcrest.date.core.IsMinimum;
 import org.exparity.hamcrest.date.core.IsMinute;
 import org.exparity.hamcrest.date.core.IsMonth;
+import org.exparity.hamcrest.date.core.IsSameInstant;
 import org.exparity.hamcrest.date.core.IsSameOrAfter;
 import org.exparity.hamcrest.date.core.IsSameOrBefore;
 import org.exparity.hamcrest.date.core.IsSecond;
 import org.exparity.hamcrest.date.core.IsWithin;
 import org.exparity.hamcrest.date.core.IsYear;
-import org.exparity.hamcrest.localdatetime.IsSame;
 import org.exparity.hamcrest.localdatetime.IsSameDay;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
@@ -244,7 +244,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameInstant(final Date date) {
-		return new IsSame(date);
+		return new IsSameInstant(toLocalDateTime(date), ChronoUnit.MILLIS);
 	}
 
 	/**
@@ -261,7 +261,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameInstant(final LocalDateTime date) {
-		return new IsSame(date);
+		return new IsSameInstant(date, ChronoUnit.NANOS);
 	}
 
 	/**
@@ -294,7 +294,43 @@ public abstract class LocalDateTimeMatchers {
 			final int hour,
 			final int minute,
 			final int second) {
-		return sameInstant(LocalDateTime.of(year, month, dayOfMonth, hour, minute, second));
+		return new IsSameInstant(LocalDateTime.of(year, month, dayOfMonth, hour, minute, second), ChronoUnit.SECONDS);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is at the same
+	 * specified instance down to the second
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameInstant(2012, Month.JAN, 1, 3, 15, 0))
+	 * </pre>
+	 * 
+	 * @param dayOfMonth
+	 *            the reference day of the month against which the examined date
+	 *            is checked
+	 * @param month
+	 *            the reference month against which the examined date is checked
+	 * @param year
+	 *            the reference year against which the examined date is checked
+	 * @param hour
+	 *            the hour of the day
+	 * @param minute
+	 *            the minute of the hour
+	 * @param second
+	 *            the second of the minute
+	 * @param nanos
+	 *            the nanosecond of the second
+	 */
+	public static Matcher<LocalDateTime> sameInstant(final int year,
+			final Month month,
+			final int dayOfMonth,
+			final int hour,
+			final int minute,
+			final int second,
+			final int nanos) {
+		return sameInstant(LocalDateTime.of(year, month, dayOfMonth, hour, minute, second, nanos));
 	}
 
 	/**
@@ -694,7 +730,7 @@ public abstract class LocalDateTimeMatchers {
 	 * </pre>
 	 */
 	public static Matcher<LocalDateTime> isYesterday() {
-		return new IsSame(LocalDateTime.now().plusDays(-1));
+		return sameDay(LocalDateTime.now().plusDays(-1));
 	}
 
 	/**
@@ -707,7 +743,7 @@ public abstract class LocalDateTimeMatchers {
 	 * </pre>
 	 */
 	public static Matcher<LocalDateTime> isToday() {
-		return new IsSame(LocalDateTime.now());
+		return sameDay(LocalDateTime.now());
 	}
 
 	/**
@@ -720,7 +756,7 @@ public abstract class LocalDateTimeMatchers {
 	 * </pre>
 	 */
 	public static Matcher<LocalDateTime> isTomorrow() {
-		return new IsSame(LocalDateTime.now().plusDays(1));
+		return sameDay(LocalDateTime.now().plusDays(1));
 	}
 
 	/**
