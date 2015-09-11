@@ -1,4 +1,4 @@
-package org.exparity.hamcrest;
+package org.exparity.hamcrest.date;
 
 import static java.time.DayOfWeek.MONDAY;
 import static java.time.Month.*;
