@@ -222,21 +222,6 @@ public class LocalDateTimeMatchersTest {
 	}
 
 	@Test(expected = AssertionError.class)
-	public void canTestSameInstantWithEarlierDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(2015, AUGUST, 4, 11, 59, 59));
-	}
-
-	@Test
-	public void canTestSameInstantWithSameDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(2015, AUGUST, 4, 12, 0, 0));
-	}
-
-	@Test(expected = AssertionError.class)
-	public void canTestSameInstantWithLaterDDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(2015, AUGUST, 4, 12, 0, 1));
-	}
-
-	@Test(expected = AssertionError.class)
 	public void canTestSameOrBeforeWithEarlierLocalDateTime() {
 		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_4_2015_AT_11_59_59));
 	}

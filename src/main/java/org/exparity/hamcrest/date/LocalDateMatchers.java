@@ -20,7 +20,7 @@ import org.exparity.hamcrest.date.core.IsLeapYear;
 import org.exparity.hamcrest.date.core.IsMaximum;
 import org.exparity.hamcrest.date.core.IsMinimum;
 import org.exparity.hamcrest.date.core.IsMonth;
-import org.exparity.hamcrest.date.core.IsSame;
+import org.exparity.hamcrest.date.core.IsSameDay;
 import org.exparity.hamcrest.date.core.IsSameOrAfter;
 import org.exparity.hamcrest.date.core.IsSameOrBefore;
 import org.exparity.hamcrest.date.core.IsWithin;
@@ -179,7 +179,7 @@ public abstract class LocalDateMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDate> sameDay(final LocalDate date) {
-		return new IsSame<LocalDate>(date);
+		return new IsSameDay<LocalDate>(date);
 	}
 
 	/**

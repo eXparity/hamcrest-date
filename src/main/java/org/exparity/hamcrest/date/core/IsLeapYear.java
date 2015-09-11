@@ -1,7 +1,7 @@
 package org.exparity.hamcrest.date.core;
 
-import java.time.chrono.IsoChronology;
-import java.time.temporal.ChronoField;
+import static java.time.temporal.TemporalQueries.localDate;
+
 import java.time.temporal.TemporalAccessor;
 
 import org.hamcrest.Description;
@@ -16,16 +16,12 @@ public class IsLeapYear<T extends TemporalAccessor> extends TypeSafeDiagnosingMa
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
-		if (isLeapYear(actual)) {
+		if (actual.query(localDate()).isLeapYear()) {
 			return true;
 		} else {
 			mismatchDesc.appendText("a leap year");
 			return false;
 		}
-	}
-
-	private boolean isLeapYear(T actual) {
-		return IsoChronology.INSTANCE.isLeapYear(actual.get(ChronoField.YEAR));
 	}
 
 	public void describeTo(final Description description) {

@@ -1,6 +1,7 @@
 package org.exparity.hamcrest.date.core;
 
-import java.time.LocalDateTime;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalQueries;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
@@ -11,17 +12,17 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  * 
  * @author Stewart Bissett
  */
-public class IsSameDay extends TypeSafeDiagnosingMatcher<LocalDateTime> {
+public class IsSameDay<T extends Temporal> extends TypeSafeDiagnosingMatcher<T> {
 
-	private final LocalDateTime expected;
+	private final T expected;
 
-	public IsSameDay(final LocalDateTime expected) {
+	public IsSameDay(final T expected) {
 		this.expected = expected;
 	}
 
 	@Override
-	protected boolean matchesSafely(final LocalDateTime actual, final Description mismatchDesc) {
-		if (expected.toLocalDate().equals(actual.toLocalDate())) {
+	protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
+		if (expected.query(TemporalQueries.localDate()).equals(actual.query(TemporalQueries.localDate()))) {
 			return true;
 		} else {
 			mismatchDesc.appendText("date is " + actual);
