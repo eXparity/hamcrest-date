@@ -7,7 +7,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoField;
@@ -24,173 +23,57 @@ import org.junit.Test;
  */
 public class ZonedDateTimeMatchersTest {
 
-	private static final LocalDateTime JAN_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(
-			2015,
-				Month.JANUARY,
-				1,
-				12,
-				0,
-				0);
-	private static final LocalDateTime FEB_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(
-			2015,
-				Month.FEBRUARY,
-				1,
-				12,
-				0,
-				0);
-	private static final LocalDateTime MAR_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, Month.MARCH, 1, 12, 0, 0);
-	private static final LocalDateTime APR_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, Month.APRIL, 1, 12, 0, 0);
-	private static final LocalDateTime MAY_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, Month.MAY, 1, 12, 0, 0);
-	private static final LocalDateTime JUN_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, Month.JUNE, 1, 12, 0, 0);
-	private static final LocalDateTime JUL_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, Month.JULY, 1, 12, 0, 0);
-	private static final LocalDateTime AUG_1_2015_AT_12_00_00_AS_LDT = LocalDateTime
-			.of(2015, Month.AUGUST, 1, 12, 0, 0);
-	private static final LocalDateTime AUG_3_2015_AT_12_00_00_AS_LDT = LocalDateTime
-			.of(2015, Month.AUGUST, 3, 12, 0, 0);
-	private static final LocalDateTime AUG_4_2015_AT_11_59_59_AS_LDT = LocalDateTime.of(
-			2015,
-				Month.AUGUST,
-				4,
-				11,
-				59,
-				59);
-	private static final LocalDateTime AUG_4_2015_AT_12_00_00_AS_LDT = LocalDateTime
-			.of(2015, Month.AUGUST, 4, 12, 0, 0);
-	private static final LocalDateTime AUG_4_2015_AT_12_00_01_AS_LDT = LocalDateTime
-			.of(2015, Month.AUGUST, 4, 12, 0, 1);
-	private static final LocalDateTime AUG_5_2015_AT_12_00_00_AS_LDT = LocalDateTime
-			.of(2015, Month.AUGUST, 5, 12, 0, 0);
-	private static final LocalDateTime AUG_6_2015_AT_12_00_00_AS_LDT = LocalDateTime
-			.of(2015, Month.AUGUST, 6, 12, 0, 0);
-	private static final LocalDateTime AUG_7_2015_AT_12_00_00_AS_LDT = LocalDateTime
-			.of(2015, Month.AUGUST, 7, 12, 0, 0);
-	private static final LocalDateTime AUG_8_2015_AT_12_00_00_AS_LDT = LocalDateTime
-			.of(2015, Month.AUGUST, 8, 12, 0, 0);
-	private static final LocalDateTime AUG_9_2015_AT_12_00_00_AS_LDT = LocalDateTime
-			.of(2015, Month.AUGUST, 9, 12, 0, 0);
-	private static final LocalDateTime AUG_31_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(
-			2015,
-				Month.AUGUST,
-				31,
-				12,
-				0,
-				0);
-	private static final LocalDateTime SEP_4_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(
-			2015,
-				Month.SEPTEMBER,
-				4,
-				12,
-				0,
-				0);
-	private static final LocalDateTime SEP_30_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(
-			2015,
-				Month.SEPTEMBER,
-				30,
-				12,
-				0,
-				0);
-	private static final LocalDateTime OCT_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(
-			2015,
-				Month.OCTOBER,
-				1,
-				12,
-				0,
-				0);
-	private static final LocalDateTime NOV_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(
-			2015,
-				Month.NOVEMBER,
-				1,
-				12,
-				0,
-				0);
-	private static final LocalDateTime DEC_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(
-			2015,
-				Month.DECEMBER,
-				1,
-				12,
-				0,
-				0);
-	private static final LocalDateTime AUG_4_2016_AT_12_00_00_AS_LDT = LocalDateTime.of(
-			2016,
-				Month.AUGUST,
-				4,
-				1,
-				12,
-				0,
-				0);
+	private static final ZoneId TZ = ZoneId.systemDefault();
 
-	private static final ZonedDateTime JAN_1_2015_AT_12_00_00 = ZonedDateTime.of(
-			JAN_1_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime FEB_1_2015_AT_12_00_00 = ZonedDateTime.of(
-			FEB_1_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime MAR_1_2015_AT_12_00_00 = ZonedDateTime.of(
-			MAR_1_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime APR_1_2015_AT_12_00_00 = ZonedDateTime.of(
-			APR_1_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime MAY_1_2015_AT_12_00_00 = ZonedDateTime.of(
-			MAY_1_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime JUN_1_2015_AT_12_00_00 = ZonedDateTime.of(
-			JUN_1_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime JUL_1_2015_AT_12_00_00 = ZonedDateTime.of(
-			JUL_1_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime AUG_1_2015_AT_12_00_00 = ZonedDateTime.of(
-			AUG_1_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime AUG_3_2015_AT_12_00_00 = ZonedDateTime.of(
-			AUG_3_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime AUG_4_2015_AT_11_59_59 = ZonedDateTime.of(
-			AUG_4_2015_AT_11_59_59_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime AUG_4_2015_AT_12_00_00 = ZonedDateTime.of(
-			AUG_4_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime AUG_4_2015_AT_12_00_01 = ZonedDateTime.of(
-			AUG_4_2015_AT_12_00_01_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime AUG_5_2015_AT_12_00_00 = ZonedDateTime.of(
-			AUG_5_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime AUG_6_2015_AT_12_00_00 = ZonedDateTime.of(
-			AUG_6_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime AUG_7_2015_AT_12_00_00 = ZonedDateTime.of(
-			AUG_7_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime AUG_8_2015_AT_12_00_00 = ZonedDateTime.of(
-			AUG_8_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime AUG_9_2015_AT_12_00_00 = ZonedDateTime.of(
-			AUG_9_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime AUG_31_2015_AT_12_00_00 = ZonedDateTime.of(
-			AUG_31_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime SEP_4_2015_AT_12_00_00 = ZonedDateTime.of(
-			SEP_4_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime SEP_30_2015_AT_12_00_00 = ZonedDateTime.of(
-			SEP_30_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime OCT_1_2015_AT_12_00_00 = ZonedDateTime.of(
-			OCT_1_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime NOV_1_2015_AT_12_00_00 = ZonedDateTime.of(
-			NOV_1_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime DEC_1_2015_AT_12_00_00 = ZonedDateTime.of(
-			DEC_1_2015_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
-	private static final ZonedDateTime AUG_4_2016_AT_12_00_00 = ZonedDateTime.of(
-			AUG_4_2016_AT_12_00_00_AS_LDT,
-				ZoneId.systemDefault());
+	private static final LocalDateTime JAN_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, JANUARY, 1, 12, 0, 0);
+	private static final LocalDateTime FEB_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, FEBRUARY, 1, 12, 0, 0);
+	private static final LocalDateTime MAR_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, MARCH, 1, 12, 0, 0);
+	private static final LocalDateTime APR_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, APRIL, 1, 12, 0, 0);
+	private static final LocalDateTime MAY_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, MAY, 1, 12, 0, 0);
+	private static final LocalDateTime JUN_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, JUNE, 1, 12, 0, 0);
+	private static final LocalDateTime JUL_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, JULY, 1, 12, 0, 0);
+	private static final LocalDateTime AUG_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, AUGUST, 1, 12, 0, 0);
+	private static final LocalDateTime AUG_3_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, AUGUST, 3, 12, 0, 0);
+	private static final LocalDateTime AUG_4_2015_AT_11_59_59_AS_LDT = LocalDateTime.of(2015, AUGUST, 4, 11, 59, 59);
+	private static final LocalDateTime AUG_4_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, AUGUST, 4, 12, 0, 0);
+	private static final LocalDateTime AUG_4_2015_AT_12_00_01_AS_LDT = LocalDateTime.of(2015, AUGUST, 4, 12, 0, 1);
+	private static final LocalDateTime AUG_5_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, AUGUST, 5, 12, 0, 0);
+	private static final LocalDateTime AUG_6_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, AUGUST, 6, 12, 0, 0);
+	private static final LocalDateTime AUG_7_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, AUGUST, 7, 12, 0, 0);
+	private static final LocalDateTime AUG_8_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, AUGUST, 8, 12, 0, 0);
+	private static final LocalDateTime AUG_9_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, AUGUST, 9, 12, 0, 0);
+	private static final LocalDateTime AUG_31_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, AUGUST, 31, 12, 0, 0);
+	private static final LocalDateTime SEP_4_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, SEPTEMBER, 4, 12, 0, 0);
+	private static final LocalDateTime SEP_30_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, SEPTEMBER, 30, 12, 0, 0);
+	private static final LocalDateTime OCT_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, OCTOBER, 1, 12, 0, 0);
+	private static final LocalDateTime NOV_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, NOVEMBER, 1, 12, 0, 0);
+	private static final LocalDateTime DEC_1_2015_AT_12_00_00_AS_LDT = LocalDateTime.of(2015, DECEMBER, 1, 12, 0, 0);
+	private static final LocalDateTime AUG_4_2016_AT_12_00_00_AS_LDT = LocalDateTime.of(2016, AUGUST, 4, 1, 12, 0, 0);
+
+	private static final ZonedDateTime JAN_1_2015_AT_12_00_00 = ZonedDateTime.of(JAN_1_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime FEB_1_2015_AT_12_00_00 = ZonedDateTime.of(FEB_1_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime MAR_1_2015_AT_12_00_00 = ZonedDateTime.of(MAR_1_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime APR_1_2015_AT_12_00_00 = ZonedDateTime.of(APR_1_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime MAY_1_2015_AT_12_00_00 = ZonedDateTime.of(MAY_1_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime JUN_1_2015_AT_12_00_00 = ZonedDateTime.of(JUN_1_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime JUL_1_2015_AT_12_00_00 = ZonedDateTime.of(JUL_1_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime AUG_1_2015_AT_12_00_00 = ZonedDateTime.of(AUG_1_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime AUG_3_2015_AT_12_00_00 = ZonedDateTime.of(AUG_3_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime AUG_4_2015_AT_11_59_59 = ZonedDateTime.of(AUG_4_2015_AT_11_59_59_AS_LDT, TZ);
+	private static final ZonedDateTime AUG_4_2015_AT_12_00_00 = ZonedDateTime.of(AUG_4_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime AUG_4_2015_AT_12_00_01 = ZonedDateTime.of(AUG_4_2015_AT_12_00_01_AS_LDT, TZ);
+	private static final ZonedDateTime AUG_5_2015_AT_12_00_00 = ZonedDateTime.of(AUG_5_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime AUG_6_2015_AT_12_00_00 = ZonedDateTime.of(AUG_6_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime AUG_7_2015_AT_12_00_00 = ZonedDateTime.of(AUG_7_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime AUG_8_2015_AT_12_00_00 = ZonedDateTime.of(AUG_8_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime AUG_9_2015_AT_12_00_00 = ZonedDateTime.of(AUG_9_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime AUG_31_2015_AT_12_00_00 = ZonedDateTime.of(AUG_31_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime SEP_4_2015_AT_12_00_00 = ZonedDateTime.of(SEP_4_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime SEP_30_2015_AT_12_00_00 = ZonedDateTime.of(SEP_30_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime OCT_1_2015_AT_12_00_00 = ZonedDateTime.of(OCT_1_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime NOV_1_2015_AT_12_00_00 = ZonedDateTime.of(NOV_1_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime DEC_1_2015_AT_12_00_00 = ZonedDateTime.of(DEC_1_2015_AT_12_00_00_AS_LDT, TZ);
+	private static final ZonedDateTime AUG_4_2016_AT_12_00_00 = ZonedDateTime.of(AUG_4_2016_AT_12_00_00_AS_LDT, TZ);
 
 	private static final Date AUG_3_2015_AT_12_00_00_AS_DATE = FluentDateTime.AUG(3, 2015).at(12, 0, 0);
 	private static final Date AUG_4_2015_AT_11_59_59_AS_DATE = FluentDateTime.AUG(4, 2015).at(11, 59, 59);
@@ -202,411 +85,387 @@ public class ZonedDateTimeMatchersTest {
 
 	@Test
 	public void canTestAfterWithEarlierLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_4_2015_AT_11_59_59_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_4_2015_AT_11_59_59_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestAfterWithSameLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_4_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_4_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestAfterWithLaterLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_4_2015_AT_12_00_01_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_4_2015_AT_12_00_01_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestAfterWithEarlierDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_4_2015_AT_11_59_59_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_4_2015_AT_11_59_59_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestAfterWithSameDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_4_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_4_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestAfterWithLaterDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_4_2015_AT_12_00_01_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, after(AUG_4_2015_AT_12_00_01_AS_DATE, TZ));
 	}
 
 	@Test
 	public void canTestAfterWithEarlierDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, after(2015, AUGUST, 4, 11, 59, 59, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, after(2015, AUGUST, 4, 11, 59, 59, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestAfterWithSameDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, after(2015, AUGUST, 4, 12, 0, 0, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, after(2015, AUGUST, 4, 12, 0, 0, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestAfterWithLaterDDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, after(2015, AUGUST, 4, 12, 0, 1, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, after(2015, AUGUST, 4, 12, 0, 1, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestBeforeWithEarlierLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_4_2015_AT_11_59_59_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_4_2015_AT_11_59_59_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestBeforeWithSameLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_4_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_4_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestBeforeWithLaterLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_4_2015_AT_12_00_01_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_4_2015_AT_12_00_01_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestBeforeWithEarlierDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_4_2015_AT_11_59_59_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_4_2015_AT_11_59_59_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestBeforeWithSameDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_4_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_4_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test
 	public void canTestBeforeWithLaterDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_4_2015_AT_12_00_01_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, before(AUG_4_2015_AT_12_00_01_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestBeforeWithEarlierDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, before(2015, AUGUST, 4, 11, 59, 59, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, before(2015, AUGUST, 4, 11, 59, 59, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestBeforeWithSameDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, before(2015, AUGUST, 4, 12, 0, 0, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, before(2015, AUGUST, 4, 12, 0, 0, TZ));
 	}
 
 	@Test
 	public void canTestBeforeWithLaterDDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, before(2015, AUGUST, 4, 12, 0, 1, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, before(2015, AUGUST, 4, 12, 0, 1, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameDayWithEarlierLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameDay(AUG_3_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameDay(AUG_3_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestSameDayWithSameLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameDay(AUG_4_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameDay(AUG_4_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameDayWithLaterLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameDay(AUG_5_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameDay(AUG_5_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameDayWithEarlierDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameDay(AUG_3_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameDay(AUG_3_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test
 	public void canTestSameDayWithSameDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameDay(AUG_4_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameDay(AUG_4_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameDayWithLaterDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameDay(AUG_5_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameDay(AUG_5_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameDayWithEarlierDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameDay(2015, AUGUST, 3, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameDay(2015, AUGUST, 3, TZ));
 	}
 
 	@Test
 	public void canTestSameDayWithSameDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameDay(2015, AUGUST, 4, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameDay(2015, AUGUST, 4, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameDayWithLaterDDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameDay(2015, AUGUST, 5, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameDay(2015, AUGUST, 5, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameInstantWithEarlierLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_3_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_3_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestSameInstantWithSameLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_4_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_4_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameInstantWithLaterLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_5_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_5_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameInstantWithEarlierDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_3_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_3_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test
 	public void canTestSameInstantWithSameDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_4_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_4_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameInstantWithLaterDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_5_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameInstant(AUG_5_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameOrBeforeWithEarlierLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_4_2015_AT_11_59_59_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_4_2015_AT_11_59_59_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestSameOrBeforeWithSameLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_4_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_4_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestSameOrBeforeWithLaterLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_4_2015_AT_12_00_01_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_4_2015_AT_12_00_01_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameOrBeforeWithEarlierDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_4_2015_AT_11_59_59_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_4_2015_AT_11_59_59_AS_DATE, TZ));
 	}
 
 	@Test
 	public void canTestSameOrBeforeWithSameDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_4_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_4_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test
 	public void canTestSameOrBeforeWithLaterDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_4_2015_AT_12_00_01_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(AUG_4_2015_AT_12_00_01_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameOrBeforeWithEarlierDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(2015, AUGUST, 3, 12, 0, 0, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(2015, AUGUST, 3, 12, 0, 0, TZ));
 	}
 
 	@Test
 	public void canTestSameOrBeforeWithSameDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(2015, AUGUST, 4, 12, 0, 0, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(2015, AUGUST, 4, 12, 0, 0, TZ));
 	}
 
 	@Test
 	public void canTestSameOrBeforeWithLaterDDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(2015, AUGUST, 5, 12, 0, 0, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrBefore(2015, AUGUST, 5, 12, 0, 0, TZ));
 	}
 
 	@Test
 	public void canTestSameOrAfterWithEarlierLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_4_2015_AT_11_59_59_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_4_2015_AT_11_59_59_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestSameOrAfterWithSameLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_4_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_4_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameOrAfterWithLaterLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_4_2015_AT_12_00_01_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_4_2015_AT_12_00_01_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestSameOrAfterWithEarlierDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_4_2015_AT_11_59_59_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_4_2015_AT_11_59_59_AS_DATE, TZ));
 	}
 
 	@Test
 	public void canTestSameOrAfterWithSameDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_4_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_4_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameOrAfterWithLaterDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_4_2015_AT_12_00_01_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(AUG_4_2015_AT_12_00_01_AS_DATE, TZ));
 	}
 
 	@Test
 	public void canTestSameOrAfterWithEarlierDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(2015, AUGUST, 4, 11, 59, 59, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(2015, AUGUST, 4, 11, 59, 59, TZ));
 	}
 
 	@Test
 	public void canTestSameOrAfterWithSameDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(2015, AUGUST, 4, 12, 0, 0, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(2015, AUGUST, 4, 12, 0, 0, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameOrAfterWithLaterDDMY() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(2015, AUGUST, 4, 12, 0, 1, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameOrAfter(2015, AUGUST, 4, 12, 0, 1, TZ));
 	}
 
 	@Test
 	public void canTestSameMonthOfYearWithSameLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(AUG_4_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(AUG_4_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestSameMonthOfYearWithDifferentLocalDateTimeSameMonth() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(AUG_3_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(AUG_3_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestSameMonthOfYearWithDifferentLocalDateTimeSameMonthDifferentYear() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(AUG_4_2016_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(AUG_4_2016_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameMonthOfYearWithDifferentLocalDateTimeMonth() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(SEP_4_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(SEP_4_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestSameMonthOfYearWithSameDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(AUG_4_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(AUG_4_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test
 	public void canTestSameMonthOfYearWithDifferentDateSameMonth() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(AUG_5_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(AUG_5_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test
 	public void canTestSameMonthOfYearWithDifferentDateSameMonthDifferentYear() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(AUG_4_2016_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(AUG_4_2016_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameMonthOfYearWithDifferentDateMonth() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(SEP_4_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameMonthOfYear(SEP_4_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test
 	public void canTestSameYearWithSameLocalDateTime() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameYear(AUG_4_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameYear(AUG_4_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestSameYearWithDifferentLocalDateTimeSameYear() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameYear(AUG_3_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameYear(AUG_3_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameYearWithDifferentLocalDateTimeDifferentYear() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameYear(AUG_4_2016_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameYear(AUG_4_2016_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestSameYearWithSameDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameYear(AUG_4_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameYear(AUG_4_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test
 	public void canTestSameYearWithDifferentDateSameYear() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameYear(AUG_5_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameYear(AUG_5_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameYearWithDifferentDateSameDifferentYear() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameYear(AUG_4_2016_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameYear(AUG_4_2016_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test
 	public void canTestWithinIntervalLocalDateTime() {
-		assertThat(
-				AUG_3_2015_AT_12_00_00,
-					within(1, ChronoUnit.DAYS, AUG_4_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_3_2015_AT_12_00_00, within(1, ChronoUnit.DAYS, AUG_4_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestWithinOutsideIntervalLocalDateTime() {
-		assertThat(
-				AUG_3_2015_AT_12_00_00,
-					within(1, ChronoUnit.DAYS, AUG_5_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_3_2015_AT_12_00_00, within(1, ChronoUnit.DAYS, AUG_5_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestWithinIntervalDate() {
-		assertThat(
-				AUG_3_2015_AT_12_00_00,
-					within(1, ChronoUnit.DAYS, AUG_4_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_3_2015_AT_12_00_00, within(1, ChronoUnit.DAYS, AUG_4_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestWithinOutsideIntervalDate() {
-		assertThat(
-				AUG_3_2015_AT_12_00_00,
-					within(1, ChronoUnit.DAYS, AUG_5_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_3_2015_AT_12_00_00, within(1, ChronoUnit.DAYS, AUG_5_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test
 	public void canTestWithinIntervalDMY() {
-		assertThat(
-				AUG_3_2015_AT_12_00_00,
-					within(1, ChronoUnit.DAYS, 2015, AUGUST, 4, 12, 0, 0, ZoneId.systemDefault()));
+		assertThat(AUG_3_2015_AT_12_00_00, within(1, ChronoUnit.DAYS, 2015, AUGUST, 4, 12, 0, 0, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestWithinOutsideIntervalDMY() {
-		assertThat(
-				AUG_3_2015_AT_12_00_00,
-					within(1, ChronoUnit.DAYS, 2015, AUGUST, 5, 12, 0, 0, ZoneId.systemDefault()));
+		assertThat(AUG_3_2015_AT_12_00_00, within(1, ChronoUnit.DAYS, 2015, AUGUST, 5, 12, 0, 0, TZ));
 	}
 
 	@Test
 	public void canTestWithinTimeIntervalLocalDateTime() {
-		assertThat(
-				AUG_4_2015_AT_12_00_00,
-					within(1, ChronoUnit.SECONDS, AUG_4_2015_AT_12_00_01_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, within(1, ChronoUnit.SECONDS, AUG_4_2015_AT_12_00_01_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestWithinOutsideTimeIntervalLocalDateTime() {
-		assertThat(
-				AUG_4_2015_AT_11_59_59,
-					within(1, ChronoUnit.SECONDS, AUG_4_2015_AT_12_00_01_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_11_59_59, within(1, ChronoUnit.SECONDS, AUG_4_2015_AT_12_00_01_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestWithinTimeIntervalDate() {
-		assertThat(
-				AUG_4_2015_AT_12_00_00,
-					within(1, ChronoUnit.SECONDS, AUG_4_2015_AT_12_00_01_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, within(1, ChronoUnit.SECONDS, AUG_4_2015_AT_12_00_01_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestWithinOutsideTimeIntervalDate() {
-		assertThat(
-				AUG_4_2015_AT_11_59_59,
-					within(1, ChronoUnit.SECONDS, AUG_4_2015_AT_12_00_01_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_11_59_59, within(1, ChronoUnit.SECONDS, AUG_4_2015_AT_12_00_01_AS_DATE, TZ));
 	}
 
 	@Test
 	public void canTestWithinTimeIntervalDMY() {
-		assertThat(
-				AUG_4_2015_AT_12_00_00,
-					within(1, ChronoUnit.SECONDS, 2015, AUGUST, 4, 12, 0, 1, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, within(1, ChronoUnit.SECONDS, 2015, AUGUST, 4, 12, 0, 1, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestWithinOutsideTimeIntervalDMY() {
-		assertThat(
-				AUG_4_2015_AT_12_00_00,
-					within(1, ChronoUnit.SECONDS, 2015, AUGUST, 4, 12, 0, 2, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, within(1, ChronoUnit.SECONDS, 2015, AUGUST, 4, 12, 0, 2, TZ));
 	}
 
 	@Test
@@ -976,22 +835,22 @@ public class ZonedDateTimeMatchersTest {
 
 	@Test
 	public void canTestSameDayOfMonth() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameDayOfMonth(AUG_4_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameDayOfMonth(AUG_4_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestNotSameDayOfMonth() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameDayOfMonth(AUG_5_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameDayOfMonth(AUG_5_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestSameDayOfMonthAsDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameDayOfMonth(AUG_4_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameDayOfMonth(AUG_4_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestNotSameDayOfMonthAsDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameDayOfMonth(AUG_5_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameDayOfMonth(AUG_5_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test
@@ -1006,22 +865,22 @@ public class ZonedDateTimeMatchersTest {
 
 	@Test
 	public void canTestSameHourOfDay() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameHourOfDay(AUG_4_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameHourOfDay(AUG_4_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestNotSameHourOfDay() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameHourOfDay(AUG_4_2015_AT_11_59_59_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameHourOfDay(AUG_4_2015_AT_11_59_59_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestSameHourOfDayAsDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameHourOfDay(AUG_4_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameHourOfDay(AUG_4_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestNotSameHourOfDayAsDate() {
-		assertThat(AUG_4_2015_AT_12_00_00, sameHourOfDay(AUG_4_2015_AT_11_59_59_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_12_00_00, sameHourOfDay(AUG_4_2015_AT_11_59_59_AS_DATE, TZ));
 	}
 
 	@Test
@@ -1036,22 +895,22 @@ public class ZonedDateTimeMatchersTest {
 
 	@Test
 	public void canTestSameMinuteOfHour() {
-		assertThat(AUG_4_2015_AT_11_59_59, sameMinuteOfHour(AUG_4_2015_AT_11_59_59_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_11_59_59, sameMinuteOfHour(AUG_4_2015_AT_11_59_59_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestNotSameMinuteOfHour() {
-		assertThat(AUG_4_2015_AT_11_59_59, sameMinuteOfHour(AUG_4_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_11_59_59, sameMinuteOfHour(AUG_4_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestSameMinuteOfHourAsDate() {
-		assertThat(AUG_4_2015_AT_11_59_59, sameMinuteOfHour(AUG_4_2015_AT_11_59_59_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_11_59_59, sameMinuteOfHour(AUG_4_2015_AT_11_59_59_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestNotSameMinuteOfHourAsDate() {
-		assertThat(AUG_4_2015_AT_11_59_59, sameMinuteOfHour(AUG_4_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_11_59_59, sameMinuteOfHour(AUG_4_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	@Test
@@ -1066,22 +925,22 @@ public class ZonedDateTimeMatchersTest {
 
 	@Test
 	public void canTestSameSecondOfMinute() {
-		assertThat(AUG_4_2015_AT_11_59_59, sameSecondOfMinute(AUG_4_2015_AT_11_59_59_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_11_59_59, sameSecondOfMinute(AUG_4_2015_AT_11_59_59_AS_LDT, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestNotSameSecondOfMinute() {
-		assertThat(AUG_4_2015_AT_11_59_59, sameSecondOfMinute(AUG_4_2015_AT_12_00_00_AS_LDT, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_11_59_59, sameSecondOfMinute(AUG_4_2015_AT_12_00_00_AS_LDT, TZ));
 	}
 
 	@Test
 	public void canTestSameSecondOfMinuteAsDate() {
-		assertThat(AUG_4_2015_AT_11_59_59, sameSecondOfMinute(AUG_4_2015_AT_11_59_59_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_11_59_59, sameSecondOfMinute(AUG_4_2015_AT_11_59_59_AS_DATE, TZ));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestNotSameSecondOfMinuteAsDate() {
-		assertThat(AUG_4_2015_AT_11_59_59, sameSecondOfMinute(AUG_4_2015_AT_12_00_00_AS_DATE, ZoneId.systemDefault()));
+		assertThat(AUG_4_2015_AT_11_59_59, sameSecondOfMinute(AUG_4_2015_AT_12_00_00_AS_DATE, TZ));
 	}
 
 	private ZonedDateTime yesterday() {
