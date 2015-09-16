@@ -15,21 +15,21 @@ public class IsLeapYearTest {
 
 	@Test
 	public void canMatch2012AsLeapYear() {
-		assertThat(Dates.JAN_1_2012_11AM_UTC_AS_DATE, isLeapYear());
+		assertThat(Dates.JAN_01_2012_11AM_AS_DATE, isLeapYear());
 	}
 
 	@Test
 	public void canMatch2000AsLeapYear() {
-		assertThat(Dates.JAN_1_2000_11AM_UTC_AS_DATE, isLeapYear());
+		assertThat(Dates.JAN_01_2000_11AM_AS_DATE, isLeapYear());
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatch2013AsNotALeapYear() {
-		assertThat(Dates.JAN_1ST_2013_11_AM, isLeapYear());
+		assertThat(Dates.JAN_01_2013_11AM_AS_DATE, isLeapYear());
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatch2100AsNotALeapYear() {
-		assertThat(Dates.JAN_1ST_2100_11_AM, isLeapYear());
+		assertThat(Dates.JAN_01_2100_11_AM_AS_DATE, isLeapYear());
 	}
 }

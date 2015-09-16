@@ -15,22 +15,22 @@ public class IsSameHourTest {
 
 	@Test
 	public void canMatchTheSameHour() {
-		assertThat(Dates.JAN_1_2012_11AM_UTC_AS_DATE, sameHourOfDay(Dates.JAN_2ND_2012_11_AM));
+		assertThat(Dates.JAN_01_2012_11AM_AS_DATE, sameHourOfDay(Dates.JAN_02_2012_11AM_AS_DATE));
 	}
 
 	@Test
 	public void canMatchTheSameHourAsInt() {
-		assertThat(Dates.JAN_1_2012_11AM_UTC_AS_DATE, sameHourOfDay(11));
+		assertThat(Dates.JAN_01_2012_11AM_AS_DATE, sameHourOfDay(11));
 	}
 
 	@Test
 	public void canMatchDifferentHour() {
-		assertThat(Dates.JAN_1_2012_11AM_UTC_AS_DATE, not(sameHourOfDay(Dates.JAN_T_2012_11PM_UTC_AS_DATE)));
+		assertThat(Dates.JAN_01_2012_11AM_AS_DATE, not(sameHourOfDay(Dates.JAN_01_2012_11PM_AS_DATE)));
 	}
 
 	@Test
 	public void canDetectDifferentHourAsInt() {
-		assertThat(Dates.JAN_1_2012_11AM_UTC_AS_DATE, not(sameHourOfDay(12)));
+		assertThat(Dates.JAN_01_2012_11AM_AS_DATE, not(sameHourOfDay(12)));
 	}
 
 }

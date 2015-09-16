@@ -16,141 +16,141 @@ public class IsSameDayOfWeekTest {
 
 	@Test
 	public void canMatchTheSameDayOfTheWeekVsDate() {
-		assertThat(JAN_1_2012_11AM_UTC_AS_DATE, sameDayOfWeek(JAN_8TH_2012_11_AM));
+		assertThat(JAN_01_2012_11AM_AS_DATE, sameDayOfWeek(JAN_08_2012_11AM_AS_DATE));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatchDifferentDayOfTheWeekVsDate() {
-		assertThat(JAN_1_2012_11AM_UTC_AS_DATE, sameDayOfWeek(JAN_2ND_2012_11_AM));
+		assertThat(JAN_01_2012_11AM_AS_DATE, sameDayOfWeek(JAN_02_2012_11AM_AS_DATE));
 	}
 
 	@Test
 	public void canMatchTheSameWeekday() {
-		assertThat(JAN_1_2012_11AM_UTC_AS_DATE, sameDayOfWeek(Weekdays.SUNDAY));
+		assertThat(JAN_01_2012_11AM_AS_DATE, sameDayOfWeek(Weekdays.SUNDAY));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatchDifferentWeekday() {
-		assertThat(JAN_1_2012_11AM_UTC_AS_DATE, sameDayOfWeek(Weekdays.SATURDAY));
+		assertThat(JAN_01_2012_11AM_AS_DATE, sameDayOfWeek(Weekdays.SATURDAY));
 	}
 
 	@Test
 	public void canMatchSaturday() {
-		assertThat(JAN_7TH_2012_11_AM, isSaturday());
+		assertThat(JAN_07_2012_11AM_AS_DATE, isSaturday());
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatchNotSaturday() {
-		assertThat(JAN_1_2012_11AM_UTC_AS_DATE, isSaturday());
+		assertThat(JAN_01_2012_11AM_AS_DATE, isSaturday());
 	}
 
 	@Test
 	public void canMatchSunday() {
-		assertThat(JAN_1_2012_11AM_UTC_AS_DATE, isSunday());
+		assertThat(JAN_01_2012_11AM_AS_DATE, isSunday());
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatchNotSunday() {
-		assertThat(JAN_2ND_2012_11_AM, isSunday());
+		assertThat(JAN_02_2012_11AM_AS_DATE, isSunday());
 	}
 
 	@Test
 	public void canMatchWeekend() {
-		assertThat(JAN_1_2012_11AM_UTC_AS_DATE, isWeekend());
-		assertThat(JAN_7TH_2012_11_AM, isWeekend());
+		assertThat(JAN_01_2012_11AM_AS_DATE, isWeekend());
+		assertThat(JAN_07_2012_11AM_AS_DATE, isWeekend());
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatchMondayIsNotWeekend() {
-		assertThat(JAN_2ND_2012_11_AM, isWeekend());
+		assertThat(JAN_02_2012_11AM_AS_DATE, isWeekend());
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatchTuesdayIsNotWeekend() {
-		assertThat(JAN_3RD_2012_11_AM, isWeekend());
+		assertThat(JAN_03_2012_11AM_AS_DATE, isWeekend());
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatchWednesdayIsNotWeekend() {
-		assertThat(JAN_4TH_2012_11_AM, isWeekend());
+		assertThat(JAN_04_2012_11AM_AS_DATE, isWeekend());
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatchThursdayIsNotWeekend() {
-		assertThat(JAN_5TH_2012_11_AM, isWeekend());
+		assertThat(JAN_05_2012_11AM_AS_DATE, isWeekend());
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatchFridayIsNotWeekend() {
-		assertThat(JAN_6TH_2012_11_AM, isWeekend());
+		assertThat(JAN_06_2012_11AM_AS_DATE, isWeekend());
 	}
 
 	@Test
 	public void canMatchWeekday() {
-		assertThat(JAN_2ND_2012_11_AM, isWeekday());
-		assertThat(JAN_3RD_2012_11_AM, isWeekday());
-		assertThat(JAN_4TH_2012_11_AM, isWeekday());
-		assertThat(JAN_5TH_2012_11_AM, isWeekday());
-		assertThat(JAN_6TH_2012_11_AM, isWeekday());
+		assertThat(JAN_02_2012_11AM_AS_DATE, isWeekday());
+		assertThat(JAN_03_2012_11AM_AS_DATE, isWeekday());
+		assertThat(JAN_04_2012_11AM_AS_DATE, isWeekday());
+		assertThat(JAN_05_2012_11AM_AS_DATE, isWeekday());
+		assertThat(JAN_06_2012_11AM_AS_DATE, isWeekday());
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatchSaturdayIsNotWeekday() {
-		assertThat(JAN_7TH_2012_11_AM, isWeekday());
+		assertThat(JAN_07_2012_11AM_AS_DATE, isWeekday());
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatchSundayIsNotWeekday() {
-		assertThat(JAN_1_2012_11AM_UTC_AS_DATE, isWeekday());
+		assertThat(JAN_01_2012_11AM_AS_DATE, isWeekday());
 	}
 
 	@Test
 	public void canMatchMonday() {
-		assertThat(JAN_2ND_2012_11_AM, isMonday());
+		assertThat(JAN_02_2012_11AM_AS_DATE, isMonday());
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatchNotMonday() {
-		assertThat(JAN_3RD_2012_11_AM, isMonday());
+		assertThat(JAN_03_2012_11AM_AS_DATE, isMonday());
 	}
 
 	@Test
 	public void canMatchTuesday() {
-		assertThat(JAN_3RD_2012_11_AM, isTuesday());
+		assertThat(JAN_03_2012_11AM_AS_DATE, isTuesday());
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatchNotTuesday() {
-		assertThat(JAN_4TH_2012_11_AM, isTuesday());
+		assertThat(JAN_04_2012_11AM_AS_DATE, isTuesday());
 	}
 
 	@Test
 	public void canMatchWednesday() {
-		assertThat(JAN_4TH_2012_11_AM, isWednesday());
+		assertThat(JAN_04_2012_11AM_AS_DATE, isWednesday());
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatchNotWednesday() {
-		assertThat(JAN_5TH_2012_11_AM, isWednesday());
+		assertThat(JAN_05_2012_11AM_AS_DATE, isWednesday());
 	}
 
 	@Test
 	public void canMatchThursday() {
-		assertThat(JAN_5TH_2012_11_AM, isThursday());
+		assertThat(JAN_05_2012_11AM_AS_DATE, isThursday());
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatchNotThursday() {
-		assertThat(JAN_6TH_2012_11_AM, isThursday());
+		assertThat(JAN_06_2012_11AM_AS_DATE, isThursday());
 	}
 
 	@Test
 	public void canMatchFriday() {
-		assertThat(JAN_6TH_2012_11_AM, isFriday());
+		assertThat(JAN_06_2012_11AM_AS_DATE, isFriday());
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatchNotFriday() {
-		assertThat(JAN_7TH_2012_11_AM, isFriday());
+		assertThat(JAN_07_2012_11AM_AS_DATE, isFriday());
 	}
 }
