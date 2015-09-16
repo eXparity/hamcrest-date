@@ -3,7 +3,7 @@ package org.exparity.hamcrest.date;
 import static java.util.Calendar.*;
 import static org.exparity.hamcrest.date.DateMatchers.*;
 import static org.exparity.hamcrest.date.testutils.DateMatcherTestUtils.*;
-import static org.exparity.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_AM;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_1_2012_11AM_UTC_AS_DATE;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.core.IsNot.*;
 import java.util.Date;
@@ -30,11 +30,11 @@ public class IsSameMinuteTest {
 
 	@Test
 	public void canCompareTheSameMinuteInt() {
-		assertThat(JAN_1ST_2012_11_AM, sameMinuteOfHour(0));
+		assertThat(JAN_1_2012_11AM_UTC_AS_DATE, sameMinuteOfHour(0));
 	}
 
 	@Test
 	public void canDetectDifferentMinuteInt() {
-		assertThat(JAN_1ST_2012_11_AM, not(sameMinuteOfHour(1)));
+		assertThat(JAN_1_2012_11AM_UTC_AS_DATE, not(sameMinuteOfHour(1)));
 	}
 }

@@ -3,54 +3,23 @@ package org.exparity.hamcrest.date;
 import static java.time.DayOfWeek.MONDAY;
 import static java.time.Month.*;
 import static org.exparity.hamcrest.date.LocalDateMatchers.*;
+import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.UnsupportedTemporalTypeException;
-import java.util.Date;
 
-import org.exparity.dates.en.FluentDate;
-import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.junit.Test;
 
 /**
  * Unit Test for {@link LocalDateMatchers}
  * 
  * @author Stewart Bissett
- */ 
+ */
 public class LocalDateMatchersTest {
-
-	private static final LocalDate JAN_1_2015 = LocalDate.of(2015, Month.JANUARY, 1);
-	private static final LocalDate FEB_1_2015 = LocalDate.of(2015, Month.FEBRUARY, 1);
-	private static final LocalDate MAR_1_2015 = LocalDate.of(2015, Month.MARCH, 1);
-	private static final LocalDate APR_1_2015 = LocalDate.of(2015, Month.APRIL, 1);
-	private static final LocalDate MAY_1_2015 = LocalDate.of(2015, Month.MAY, 1);
-	private static final LocalDate JUN_1_2015 = LocalDate.of(2015, Month.JUNE, 1);
-	private static final LocalDate JUL_1_2015 = LocalDate.of(2015, Month.JULY, 1);
-	private static final LocalDate AUG_1_2015 = LocalDate.of(2015, Month.AUGUST, 1);
-	private static final LocalDate AUG_3_2015 = LocalDate.of(2015, Month.AUGUST, 3);
-	private static final LocalDate AUG_4_2015 = LocalDate.of(2015, Month.AUGUST, 4);
-	private static final LocalDate AUG_5_2015 = LocalDate.of(2015, Month.AUGUST, 5);
-	private static final LocalDate AUG_6_2015 = LocalDate.of(2015, Month.AUGUST, 6);
-	private static final LocalDate AUG_7_2015 = LocalDate.of(2015, Month.AUGUST, 7);
-	private static final LocalDate AUG_8_2015 = LocalDate.of(2015, Month.AUGUST, 8);
-	private static final LocalDate AUG_9_2015 = LocalDate.of(2015, Month.AUGUST, 9);
-	private static final LocalDate AUG_31_2015 = LocalDate.of(2015, Month.AUGUST, 31);
-	private static final LocalDate SEP_4_2015 = LocalDate.of(2015, Month.SEPTEMBER, 4);
-	private static final LocalDate SEP_30_2015 = LocalDate.of(2015, Month.SEPTEMBER, 30);
-	private static final LocalDate OCT_1_2015 = LocalDate.of(2015, Month.OCTOBER, 1);
-	private static final LocalDate NOV_1_2015 = LocalDate.of(2015, Month.NOVEMBER, 1);
-	private static final LocalDate DEC_1_2015 = LocalDate.of(2015, Month.DECEMBER, 1);
-	private static final LocalDate AUG_4_2016 = LocalDate.of(2016, Month.AUGUST, 4);
-	private static final Date AUG_3_2015_AS_DATE = FluentDate.AUG(3, 2015);
-	private static final Date AUG_4_2015_AS_DATE = FluentDate.AUG(4, 2015);
-	private static final Date AUG_5_2015_AS_DATE = FluentDate.AUG(5, 2015);
-	private static final Date SEP_4_2015_AS_DATE = FluentDate.SEP(4, 2015);
-	private static final Date AUG_4_2016_AS_DATE = FluentDate.AUG(4, 2016);
 
 	@Test
 	public void canTestAfterWithEarlierLocalDate() {
@@ -396,7 +365,7 @@ public class LocalDateMatchersTest {
 	public void canTestWithinOutsideIntervalDMY() {
 		assertThat(AUG_3_2015, within(1, ChronoUnit.DAYS, 2015, AUGUST, 5));
 	}
-	
+
 	@Test(expected = UnsupportedTemporalTypeException.class)
 	public void canTestWithinTimeIntervalLocalDateTime() {
 		assertThat(AUG_4_2015, within(1, ChronoUnit.SECONDS, AUG_4_2015));
@@ -756,7 +725,7 @@ public class LocalDateMatchersTest {
 	public void canTestIsNotLeapYear() {
 		assertThat(AUG_4_2015, isLeapYear());
 	}
-	
+
 	@Test
 	public void canTestIsDayOfMonth() {
 		assertThat(AUG_4_2015, isDayOfMonth(4));
@@ -786,7 +755,6 @@ public class LocalDateMatchersTest {
 	public void canTestNotSameDayOfMonthAsDate() {
 		assertThat(AUG_4_2015, sameDayOfMonth(AUG_5_2015_AS_DATE));
 	}
-
 
 	private LocalDate yesterday() {
 		return LocalDate.now().minusDays(1);

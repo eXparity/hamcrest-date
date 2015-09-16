@@ -3,8 +3,8 @@ package org.exparity.hamcrest.date;
 
 import org.junit.Test;
 import static org.exparity.hamcrest.date.DateMatchers.before;
-import static org.exparity.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_AM_GMT;
-import static org.exparity.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_AM_PST;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_1_2012_11AM_GMT_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_1_2012_11AM_PST_AS_DATE;
 import static org.exparity.hamcrest.date.testutils.Dates.JUN_15TH_2012_11_AM;
 import static org.exparity.hamcrest.date.testutils.Dates.JUN_15TH_2012_11_PM;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -33,7 +33,7 @@ public class IsBeforeTest {
 
 	@Test(expected = AssertionError.class)
 	public void canCompareIsNotBeforeAcrossTimeZones() {
-		assertThat(JAN_1ST_2012_11_AM_PST, before(JAN_1ST_2012_11_AM_GMT));
+		assertThat(JAN_1_2012_11AM_PST_AS_DATE, before(JAN_1_2012_11AM_GMT_AS_DATE));
 	}
 
 	@Test(expected = AssertionError.class)

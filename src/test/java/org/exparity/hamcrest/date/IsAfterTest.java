@@ -3,7 +3,7 @@ package org.exparity.hamcrest.date;
 import org.exparity.hamcrest.date.testutils.Dates;
 import org.junit.Test;
 import static org.exparity.hamcrest.date.DateMatchers.after;
-import static org.exparity.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_AM_GMT;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_1_2012_11AM_GMT_AS_DATE;
 import static org.exparity.hamcrest.date.testutils.Dates.JUN_15TH_2012_11_AM;
 import static org.exparity.hamcrest.date.testutils.Dates.JUN_15TH_2012_11_PM;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -32,7 +32,7 @@ public class IsAfterTest {
 
 	@Test
 	public void canCompareIsAfterAcrossTimeZones() {
-		assertThat(Dates.JAN_1ST_2012_11_AM_PST, after(JAN_1ST_2012_11_AM_GMT));
+		assertThat(Dates.JAN_1_2012_11AM_PST_AS_DATE, after(JAN_1_2012_11AM_GMT_AS_DATE));
 	}
 
 	@Test

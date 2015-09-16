@@ -3,7 +3,7 @@ package org.exparity.hamcrest.date;
 import static java.util.Calendar.*;
 import static org.exparity.hamcrest.date.DateMatchers.*;
 import static org.exparity.hamcrest.date.testutils.DateMatcherTestUtils.*;
-import static org.exparity.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_AM;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_1_2012_11AM_UTC_AS_DATE;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.core.IsNot.*;
 import java.util.Date;
@@ -30,12 +30,12 @@ public class IsSameSecondTest {
 
 	@Test
 	public void canCompareTheSameSecondInt() {
-		assertThat(JAN_1ST_2012_11_AM, sameSecondOfMinute(0));
+		assertThat(JAN_1_2012_11AM_UTC_AS_DATE, sameSecondOfMinute(0));
 	}
 
 	@Test
 	public void canDetectDifferentSecondInt() {
-		assertThat(JAN_1ST_2012_11_AM, not(sameSecondOfMinute(1)));
+		assertThat(JAN_1_2012_11AM_UTC_AS_DATE, not(sameSecondOfMinute(1)));
 	}
 
 }

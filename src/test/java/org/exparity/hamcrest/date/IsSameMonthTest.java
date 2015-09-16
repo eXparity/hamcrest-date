@@ -4,7 +4,7 @@ import org.exparity.hamcrest.date.Months;
 import org.exparity.hamcrest.date.testutils.Dates;
 import org.junit.Test;
 import static org.exparity.hamcrest.date.DateMatchers.*;
-import static org.exparity.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_AM;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_1_2012_11AM_UTC_AS_DATE;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNot.not;
 
@@ -17,27 +17,27 @@ public class IsSameMonthTest {
 
 	@Test
 	public void canMatchTheSameMonthOnDates() {
-		assertThat(Dates.JAN_1ST_2012_11_AM, sameMonthOfYear(Dates.JAN_2ND_2012_11_AM));
+		assertThat(Dates.JAN_1_2012_11AM_UTC_AS_DATE, sameMonthOfYear(Dates.JAN_2ND_2012_11_AM));
 	}
 
 	@Test
 	public void canMatchDifferentMonthsOnDates() {
-		assertThat(Dates.JAN_1ST_2012_11_AM, not(sameMonthOfYear(Dates.JUN_15TH_2012_11_AM)));
+		assertThat(Dates.JAN_1_2012_11AM_UTC_AS_DATE, not(sameMonthOfYear(Dates.JUN_15TH_2012_11_AM)));
 	}
 
 	@Test
 	public void canMatchTheSameMonth() {
-		assertThat(Dates.JAN_1ST_2012_11_AM, sameMonthOfYear(Months.JANUARY));
+		assertThat(Dates.JAN_1_2012_11AM_UTC_AS_DATE, sameMonthOfYear(Months.JANUARY));
 	}
 
 	@Test
 	public void canMatchDifferentMonth() {
-		assertThat(JAN_1ST_2012_11_AM, not(sameMonthOfYear(Months.FEBRUARY)));
+		assertThat(JAN_1_2012_11AM_UTC_AS_DATE, not(sameMonthOfYear(Months.FEBRUARY)));
 	}
 
 	@Test
 	public void canMatchJanuary() {
-		assertThat(Dates.JAN_1ST_2012_11_AM, isJanuary());
+		assertThat(Dates.JAN_1_2012_11AM_UTC_AS_DATE, isJanuary());
 	}
 
 	@Test

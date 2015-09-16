@@ -15,12 +15,12 @@ public class IsLeapYearTest {
 
 	@Test
 	public void canMatch2012AsLeapYear() {
-		assertThat(Dates.JAN_1ST_2012_11_AM, isLeapYear());
+		assertThat(Dates.JAN_1_2012_11AM_UTC_AS_DATE, isLeapYear());
 	}
 
 	@Test
 	public void canMatch2000AsLeapYear() {
-		assertThat(Dates.JAN_1ST_2000_11_AM, isLeapYear());
+		assertThat(Dates.JAN_1_2000_11AM_UTC_AS_DATE, isLeapYear());
 	}
 
 	@Test(expected = AssertionError.class)

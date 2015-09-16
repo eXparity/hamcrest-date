@@ -2,7 +2,7 @@ package org.exparity.hamcrest.date;
 
 import static org.exparity.hamcrest.date.DateMatchers.sameMillisecondOfSecond;
 import static org.exparity.hamcrest.date.testutils.DateMatcherTestUtils.addDateField;
-import static org.exparity.hamcrest.date.testutils.Dates.JAN_1ST_2012_11_AM;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_1_2012_11AM_UTC_AS_DATE;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNot.not;
 import java.util.Calendar;
@@ -30,12 +30,12 @@ public class IsSameMillsecondTest {
 
 	@Test
 	public void canCompareTheSameSecondInt() {
-		assertThat(JAN_1ST_2012_11_AM, sameMillisecondOfSecond(0));
+		assertThat(JAN_1_2012_11AM_UTC_AS_DATE, sameMillisecondOfSecond(0));
 	}
 
 	@Test
 	public void canDetectDifferentSecondInt() {
-		assertThat(JAN_1ST_2012_11_AM, not(sameMillisecondOfSecond(1)));
+		assertThat(JAN_1_2012_11AM_UTC_AS_DATE, not(sameMillisecondOfSecond(1)));
 	}
 
 }
