@@ -40,12 +40,12 @@ public class ZonedDateTimeMatchersTest {
 	// After / TimeZone
 	@Test(expected = AssertionError.class)
 	public void canTestAfterWithEarlierTimeZone() {
-		assertThat(AUG_04_2015_NOON_UTC, after(AUG_04_2015_NOON_MINUS_1));
+		assertThat(AUG_04_2015_NOON_UTC, after(AUG_04_2015_NOON_EST));
 	}
 
 	@Test
 	public void canTestAfterWithLaterTimeZone() {
-		assertThat(AUG_04_2015_NOON_UTC, after(AUG_04_2015_NOON_PLUS_1));
+		assertThat(AUG_04_2015_NOON_UTC, after(AUG_04_2015_NOON_CET));
 	}
 
 	// After / LocalDateTime
@@ -67,7 +67,7 @@ public class ZonedDateTimeMatchersTest {
 	// After / Date
 	@Test
 	public void canTestAfterWithEarlierDate() {
-		assertThat(AUG_04_2015_NOON_UTC, after(AUG_04_2015_115959_UTC_AS_DATE, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, after(AUG_04_2015_1159_UTC_AS_DATE, ZoneIds.UTC));
 	}
 
 	@Test(expected = AssertionError.class)
@@ -77,7 +77,7 @@ public class ZonedDateTimeMatchersTest {
 
 	@Test(expected = AssertionError.class)
 	public void canTestAfterWithLaterDate() {
-		assertThat(AUG_04_2015_NOON_UTC, after(AUG_04_2015_120001_UTC_AS_DATE, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, after(AUG_04_2015_1201_UTC_AS_DATE, ZoneIds.UTC));
 	}
 
 	// After / DayMonthYear
@@ -115,12 +115,12 @@ public class ZonedDateTimeMatchersTest {
 	// Before / TimeZone
 	@Test
 	public void canTestBeforeWithEarlierTimeZone() {
-		assertThat(AUG_04_2015_NOON_UTC, before(AUG_04_2015_NOON_MINUS_1));
+		assertThat(AUG_04_2015_NOON_UTC, before(AUG_04_2015_NOON_EST));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestBeforeWithLaterTimeZone() {
-		assertThat(AUG_04_2015_NOON_UTC, before(AUG_04_2015_NOON_PLUS_1));
+		assertThat(AUG_04_2015_NOON_UTC, before(AUG_04_2015_NOON_CET));
 	}
 
 	// Before / LocalDateTime
@@ -142,7 +142,7 @@ public class ZonedDateTimeMatchersTest {
 	// Before / Date
 	@Test(expected = AssertionError.class)
 	public void canTestBeforeWithEarlierDate() {
-		assertThat(AUG_04_2015_NOON_UTC, before(AUG_04_2015_115959_UTC_AS_DATE, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, before(AUG_04_2015_1159_UTC_AS_DATE, ZoneIds.UTC));
 	}
 
 	@Test(expected = AssertionError.class)
@@ -152,7 +152,7 @@ public class ZonedDateTimeMatchersTest {
 
 	@Test
 	public void canTestBeforeWithLaterDate() {
-		assertThat(AUG_04_2015_NOON_UTC, before(AUG_04_2015_120001_UTC_AS_DATE, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, before(AUG_04_2015_1201_UTC_AS_DATE, ZoneIds.UTC));
 	}
 
 	// Before / DayMonthYear
@@ -190,12 +190,12 @@ public class ZonedDateTimeMatchersTest {
 	// SameDay / TimeZone
 	@Test(expected = AssertionError.class)
 	public void canTestSameDayWithEarlierTimeZone() {
-		assertThat(AUG_04_2015_NOON_UTC, sameDay(AUG_03_2015_11PM_MINUS_1));
+		assertThat(AUG_04_2015_NOON_UTC, sameDay(AUG_03_2015_11PM_EST));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameDayWithLaterTimeZone() {
-		assertThat(AUG_04_2015_NOON_UTC, sameDay(AUG_05_2015_01AM_PLUS_1));
+		assertThat(AUG_04_2015_NOON_UTC, sameDay(AUG_05_2015_01AM_CET));
 	}
 
 	// SameDay / LocalDateTime
@@ -265,12 +265,12 @@ public class ZonedDateTimeMatchersTest {
 	// SameInstant / TimeZone
 	@Test(expected = AssertionError.class)
 	public void canTestSameInstantWithEarlierTimeZone() {
-		assertThat(AUG_04_2015_NOON_UTC, sameInstant(AUG_04_2015_NOON_MINUS_1));
+		assertThat(AUG_04_2015_NOON_UTC, sameInstant(AUG_04_2015_NOON_EST));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameInstantWithLaterTimeZone() {
-		assertThat(AUG_04_2015_NOON_UTC, sameInstant(AUG_04_2015_NOON_PLUS_1));
+		assertThat(AUG_04_2015_NOON_UTC, sameInstant(AUG_04_2015_NOON_CET));
 	}
 
 	// SameInstant / LocalDateTime
@@ -340,12 +340,12 @@ public class ZonedDateTimeMatchersTest {
 	// SameOrBefore / TimeZone
 	@Test
 	public void canTestSameOrBeforeWithEarlierTimeZone() {
-		assertThat(AUG_04_2015_NOON_UTC, sameOrBefore(AUG_04_2015_NOON_MINUS_1));
+		assertThat(AUG_04_2015_NOON_UTC, sameOrBefore(AUG_04_2015_NOON_EST));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameOrBeforeWithLaterTimeZone() {
-		assertThat(AUG_04_2015_NOON_UTC, sameOrBefore(AUG_04_2015_NOON_PLUS_1));
+		assertThat(AUG_04_2015_NOON_UTC, sameOrBefore(AUG_04_2015_NOON_CET));
 	}
 
 	// SameOrBefore / LocalDateTime
@@ -367,7 +367,7 @@ public class ZonedDateTimeMatchersTest {
 	// SameOrBefore / Date
 	@Test(expected = AssertionError.class)
 	public void canTestSameOrBeforeWithEarlierDate() {
-		assertThat(AUG_04_2015_NOON_UTC, sameOrBefore(AUG_04_2015_115959_UTC_AS_DATE, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, sameOrBefore(AUG_04_2015_1159_UTC_AS_DATE, ZoneIds.UTC));
 	}
 
 	@Test
@@ -377,7 +377,7 @@ public class ZonedDateTimeMatchersTest {
 
 	@Test
 	public void canTestSameOrBeforeWithLaterDate() {
-		assertThat(AUG_04_2015_NOON_UTC, sameOrBefore(AUG_04_2015_120001_UTC_AS_DATE, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, sameOrBefore(AUG_04_2015_1201_UTC_AS_DATE, ZoneIds.UTC));
 	}
 
 	// SameOrBefore / DayMonthYear
@@ -415,12 +415,12 @@ public class ZonedDateTimeMatchersTest {
 	// SameOrAfter / TimeZone
 	@Test(expected = AssertionError.class)
 	public void canTestSameOrAfterWithEarlierTimeZone() {
-		assertThat(AUG_04_2015_NOON_UTC, sameOrAfter(AUG_04_2015_NOON_MINUS_1));
+		assertThat(AUG_04_2015_NOON_UTC, sameOrAfter(AUG_04_2015_NOON_EST));
 	}
 
 	@Test
 	public void canTestSameOrAfterWithLaterTimeZone() {
-		assertThat(AUG_04_2015_NOON_UTC, sameOrAfter(AUG_04_2015_NOON_PLUS_1));
+		assertThat(AUG_04_2015_NOON_UTC, sameOrAfter(AUG_04_2015_NOON_CET));
 	}
 
 	// SameOrAfter / LocalDateTime
@@ -442,7 +442,7 @@ public class ZonedDateTimeMatchersTest {
 	// SameOrAfter / Date
 	@Test
 	public void canTestSameOrAfterWithEarlierDate() {
-		assertThat(AUG_04_2015_NOON_UTC, sameOrAfter(AUG_04_2015_115959_UTC_AS_DATE, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, sameOrAfter(AUG_04_2015_1159_UTC_AS_DATE, ZoneIds.UTC));
 	}
 
 	@Test
@@ -452,7 +452,7 @@ public class ZonedDateTimeMatchersTest {
 
 	@Test(expected = AssertionError.class)
 	public void canTestSameOrAfterWithLaterDate() {
-		assertThat(AUG_04_2015_NOON_UTC, sameOrAfter(AUG_04_2015_120001_UTC_AS_DATE, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, sameOrAfter(AUG_04_2015_1201_UTC_AS_DATE, ZoneIds.UTC));
 	}
 
 	// SameOrAfter / DayMonthYear
@@ -573,27 +573,27 @@ public class ZonedDateTimeMatchersTest {
 
 	@Test
 	public void canTestWithinTimeIntervalLocalDateTime() {
-		assertThat(AUG_04_2015_NOON_UTC, within(1, ChronoUnit.SECONDS, AUG_04_2015_1201, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, within(60, ChronoUnit.SECONDS, AUG_04_2015_1201, ZoneIds.UTC));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestWithinOutsideTimeIntervalLocalDateTime() {
-		assertThat(AUG_04_2015_11AM_UTC, within(1, ChronoUnit.SECONDS, AUG_04_2015_1201, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, within(1, ChronoUnit.SECONDS, AUG_04_2015_1201, ZoneIds.UTC));
 	}
 
 	@Test
 	public void canTestWithinTimeIntervalDate() {
-		assertThat(AUG_04_2015_NOON_UTC, within(1, ChronoUnit.SECONDS, AUG_04_2015_120001_UTC_AS_DATE, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, within(60, ChronoUnit.SECONDS, AUG_04_2015_1201_UTC_AS_DATE, ZoneIds.UTC));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestWithinOutsideTimeIntervalDate() {
-		assertThat(AUG_04_2015_11AM_UTC, within(1, ChronoUnit.SECONDS, AUG_04_2015_120001_UTC_AS_DATE, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, within(1, ChronoUnit.SECONDS, AUG_04_2015_1201_UTC_AS_DATE, ZoneIds.UTC));
 	}
 
 	@Test
 	public void canTestWithinTimeIntervalDMY() {
-		assertThat(AUG_04_2015_NOON_UTC, within(1, ChronoUnit.SECONDS, 2015, AUGUST, 4, 12, 0, 1, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, within(60, ChronoUnit.SECONDS, 2015, AUGUST, 4, 12, 0, 1, ZoneIds.UTC));
 	}
 
 	@Test(expected = AssertionError.class)
@@ -1013,7 +1013,7 @@ public class ZonedDateTimeMatchersTest {
 
 	@Test(expected = AssertionError.class)
 	public void canTestNotSameHourOfDayAsDate() {
-		assertThat(AUG_04_2015_NOON_UTC, sameHourOfDay(AUG_04_2015_115959_UTC_AS_DATE, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, sameHourOfDay(AUG_04_2015_1159_UTC_AS_DATE, ZoneIds.UTC));
 	}
 
 	@Test
@@ -1038,7 +1038,7 @@ public class ZonedDateTimeMatchersTest {
 
 	@Test
 	public void canTestSameMinuteOfHourAsDate() {
-		assertThat(AUG_04_2015_11AM_UTC, sameMinuteOfHour(AUG_04_2015_115959_UTC_AS_DATE, ZoneIds.UTC));
+		assertThat(AUG_04_2015_11AM_UTC, sameMinuteOfHour(AUG_04_2015_1159_UTC_AS_DATE, ZoneIds.UTC));
 	}
 
 	@Test(expected = AssertionError.class)
@@ -1048,32 +1048,32 @@ public class ZonedDateTimeMatchersTest {
 
 	@Test
 	public void canTestIsSecond() {
-		assertThat(AUG_04_2015_11AM_UTC, isSecond(59));
+		assertThat(AUG_04_2015_11AM_UTC, isSecond(0));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestIsNotSecond() {
-		assertThat(AUG_04_2015_11AM_UTC, isSecond(58));
+		assertThat(AUG_04_2015_11AM_UTC, isSecond(1));
 	}
 
 	@Test
 	public void canTestSameSecondOfMinute() {
-		assertThat(AUG_04_2015_11AM_UTC, sameSecondOfMinute(AUG_04_2015_1159, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, sameSecondOfMinute(AUG_04_2015_NOON, ZoneIds.UTC));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestNotSameSecondOfMinute() {
-		assertThat(AUG_04_2015_11AM_UTC, sameSecondOfMinute(AUG_04_2015_NOON, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, sameSecondOfMinute(AUG_04_2015_NOON.plusSeconds(1), ZoneIds.UTC));
 	}
 
 	@Test
 	public void canTestSameSecondOfMinuteAsDate() {
-		assertThat(AUG_04_2015_11AM_UTC, sameSecondOfMinute(AUG_04_2015_115959_UTC_AS_DATE, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, sameSecondOfMinute(AUG_04_2015_NOON_UTC_AS_DATE, ZoneIds.UTC));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canTestNotSameSecondOfMinuteAsDate() {
-		assertThat(AUG_04_2015_11AM_UTC, sameSecondOfMinute(AUG_04_2015_NOON_UTC_AS_DATE, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC.plusSeconds(1), sameSecondOfMinute(AUG_04_2015_NOON_UTC_AS_DATE, ZoneIds.UTC));
 	}
 
 	private ZonedDateTime yesterday() {

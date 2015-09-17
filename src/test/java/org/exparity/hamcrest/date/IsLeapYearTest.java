@@ -30,6 +30,6 @@ public class IsLeapYearTest {
 
 	@Test(expected = AssertionError.class)
 	public void canMatch2100AsNotALeapYear() {
-		assertThat(Dates.JAN_01_2100_11_AM_AS_DATE, isLeapYear());
+		assertThat(Dates.JAN_01_2100_11AM_AS_DATE, isLeapYear());
 	}
 }

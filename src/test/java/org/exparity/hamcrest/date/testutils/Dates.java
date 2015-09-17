@@ -26,9 +26,7 @@ public abstract class Dates {
 	// Date
 	public static final Date JAN_01_2000_11AM_AS_DATE = JAN(1, 2000).at(11);
 	public static final Date JAN_01_2012_11AM_AS_DATE = JAN(1, 2012).at(11);
-	public static final Date JAN_01_2012_11AM_GMT_AS_DATE = JAN(1, 2012).at(11, GMT);
 	public static final Date JAN_01_2012_11PM_AS_DATE = JAN(1, 2012).at(23);
-	public static final Date JAN_01_2012_11AM_PST_AS_DATE = JAN(1, 2012).at(11, PST);
 	public static final Date JAN_02_2012_11AM_AS_DATE = JAN(2, 2012).at(11);
 	public static final Date JAN_03_2012_11AM_AS_DATE = JAN(3, 2012).at(11);
 	public static final Date JAN_04_2012_11AM_AS_DATE = JAN(4, 2012).at(11);
@@ -51,26 +49,29 @@ public abstract class Dates {
 	public static final Date NOV_01_2012_11AM_AS_DATE = NOV(1, 2012).at(11);
 	public static final Date DEC_01_2012_11AM_AS_DATE = DEC(1, 2012).at(11);
 	public static final Date JAN_01_2013_11AM_AS_DATE = JAN(1, 2013).at(11);
-	public static final Date JAN_01_2100_11_AM_AS_DATE = JAN(1, 2100).at(11);
-	public static final Date AUG_03_2015_NOON_AS_DATE = AUG(3, 2015).at(12, 0, 0);
-	public static final Date AUG_03_2015_NOON_UTC_AS_DATE = AUG(3, 2015).at(12, 0, 0, UTC_AS_TZ);
-	public static final Date AUG_04_2015_115959_AS_DATE = AUG(4, 2015).at(11, 59, 59);
-	public static final Date AUG_04_2015_115959_UTC_AS_DATE = AUG(4, 2015).at(11, 59, 59, UTC_AS_TZ);
+	public static final Date JAN_01_2100_11AM_AS_DATE = JAN(1, 2100).at(11);
+	public static final Date AUG_03_2015_NOON_AS_DATE = AUG(3, 2015).at(12);
+	public static final Date AUG_04_2015_1159_AS_DATE = AUG(4, 2015).at(11, 59);
 	public static final Date AUG_04_2015_NOON_AS_DATE = AUG(4, 2015).at(12);
-	public static final Date AUG_04_2015_NOON_UTC_AS_DATE = AUG(4, 2015).at(12, UTC_AS_TZ);
-	public static final Date AUG_04_2015_120001_AS_DATE = AUG(4, 2015).at(12, 0, 1);
-	public static final Date AUG_04_2015_120001_UTC_AS_DATE = AUG(4, 2015).at(12, 0, 1, UTC_AS_TZ);
+	public static final Date AUG_04_2015_1201_AS_DATE = AUG(4, 2015).at(12, 1);
 	public static final Date AUG_05_2015_NOON_AS_DATE = AUG(5, 2015).at(12);
-	public static final Date AUG_05_2015_NOON_UTC_AS_DATE = AUG(5, 2015).at(12, UTC_AS_TZ);
 	public static final Date SEP_04_2015_NOON_AS_DATE = SEP(4, 2015).at(12);
-	public static final Date SEP_04_2015_NOON_UTC_AS_DATE = SEP(4, 2015).at(12, UTC_AS_TZ);
 	public static final Date AUG_04_2016_NOON_AS_DATE = AUG(4, 2016).at(12);
-	public static final Date AUG_04_2016_NOON_UTC_AS_DATE = AUG(4, 2016).at(12, UTC_AS_TZ);
 	public static final Date AUG_03_2015_AS_DATE = FluentDate.AUG(3, 2015);
 	public static final Date AUG_04_2015_AS_DATE = FluentDate.AUG(4, 2015);
 	public static final Date AUG_05_2015_AS_DATE = FluentDate.AUG(5, 2015);
 	public static final Date SEP_04_2015_AS_DATE = FluentDate.SEP(4, 2015);
 	public static final Date AUG_04_2016_AS_DATE = FluentDate.AUG(4, 2016);
+
+	public static final Date JAN_01_2012_11AM_GMT_AS_DATE = JAN(1, 2012).at(11, GMT_AS_TZ);
+	public static final Date JAN_01_2012_11AM_PST_AS_DATE = JAN(1, 2012).at(11, PST_AS_TZ);
+	public static final Date AUG_03_2015_NOON_UTC_AS_DATE = AUG(3, 2015).at(12, UTC_AS_TZ);
+	public static final Date AUG_04_2015_1159_UTC_AS_DATE = AUG(4, 2015).at(11, 59, UTC_AS_TZ);
+	public static final Date AUG_04_2015_NOON_UTC_AS_DATE = AUG(4, 2015).at(12, UTC_AS_TZ);
+	public static final Date AUG_04_2015_1201_UTC_AS_DATE = AUG(4, 2015).at(12, 1, UTC_AS_TZ);
+	public static final Date AUG_04_2016_NOON_UTC_AS_DATE = AUG(4, 2016).at(12, UTC_AS_TZ);
+	public static final Date SEP_04_2015_NOON_UTC_AS_DATE = SEP(4, 2015).at(12, UTC_AS_TZ);
+	public static final Date AUG_05_2015_NOON_UTC_AS_DATE = AUG(5, 2015).at(12, UTC_AS_TZ);
 
 	// LocalDate
 	public static final LocalDate JAN_01_2015 = LocalDate.of(2015, Month.JANUARY, 1);
@@ -107,9 +108,9 @@ public abstract class Dates {
 	public static final LocalDateTime AUG_01_2015_NOON = LocalDateTime.of(AUG_01_2015, NOON);
 	public static final LocalDateTime AUG_03_2015_NOON = LocalDateTime.of(AUG_03_2015, NOON);
 	public static final LocalDateTime AUG_03_2015_11PM = LocalDateTime.of(AUG_03_2015, LocalTime.of(23, 0, 0));
-	public static final LocalDateTime AUG_04_2015_1159 = LocalDateTime.of(AUG_04_2015, NOON.minusSeconds(1));
+	public static final LocalDateTime AUG_04_2015_1159 = LocalDateTime.of(AUG_04_2015, LocalTime.of(11, 59, 0));
 	public static final LocalDateTime AUG_04_2015_NOON = LocalDateTime.of(AUG_04_2015, NOON);
-	public static final LocalDateTime AUG_04_2015_1201 = LocalDateTime.of(AUG_04_2015, NOON.plusSeconds(1));
+	public static final LocalDateTime AUG_04_2015_1201 = LocalDateTime.of(AUG_04_2015, LocalTime.of(12, 1, 0));
 	public static final LocalDateTime AUG_05_2015_01AM = LocalDateTime.of(AUG_05_2015, LocalTime.of(1, 0, 0));
 	public static final LocalDateTime AUG_05_2015_NOON = LocalDateTime.of(AUG_05_2015, NOON);
 	public static final LocalDateTime AUG_06_2015_NOON = LocalDateTime.of(AUG_06_2015, NOON);
@@ -149,9 +150,9 @@ public abstract class Dates {
 	public static final ZonedDateTime DEC_01_2015_NOON_UTC = ZonedDateTime.of(DEC_01_2015_NOON, ZoneIds.UTC);
 	public static final ZonedDateTime AUG_04_2016_NOON_UTC = ZonedDateTime.of(AUG_04_2016_NOON, ZoneIds.UTC);
 
-	public static final ZonedDateTime AUG_03_2015_11PM_MINUS_1 = ZonedDateTime.of(AUG_03_2015_11PM, ZoneIds.MINUS1);
-	public static final ZonedDateTime AUG_04_2015_NOON_MINUS_1 = ZonedDateTime.of(AUG_04_2015_NOON, ZoneIds.MINUS1);
-	public static final ZonedDateTime AUG_04_2015_01PM_MINUS_1 = ZonedDateTime.of(AUG_04_2015_NOON, ZoneIds.MINUS1);
-	public static final ZonedDateTime AUG_04_2015_NOON_PLUS_1 = ZonedDateTime.of(AUG_04_2015_NOON, ZoneIds.PLUS1);
-	public static final ZonedDateTime AUG_05_2015_01AM_PLUS_1 = ZonedDateTime.of(AUG_05_2015_01AM, ZoneIds.PLUS1);
+	public static final ZonedDateTime AUG_03_2015_11PM_EST = ZonedDateTime.of(AUG_03_2015_11PM, ZoneIds.EST);
+	public static final ZonedDateTime AUG_04_2015_NOON_EST = ZonedDateTime.of(AUG_04_2015_NOON, ZoneIds.EST);
+	public static final ZonedDateTime AUG_04_2015_01PM_EST = ZonedDateTime.of(AUG_04_2015_NOON, ZoneIds.EST);
+	public static final ZonedDateTime AUG_04_2015_NOON_CET = ZonedDateTime.of(AUG_04_2015_NOON, ZoneIds.CET);
+	public static final ZonedDateTime AUG_05_2015_01AM_CET = ZonedDateTime.of(AUG_05_2015_01AM, ZoneIds.CET);
 }
