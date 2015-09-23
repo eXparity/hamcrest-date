@@ -4,23 +4,24 @@ import org.hamcrest.Description;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * A matcher that tests that the examined date is before or the same instant as
- * the reference date
+ * A matcher that tests that the actual date is before or the same instant as the reference date
  * 
  * @author Stewart Bissett
  */
-public class IsSameOrBefore<T extends Comparable<? super T>> extends TypeSafeDiagnosingMatcher<T> {
+public class IsSameOrBefore<T> extends TypeSafeDiagnosingMatcher<T> {
 
-	private final T expected;
+	private final TemporalWrapper<T> expected;
+	private final TemporalFormatter<T> describer;
 
-	public IsSameOrBefore(T expected) {
+	public IsSameOrBefore(final TemporalWrapper<T> expected, final TemporalFormatter<T> describer) {
 		this.expected = expected;
+		this.describer = describer;
 	}
 
 	@Override
 	protected boolean matchesSafely(T actual, Description mismatchDescription) {
-		if (actual.compareTo(expected) > 0) {
-			mismatchDescription.appendText("date is ").appendValue(actual.toString());
+		if (expected.isBefore(actual)) {
+			mismatchDescription.appendText("date is " + describer.describe(actual));
 			return false;
 		} else {
 			return true;
@@ -28,7 +29,7 @@ public class IsSameOrBefore<T extends Comparable<? super T>> extends TypeSafeDia
 	}
 
 	public void describeTo(final Description description) {
-		description.appendText("the date is on same day or before ").appendValue(expected.toString());
+		description.appendText("the date is on same day or before " + describer.describe(expected.unwrap()));
 	}
 
 }

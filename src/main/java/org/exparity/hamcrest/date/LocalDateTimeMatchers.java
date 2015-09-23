@@ -29,6 +29,8 @@ import org.exparity.hamcrest.date.core.IsSameOrBefore;
 import org.exparity.hamcrest.date.core.IsSecond;
 import org.exparity.hamcrest.date.core.IsWithin;
 import org.exparity.hamcrest.date.core.IsYear;
+import org.exparity.hamcrest.date.core.LocalDateTimeFormatter;
+import org.exparity.hamcrest.date.core.LocalDateTimeWrapper;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
@@ -314,7 +316,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameOrBefore(final LocalDateTime date) {
-		return new IsSameOrBefore<LocalDateTime>(date);
+		return new IsSameOrBefore<LocalDateTime>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -331,7 +333,7 @@ public abstract class LocalDateTimeMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameOrBefore(final Date date) {
-		return sameOrBefore(toLocalDateTime(date));
+		return new IsSameOrBefore<LocalDateTime>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -365,7 +367,7 @@ public abstract class LocalDateTimeMatchers {
 			final int hour,
 			final int minute,
 			final int second) {
-		return sameOrBefore(LocalDateTime.of(year, month, day, hour, minute, second));
+		return new IsSameOrBefore<LocalDateTime>(new LocalDateTimeWrapper(year, month, day, hour, minute, second), new LocalDateTimeFormatter());
 	}
 
 	/**
