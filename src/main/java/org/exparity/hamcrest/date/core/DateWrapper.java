@@ -14,6 +14,7 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
 import java.util.Date;
 
+import org.exparity.hamcrest.date.DayMonthYear;
 import org.exparity.hamcrest.date.Months;
 
 /**
@@ -41,24 +42,28 @@ public class DateWrapper implements TemporalWrapper<Date> {
 		this.accuracy = ChronoUnit.SECONDS;
 	}
 
+	public DateWrapper(final DayMonthYear date) {
+		this(LocalDate.of(date.getYear(), date.getMonth().month(), date.getDay()));
+	}
+
 	@Override
 	public boolean isAfter(final Date other) {
-		return wrapped.isAfter(other.toInstant().truncatedTo(accuracy));
+		return wrapped.truncatedTo(accuracy).isAfter(other.toInstant().truncatedTo(accuracy));
 	}
 
 	@Override
 	public boolean isBefore(Date other) {
-		return wrapped.isBefore(other.toInstant().truncatedTo(accuracy));
+		return wrapped.truncatedTo(accuracy).isBefore(other.toInstant().truncatedTo(accuracy));
 	}
 
 	@Override
 	public boolean isSame(Date other) {
-		return wrapped.equals(other.toInstant().truncatedTo(accuracy));
+		return wrapped.truncatedTo(accuracy).equals(other.toInstant().truncatedTo(accuracy));
 	}
 
 	@Override
 	public boolean isSameDay(Date other) {
-		return wrapped.equals(other.toInstant().truncatedTo(ChronoUnit.DAYS));
+		return wrapped.truncatedTo(accuracy).equals(other.toInstant().truncatedTo(ChronoUnit.DAYS));
 	}
 
 	@Override

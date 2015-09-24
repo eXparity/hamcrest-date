@@ -11,16 +11,18 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  */
 public class IsSameOrAfter<T extends Comparable<? super T>> extends TypeSafeDiagnosingMatcher<T> {
 
-	private final T expected;
+	private final TemporalWrapper<T> expected;
+	private final TemporalFormatter<T> describer;
 
-	public IsSameOrAfter(T expected) {
+	public IsSameOrAfter(final TemporalWrapper<T> expected, final TemporalFormatter<T> describer) {
 		this.expected = expected;
+		this.describer = describer;
 	}
 
 	@Override
 	protected boolean matchesSafely(T actual, Description mismatchDescription) {
-		if (actual.compareTo(expected) < 0) {
-			mismatchDescription.appendText("date is ").appendValue(actual.toString());
+		if (expected.isAfter(actual)) {
+			mismatchDescription.appendText("date is " + describer.describe(actual));
 			return false;
 		} else {
 			return true;
@@ -28,7 +30,7 @@ public class IsSameOrAfter<T extends Comparable<? super T>> extends TypeSafeDiag
 	}
 
 	public void describeTo(final Description description) {
-		description.appendText("the date is on same day or after ").appendValue(expected.toString());
+		description.appendText("the date is on same day or after " + describer.describe(expected.unwrap()));
 	}
 
 }

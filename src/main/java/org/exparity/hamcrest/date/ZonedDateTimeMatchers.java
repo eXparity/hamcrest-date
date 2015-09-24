@@ -383,7 +383,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param tz the time zone of the reference date
 	 */
 	public static Matcher<ZonedDateTime> sameOrBefore(final Date date, final ZoneId tz) {
-		return new IsSameOrBefore<ZonedDateTime>(new ZonedDateTimeWrapper(date), new ZonedDateTimeFormatter());
+		return new IsSameOrBefore<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -449,7 +449,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param tz the time zone of the reference date
 	 */
 	public static Matcher<ZonedDateTime> sameOrAfter(final Date date, final ZoneId tz) {
-		return sameOrAfter(toZonedDateTime(date, tz));
+		return new IsSameOrAfter<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -466,7 +466,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param tz the time zone of the reference date
 	 */
 	public static Matcher<ZonedDateTime> sameOrAfter(final LocalDateTime date, final ZoneId tz) {
-		return sameOrAfter(toZonedDateTime(date, tz));
+		return new IsSameOrAfter<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -482,7 +482,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<ZonedDateTime> sameOrAfter(final ZonedDateTime date) {
-		return new IsSameOrAfter<ZonedDateTime>(date);
+		return new IsSameOrAfter<ZonedDateTime>(new ZonedDateTimeWrapper(date), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -510,7 +510,7 @@ public abstract class ZonedDateTimeMatchers {
 			final int minute,
 			final int second,
 			final ZoneId tz) {
-		return sameOrAfter(LocalDateTime.of(year, month, day, hour, minute, second), tz);
+		return new IsSameOrAfter<ZonedDateTime>(new ZonedDateTimeWrapper(LocalDateTime.of(year, month, day, hour, minute, second), tz), new ZonedDateTimeFormatter());
 	}
 
 	/**

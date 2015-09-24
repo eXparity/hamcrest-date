@@ -35,8 +35,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, after(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> after(final Date date) {
 		return new IsAfter<Date>(date);
@@ -52,8 +51,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, after(Moments.today()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> after(final DayMonthYear date) {
 		return after(date.getYear(), date.getMonth(), date.getDay());
@@ -69,12 +67,9 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, after(2012, Months.MAY, 12));
 	 * </pre>
 	 * 
-	 * @param year
-	 *            the year against which the examined date is checked
-	 * @param month
-	 *            the month against which the examined date is checked
-	 * @param day
-	 *            the day of the month against which the examined date is
+	 * @param year the year against which the examined date is checked
+	 * @param month the month against which the examined date is checked
+	 * @param day the day of the month against which the examined date is
 	 *            checked
 	 */
 	public static Matcher<Date> after(final int year, final Months month, final int day) {
@@ -91,20 +86,15 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, after(2012, Months.MAY, 12, 23, 00, 01));
 	 * </pre>
 	 * 
-	 * @param year
-	 *            the year against which the examined date is checked
-	 * @param month
-	 *            the month against which the examined date is checked
-	 * @param day
-	 *            the day of the month against which the examined date is
+	 * @param year the year against which the examined date is checked
+	 * @param month the month against which the examined date is checked
+	 * @param day the day of the month against which the examined date is
 	 *            checked
-	 * @param hour
-	 *            the hour of the day against which the examined date is checked
-	 * @param minute
-	 *            the minute of the hour against which the examined date is
+	 * @param hour the hour of the day against which the examined date is
 	 *            checked
-	 * @param second
-	 *            the second of the minute against which the examined date is
+	 * @param minute the minute of the hour against which the examined date is
+	 *            checked
+	 * @param second the second of the minute against which the examined date is
 	 *            checked
 	 */
 	public static Matcher<Date> after(final int year,
@@ -126,8 +116,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, before(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> before(final Date date) {
 		return new org.exparity.hamcrest.date.core.IsBefore<Date>(date);
@@ -143,8 +132,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, before(Moments.today()));
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> before(final DayMonthYear date) {
 		return before(date.getYear(), date.getMonth(), date.getDay());
@@ -160,12 +148,9 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, before(2012, Months.MAY, 12));
 	 * </pre>
 	 * 
-	 * @param year
-	 *            the year against which the examined date is checked
-	 * @param month
-	 *            the month against which the examined date is checked
-	 * @param day
-	 *            the day of the month against which the examined date is
+	 * @param year the year against which the examined date is checked
+	 * @param month the month against which the examined date is checked
+	 * @param day the day of the month against which the examined date is
 	 *            checked
 	 */
 	public static Matcher<Date> before(final int year, final Months month, final int day) {
@@ -182,20 +167,15 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, before(2012, Months.MAY, 12, 23, 00, 01));
 	 * </pre>
 	 * 
-	 * @param year
-	 *            the year against which the examined date is checked
-	 * @param month
-	 *            the month against which the examined date is checked
-	 * @param day
-	 *            the day of the month against which the examined date is
+	 * @param year the year against which the examined date is checked
+	 * @param month the month against which the examined date is checked
+	 * @param day the day of the month against which the examined date is
 	 *            checked
-	 * @param hour
-	 *            the hour of the day against which the examined date is checked
-	 * @param minute
-	 *            the minute of the hour against which the examined date is
+	 * @param hour the hour of the day against which the examined date is
 	 *            checked
-	 * @param second
-	 *            the second of the minute against which the examined date is
+	 * @param minute the minute of the hour against which the examined date is
+	 *            checked
+	 * @param second the second of the minute against which the examined date is
 	 *            checked
 	 */
 	public static Matcher<Date> before(final int year,
@@ -217,8 +197,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameWeekday(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameDayOfWeek(final Date date) {
 		return IsSameDayOfWeek.sameDayOfWeek(date);
@@ -234,8 +213,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameDayOfTheWeek(new Date()))
 	 * </pre>
 	 * 
-	 * @param weekday
-	 *            the reference weekday against which the examined date is
+	 * @param weekday the reference weekday against which the examined date is
 	 *            checked
 	 */
 	public static Matcher<Date> sameDayOfWeek(final Weekdays weekday) {
@@ -252,8 +230,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameDay(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameDay(final Date date) {
 		return IsSameDay.sameDay(date);
@@ -269,8 +246,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameDay(Moments.today()));
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameDay(final DayMonthYear date) {
 		return IsSameDay.sameDay(date);
@@ -286,13 +262,11 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameDayOfTheYear(2012, Month.JAN, 1))
 	 * </pre>
 	 * 
-	 * @param day
-	 *            the reference day of the month against which the examined date
+	 * @param day the reference day of the month against which the examined date
 	 *            is checked
-	 * @param month
-	 *            the reference month against which the examined date is checked
-	 * @param year
-	 *            the reference year against which the examined date is checked
+	 * @param month the reference month against which the examined date is
+	 *            checked
+	 * @param year the reference year against which the examined date is checked
 	 */
 	public static Matcher<Date> sameDay(final int year, final Months month, final int day) {
 		return IsSameDay.sameDay(year, month, day);
@@ -308,8 +282,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameHour(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 * @deprecated Use {@link #sameHourOfDay(Date)} instead
 	 */
 	public static Matcher<Date> sameHour(final Date date) {
@@ -326,8 +299,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameHourOfDay(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameHourOfDay(final Date date) {
 		return IsSameHourOfDay.sameHour(date);
@@ -343,8 +315,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameHour(12));
 	 * </pre>
 	 * 
-	 * @param hour
-	 *            the reference hour against which the examined date is checked
+	 * @param hour the reference hour against which the examined date is checked
 	 * @deprecated Use {@link #sameHourOfDay(int)} instead
 	 */
 
@@ -362,8 +333,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameHour(12));
 	 * </pre>
 	 * 
-	 * @param hour
-	 *            the reference hour against which the examined date is checked
+	 * @param hour the reference hour against which the examined date is checked
 	 */
 
 	public static Matcher<Date> sameHourOfDay(final int hour) {
@@ -380,8 +350,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameInstant(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameInstant(final Date date) {
 		return IsSameInstant.sameInstant(date);
@@ -397,8 +366,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameInstant(1325415600000L))
 	 * </pre>
 	 * 
-	 * @param timestamp
-	 *            the time as milliseconds since the Unix epoch time
+	 * @param timestamp the time as milliseconds since the Unix epoch time
 	 */
 	public static Matcher<Date> sameInstant(final long timestamp) {
 		return IsSameInstant.sameInstant(timestamp);
@@ -414,24 +382,18 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameInstant(2012, Months.MAY, 12, 23, 00, 01, 123));
 	 * </pre>
 	 * 
-	 * @param year
-	 *            the year against which the examined date is checked
-	 * @param month
-	 *            the month against which the examined date is checked
-	 * @param day
-	 *            the day of the month against which the examined date is
+	 * @param year the year against which the examined date is checked
+	 * @param month the month against which the examined date is checked
+	 * @param day the day of the month against which the examined date is
 	 *            checked
-	 * @param hour
-	 *            the hour of the day against which the examined date is checked
-	 * @param minute
-	 *            the minute of the hour against which the examined date is
+	 * @param hour the hour of the day against which the examined date is
 	 *            checked
-	 * @param second
-	 *            the second of the minute against which the examined date is
+	 * @param minute the minute of the hour against which the examined date is
 	 *            checked
-	 * @param milliseconds
-	 *            the milliseconds of the second against which the examined date
-	 *            is checked
+	 * @param second the second of the minute against which the examined date is
+	 *            checked
+	 * @param milliseconds the milliseconds of the second against which the
+	 *            examined date is checked
 	 */
 	public static Matcher<Date> sameInstant(final int year,
 			final Months month,
@@ -453,8 +415,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameOrBefore(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameOrBefore(final Date date) {
 		return new IsSameOrBefore<Date>(new DateWrapper(date), new DateFormatter());
@@ -470,8 +431,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameOrBefore(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameOrBefore(final DayMonthYear date) {
 		return sameOrBefore(date.getYear(), date.getMonth(), date.getDay());
@@ -487,17 +447,16 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameOrBefore(2012, Months.MAY, 12));
 	 * </pre>
 	 * 
-	 * @param year
-	 *            the year against which the examined date is checked
-	 * @param month
-	 *            the month against which the examined date is checked
-	 * @param dayOfMonth
-	 *            the day of the month against which the examined date is
+	 * @param year the year against which the examined date is checked
+	 * @param month the month against which the examined date is checked
+	 * @param dayOfMonth the day of the month against which the examined date is
 	 *            checked
 	 */
 	@Factory
 	public static Matcher<Date> sameOrBefore(final int year, final Months month, final int dayOfMonth) {
-		return new IsSameOrBefore<Date>(new DateWrapper(LocalDate.of(year, month.month(), dayOfMonth)), new DateFormatter());
+		return new IsSameOrBefore<Date>(
+				new DateWrapper(LocalDate.of(year, month.month(), dayOfMonth)),
+					new DateFormatter());
 	}
 
 	/**
@@ -510,20 +469,15 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameOrBefore(2012, Months.MAY, 12, 23, 00, 01));
 	 * </pre>
 	 * 
-	 * @param year
-	 *            the year against which the examined date is checked
-	 * @param month
-	 *            the month against which the examined date is checked
-	 * @param dayOfMonth
-	 *            the day of the month against which the examined date is
+	 * @param year the year against which the examined date is checked
+	 * @param month the month against which the examined date is checked
+	 * @param dayOfMonth the day of the month against which the examined date is
 	 *            checked
-	 * @param hour
-	 *            the hour of the day against which the examined date is checked
-	 * @param minute
-	 *            the minute of the hour against which the examined date is
+	 * @param hour the hour of the day against which the examined date is
 	 *            checked
-	 * @param second
-	 *            the second of the minute against which the examined date is
+	 * @param minute the minute of the hour against which the examined date is
+	 *            checked
+	 * @param second the second of the minute against which the examined date is
 	 *            checked
 	 */
 	@Factory
@@ -533,11 +487,13 @@ public abstract class DateMatchers {
 			final int hour,
 			final int minute,
 			final int second) {
-		return new IsSameOrBefore<Date>(new DateWrapper(LocalDate.of(year, month.month(), dayOfMonth), LocalTime.of(hour, minute, second)), new DateFormatter());
+		return new IsSameOrBefore<Date>(
+				new DateWrapper(LocalDate.of(year, month.month(), dayOfMonth), LocalTime.of(hour, minute, second)),
+					new DateFormatter());
 	}
 
-	/**F
-	 * Creates a matcher that matches when the examined date is at the same
+	/**
+	 * F Creates a matcher that matches when the examined date is at the same
 	 * instant or after the reference date
 	 * <p/>
 	 * For example:
@@ -546,11 +502,10 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameOrAfter(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameOrAfter(final Date date) {
-		return new IsSameOrAfter<Date>(date);
+		return new IsSameOrAfter<Date>(new DateWrapper(date), new DateFormatter());
 	}
 
 	/**
@@ -563,11 +518,10 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameOrAfter(Moments.today()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameOrAfter(final DayMonthYear date) {
-		return sameOrAfter(date.getYear(), date.getMonth(), date.getDay());
+		return new IsSameOrAfter<Date>(new DateWrapper(date), new DateFormatter());
 	}
 
 	/**
@@ -580,16 +534,15 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameOrAfter(2012, Months.MAY, 12));
 	 * </pre>
 	 * 
-	 * @param year
-	 *            the year against which the examined date is checked
-	 * @param month
-	 *            the month against which the examined date is checked
-	 * @param day
-	 *            the day of the month against which the examined date is
+	 * @param year the year against which the examined date is checked
+	 * @param month the month against which the examined date is checked
+	 * @param dayOfMonth the day of the month against which the examined date is
 	 *            checked
 	 */
-	public static Matcher<Date> sameOrAfter(final int year, final Months month, final int day) {
-		return sameOrAfter(year, month, day, 0, 0, 0);
+	public static Matcher<Date> sameOrAfter(final int year, final Months month, final int dayOfMonth) {
+		return new IsSameOrAfter<Date>(
+				new DateWrapper(LocalDate.of(year, month.month(), dayOfMonth)),
+					new DateFormatter());
 	}
 
 	/**
@@ -602,30 +555,27 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameOrAfter(2012, Months.MAY, 12, 23, 00, 01));
 	 * </pre>
 	 * 
-	 * @param year
-	 *            the year against which the examined date is checked
-	 * @param month
-	 *            the month against which the examined date is checked
-	 * @param day
-	 *            the day of the month against which the examined date is
+	 * @param year the year against which the examined date is checked
+	 * @param month the month against which the examined date is checked
+	 * @param day the day of the month against which the examined date is
 	 *            checked
-	 * @param hour
-	 *            the hour of the day against which the examined date is checked
-	 * @param minute
-	 *            the minute of the hour against which the examined date is
+	 * @param hour the hour of the day against which the examined date is
 	 *            checked
-	 * @param second
-	 *            the second of the minute against which the examined date is
+	 * @param minute the minute of the hour against which the examined date is
+	 *            checked
+	 * @param second the second of the minute against which the examined date is
 	 *            checked
 	 */
 	@Factory
 	public static Matcher<Date> sameOrAfter(final int year,
 			final Months month,
-			final int date,
+			final int dayOfMonth,
 			final int hour,
 			final int minute,
 			final int second) {
-		return sameOrAfter(toDate(year, month, date, hour, minute, second, 0));
+		return new IsSameOrAfter<Date>(
+				new DateWrapper(LocalDate.of(year, month.month(), dayOfMonth), LocalTime.of(hour, minute, second)),
+					new DateFormatter());
 	}
 
 	/**
@@ -638,8 +588,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameMinute(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 * @deprecated Use {@link #sameMinuteOfHour(Date)} instead
 	 */
 	public static Matcher<Date> sameMinute(final Date date) {
@@ -656,8 +605,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameMinute(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameMinuteOfHour(final Date date) {
 		return IsSameMinuteOfHour.sameMinuteOfHour(date);
@@ -673,8 +621,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameMinute(55))
 	 * </pre>
 	 * 
-	 * @param minute
-	 *            the reference minute against which the examined date is
+	 * @param minute the reference minute against which the examined date is
 	 *            checked
 	 * @deprecated Use {@link #sameMinuteOfHour(int)} instead
 	 */
@@ -692,8 +639,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameMinute(55))
 	 * </pre>
 	 * 
-	 * @param minute
-	 *            the reference minute against which the examined date is
+	 * @param minute the reference minute against which the examined date is
 	 *            checked
 	 */
 	public static Matcher<Date> sameMinuteOfHour(final int minute) {
@@ -710,8 +656,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameMonth(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 * @deprecated Use {@link #sameMonthOfYear(Date)} instead
 	 */
 	public static Matcher<Date> sameMonth(final Date date) {
@@ -728,8 +673,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameMonth(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameMonthOfYear(final Date date) {
 		return IsSameMonthOfYear.sameMonthOfYear(date);
@@ -745,8 +689,8 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameMonth(Months.DECEMBER))
 	 * </pre>
 	 * 
-	 * @param month
-	 *            the reference month against which the examined date is checked
+	 * @param month the reference month against which the examined date is
+	 *            checked
 	 * @deprecated Use {@link #sameMonthOfYear(Months)} instead
 	 */
 	public static Matcher<Date> sameMonth(final Months month) {
@@ -763,8 +707,8 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameMonth(Months.DECEMBER))
 	 * </pre>
 	 * 
-	 * @param month
-	 *            the reference month against which the examined date is checked
+	 * @param month the reference month against which the examined date is
+	 *            checked
 	 */
 	public static Matcher<Date> sameMonthOfYear(final Months month) {
 		return IsSameMonthOfYear.sameMonthOfYear(month);
@@ -780,8 +724,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameSecond(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 * @deprecated Use {@link #sameSecondOfMinute(Date)} instead
 	 */
 	public static Matcher<Date> sameSecond(final Date date) {
@@ -798,8 +741,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameSecond(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameSecondOfMinute(final Date date) {
 		return IsSameSecondOfMinute.sameSecondOfMinute(date);
@@ -815,8 +757,8 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameSecond(33))
 	 * </pre>
 	 * 
-	 * @param second
-	 *            the reference date against which the examined date is checked
+	 * @param second the reference date against which the examined date is
+	 *            checked
 	 * @deprecated Use {@link #sameSecondOfMinute(int)} instead
 	 */
 	public static Matcher<Date> sameSecond(final int second) {
@@ -833,8 +775,8 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameSecond(33))
 	 * </pre>
 	 * 
-	 * @param second
-	 *            the reference date against which the examined date is checked
+	 * @param second the reference date against which the examined date is
+	 *            checked
 	 */
 	public static Matcher<Date> sameSecondOfMinute(final int second) {
 		return IsSameSecondOfMinute.sameSecondOfMinute(second);
@@ -850,8 +792,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameMillisecond(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 * @deprecated Use {@link #sameMillisecondOfSecond(Date)} instead
 	 */
 	public static Matcher<Date> sameMillisecond(final Date date) {
@@ -868,8 +809,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameMillisecond(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameMillisecondOfSecond(final Date date) {
 		return IsSameMillisecondOfSecond.sameMillisecondOfSecond(date);
@@ -885,8 +825,8 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameMillisecond(123))
 	 * </pre>
 	 * 
-	 * @param millisecond
-	 *            the millisecond against which the examined date is checked
+	 * @param millisecond the millisecond against which the examined date is
+	 *            checked
 	 * @deprecated Use {@link #sameMillisecondOfSecond(int)} instead
 	 */
 	public static Matcher<Date> sameMillisecond(final int millisecond) {
@@ -903,8 +843,8 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameMillisecond(123))
 	 * </pre>
 	 * 
-	 * @param millisecond
-	 *            the millisecond against which the examined date is checked
+	 * @param millisecond the millisecond against which the examined date is
+	 *            checked
 	 */
 	public static Matcher<Date> sameMillisecondOfSecond(final int millisecond) {
 		return IsSameMillisecondOfSecond.sameMillisecondOfSecond(millisecond);
@@ -920,8 +860,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameYear(new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameYear(final Date date) {
 		return IsSameYear.sameYear(date);
@@ -937,8 +876,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameYear(2013))
 	 * </pre>
 	 * 
-	 * @param year
-	 *            the reference year against which the examined date is checked
+	 * @param year the reference year against which the examined date is checked
 	 */
 	public static Matcher<Date> sameYear(final int year) {
 		return IsSameYear.sameYear(year);
@@ -954,8 +892,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, within(10, TimeUnit.MINUTES, new Date()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> within(final long period, final TimeUnit unit, final Date date) {
 		return IsWithin.within(period, unit, date);
@@ -971,8 +908,7 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, within(10, TimeUnit.DAYS, Moments.today()))
 	 * </pre>
 	 * 
-	 * @param date
-	 *            the reference date against which the examined date is checked
+	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> within(final long period, final TimeUnit unit, final DayMonthYear date) {
 		return IsWithin.within(period, unit, date);
@@ -988,16 +924,11 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, within(5, TimeUnit.DAYS, 2012, Months.MAY, 12));
 	 * </pre>
 	 * 
-	 * @param period
-	 *            the timeunit interval the examined date should be with
-	 * @param unit
-	 *            the timeunit to define the length of the period
-	 * @param year
-	 *            the year against which the examined date is checked
-	 * @param month
-	 *            the month against which the examined date is checked
-	 * @param day
-	 *            the day of the month against which the examined date is
+	 * @param period the timeunit interval the examined date should be with
+	 * @param unit the timeunit to define the length of the period
+	 * @param year the year against which the examined date is checked
+	 * @param month the month against which the examined date is checked
+	 * @param day the day of the month against which the examined date is
 	 *            checked
 	 */
 	public static Matcher<Date> within(final long period,
@@ -1018,28 +949,20 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, within(1, TimeUnit.MINUTES, 2012, Months.MAY, 12, 23, 00, 01));
 	 * </pre>
 	 * 
-	 * @param period
-	 *            the timeunit interval the examined date should be with
-	 * @param unit
-	 *            the timeunit to define the length of the period
-	 * @param year
-	 *            the year against which the examined date is checked
-	 * @param month
-	 *            the month against which the examined date is checked
-	 * @param day
-	 *            the day of the month against which the examined date is
+	 * @param period the timeunit interval the examined date should be with
+	 * @param unit the timeunit to define the length of the period
+	 * @param year the year against which the examined date is checked
+	 * @param month the month against which the examined date is checked
+	 * @param day the day of the month against which the examined date is
 	 *            checked
-	 * @param hour
-	 *            the hour of the day against which the examined date is checked
-	 * @param minute
-	 *            the minute of the hour against which the examined date is
+	 * @param hour the hour of the day against which the examined date is
 	 *            checked
-	 * @param second
-	 *            the second of the minute against which the examined date is
+	 * @param minute the minute of the hour against which the examined date is
 	 *            checked
-	 * @param second
-	 *            the millisecond of the second against which the examined date
-	 *            is checked
+	 * @param second the second of the minute against which the examined date is
+	 *            checked
+	 * @param second the millisecond of the second against which the examined
+	 *            date is checked
 	 */
 	public static Matcher<Date> within(final long period,
 			final TimeUnit unit,

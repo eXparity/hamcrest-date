@@ -277,7 +277,7 @@ public abstract class LocalDateMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDate> sameOrAfter(final Date date) {
-		return sameOrAfter(toLocalDate(date));
+		return new IsSameOrAfter<LocalDate>(new LocalDateWrapper(date), new LocalDateFormatter());
 	}
 
 	/**
@@ -294,7 +294,7 @@ public abstract class LocalDateMatchers {
 	 *            the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDate> sameOrAfter(final LocalDate date) {
-		return new IsSameOrAfter<LocalDate>(date);
+		return new IsSameOrAfter<LocalDate>(new LocalDateWrapper(date), new LocalDateFormatter());
 	}
 
 	/**
