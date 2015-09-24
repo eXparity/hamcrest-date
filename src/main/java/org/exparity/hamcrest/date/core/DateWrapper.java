@@ -48,9 +48,19 @@ public class DateWrapper implements TemporalWrapper<Date> {
 		this.accuracy = ChronoUnit.SECONDS;
 	}
 
+	public DateWrapper(final int year, final Month month, final int dayOfMonth, final int hour, final int minute,
+			final int second, final int millis) {
+		this.wrapped = ZonedDateTime
+				.of(
+						LocalDateTime.of(year, month, dayOfMonth, hour, minute, second, millis * 1000000),
+							ZoneId.systemDefault())
+					.toInstant();
+		this.accuracy = ChronoUnit.MILLIS;
+	}
+
 	@Override
 	public long difference(final Date other, ChronoUnit unit) {
-		return wrapped.truncatedTo(accuracy).until(other.toInstant(), unit);
+		return Math.abs(wrapped.truncatedTo(accuracy).until(other.toInstant(), unit));
 	}
 
 	@Override
