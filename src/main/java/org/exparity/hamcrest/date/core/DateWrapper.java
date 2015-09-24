@@ -3,11 +3,11 @@
  */
 package org.exparity.hamcrest.date.core;
 
-import static java.time.ZoneId.systemDefault;
-
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Month;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
@@ -15,7 +15,6 @@ import java.time.temporal.TemporalUnit;
 import java.util.Date;
 
 import org.exparity.hamcrest.date.DayMonthYear;
-import org.exparity.hamcrest.date.Months;
 
 /**
  * Implementation of {@link TemporalWrapper} to wrap {@link Date} objects.
@@ -33,17 +32,20 @@ public class DateWrapper implements TemporalWrapper<Date> {
 	}
 
 	public DateWrapper(final LocalDate date) {
-		this.wrapped = ZonedDateTime.of(date, LocalTime.MIN, ZoneId.systemDefault()).toInstant();
+		this.wrapped = ZonedDateTime.of(date, LocalTime.NOON, ZoneId.systemDefault()).toInstant();
 		this.accuracy = ChronoUnit.DAYS;
 	}
 
-	public DateWrapper(final LocalDate date, final LocalTime time) {
-		this.wrapped = ZonedDateTime.of(date, time, ZoneId.systemDefault()).toInstant();
-		this.accuracy = ChronoUnit.SECONDS;
+	public DateWrapper(final int year, final Month month, final int dayOfMonth) {
+		this(LocalDate.of(year, month, dayOfMonth));
 	}
 
-	public DateWrapper(final DayMonthYear date) {
-		this(LocalDate.of(date.getYear(), date.getMonth().month(), date.getDay()));
+	public DateWrapper(final int year, final Month month, final int dayOfMonth, final int hour, final int minute,
+			final int second) {
+		this.wrapped = ZonedDateTime
+				.of(LocalDateTime.of(year, month, dayOfMonth, hour, minute, second), ZoneId.systemDefault())
+					.toInstant();
+		this.accuracy = ChronoUnit.SECONDS;
 	}
 
 	@Override

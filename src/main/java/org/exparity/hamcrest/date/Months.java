@@ -7,7 +7,9 @@ import java.util.Calendar;
  * Enumeration of months in a year
  * 
  * @author Stewart Bissett
+ * @deprecated Use {@link Month} enumeration
  */
+@Deprecated
 public enum Months {
 
 	JAN(Calendar.JANUARY, Month.JANUARY, "January"),

@@ -57,7 +57,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param tz the timezone of the reference date
 	 */
 	public static Matcher<ZonedDateTime> after(final Date date, final ZoneId tz) {
-		return after(toZonedDateTime(date, tz));
+		return new IsAfter<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -74,7 +74,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param tz the timezone of the reference date
 	 */
 	public static Matcher<ZonedDateTime> after(final LocalDateTime date, final ZoneId tz) {
-		return after(toZonedDateTime(date, tz));
+		return new IsAfter<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -90,7 +90,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<ZonedDateTime> after(final ZonedDateTime date) {
-		return new IsAfter<ZonedDateTime>(date);
+		return new IsAfter<ZonedDateTime>(new ZonedDateTimeWrapper(date), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -118,7 +118,9 @@ public abstract class ZonedDateTimeMatchers {
 			final int minute,
 			final int second,
 			final ZoneId tz) {
-		return after(LocalDateTime.of(year, month, dayOfMonth, hour, minute, second), tz);
+		return new IsAfter<ZonedDateTime>(
+				new ZonedDateTimeWrapper(year, month, dayOfMonth, hour, minute, second, tz),
+					new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -134,7 +136,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<ZonedDateTime> before(final Date date, final ZoneId tz) {
-		return before(toZonedDateTime(date, tz));
+		return new IsBefore<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -150,7 +152,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<ZonedDateTime> before(final LocalDateTime date, final ZoneId tz) {
-		return before(toZonedDateTime(date, tz));
+		return new IsBefore<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -166,7 +168,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<ZonedDateTime> before(final ZonedDateTime date) {
-		return new IsBefore<ZonedDateTime>(date);
+		return new IsBefore<ZonedDateTime>(new ZonedDateTimeWrapper(date), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -194,7 +196,9 @@ public abstract class ZonedDateTimeMatchers {
 			final int minute,
 			final int second,
 			final ZoneId tz) {
-		return before(LocalDateTime.of(year, month, dayOfMonth, hour, minute, second), tz);
+		return new IsBefore<ZonedDateTime>(
+				new ZonedDateTimeWrapper(year, month, dayOfMonth, hour, minute, second, tz),
+					new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -284,7 +288,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param tz the timezone the reference date is in
 	 */
 	public static Matcher<ZonedDateTime> sameInstant(final Date date, final ZoneId tz) {
-		return sameInstant(toZonedDateTime(date, tz));
+		return new IsSame<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -301,7 +305,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param tz the time zone the reference date is in
 	 */
 	public static Matcher<ZonedDateTime> sameInstant(final LocalDateTime date, final ZoneId tz) {
-		return sameInstant(ZonedDateTime.of(date, tz));
+		return new IsSame<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -317,7 +321,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<ZonedDateTime> sameInstant(final ZonedDateTime date) {
-		return new IsSame<ZonedDateTime>(date);
+		return new IsSame<ZonedDateTime>(new ZonedDateTimeWrapper(date), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -510,7 +514,9 @@ public abstract class ZonedDateTimeMatchers {
 			final int minute,
 			final int second,
 			final ZoneId tz) {
-		return new IsSameOrAfter<ZonedDateTime>(new ZonedDateTimeWrapper(LocalDateTime.of(year, month, day, hour, minute, second), tz), new ZonedDateTimeFormatter());
+		return new IsSameOrAfter<ZonedDateTime>(
+				new ZonedDateTimeWrapper(LocalDateTime.of(year, month, day, hour, minute, second), tz),
+					new ZonedDateTimeFormatter());
 	}
 
 	/**

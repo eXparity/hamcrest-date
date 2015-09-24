@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import org.exparity.hamcrest.date.core.DateFormatter;
 import org.exparity.hamcrest.date.core.DateWrapper;
 import org.exparity.hamcrest.date.core.IsAfter;
+import org.exparity.hamcrest.date.core.IsBefore;
 import org.exparity.hamcrest.date.core.IsSameOrAfter;
 import org.exparity.hamcrest.date.core.IsSameOrBefore;
 import org.hamcrest.Factory;
@@ -38,7 +39,7 @@ public abstract class DateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> after(final Date date) {
-		return new IsAfter<Date>(date);
+		return new IsAfter<Date>(new DateWrapper(date), new DateFormatter());
 	}
 
 	/**
@@ -54,8 +55,25 @@ public abstract class DateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> after(final DayMonthYear date) {
-		return after(date.getYear(), date.getMonth(), date.getDay());
+		return after(date.toLocalDate());
 	}
+	
+	/**
+	 * Creates a matcher that matches when the examined date is after the
+	 * reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, after(Moments.today()))
+	 * </pre>
+	 * 
+	 * @param date the reference date against which the examined date is checked
+	 */
+	public static Matcher<Date> after(final LocalDate date) {
+		return new IsAfter<Date>(new DateWrapper(date), new DateFormatter());
+	}
+
 
 	/**
 	 * Creates a matcher that matches when the examined date is after the end of
@@ -73,7 +91,7 @@ public abstract class DateMatchers {
 	 *            checked
 	 */
 	public static Matcher<Date> after(final int year, final Months month, final int day) {
-		return after(year, month, day, 23, 59, 59);
+		return new IsAfter<Date>(new DateWrapper(year, month.month(), day), new DateFormatter());
 	}
 
 	/**
@@ -99,11 +117,13 @@ public abstract class DateMatchers {
 	 */
 	public static Matcher<Date> after(final int year,
 			final Months month,
-			final int date,
+			final int dayOfMonth,
 			final int hour,
 			final int minute,
 			final int second) {
-		return after(toDate(year, month, date, hour, minute, second, 999));
+		return new IsAfter<Date>(
+				new DateWrapper(year, month.month(), dayOfMonth, hour, minute, second),
+					new DateFormatter());
 	}
 
 	/**
@@ -119,7 +139,23 @@ public abstract class DateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> before(final Date date) {
-		return new org.exparity.hamcrest.date.core.IsBefore<Date>(date);
+		return new IsBefore<Date>(new DateWrapper(date), new DateFormatter());
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is before the
+	 * reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, before(LocalDate.now()))
+	 * </pre>
+	 * 
+	 * @param date the reference date against which the examined date is checked
+	 */
+	public static Matcher<Date> before(final LocalDate date) {
+		return new IsBefore<Date>(new DateWrapper(date), new DateFormatter());
 	}
 
 	/**
@@ -135,7 +171,7 @@ public abstract class DateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> before(final DayMonthYear date) {
-		return before(date.getYear(), date.getMonth(), date.getDay());
+		return before(date.toLocalDate());
 	}
 
 	/**
@@ -150,11 +186,11 @@ public abstract class DateMatchers {
 	 * 
 	 * @param year the year against which the examined date is checked
 	 * @param month the month against which the examined date is checked
-	 * @param day the day of the month against which the examined date is
+	 * @param dayOfMonth the day of the month against which the examined date is
 	 *            checked
 	 */
-	public static Matcher<Date> before(final int year, final Months month, final int day) {
-		return before(year, month, day, 0, 0, 0);
+	public static Matcher<Date> before(final int year, final Months month, final int dayOfMonth) {
+		return new IsBefore<Date>(new DateWrapper(year, month.month(), dayOfMonth), new DateFormatter());
 	}
 
 	/**
@@ -180,11 +216,13 @@ public abstract class DateMatchers {
 	 */
 	public static Matcher<Date> before(final int year,
 			final Months month,
-			final int date,
+			final int dayOfMonth,
 			final int hour,
 			final int minute,
 			final int second) {
-		return before(toDate(year, month, date, hour, minute, second, 0));
+		return new IsBefore<Date>(
+				new DateWrapper(year, month.month(), dayOfMonth, hour, minute, second),
+					new DateFormatter());
 	}
 
 	/**
@@ -422,6 +460,22 @@ public abstract class DateMatchers {
 	}
 
 	/**
+	 * Creates a matcher that matches when the examined date is at the same
+	 * instant or before the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameOrBefore(LocalDate.now()))
+	 * </pre>
+	 * 
+	 * @param date the reference date against which the examined date is checked
+	 */
+	public static Matcher<Date> sameOrBefore(final LocalDate date) {
+		return new IsSameOrBefore<Date>(new DateWrapper(date), new DateFormatter());
+	}
+
+	/**
 	 * Creates a matcher that matches when the examined date is at the same date
 	 * or before the reference date
 	 * <p/>
@@ -434,7 +488,7 @@ public abstract class DateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameOrBefore(final DayMonthYear date) {
-		return sameOrBefore(date.getYear(), date.getMonth(), date.getDay());
+		return sameOrBefore(date.toLocalDate());
 	}
 
 	/**
@@ -488,7 +542,7 @@ public abstract class DateMatchers {
 			final int minute,
 			final int second) {
 		return new IsSameOrBefore<Date>(
-				new DateWrapper(LocalDate.of(year, month.month(), dayOfMonth), LocalTime.of(hour, minute, second)),
+				new DateWrapper(year, month.month(), dayOfMonth, hour, minute, second),
 					new DateFormatter());
 	}
 
@@ -509,6 +563,22 @@ public abstract class DateMatchers {
 	}
 
 	/**
+	 * F Creates a matcher that matches when the examined date is at the same
+	 * instant or after the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameOrAfter(LocalDate.now()))
+	 * </pre>
+	 * 
+	 * @param date the reference date against which the examined date is checked
+	 */
+	public static Matcher<Date> sameOrAfter(final LocalDate date) {
+		return new IsSameOrAfter<Date>(new DateWrapper(date), new DateFormatter());
+	}
+
+	/**
 	 * Creates a matcher that matches when the examined date is at the same
 	 * instant or after the reference date
 	 * <p/>
@@ -521,7 +591,7 @@ public abstract class DateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameOrAfter(final DayMonthYear date) {
-		return new IsSameOrAfter<Date>(new DateWrapper(date), new DateFormatter());
+		return sameOrAfter(date.toLocalDate());
 	}
 
 	/**
@@ -540,9 +610,7 @@ public abstract class DateMatchers {
 	 *            checked
 	 */
 	public static Matcher<Date> sameOrAfter(final int year, final Months month, final int dayOfMonth) {
-		return new IsSameOrAfter<Date>(
-				new DateWrapper(LocalDate.of(year, month.month(), dayOfMonth)),
-					new DateFormatter());
+		return new IsSameOrAfter<Date>(new DateWrapper(year, month.month(), dayOfMonth), new DateFormatter());
 	}
 
 	/**
@@ -574,7 +642,7 @@ public abstract class DateMatchers {
 			final int minute,
 			final int second) {
 		return new IsSameOrAfter<Date>(
-				new DateWrapper(LocalDate.of(year, month.month(), dayOfMonth), LocalTime.of(hour, minute, second)),
+				new DateWrapper(year, month.month(), dayOfMonth, hour, minute, second),
 					new DateFormatter());
 	}
 
@@ -1328,22 +1396,4 @@ public abstract class DateMatchers {
 	public static Matcher<Date> isLeapYear() {
 		return IsLeapYear.isLeapYear();
 	}
-
-	private static Date toDate(final int year,
-			final Months month,
-			final int date,
-			final int hour,
-			final int minute,
-			final int second,
-			int millis) {
-		Calendar calendar = getInstance();
-		calendar.set(year, month.calendarConstant(), date, hour, minute, second);
-		calendar.set(Calendar.MILLISECOND, millis);
-		return calendar.getTime();
-	}
-
-	private static Date truncateDate(Date d, ChronoUnit truncateTo) {
-		return new Date(d.toInstant().truncatedTo(truncateTo).toEpochMilli());
-	}
-
 }

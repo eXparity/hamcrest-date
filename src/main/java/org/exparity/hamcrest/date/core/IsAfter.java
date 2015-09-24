@@ -8,25 +8,27 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  * 
  * @author Stewart Bissett
  */
-public class IsAfter<T extends Comparable<? super T>> extends TypeSafeDiagnosingMatcher<T> {
+public class IsAfter<T> extends TypeSafeDiagnosingMatcher<T> {
 
-	private final T expected;
+	private final TemporalWrapper<T> expected;
+	private final TemporalFormatter<T> describer;
 
-	public IsAfter(final T expected) {
+	public IsAfter(final TemporalWrapper<T> expected, final TemporalFormatter<T> describer) {
 		this.expected = expected;
+		this.describer = describer;
 	}
 
 	@Override
-	protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
-		if (actual.compareTo(expected) > 0) {
-			return true;
-		} else {
-			mismatchDesc.appendText("date is ").appendValue(actual.toString());
+	protected boolean matchesSafely(T actual, Description mismatchDescription) {
+		if (expected.isSame(actual) || expected.isAfter(actual)) {
+			mismatchDescription.appendText("date is " + describer.describe(actual));
 			return false;
+		} else {
+			return true;
 		}
 	}
 
 	public void describeTo(final Description description) {
-		description.appendText("the date is after ").appendValue(expected.toString());
+		description.appendText("the date is after " + describer.describe(expected.unwrap()));
 	}
 }

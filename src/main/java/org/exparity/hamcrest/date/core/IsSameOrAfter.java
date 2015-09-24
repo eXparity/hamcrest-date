@@ -9,7 +9,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  * 
  * @author Stewart Bissett
  */
-public class IsSameOrAfter<T extends Comparable<? super T>> extends TypeSafeDiagnosingMatcher<T> {
+public class IsSameOrAfter<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	private final TemporalWrapper<T> expected;
 	private final TemporalFormatter<T> describer;
@@ -32,5 +32,5 @@ public class IsSameOrAfter<T extends Comparable<? super T>> extends TypeSafeDiag
 	public void describeTo(final Description description) {
 		description.appendText("the date is on same day or after " + describer.describe(expected.unwrap()));
 	}
-
+	
 }

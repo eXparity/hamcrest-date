@@ -55,7 +55,7 @@ public abstract class LocalDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> after(final Date date) {
-		return after(toLocalDateTime(date));
+		return new IsAfter<LocalDateTime>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -71,7 +71,7 @@ public abstract class LocalDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> after(final LocalDateTime date) {
-		return new IsAfter<LocalDateTime>(date);
+		return new IsAfter<LocalDateTime>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -98,7 +98,9 @@ public abstract class LocalDateTimeMatchers {
 			final int hour,
 			final int minute,
 			final int second) {
-		return after(LocalDateTime.of(year, month, dayOfMonth, hour, minute, second));
+		return new IsAfter<LocalDateTime>(
+				new LocalDateTimeWrapper(year, month, dayOfMonth, hour, minute, second),
+					new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -114,7 +116,7 @@ public abstract class LocalDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> before(final Date date) {
-		return before(toLocalDateTime(date));
+		return new IsBefore<LocalDateTime>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -130,7 +132,7 @@ public abstract class LocalDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> before(final LocalDateTime date) {
-		return new IsBefore<LocalDateTime>(date);
+		return new IsBefore<LocalDateTime>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -157,7 +159,9 @@ public abstract class LocalDateTimeMatchers {
 			final int hour,
 			final int minute,
 			final int second) {
-		return before(LocalDateTime.of(year, month, dayOfMonth, hour, minute, second));
+		return new IsBefore<LocalDateTime>(
+				new LocalDateTimeWrapper(year, month, dayOfMonth, hour, minute, second),
+					new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -225,7 +229,7 @@ public abstract class LocalDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameInstant(final Date date) {
-		return sameInstant(toLocalDateTime(date));
+		return new IsSame<LocalDateTime>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -241,7 +245,7 @@ public abstract class LocalDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameInstant(final LocalDateTime date) {
-		return new IsSame<LocalDateTime>(date);
+		return new IsSame<LocalDateTime>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -269,9 +273,10 @@ public abstract class LocalDateTimeMatchers {
 			final int dayOfMonth,
 			final int hour,
 			final int minute,
-			final int second,
-			final int nanos) {
-		return sameInstant(LocalDateTime.of(year, month, dayOfMonth, hour, minute, second, nanos));
+			final int second) {
+		return new IsSame<LocalDateTime>(
+				new LocalDateTimeWrapper(year, month, dayOfMonth, hour, minute, second),
+					new LocalDateTimeFormatter());
 	}
 
 	/**

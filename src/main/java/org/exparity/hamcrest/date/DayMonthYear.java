@@ -1,10 +1,17 @@
 package org.exparity.hamcrest.date;
 
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.Date;
+
 /**
  * Value object to store a day, month, and year tuple
  * 
  * @author Stewart Bissett
+ * 
+ * @deprecated Use {@link LocalDate}
  */
+@Deprecated
 public class DayMonthYear {
 
 	private final int day, year;
@@ -26,5 +33,9 @@ public class DayMonthYear {
 
 	public int getYear() {
 		return year;
+	}
+
+	public LocalDate toLocalDate() {
+		return LocalDate.of(year, month.month(), day);
 	}
 }
