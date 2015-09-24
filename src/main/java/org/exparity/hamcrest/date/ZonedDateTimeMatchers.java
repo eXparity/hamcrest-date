@@ -718,7 +718,11 @@ public abstract class ZonedDateTimeMatchers {
 			final ChronoUnit unit,
 			final Date date,
 			final ZoneId tz) {
-		return within(period, unit, toZonedDateTime(date, tz));
+		return new IsWithin<ZonedDateTime>(
+				period,
+					unit,
+					new ZonedDateTimeWrapper(date, tz),
+					new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -738,7 +742,11 @@ public abstract class ZonedDateTimeMatchers {
 			final ChronoUnit unit,
 			final LocalDateTime date,
 			final ZoneId tz) {
-		return within(period, unit, toZonedDateTime(date, tz));
+		return new IsWithin<ZonedDateTime>(
+				period,
+					unit,
+					new ZonedDateTimeWrapper(date, tz),
+					new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -754,7 +762,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<ZonedDateTime> within(final long period, final ChronoUnit unit, final ZonedDateTime date) {
-		return new IsWithin<ZonedDateTime>(period, unit, date);
+		return new IsWithin<ZonedDateTime>(period, unit, new ZonedDateTimeWrapper(date), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -791,7 +799,11 @@ public abstract class ZonedDateTimeMatchers {
 			final int minute,
 			final int second,
 			final ZoneId tz) {
-		return within(period, unit, LocalDateTime.of(year, month, dayofMonth, hour, minute, second), tz);
+		return new IsWithin<ZonedDateTime>(
+				period,
+					unit,
+					new ZonedDateTimeWrapper(year, month, dayofMonth, hour, minute, second, tz),
+					new ZonedDateTimeFormatter());
 	}
 
 	/**

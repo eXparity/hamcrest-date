@@ -6,6 +6,7 @@ package org.exparity.hamcrest.date.core;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 /**
@@ -44,5 +45,10 @@ public interface TemporalWrapper<T> {
 	 * @return a the wrapped value
 	 */
 	public T unwrap();
+
+	/**
+	 * Return the difference in units between this time and the other time in the given units
+	 */
+	public long difference(final T other, final ChronoUnit unit);
 
 }

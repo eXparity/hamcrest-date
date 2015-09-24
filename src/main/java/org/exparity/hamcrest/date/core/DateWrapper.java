@@ -49,6 +49,11 @@ public class DateWrapper implements TemporalWrapper<Date> {
 	}
 
 	@Override
+	public long difference(final Date other, ChronoUnit unit) {
+		return wrapped.truncatedTo(accuracy).until(other.toInstant(), unit);
+	}
+
+	@Override
 	public boolean isAfter(final Date other) {
 		return wrapped.truncatedTo(accuracy).isAfter(other.toInstant().truncatedTo(accuracy));
 	}

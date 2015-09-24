@@ -436,7 +436,7 @@ public abstract class LocalDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDate> within(final long period, final ChronoUnit unit, final Date date) {
-		return within(period, unit, toLocalDate(date));
+		return new IsWithin<LocalDate>(period, unit, new LocalDateWrapper(date), new LocalDateFormatter());
 	}
 
 	/**
@@ -452,7 +452,7 @@ public abstract class LocalDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDate> within(final long period, final ChronoUnit unit, final LocalDate date) {
-		return new IsWithin<LocalDate>(period, unit, date);
+		return new IsWithin<LocalDate>(period, unit, new LocalDateWrapper(date), new LocalDateFormatter());
 	}
 
 	/**

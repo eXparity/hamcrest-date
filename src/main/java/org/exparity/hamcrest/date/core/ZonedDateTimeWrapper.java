@@ -40,6 +40,11 @@ public class ZonedDateTimeWrapper implements TemporalWrapper<ZonedDateTime> {
 	}
 
 	@Override
+	public long difference(ZonedDateTime other, ChronoUnit unit) {
+		return Math.abs(wrapped.truncatedTo(accuracy).until(other, unit));
+	}
+	
+	@Override
 	public boolean isAfter(ZonedDateTime other) {
 		return wrapped.truncatedTo(accuracy).isAfter(other.truncatedTo(accuracy));
 	}

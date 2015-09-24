@@ -541,7 +541,7 @@ public abstract class LocalDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> within(final long period, final ChronoUnit unit, final Date date) {
-		return within(period, unit, toLocalDateTime(date));
+		return new IsWithin<LocalDateTime>(period, unit, new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -557,7 +557,7 @@ public abstract class LocalDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> within(final long period, final ChronoUnit unit, final LocalDateTime date) {
-		return new IsWithin<LocalDateTime>(period, unit, date);
+		return new IsWithin<LocalDateTime>(period, unit, new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -592,7 +592,11 @@ public abstract class LocalDateTimeMatchers {
 			final int hour,
 			final int minute,
 			final int second) {
-		return within(period, unit, LocalDateTime.of(year, month, dayofMonth, hour, minute, second));
+		return new IsWithin<LocalDateTime>(
+				period,
+					unit,
+					new LocalDateTimeWrapper(year, month, dayofMonth, hour, minute, second),
+					new LocalDateTimeFormatter());
 	}
 
 	/**

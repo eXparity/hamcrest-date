@@ -2,6 +2,7 @@ package org.exparity.hamcrest.date.core;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 /**
@@ -23,6 +24,11 @@ public class LocalDateWrapper implements TemporalWrapper<LocalDate> {
 	}
 
 	@Override
+	public long difference(LocalDate other, ChronoUnit unit) {
+		return Math.abs(wrapped.until(other, unit));
+	}
+
+	@Override
 	public boolean isAfter(LocalDate other) {
 		return wrapped.isAfter(other);
 	}
@@ -41,12 +47,12 @@ public class LocalDateWrapper implements TemporalWrapper<LocalDate> {
 	public boolean isSameDay(LocalDate other) {
 		return wrapped.isEqual(other);
 	}
-	
+
 	@Override
 	public LocalDate unwrap() {
 		return wrapped;
 	}
-	
+
 	@Override
 	public String toString() {
 		return wrapped.toString();

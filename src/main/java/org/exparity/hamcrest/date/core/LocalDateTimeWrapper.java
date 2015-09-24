@@ -34,6 +34,11 @@ public class LocalDateTimeWrapper implements TemporalWrapper<LocalDateTime> {
 	}
 
 	@Override
+	public long difference(LocalDateTime other, ChronoUnit unit) {
+		return Math.abs(wrapped.truncatedTo(accuracy).until(other, unit));
+	}
+
+	@Override
 	public boolean isAfter(LocalDateTime other) {
 		return wrapped.truncatedTo(accuracy).isAfter(other.truncatedTo(accuracy));
 	}

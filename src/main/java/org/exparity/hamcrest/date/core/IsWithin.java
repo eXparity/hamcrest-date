@@ -12,23 +12,25 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  * 
  * @author Stewart Bissett
  */
-public class IsWithin<T extends Temporal> extends TypeSafeDiagnosingMatcher<T> {
+public class IsWithin<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	private final long period;
 	private final ChronoUnit unit;
-	private final T expected;
+	private final TemporalWrapper<T> expected;
+	private final TemporalFormatter<T> describer;
 
-	public IsWithin(final long period, final ChronoUnit unit, final T expected) {
+	public IsWithin(final long period, final ChronoUnit unit, final TemporalWrapper<T> expected, final TemporalFormatter<T> describer) {
 		this.period = period;
 		this.unit = unit;
 		this.expected = expected;
+		this.describer = describer;
 	}
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
-		long actualDuration = Math.abs(expected.until(actual, unit));
+		long actualDuration = expected.difference(actual, unit);
 		if (actualDuration > period) {
-			mismatchDesc.appendText("date is " + expected.toString()
+			mismatchDesc.appendText("date is " + describer.describe(actual)
 					+ " and "
 					+ actualDuration
 					+ " "
@@ -41,7 +43,7 @@ public class IsWithin<T extends Temporal> extends TypeSafeDiagnosingMatcher<T> {
 	}
 
 	public void describeTo(final Description description) {
-		description.appendText("the date is within " + period + " " + describeUnit() + " of " + expected.toString());
+		description.appendText("the date is within " + period + " " + describeUnit() + " of " + describer.describe(expected.unwrap()));
 	}
 
 	private String describeUnit() {
