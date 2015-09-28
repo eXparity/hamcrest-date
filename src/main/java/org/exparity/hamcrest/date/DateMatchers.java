@@ -11,6 +11,7 @@ import org.exparity.hamcrest.date.core.DateWrapper;
 import org.exparity.hamcrest.date.core.IsAfter;
 import org.exparity.hamcrest.date.core.IsBefore;
 import org.exparity.hamcrest.date.core.IsSame;
+import org.exparity.hamcrest.date.core.IsSameDay;
 import org.exparity.hamcrest.date.core.IsSameOrAfter;
 import org.exparity.hamcrest.date.core.IsSameOrBefore;
 import org.exparity.hamcrest.date.core.IsWithin;
@@ -371,7 +372,25 @@ public abstract class DateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameDay(final Date date) {
-		return IsSameDay.sameDay(date);
+		return new IsSameDay<Date>(new DateWrapper(date), new DateFormatter());
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same day
+	 * of the year as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameDay(Moments.today()));
+	 * </pre>
+	 * 
+	 * @param date the reference date against which the examined date is checked
+	 * @deprecated Use {@link #sameDay(LocalDate)}
+	 */
+	@Deprecated
+	public static Matcher<Date> sameDay(final DayMonthYear date) {
+		return sameDay(date.toLocalDate());
 	}
 
 	/**
@@ -386,8 +405,8 @@ public abstract class DateMatchers {
 	 * 
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static Matcher<Date> sameDay(final DayMonthYear date) {
-		return IsSameDay.sameDay(date);
+	public static Matcher<Date> sameDay(final LocalDate date) {
+		return new IsSameDay<Date>(new DateWrapper(date), new DateFormatter());
 	}
 
 	/**
@@ -405,9 +424,31 @@ public abstract class DateMatchers {
 	 * @param month the reference month against which the examined date is
 	 *            checked
 	 * @param year the reference year against which the examined date is checked
+	 * @deprecated Use {@link #sameDay(int, Month, int)}
 	 */
+	@Deprecated
 	public static Matcher<Date> sameDay(final int year, final Months month, final int day) {
-		return IsSameDay.sameDay(year, month, day);
+		return sameDay(year, month.month(), day);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is on the same day
+	 * of the year as the reference date
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, sameDayOfTheYear(2012, Month.JAN, 1))
+	 * </pre>
+	 * 
+	 * @param dayOfMonth the reference day of the month against which the examined date
+	 *            is checked
+	 * @param month the reference month against which the examined date is
+	 *            checked
+	 * @param year the reference year against which the examined date is checked
+	 */
+	public static Matcher<Date> sameDay(final int year, final Month month, final int dayOfMonth) {
+		return sameDay(LocalDate.of(year, month, dayOfMonth));
 	}
 
 	/**
@@ -1402,7 +1443,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isYesterday() {
-		return IsDay.isYesterday();
+		return sameDay(LocalDate.now().minusDays(1));
 	}
 
 	/**
@@ -1415,7 +1456,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isToday() {
-		return IsDay.isToday();
+		return sameDay(LocalDate.now());
 	}
 
 	/**
@@ -1428,7 +1469,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isTomorrow() {
-		return IsDay.isTomorrow();
+		return sameDay(LocalDate.now().plusDays(1));
 	}
 
 	/**

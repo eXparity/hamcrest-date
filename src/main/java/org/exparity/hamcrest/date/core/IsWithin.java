@@ -30,7 +30,7 @@ public class IsWithin<T> extends TypeSafeDiagnosingMatcher<T> {
 	protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
 		long actualDuration = expected.difference(actual, unit);
 		if (actualDuration > period) {
-			mismatchDesc.appendText("date is " + describer.describe(actual)
+			mismatchDesc.appendText("date is " + describer.describe(expected.unwrap())
 					+ " and "
 					+ actualDuration
 					+ " "

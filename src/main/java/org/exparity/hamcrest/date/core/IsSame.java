@@ -21,7 +21,7 @@ public class IsSame<T> extends TypeSafeDiagnosingMatcher<T> {
 	@Override
 	protected boolean matchesSafely(T actual, Description mismatchDescription) {
 		if (!expected.isSame(actual)) {
-			mismatchDescription.appendText("date is " + describer.describe(actual));
+			mismatchDescription.appendText("date is " + describer.describe(expected.unwrap()));
 			return false;
 		} else {
 			return true;

@@ -177,7 +177,7 @@ public abstract class LocalDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameDay(final Date date) {
-		return sameDay(toLocalDateTime(date));
+		return new IsSameDay<LocalDateTime>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -193,7 +193,7 @@ public abstract class LocalDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameDay(final LocalDateTime date) {
-		return new IsSameDay<LocalDateTime>(date);
+		return new IsSameDay<LocalDateTime>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -213,7 +213,7 @@ public abstract class LocalDateTimeMatchers {
 	 * @param year the reference year against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameDay(final int year, final Month month, final int dayOfMonth) {
-		return sameDay(LocalDateTime.of(year, month, dayOfMonth, 0, 0, 0));
+		return new IsSameDay<LocalDateTime>(new LocalDateTimeWrapper(year, month, dayOfMonth), new LocalDateTimeFormatter());
 	}
 
 	/**

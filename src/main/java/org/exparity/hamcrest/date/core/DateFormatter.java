@@ -20,5 +20,4 @@ public class DateFormatter implements TemporalFormatter<Date> {
 	public String describe(final Date temporal) {
 		return new SimpleDateFormat(DATE_PATTERN_WITH_MILLIS).format(temporal);
 	}
-
 }

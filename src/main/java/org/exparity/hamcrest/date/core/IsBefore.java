@@ -21,7 +21,7 @@ public class IsBefore<T> extends TypeSafeDiagnosingMatcher<T> {
 	@Override
 	protected boolean matchesSafely(T actual, Description mismatchDescription) {
 		if (expected.isSame(actual) || expected.isBefore(actual)) {
-			mismatchDescription.appendText("date is " + describer.describe(actual));
+			mismatchDescription.appendText("date is " + describer.describe(expected.unwrap()));
 			return false;
 		} else {
 			return true;

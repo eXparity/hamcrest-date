@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class LocalDateFormatter implements TemporalFormatter<LocalDate> {
 
 	@Override
-	public String describe(LocalDate temporal) {
+	public String describe(final LocalDate temporal) {
 		return temporal.toString();
 	}
 

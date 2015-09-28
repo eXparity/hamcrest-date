@@ -214,7 +214,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<ZonedDateTime> sameDay(final Date date, final ZoneId tz) {
-		return sameDay(toZonedDateTime(date, tz));
+		return new IsSameDay<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -230,7 +230,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<ZonedDateTime> sameDay(final LocalDateTime date, final ZoneId tz) {
-		return sameDay(toZonedDateTime(date, tz));
+		return new IsSameDay<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -246,7 +246,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<ZonedDateTime> sameDay(final ZonedDateTime date) {
-		return new IsSameDay<ZonedDateTime>(date);
+		return new IsSameDay<ZonedDateTime>(new ZonedDateTimeWrapper(date), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -270,7 +270,7 @@ public abstract class ZonedDateTimeMatchers {
 			final Month month,
 			final int dayOfMonth,
 			final ZoneId tz) {
-		return sameDay(LocalDateTime.of(year, month, dayOfMonth, 0, 0, 0), tz);
+		return new IsSameDay<ZonedDateTime>(new ZonedDateTimeWrapper(year, month, dayOfMonth, tz), new ZonedDateTimeFormatter());
 	}
 
 	/**

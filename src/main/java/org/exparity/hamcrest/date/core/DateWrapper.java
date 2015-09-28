@@ -80,7 +80,7 @@ public class DateWrapper implements TemporalWrapper<Date> {
 
 	@Override
 	public boolean isSameDay(Date other) {
-		return wrapped.truncatedTo(accuracy).equals(other.toInstant().truncatedTo(ChronoUnit.DAYS));
+		return wrapped.truncatedTo(ChronoUnit.DAYS).equals(other.toInstant().truncatedTo(ChronoUnit.DAYS));
 	}
 
 	@Override

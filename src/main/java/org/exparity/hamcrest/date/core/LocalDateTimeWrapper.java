@@ -1,6 +1,8 @@
 package org.exparity.hamcrest.date.core;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Month;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -26,6 +28,11 @@ public class LocalDateTimeWrapper implements TemporalWrapper<LocalDateTime> {
 	public LocalDateTimeWrapper(final LocalDateTime date) {
 		this.wrapped = date;
 		this.accuracy = ChronoUnit.NANOS;
+	}
+
+	public LocalDateTimeWrapper(int year, Month month, int dayOfMonth) {
+		this.wrapped = LocalDateTime.of(LocalDate.of(year, month, dayOfMonth), LocalTime.NOON);
+		this.accuracy = ChronoUnit.DAYS;
 	}
 
 	public LocalDateTimeWrapper(int year, Month month, int dayOfMonth, int hour, int minute, int second) {

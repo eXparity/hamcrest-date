@@ -10,8 +10,8 @@ package org.exparity.hamcrest.date.core;
 public interface TemporalFormatter<T> {
 
 	/**
-	 * @param temporal the temporal value to describe
+	 * @param temporal TODO
 	 * @return a pretty description of the temporal value as a date
 	 */
-	public String describe(final T temporal);
+	public String describe(T temporal);
 }

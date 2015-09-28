@@ -1,6 +1,8 @@
 package org.exparity.hamcrest.date.core;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Month;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -34,16 +36,22 @@ public class ZonedDateTimeWrapper implements TemporalWrapper<ZonedDateTime> {
 		this.accuracy = ChronoUnit.NANOS;
 	}
 
-	public ZonedDateTimeWrapper(int year, Month month, int dayOfMonth, int hour, int minute, int second, final ZoneId zone) {
+	public ZonedDateTimeWrapper(int year, Month month, int dayOfMonth, int hour, int minute, int second,
+			final ZoneId zone) {
 		this.wrapped = ZonedDateTime.of(LocalDateTime.of(year, month, dayOfMonth, hour, minute, second), zone);
 		this.accuracy = ChronoUnit.SECONDS;
+	}
+
+	public ZonedDateTimeWrapper(int year, Month month, int dayOfMonth, final ZoneId zone) {
+		this.wrapped = ZonedDateTime.of(LocalDate.of(year, month, dayOfMonth), LocalTime.NOON, zone);
+		this.accuracy = ChronoUnit.DAYS;
 	}
 
 	@Override
 	public long difference(ZonedDateTime other, ChronoUnit unit) {
 		return Math.abs(wrapped.truncatedTo(accuracy).until(other, unit));
 	}
-	
+
 	@Override
 	public boolean isAfter(ZonedDateTime other) {
 		return wrapped.truncatedTo(accuracy).isAfter(other.truncatedTo(accuracy));
