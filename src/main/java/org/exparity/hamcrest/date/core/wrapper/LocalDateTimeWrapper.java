@@ -1,4 +1,4 @@
-package org.exparity.hamcrest.date.core;
+package org.exparity.hamcrest.date.core.wrapper;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,6 +8,8 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
 import java.util.Date;
+
+import org.exparity.hamcrest.date.core.TemporalWrapper;
 
 /**
  * Implementation of a {@link TemporalWrapper} which wraps a

@@ -29,8 +29,8 @@ import org.exparity.hamcrest.date.core.IsSameOrBefore;
 import org.exparity.hamcrest.date.core.IsSecond;
 import org.exparity.hamcrest.date.core.IsWithin;
 import org.exparity.hamcrest.date.core.IsYear;
-import org.exparity.hamcrest.date.core.LocalDateTimeFormatter;
-import org.exparity.hamcrest.date.core.LocalDateTimeWrapper;
+import org.exparity.hamcrest.date.core.format.LocalDateTimeFormatter;
+import org.exparity.hamcrest.date.core.wrapper.LocalDateTimeWrapper;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
@@ -609,7 +609,7 @@ public abstract class LocalDateTimeMatchers {
 	 * </pre>
 	 */
 	public static Matcher<LocalDateTime> isYesterday() {
-		return sameDay(LocalDateTime.now().plusDays(-1));
+		return sameDay(LocalDateTime.now().minusDays(1));
 	}
 
 	/**
@@ -839,7 +839,7 @@ public abstract class LocalDateTimeMatchers {
 	 * </pre>
 	 */
 	public static Matcher<LocalDateTime> isMonth(final Month month) {
-		return new IsMonth<LocalDateTime>(month);
+		return new IsMonth<LocalDateTime>(month, (t,f) -> t.get(f));
 	}
 
 	/**

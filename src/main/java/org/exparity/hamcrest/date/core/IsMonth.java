@@ -3,7 +3,6 @@ package org.exparity.hamcrest.date.core;
 import java.time.Month;
 import java.time.format.TextStyle;
 import java.time.temporal.ChronoField;
-import java.time.temporal.Temporal;
 import java.util.Locale;
 
 import org.hamcrest.Description;
@@ -15,18 +14,20 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  * 
  * @author Stewart Bissett
  */
-public class IsMonth<T extends Temporal> extends TypeSafeDiagnosingMatcher<T> {
+public class IsMonth<T> extends TypeSafeDiagnosingMatcher<T> {
 
-	private final Month expected;
+	private final Month expectedMonth;
+	private final TemporalFieldWrapper<T> accessor;
 
-	public IsMonth(final Month expected) {
-		this.expected = expected;
+	public IsMonth(final Month month, final TemporalFieldWrapper<T> accessor) {
+		this.expectedMonth = month;
+		this.accessor = accessor;
 	}
 
 	@Override
-	protected boolean matchesSafely(final T actual, Description mismatchDescription) {
-		Month actualMonth = Month.of(actual.get(ChronoField.MONTH_OF_YEAR));
-		if (expected.equals(actualMonth)) {
+	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
+		Month actualMonth = Month.of(accessor.get(actual, ChronoField.MONTH_OF_YEAR));
+		if (expectedMonth.equals(actualMonth)) {
 			return true;
 		} else {
 			mismatchDescription.appendText("the date is in " + describeMonth(actualMonth));
@@ -36,7 +37,7 @@ public class IsMonth<T extends Temporal> extends TypeSafeDiagnosingMatcher<T> {
 
 	@Override
 	public void describeTo(Description description) {
-		description.appendText("the date is in month " + describeMonth(expected));
+		description.appendText("the date is in the month of " + describeMonth(expectedMonth));
 	}
 
 	private String describeMonth(Month m) {

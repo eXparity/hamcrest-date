@@ -30,8 +30,8 @@ import org.exparity.hamcrest.date.core.IsSameOrBefore;
 import org.exparity.hamcrest.date.core.IsSecond;
 import org.exparity.hamcrest.date.core.IsWithin;
 import org.exparity.hamcrest.date.core.IsYear;
-import org.exparity.hamcrest.date.core.ZonedDateTimeFormatter;
-import org.exparity.hamcrest.date.core.ZonedDateTimeWrapper;
+import org.exparity.hamcrest.date.core.format.ZonedDateTimeFormatter;
+import org.exparity.hamcrest.date.core.wrapper.ZonedDateTimeWrapper;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
@@ -1046,7 +1046,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * </pre>
 	 */
 	public static Matcher<ZonedDateTime> isMonth(final Month month) {
-		return new IsMonth<ZonedDateTime>(month);
+		return new IsMonth<ZonedDateTime>(month, (t,f) -> t.get(f));
 	}
 
 	/**

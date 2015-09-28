@@ -1,20 +1,25 @@
 package org.exparity.hamcrest.date;
 
+import static java.time.Month.*;
+
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.ZoneId;
+import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import org.exparity.hamcrest.date.core.DateFormatter;
-import org.exparity.hamcrest.date.core.DateWrapper;
 import org.exparity.hamcrest.date.core.IsAfter;
 import org.exparity.hamcrest.date.core.IsBefore;
+import org.exparity.hamcrest.date.core.IsMonth;
 import org.exparity.hamcrest.date.core.IsSame;
 import org.exparity.hamcrest.date.core.IsSameDay;
 import org.exparity.hamcrest.date.core.IsSameOrAfter;
 import org.exparity.hamcrest.date.core.IsSameOrBefore;
 import org.exparity.hamcrest.date.core.IsWithin;
+import org.exparity.hamcrest.date.core.format.DateFormatter;
+import org.exparity.hamcrest.date.core.wrapper.DateWrapper;
 import org.hamcrest.Matcher;
 
 /**
@@ -441,8 +446,8 @@ public abstract class DateMatchers {
 	 * assertThat(myDate, sameDayOfTheYear(2012, Month.JAN, 1))
 	 * </pre>
 	 * 
-	 * @param dayOfMonth the reference day of the month against which the examined date
-	 *            is checked
+	 * @param dayOfMonth the reference day of the month against which the
+	 *            examined date is checked
 	 * @param month the reference month against which the examined date is
 	 *            checked
 	 * @param year the reference year against which the examined date is checked
@@ -1027,7 +1032,7 @@ public abstract class DateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<Date> sameMonthOfYear(final Date date) {
-		return IsSameMonthOfYear.sameMonthOfYear(date);
+		return isMonth(Month.of(date.toInstant().atZone(ZoneId.systemDefault()).get(ChronoField.MONTH_OF_YEAR)));
 	}
 
 	/**
@@ -1060,9 +1065,10 @@ public abstract class DateMatchers {
 	 * 
 	 * @param month the reference month against which the examined date is
 	 *            checked
+	 * @deprecated Use {@link #isMonth(Month)}
 	 */
 	public static Matcher<Date> sameMonthOfYear(final Months month) {
-		return IsSameMonthOfYear.sameMonthOfYear(month);
+		return isMonth(month.month());
 	}
 
 	/**
@@ -1618,6 +1624,20 @@ public abstract class DateMatchers {
 	}
 
 	/**
+	 * Creates a matcher that matches when the examined date is in the expected
+	 * month
+	 * <p/>
+	 * For example:
+	 * 
+	 * <pre>
+	 * assertThat(myDate, isMonth(Month.AUGUST));
+	 * </pre>
+	 */
+	public static Matcher<Date> isMonth(final Month month) {
+		return new IsMonth<Date>(month, (t, f) -> t.toInstant().atZone(ZoneId.systemDefault()).get(f));
+	}
+
+	/**
 	 * Creates a matcher that matches when the examined date is in January
 	 * <p/>
 	 * For example:
@@ -1627,7 +1647,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isJanuary() {
-		return IsSameMonthOfYear.isJanuary();
+		return isMonth(JANUARY);
 	}
 
 	/**
@@ -1640,7 +1660,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isFebruary() {
-		return IsSameMonthOfYear.isFebruary();
+		return isMonth(FEBRUARY);
 	}
 
 	/**
@@ -1653,7 +1673,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isMarch() {
-		return IsSameMonthOfYear.isMarch();
+		return isMonth(MARCH);
 	}
 
 	/**
@@ -1666,7 +1686,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isApril() {
-		return IsSameMonthOfYear.isApril();
+		return isMonth(APRIL);
 	}
 
 	/**
@@ -1679,7 +1699,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isMay() {
-		return IsSameMonthOfYear.isMay();
+		return isMonth(MAY);
 	}
 
 	/**
@@ -1692,7 +1712,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isJune() {
-		return IsSameMonthOfYear.isJune();
+		return isMonth(JUNE);
 	}
 
 	/**
@@ -1705,7 +1725,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isJuly() {
-		return IsSameMonthOfYear.isJuly();
+		return isMonth(JULY);
 	}
 
 	/**
@@ -1718,7 +1738,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isAugust() {
-		return IsSameMonthOfYear.isAugust();
+		return isMonth(AUGUST);
 	}
 
 	/**
@@ -1731,7 +1751,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isSeptember() {
-		return IsSameMonthOfYear.isSeptember();
+		return isMonth(SEPTEMBER);
 	}
 
 	/**
@@ -1744,7 +1764,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isOctober() {
-		return IsSameMonthOfYear.isOctober();
+		return isMonth(OCTOBER);
 	}
 
 	/**
@@ -1757,7 +1777,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isNovember() {
-		return IsSameMonthOfYear.isNovember();
+		return isMonth(NOVEMBER);
 	}
 
 	/**
@@ -1770,7 +1790,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isDecember() {
-		return IsSameMonthOfYear.isDecember();
+		return isMonth(DECEMBER);
 	}
 
 	/**

@@ -1,10 +1,12 @@
 /**
  * 
  */
-package org.exparity.hamcrest.date.core;
+package org.exparity.hamcrest.date.core.format;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import org.exparity.hamcrest.date.core.TemporalFormatter;
 
 /**
  * Implementation of a {@link TemporalFormatter} that can format a

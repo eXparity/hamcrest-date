@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.exparity.hamcrest.date.core;
+package org.exparity.hamcrest.date.core.wrapper;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -15,6 +15,7 @@ import java.time.temporal.TemporalUnit;
 import java.util.Date;
 
 import org.exparity.hamcrest.date.DayMonthYear;
+import org.exparity.hamcrest.date.core.TemporalWrapper;
 
 /**
  * Implementation of {@link TemporalWrapper} to wrap {@link Date} objects.

@@ -25,8 +25,8 @@ import org.exparity.hamcrest.date.core.IsSameOrAfter;
 import org.exparity.hamcrest.date.core.IsSameOrBefore;
 import org.exparity.hamcrest.date.core.IsWithin;
 import org.exparity.hamcrest.date.core.IsYear;
-import org.exparity.hamcrest.date.core.LocalDateFormatter;
-import org.exparity.hamcrest.date.core.LocalDateWrapper;
+import org.exparity.hamcrest.date.core.format.LocalDateFormatter;
+import org.exparity.hamcrest.date.core.wrapper.LocalDateWrapper;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
@@ -720,7 +720,7 @@ public abstract class LocalDateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<LocalDate> isMonth(final Month month) {
-		return new IsMonth<LocalDate>(month);
+		return new IsMonth<LocalDate>(month, (t, f) -> t.get(f));
 	}
 
 	/**
