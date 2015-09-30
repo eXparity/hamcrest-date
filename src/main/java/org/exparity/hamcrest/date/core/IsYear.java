@@ -1,7 +1,6 @@
 package org.exparity.hamcrest.date.core;
 
 import java.time.temporal.ChronoField;
-import java.time.temporal.Temporal;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
@@ -9,20 +8,22 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 /**
  * A matcher that tests that the examined date is on the same year as the
  * reference date
- * 
+ *
  * @author Stewart Bissett
  */
-public class IsYear<T extends Temporal> extends TypeSafeDiagnosingMatcher<T> {
+public class IsYear<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	private final int expected;
+	private final TemporalAdapter<T> accessor;
 
-	public IsYear(final int expected) {
+	public IsYear(final int expected, final TemporalAdapter<T> accessor) {
 		this.expected = expected;
+		this.accessor = accessor;
 	}
 
 	@Override
-	protected boolean matchesSafely(final T actual, Description mismatchDescription) {
-		int actualYear = actual.get(ChronoField.YEAR);
+	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
+		int actualYear = accessor.asTemporal(actual).get(ChronoField.YEAR);
 		if (expected == actualYear) {
 			return true;
 		} else {
@@ -32,7 +33,7 @@ public class IsYear<T extends Temporal> extends TypeSafeDiagnosingMatcher<T> {
 	}
 
 	@Override
-	public void describeTo(Description description) {
+	public void describeTo(final Description description) {
 		description.appendText("the date is in the year " + expected);
 	}
 }

@@ -30,11 +30,11 @@ public class IsSameMinuteTest {
 
 	@Test
 	public void canCompareTheSameMinuteInt() {
-		assertThat(JAN_01_2012_11AM_AS_DATE, sameMinuteOfHour(0));
+		assertThat(JAN_01_2012_11AM_AS_DATE, isMinute(0));
 	}
 
 	@Test
 	public void canDetectDifferentMinuteInt() {
-		assertThat(JAN_01_2012_11AM_AS_DATE, not(sameMinuteOfHour(1)));
+		assertThat(JAN_01_2012_11AM_AS_DATE, not(isMinute(1)));
 	}
 }

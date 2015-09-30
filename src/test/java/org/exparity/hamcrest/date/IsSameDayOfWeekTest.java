@@ -1,15 +1,15 @@
 
 package org.exparity.hamcrest.date;
 
-import org.exparity.hamcrest.date.Weekdays;
-import org.junit.Test;
 import static org.exparity.hamcrest.date.DateMatchers.*;
 import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import org.junit.Test;
+
 /**
  * Unit Tests for the {@link IsSameMonthOfYear} class
- * 
+ *
  * @author Stewart Bissett
  */
 public class IsSameDayOfWeekTest {
@@ -26,12 +26,12 @@ public class IsSameDayOfWeekTest {
 
 	@Test
 	public void canMatchTheSameWeekday() {
-		assertThat(JAN_01_2012_11AM_AS_DATE, sameDayOfWeek(Weekdays.SUNDAY));
+		assertThat(JAN_01_2012_11AM_AS_DATE, isDayOfWeek(Weekdays.SUNDAY));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void canMatchDifferentWeekday() {
-		assertThat(JAN_01_2012_11AM_AS_DATE, sameDayOfWeek(Weekdays.SATURDAY));
+		assertThat(JAN_01_2012_11AM_AS_DATE, isDayOfWeek(Weekdays.SATURDAY));
 	}
 
 	@Test

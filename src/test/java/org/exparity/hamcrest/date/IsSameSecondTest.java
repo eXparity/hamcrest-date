@@ -30,12 +30,12 @@ public class IsSameSecondTest {
 
 	@Test
 	public void canCompareTheSameSecondInt() {
-		assertThat(JAN_01_2012_11AM_AS_DATE, sameSecondOfMinute(0));
+		assertThat(JAN_01_2012_11AM_AS_DATE, isSecond(0));
 	}
 
 	@Test
 	public void canDetectDifferentSecondInt() {
-		assertThat(JAN_01_2012_11AM_AS_DATE, not(sameSecondOfMinute(1)));
+		assertThat(JAN_01_2012_11AM_AS_DATE, not(isSecond(1)));
 	}
 
 }

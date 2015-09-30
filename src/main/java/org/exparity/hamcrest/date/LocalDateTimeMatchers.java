@@ -2,6 +2,7 @@ package org.exparity.hamcrest.date;
 
 import static java.time.DayOfWeek.*;
 import static java.time.Month.*;
+import static java.util.Arrays.asList;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -37,7 +38,7 @@ import org.hamcrest.Matcher;
 /**
  * Static factory for creating {@link org.hamcrest.Matcher} instances for
  * comparing {@link LocalDateTime} instances
- * 
+ *
  * @author Stewart Bissett
  */
 public abstract class LocalDateTimeMatchers {
@@ -47,11 +48,11 @@ public abstract class LocalDateTimeMatchers {
 	 * reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * MatcherAssert.assertThat(myDate, LocalDateTimeMatchers.after(LocalDateTime.now()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> after(final Date date) {
@@ -63,11 +64,11 @@ public abstract class LocalDateTimeMatchers {
 	 * reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * MatcherAssert.assertThat(myDate, LocalDateTimeMatchers.after(LocalDateTime.now()));
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> after(final LocalDateTime date) {
@@ -79,11 +80,11 @@ public abstract class LocalDateTimeMatchers {
 	 * the reference year
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * MatcherAssert.assertThat(myDate, LocalDateTimeMatchers.after(2012, Month.MAY, 12));
 	 * </pre>
-	 * 
+	 *
 	 * @param year the year against which the examined date is checked
 	 * @param month the month against which the examined date is checked
 	 * @param dayOfMonth the day of the month against which the examined date is
@@ -93,14 +94,14 @@ public abstract class LocalDateTimeMatchers {
 	 * @param second the second of the minute
 	 */
 	public static Matcher<LocalDateTime> after(final int year,
-			final Month month,
-			final int dayOfMonth,
-			final int hour,
-			final int minute,
-			final int second) {
+	        final Month month,
+	        final int dayOfMonth,
+	        final int hour,
+	        final int minute,
+	        final int second) {
 		return new IsAfter<LocalDateTime>(
-				new LocalDateTimeWrapper(year, month, dayOfMonth, hour, minute, second),
-					new LocalDateTimeFormatter());
+		        new LocalDateTimeWrapper(year, month, dayOfMonth, hour, minute, second),
+		            new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -108,11 +109,11 @@ public abstract class LocalDateTimeMatchers {
 	 * reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * MatcherAssert.assertThat(myDate, LocalDateTimeMatchers.before(LocalDateTime.now()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> before(final Date date) {
@@ -124,11 +125,11 @@ public abstract class LocalDateTimeMatchers {
 	 * reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * MatcherAssert.assertThat(myDate, LocalDateTimeMatchers.before(LocalDateTime.now()));
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> before(final LocalDateTime date) {
@@ -140,11 +141,11 @@ public abstract class LocalDateTimeMatchers {
 	 * of the reference year
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * MatcherAssert.assertThat(myDate, LocalDateTimeMatchers.before(2012, Month.MAY, 12));
 	 * </pre>
-	 * 
+	 *
 	 * @param year the year against which the examined date is checked
 	 * @param month the month against which the examined date is checked
 	 * @param dayOfMonth the day of the month against which the examined date is
@@ -154,14 +155,14 @@ public abstract class LocalDateTimeMatchers {
 	 * @param second the second of the minute
 	 */
 	public static Matcher<LocalDateTime> before(final int year,
-			final Month month,
-			final int dayOfMonth,
-			final int hour,
-			final int minute,
-			final int second) {
+	        final Month month,
+	        final int dayOfMonth,
+	        final int hour,
+	        final int minute,
+	        final int second) {
 		return new IsBefore<LocalDateTime>(
-				new LocalDateTimeWrapper(year, month, dayOfMonth, hour, minute, second),
-					new LocalDateTimeFormatter());
+		        new LocalDateTimeWrapper(year, month, dayOfMonth, hour, minute, second),
+		            new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -169,11 +170,11 @@ public abstract class LocalDateTimeMatchers {
 	 * of the year as the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameDay(new Date()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameDay(final Date date) {
@@ -185,11 +186,11 @@ public abstract class LocalDateTimeMatchers {
 	 * of the year as the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameDay(LocalDateTime.now()));
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameDay(final LocalDateTime date) {
@@ -201,11 +202,11 @@ public abstract class LocalDateTimeMatchers {
 	 * of the year as the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameDay(2012, Month.JAN, 1))
 	 * </pre>
-	 * 
+	 *
 	 * @param dayOfMonth the reference day of the month against which the
 	 *            examined date is checked
 	 * @param month the reference month against which the examined date is
@@ -213,7 +214,9 @@ public abstract class LocalDateTimeMatchers {
 	 * @param year the reference year against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameDay(final int year, final Month month, final int dayOfMonth) {
-		return new IsSameDay<LocalDateTime>(new LocalDateTimeWrapper(year, month, dayOfMonth), new LocalDateTimeFormatter());
+		return new IsSameDay<LocalDateTime>(
+		        new LocalDateTimeWrapper(year, month, dayOfMonth),
+		            new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -221,11 +224,11 @@ public abstract class LocalDateTimeMatchers {
 	 * instant of the year as the reference date down to the millisecond
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameInstant(new Date()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameInstant(final Date date) {
@@ -237,11 +240,11 @@ public abstract class LocalDateTimeMatchers {
 	 * instant as the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameInstant(LocalDateTime.now()));
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameInstant(final LocalDateTime date) {
@@ -253,11 +256,11 @@ public abstract class LocalDateTimeMatchers {
 	 * specified instance down to the second
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameInstant(2012, Month.JAN, 1, 3, 15, 0))
 	 * </pre>
-	 * 
+	 *
 	 * @param dayOfMonth the reference day of the month against which the
 	 *            examined date is checked
 	 * @param month the reference month against which the examined date is
@@ -269,14 +272,14 @@ public abstract class LocalDateTimeMatchers {
 	 * @param nanos the nanosecond of the second
 	 */
 	public static Matcher<LocalDateTime> sameInstant(final int year,
-			final Month month,
-			final int dayOfMonth,
-			final int hour,
-			final int minute,
-			final int second) {
+	        final Month month,
+	        final int dayOfMonth,
+	        final int hour,
+	        final int minute,
+	        final int second) {
 		return new IsSame<LocalDateTime>(
-				new LocalDateTimeWrapper(year, month, dayOfMonth, hour, minute, second),
-					new LocalDateTimeFormatter());
+		        new LocalDateTimeWrapper(year, month, dayOfMonth, hour, minute, second),
+		            new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -284,11 +287,11 @@ public abstract class LocalDateTimeMatchers {
 	 * instant or before the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isSameOrBefore(new Date()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameOrBefore(final LocalDateTime date) {
@@ -300,11 +303,11 @@ public abstract class LocalDateTimeMatchers {
 	 * instant or before the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isSameOrBefore(new Date()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameOrBefore(final Date date) {
@@ -316,11 +319,11 @@ public abstract class LocalDateTimeMatchers {
 	 * or before the start of the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isSameOrBefore(2012, Months.MAY, 12));
 	 * </pre>
-	 * 
+	 *
 	 * @param year the year against which the examined date is checked
 	 * @param month the month against which the examined date is checked
 	 * @param day the day of the month against which the examined date is
@@ -331,14 +334,14 @@ public abstract class LocalDateTimeMatchers {
 	 */
 	@Factory
 	public static Matcher<LocalDateTime> sameOrBefore(final int year,
-			final Month month,
-			final int day,
-			final int hour,
-			final int minute,
-			final int second) {
+	        final Month month,
+	        final int day,
+	        final int hour,
+	        final int minute,
+	        final int second) {
 		return new IsSameOrBefore<LocalDateTime>(
-				new LocalDateTimeWrapper(year, month, day, hour, minute, second),
-					new LocalDateTimeFormatter());
+		        new LocalDateTimeWrapper(year, month, day, hour, minute, second),
+		            new LocalDateTimeFormatter());
 	}
 
 	/**
@@ -346,11 +349,11 @@ public abstract class LocalDateTimeMatchers {
 	 * instant or after the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isSameOrAfter(new Date()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameOrAfter(final Date date) {
@@ -362,11 +365,11 @@ public abstract class LocalDateTimeMatchers {
 	 * instant or after the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isSameOrAfter(new Date()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameOrAfter(final LocalDateTime date) {
@@ -378,11 +381,11 @@ public abstract class LocalDateTimeMatchers {
 	 * or after the start of the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isSameOrAfter(2012, Months.MAY, 12));
 	 * </pre>
-	 * 
+	 *
 	 * @param year the year against which the examined date is checked
 	 * @param month the month against which the examined date is checked
 	 * @param day the day of the month against which the examined date is
@@ -392,11 +395,11 @@ public abstract class LocalDateTimeMatchers {
 	 * @param second the second of the minute
 	 */
 	public static Matcher<LocalDateTime> sameOrAfter(final int year,
-			final Month month,
-			final int day,
-			final int hour,
-			final int minute,
-			final int second) {
+	        final Month month,
+	        final int day,
+	        final int hour,
+	        final int minute,
+	        final int second) {
 		return sameOrAfter(LocalDateTime.of(year, month, day, hour, minute, second));
 	}
 
@@ -405,11 +408,11 @@ public abstract class LocalDateTimeMatchers {
 	 * month as the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameMonth(new Date()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameMonthOfYear(final Date date) {
@@ -421,11 +424,11 @@ public abstract class LocalDateTimeMatchers {
 	 * month as the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameMonth(new Date()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameMonthOfYear(final LocalDateTime date) {
@@ -437,11 +440,11 @@ public abstract class LocalDateTimeMatchers {
 	 * of the month as the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameDayOfMonth(new Date()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameDayOfMonth(final Date date) {
@@ -453,11 +456,11 @@ public abstract class LocalDateTimeMatchers {
 	 * of the month as the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameDayOfMonth(new Date()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameDayOfMonth(final LocalDateTime date) {
@@ -469,15 +472,15 @@ public abstract class LocalDateTimeMatchers {
 	 * day of the month
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isDayOfMonth(4))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the expected day of the month
 	 */
 	public static Matcher<LocalDateTime> isDayOfMonth(final int dayOfMonth) {
-		return new IsDayOfMonth<LocalDateTime>(dayOfMonth);
+		return new IsDayOfMonth<LocalDateTime>(dayOfMonth, t -> t);
 	}
 
 	/**
@@ -485,11 +488,11 @@ public abstract class LocalDateTimeMatchers {
 	 * as the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameYear(new Date()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameYear(final Date date) {
@@ -501,11 +504,11 @@ public abstract class LocalDateTimeMatchers {
 	 * as the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameYear(new Date()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameYear(final LocalDateTime date) {
@@ -517,15 +520,15 @@ public abstract class LocalDateTimeMatchers {
 	 * as the reference year
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameYear(2013))
 	 * </pre>
-	 * 
+	 *
 	 * @param year the reference year against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> isYear(final int year) {
-		return new IsYear<LocalDateTime>(year);
+		return new IsYear<LocalDateTime>(year, t -> t);
 	}
 
 	/**
@@ -533,11 +536,11 @@ public abstract class LocalDateTimeMatchers {
 	 * period the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, within(10, TimeUnit.MINUTES, new Date()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> within(final long period, final ChronoUnit unit, final Date date) {
@@ -549,11 +552,11 @@ public abstract class LocalDateTimeMatchers {
 	 * period the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, within(10, TimeUnit.DAYS, Moments.today()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> within(final long period, final ChronoUnit unit, final LocalDateTime date) {
@@ -565,11 +568,11 @@ public abstract class LocalDateTimeMatchers {
 	 * period of the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, within(5, TimeUnit.DAYS, 2012, Months.MAY, 12));
 	 * </pre>
-	 * 
+	 *
 	 * @param period the timeunit interval the examined date should be with
 	 * @param unit the timeunit to define the length of the period
 	 * @param year the year against which the examined date is checked
@@ -585,25 +588,25 @@ public abstract class LocalDateTimeMatchers {
 	 * @param second the second of the minute
 	 */
 	public static Matcher<LocalDateTime> within(final long period,
-			final ChronoUnit unit,
-			final int year,
-			final Month month,
-			final int dayofMonth,
-			final int hour,
-			final int minute,
-			final int second) {
+	        final ChronoUnit unit,
+	        final int year,
+	        final Month month,
+	        final int dayofMonth,
+	        final int hour,
+	        final int minute,
+	        final int second) {
 		return new IsWithin<LocalDateTime>(
-				period,
-					unit,
-					new LocalDateTimeWrapper(year, month, dayofMonth, hour, minute, second),
-					new LocalDateTimeFormatter());
+		        period,
+		            unit,
+		            new LocalDateTimeWrapper(year, month, dayofMonth, hour, minute, second),
+		            new LocalDateTimeFormatter());
 	}
 
 	/**
 	 * Creates a matcher that matches when the examined date is yesterday
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isToday());
 	 * </pre>
@@ -616,7 +619,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is today
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isToday());
 	 * </pre>
@@ -629,7 +632,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is tomorrow
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isTomorrow());
 	 * </pre>
@@ -642,20 +645,20 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is on a monday
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isMonday());
 	 * </pre>
 	 */
 	public static Matcher<LocalDateTime> isDayOfWeek(final DayOfWeek... dayOfWeek) {
-		return new IsDayOfWeek<LocalDateTime>(dayOfWeek);
+		return new IsDayOfWeek<LocalDateTime>(asList(dayOfWeek), t -> t);
 	}
 
 	/**
 	 * Creates a matcher that matches when the examined date is on a monday
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isMonday());
 	 * </pre>
@@ -668,7 +671,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is on a tuesday
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isTuesday());
 	 * </pre>
@@ -681,7 +684,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is on a wednesday
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isWednesday());
 	 * </pre>
@@ -694,7 +697,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is on a thursday
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isThursday());
 	 * </pre>
@@ -707,7 +710,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is on a friday
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isFriday());
 	 * </pre>
@@ -720,7 +723,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is on a saturday
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isSaturday());
 	 * </pre>
@@ -733,7 +736,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is on a sunday
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isSunday());
 	 * </pre>
@@ -746,7 +749,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is on a weekday
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isWeekday());
 	 * </pre>
@@ -759,7 +762,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is on a weekend
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isWeekend());
 	 * </pre>
@@ -773,7 +776,7 @@ public abstract class LocalDateTimeMatchers {
 	 * of the month
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isFirstDayOfMonth());
 	 * </pre>
@@ -787,15 +790,15 @@ public abstract class LocalDateTimeMatchers {
 	 * value of the given date part in its period
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isMaximumDayOfMonth(ChronoField.DAY_OF_MONTH));
 	 * </pre>
-	 * 
+	 *
 	 * @param field the temporal field to check
 	 */
 	public static Matcher<LocalDateTime> isMinimum(final TemporalField field) {
-		return new IsMinimum<LocalDateTime>(field);
+		return new IsMinimum<LocalDateTime>(field, t -> t);
 	}
 
 	/**
@@ -803,7 +806,7 @@ public abstract class LocalDateTimeMatchers {
 	 * of the month
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isFirstDayOfMonth());
 	 * </pre>
@@ -817,15 +820,15 @@ public abstract class LocalDateTimeMatchers {
 	 * value of the given date part in its period
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isMaximum(ChronoField.DAY_OF_MONTH));
 	 * </pre>
-	 * 
+	 *
 	 * @param field the temporal field to check
 	 */
 	public static Matcher<LocalDateTime> isMaximum(final TemporalField field) {
-		return new IsMaximum<LocalDateTime>(field);
+		return new IsMaximum<LocalDateTime>(field, t -> t);
 	}
 
 	/**
@@ -833,20 +836,20 @@ public abstract class LocalDateTimeMatchers {
 	 * month
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isMonth(Month.AUGUST));
 	 * </pre>
 	 */
 	public static Matcher<LocalDateTime> isMonth(final Month month) {
-		return new IsMonth<LocalDateTime>(month, (t,f) -> t.get(f));
+		return new IsMonth<LocalDateTime>(month, t -> t);
 	}
 
 	/**
 	 * Creates a matcher that matches when the examined date is in January
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isJanuary());
 	 * </pre>
@@ -859,7 +862,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is in February
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isFebruary());
 	 * </pre>
@@ -872,7 +875,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is in March
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isMarch());
 	 * </pre>
@@ -885,7 +888,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is in April
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isApril());
 	 * </pre>
@@ -898,7 +901,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is in May
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isMay());
 	 * </pre>
@@ -911,7 +914,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is in June
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isJune());
 	 * </pre>
@@ -924,7 +927,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is in July
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isJuly());
 	 * </pre>
@@ -937,7 +940,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is in August
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isAugust());
 	 * </pre>
@@ -950,7 +953,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is in September
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isSeptember());
 	 * </pre>
@@ -963,7 +966,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is in October
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isOctober());
 	 * </pre>
@@ -976,7 +979,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is in November
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isNovember());
 	 * </pre>
@@ -989,7 +992,7 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is in December
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isDecember());
 	 * </pre>
@@ -1002,13 +1005,13 @@ public abstract class LocalDateTimeMatchers {
 	 * Creates a matcher that matches when the examined date is a leap year
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isLeapYear());
 	 * </pre>
 	 */
 	public static Matcher<LocalDateTime> isLeapYear() {
-		return new IsLeapYear<LocalDateTime>();
+		return new IsLeapYear<LocalDateTime>(t -> t);
 	}
 
 	/**
@@ -1016,15 +1019,15 @@ public abstract class LocalDateTimeMatchers {
 	 * hour (0-23)
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isHour(12));
 	 * </pre>
-	 * 
+	 *
 	 * @param hour the hour of the day (0-23)
 	 */
 	public static Matcher<LocalDateTime> isHour(final int hour) {
-		return new IsHour<LocalDateTime>(hour);
+		return new IsHour<LocalDateTime>(hour, t -> t);
 	}
 
 	/**
@@ -1032,11 +1035,11 @@ public abstract class LocalDateTimeMatchers {
 	 * as the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameHourOfDay(new Date()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameHourOfDay(final Date date) {
@@ -1048,11 +1051,11 @@ public abstract class LocalDateTimeMatchers {
 	 * as the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameHourOfDay(LocalDateTime.now()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameHourOfDay(final LocalDateTime date) {
@@ -1064,15 +1067,15 @@ public abstract class LocalDateTimeMatchers {
 	 * minute (0-59)
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isMinute(12));
 	 * </pre>
-	 * 
+	 *
 	 * @param Minute the minute of the day (0-59)
 	 */
 	public static Matcher<LocalDateTime> isMinute(final int minute) {
-		return new IsMinute<LocalDateTime>(minute);
+		return new IsMinute<LocalDateTime>(minute, t -> t);
 	}
 
 	/**
@@ -1080,11 +1083,11 @@ public abstract class LocalDateTimeMatchers {
 	 * Minute as the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameMinuteOfHour(new Date()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameMinuteOfHour(final Date date) {
@@ -1096,11 +1099,11 @@ public abstract class LocalDateTimeMatchers {
 	 * minute as the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameMinuteOfHour(LocalDateTime.now()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameMinuteOfHour(final LocalDateTime date) {
@@ -1112,15 +1115,15 @@ public abstract class LocalDateTimeMatchers {
 	 * second (0-59)
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, isSecond(12));
 	 * </pre>
-	 * 
+	 *
 	 * @param Second the second of the day (0-59)
 	 */
 	public static Matcher<LocalDateTime> isSecond(final int Second) {
-		return new IsSecond<LocalDateTime>(Second);
+		return new IsSecond<LocalDateTime>(Second, t -> t);
 	}
 
 	/**
@@ -1128,11 +1131,11 @@ public abstract class LocalDateTimeMatchers {
 	 * Second as the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameSecondOfMinute(new Date()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameSecondOfMinute(final Date date) {
@@ -1144,11 +1147,11 @@ public abstract class LocalDateTimeMatchers {
 	 * second as the reference date
 	 * <p/>
 	 * For example:
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(myDate, sameSecondOfMinute(LocalDateTime.now()))
 	 * </pre>
-	 * 
+	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static Matcher<LocalDateTime> sameSecondOfMinute(final LocalDateTime date) {

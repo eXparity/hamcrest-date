@@ -10,29 +10,29 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  *
  * @author Stewart Bissett
  */
-public class IsMinute<T> extends TypeSafeDiagnosingMatcher<T> {
+public class IsMillisecond<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	private final int expected;
 	private final TemporalAdapter<T> accessor;
 
-	public IsMinute(final int expected, final TemporalAdapter<T> accessor) {
+	public IsMillisecond(final int expected, final TemporalAdapter<T> accessor) {
 		this.expected = expected;
 		this.accessor = accessor;
 	}
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
-		int actualMinute = accessor.asTemporal(actual).get(ChronoField.MINUTE_OF_HOUR);
-		if (expected == actualMinute) {
+		int actualMillis = accessor.asTemporal(actual).get(ChronoField.MILLI_OF_SECOND);
+		if (expected == actualMillis) {
 			return true;
 		} else {
-			mismatchDescription.appendText("the date has the minute " + actualMinute);
+			mismatchDescription.appendText("the date has the millisecond " + actualMillis);
 			return false;
 		}
 	}
 
 	@Override
 	public void describeTo(final Description description) {
-		description.appendText("the date has the minute " + expected);
+		description.appendText("the date has the millisecond " + expected);
 	}
 }
