@@ -24,198 +24,198 @@ public class IsBeforeTest {
 	// Date Matchers
 
 	@Test(expected = AssertionError.class)
-	public void isDateBeforeDate() {
+	public void isDateBeforeLaterDate() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.before(JUN_15_2012_11AM_AS_DATE));
 	}
 
 	@Test
-	public void isDateNotBeforeDate() {
+	public void isDateBeforeEarlierDate() {
 		assertThat(JUN_15_2012_11AM_AS_DATE, DateMatchers.before(JUN_15_2012_11PM_AS_DATE));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isDateBeforeSameDate() {
+	public void isDateBeforeLaterSameDate() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.before(JUN_15_2012_11PM_AS_DATE));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isDateBeforeSameDateDifferentTimeZone() {
+	public void isDateBeforeLaterSameDateDifferentTimeZone() {
 		assertThat(JAN_01_2012_11AM_PST_AS_DATE, DateMatchers.before(JAN_01_2012_11AM_GMT_AS_DATE));
 	}
 
 	@Test
-	public void isDateNotBeforeSameDateDifferentTimeZone() {
+	public void isDateBeforeSameDateDifferentTimeZone() {
 		assertThat(JAN_01_2012_11AM_GMT_AS_DATE, DateMatchers.before(JAN_01_2012_11AM_PST_AS_DATE));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isDateBeforeLocalDate() {
+	public void isDateBeforeLaterLocalDate() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.before(JUN_14_2012));
 	}
 
 	@Test
-	public void isDateNotBeforeLocalDate() {
+	public void isDateBeforeEarlierLocalDate() {
 		assertThat(JUN_15_2012_11AM_AS_DATE, DateMatchers.before(JUN_16_2012));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isDateBeforeSameLocalDate() {
+	public void isDateBeforeLaterSameLocalDate() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.before(JUN_15_2012));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isDateBeforeDay() {
+	public void isDateBeforeLaterDay() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.before(2012, Months.JUNE, 14));
 	}
 
 	@Test
-	public void isDateNotBeforeDay() {
+	public void isDateBeforeEarlierDay() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.before(2012, Months.JUNE, 16));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isDateBeforeSameDay() {
+	public void isDateBeforeLaterSameDay() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.before(2012, Months.JUNE, 15));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isDateBeforeDayMonthYear() {
+	public void isDateBeforeLaterDayMonthYear() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.before(new DayMonthYear(14, Months.JUNE, 2012)));
 	}
 
 	@Test
-	public void isDateNotBeforeDayMonthYear() {
+	public void isDateBeforeEarlierDayMonthYear() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.before(new DayMonthYear(16, Months.JUNE, 2012)));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isDateBeforeSameDayMonthYear() {
+	public void isDateBeforeLaterSameDayMonthYear() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.before(new DayMonthYear(15, Months.JUNE, 2012)));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isDateBeforeDateTime() {
+	public void isDateBeforeLaterDateTime() {
 		assertThat(JUN_15_2012_11AM_AS_DATE, DateMatchers.before(2012, Months.JUNE, 15, 10, 59, 59));
 	}
 
 	@Test
-	public void isDateNotBeforeDateTime() {
+	public void isDateBeforeEarlierDateTime() {
 		assertThat(JUN_15_2012_11AM_AS_DATE, DateMatchers.before(2012, Months.JUNE, 15, 11, 00, 01));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isDateBeforeSameDateTime() {
+	public void isDateBeforeLaterSameDateTime() {
 		assertThat(JUN_15_2012_11AM_AS_DATE, DateMatchers.before(2012, Months.JUNE, 15, 11, 00, 00));
 	}
 
 	// LocalDate Matchers
 
 	@Test(expected = AssertionError.class)
-	public void isLocalDateBeforeLocalDate() {
+	public void isLocalDateBeforeLaterLocalDate() {
 		assertThat(AUG_04_2015, LocalDateMatchers.before(AUG_03_2015));
 	}
 
 	@Test
-	public void isLocalDateNotBeforeLocalDate() {
+	public void isLocalDateBeforeEarlierLocalDate() {
 		assertThat(AUG_04_2015, LocalDateMatchers.before(AUG_05_2015));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isLocalDateBeforeSameLocalDate() {
+	public void isLocalDateBeforeLaterSameLocalDate() {
 		assertThat(AUG_04_2015, LocalDateMatchers.before(AUG_04_2015));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isLocalDateBeforeDate() {
+	public void isLocalDateBeforeLaterDate() {
 		assertThat(AUG_04_2015, LocalDateMatchers.before(AUG_03_2015_AS_DATE));
 	}
 
 	@Test
-	public void isLocalDateNotBeforeDate() {
+	public void isLocalDateBeforeEarlierDate() {
 		assertThat(AUG_04_2015, LocalDateMatchers.before(AUG_05_2015_AS_DATE));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isLocalDateBeforeSameDate() {
+	public void isLocalDateBeforeLaterSameDate() {
 		assertThat(AUG_04_2015, LocalDateMatchers.before(AUG_04_2015_AS_DATE));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isLocalDateBeforeDay() {
+	public void isLocalDateBeforeLaterDay() {
 		assertThat(AUG_04_2015, LocalDateMatchers.before(2015, AUGUST, 3));
 	}
 
 	@Test
-	public void isLocalDateNotBeforeDay() {
+	public void isLocalDateBeforeEarlierDay() {
 		assertThat(AUG_04_2015, LocalDateMatchers.before(2015, AUGUST, 5));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isLocalDateNotBeforeSameDay() {
+	public void isLocalDateBeforeSameDay() {
 		assertThat(AUG_04_2015, LocalDateMatchers.before(2015, AUGUST, 4));
 	}
 
 	// LocalDateTime Matchers
 
 	@Test(expected = AssertionError.class)
-	public void isLocalDateTimeBeforeLocalDateTime() {
+	public void isLocalDateTimeBeforeLaterLocalDateTime() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.before(AUG_04_2015_1159));
 	}
 
 	@Test
-	public void isLocalDateTimeNotBeforeLocalDateTime() {
+	public void isLocalDateTimeBeforeEarlierLocalDateTime() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.before(AUG_04_2015_1201));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isLocalDateTimeBeforeSameLocalDateTime() {
+	public void isLocalDateTimeBeforeLaterSameLocalDateTime() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.before(AUG_04_2015_NOON));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isLocalDateTimeBeforeDate() {
+	public void isLocalDateTimeBeforeLaterDate() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.before(AUG_04_2015_1159_AS_DATE));
 	}
 
 	@Test
-	public void isLocalDateTimeNotBeforeDate() {
+	public void isLocalDateTimeBeforeEarlierDate() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.before(AUG_04_2015_1201_AS_DATE));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isLocalDateTimeBeforeSameDate() {
+	public void isLocalDateTimeBeforeLaterSameDate() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.before(AUG_04_2015_NOON_AS_DATE));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isLocalDateTimeBeforeDateTime() {
+	public void isLocalDateTimeBeforeLaterDateTime() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.before(2015, AUGUST, 4, 11, 59, 0));
 	}
 
 	@Test
-	public void isLocalDateTimeNotBeforeDateTime() {
+	public void isLocalDateTimeBeforeEarlierDateTime() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.before(2015, AUGUST, 4, 12, 0, 1));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isLocalDateTimeNotBeforeSameDateTime() {
+	public void isLocalDateTimeBeforeSameDateTime() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.before(2015, AUGUST, 4, 12, 0, 0));
 	}
 
 	// ZonedDateTime Matchers
 
 	@Test(expected = AssertionError.class)
-	public void isZonedDateTimeBeforeZonedDateTime() {
+	public void isZonedDateTimeBeforeLaterZonedDateTime() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.before(AUG_04_2015_11AM_UTC));
 	}
 
 	@Test
-	public void isZonedDateTimeNotBeforeZonedDateTime() {
+	public void isZonedDateTimeBeforeEarlierZonedDateTime() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.before(AUG_04_2015_01PM_UTC));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isZonedDateTimeBeforeSameZonedDateTime() {
+	public void isZonedDateTimeBeforeLaterSameZonedDateTime() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.before(AUG_04_2015_NOON_UTC));
 	}
 
@@ -230,17 +230,17 @@ public class IsBeforeTest {
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isZonedDateTimeBeforeLocalDateTime() {
+	public void isZonedDateTimeBeforeLaterLocalDateTime() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.before(AUG_04_2015_1159, ZoneIds.UTC));
 	}
 
 	@Test
-	public void isZonedDateTimeNotBeforeLocalDateTime() {
+	public void isZonedDateTimeBeforeEarlierLocalDateTime() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.before(AUG_04_2015_1201, ZoneIds.UTC));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isZonedDateTimeBeforeSameLocalDateTime() {
+	public void isZonedDateTimeBeforeLaterSameLocalDateTime() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.before(AUG_04_2015_NOON, ZoneIds.UTC));
 	}
 
@@ -255,17 +255,17 @@ public class IsBeforeTest {
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isZonedDateTimeBeforeDate() {
+	public void isZonedDateTimeBeforeLaterDate() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.before(AUG_04_2015_1159_UTC_AS_DATE, ZoneIds.UTC));
 	}
 
 	@Test
-	public void isZonedDateTimeNotBeforeDate() {
+	public void isZonedDateTimeBeforeEarlierDate() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.before(AUG_04_2015_1201_UTC_AS_DATE, ZoneIds.UTC));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isZonedDateTimeBeforeSameDate() {
+	public void isZonedDateTimeBeforeLaterSameDate() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.before(AUG_04_2015_NOON_UTC_AS_DATE, ZoneIds.UTC));
 	}
 
@@ -280,17 +280,17 @@ public class IsBeforeTest {
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isZonedDateTimeBeforeDateTime() {
+	public void isZonedDateTimeBeforeLaterDateTime() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.before(2015, AUGUST, 4, 11, 59, 0, ZoneIds.UTC));
 	}
 
 	@Test
-	public void isZonedDateTimeNotBeforeDateTime() {
+	public void isZonedDateTimeBeforeEarlierDateTime() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.before(2015, AUGUST, 4, 12, 0, 1, ZoneIds.UTC));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isZonedDateTimeNotBeforeSameDateTime() {
+	public void isZonedDateTimeBeforeSameDateTime() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.before(2015, AUGUST, 4, 12, 0, 0, ZoneIds.UTC));
 	}
 
@@ -300,7 +300,7 @@ public class IsBeforeTest {
 	}
 
 	@Test
-	public void isZonedDateTimeNotBeforeDateTimeLaterZone() {
+	public void isZonedDateTimeBeforeDateTimeLaterZone() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.before(2015, AUGUST, 4, 12, 0, 0, ZoneIds.EST));
 	}
 
