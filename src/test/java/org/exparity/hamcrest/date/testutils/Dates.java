@@ -3,7 +3,6 @@ package org.exparity.hamcrest.date.testutils;
 
 import static java.time.LocalTime.NOON;
 import static org.exparity.dates.en.FluentDateTime.*;
-import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.exparity.hamcrest.date.testutils.TimeZones.*;
 
 import java.time.LocalDate;
@@ -14,11 +13,10 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 
 import org.exparity.dates.en.FluentDate;
-import org.exparity.dates.en.FluentDateTime;
 
 /**
  * Static repository of dates used for testing
- * 
+ *
  * @author Stewart Bissett
  */
 public abstract class Dates {
@@ -67,13 +65,18 @@ public abstract class Dates {
 	public static final Date JAN_01_2012_11AM_PST_AS_DATE = JAN(1, 2012).at(11, PST_AS_TZ);
 	public static final Date AUG_03_2015_NOON_UTC_AS_DATE = AUG(3, 2015).at(12, UTC_AS_TZ);
 	public static final Date AUG_04_2015_1159_UTC_AS_DATE = AUG(4, 2015).at(11, 59, UTC_AS_TZ);
+	public static final Date AUG_04_2015_NOON_CET_AS_DATE = AUG(4, 2015).at(12, CET_AS_TZ);
 	public static final Date AUG_04_2015_NOON_UTC_AS_DATE = AUG(4, 2015).at(12, UTC_AS_TZ);
+	public static final Date AUG_04_2015_NOON_EST_AS_DATE = AUG(4, 2015).at(12, EST_AS_TZ);
 	public static final Date AUG_04_2015_1201_UTC_AS_DATE = AUG(4, 2015).at(12, 1, UTC_AS_TZ);
 	public static final Date AUG_04_2016_NOON_UTC_AS_DATE = AUG(4, 2016).at(12, UTC_AS_TZ);
 	public static final Date SEP_04_2015_NOON_UTC_AS_DATE = SEP(4, 2015).at(12, UTC_AS_TZ);
 	public static final Date AUG_05_2015_NOON_UTC_AS_DATE = AUG(5, 2015).at(12, UTC_AS_TZ);
 
 	// LocalDate
+	public static final LocalDate JUN_14_2012 = LocalDate.of(2012, Month.JUNE, 14);
+	public static final LocalDate JUN_15_2012 = LocalDate.of(2012, Month.JUNE, 15);
+	public static final LocalDate JUN_16_2012 = LocalDate.of(2012, Month.JUNE, 16);
 	public static final LocalDate JAN_01_2015 = LocalDate.of(2015, Month.JANUARY, 1);
 	public static final LocalDate FEB_01_2015 = LocalDate.of(2015, Month.FEBRUARY, 1);
 	public static final LocalDate MAR_01_2015 = LocalDate.of(2015, Month.MARCH, 1);
