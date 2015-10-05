@@ -1,7 +1,6 @@
 package org.exparity.hamcrest.date.core;
 
 import static java.time.Month.AUGUST;
-import static org.exparity.hamcrest.date.ZonedDateTimeMatchers.after;
 import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -221,12 +220,12 @@ public class IsAfterTest {
 
 	@Test
 	public void isZonedDateTimeAfterZonedDateTimeEarlierZone() {
-		assertThat(AUG_04_2015_NOON_UTC, after(AUG_04_2015_NOON_CET));
+		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.after(AUG_04_2015_NOON_CET));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void isZonedDateTimeAfterZonedDateTimeLaterZone() {
-		assertThat(AUG_04_2015_NOON_UTC, after(AUG_04_2015_NOON_EST));
+		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.after(AUG_04_2015_NOON_EST));
 	}
 
 	@Test
@@ -246,12 +245,12 @@ public class IsAfterTest {
 
 	@Test
 	public void isZonedDateTimeAfterLocalDateTimeEarlierZone() {
-		assertThat(AUG_04_2015_NOON_UTC, after(AUG_04_2015_NOON, ZoneIds.CET));
+		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.after(AUG_04_2015_NOON, ZoneIds.CET));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void isZonedDateTimeAfterLocalDateTimeLaterZone() {
-		assertThat(AUG_04_2015_NOON_UTC, after(AUG_04_2015_NOON, ZoneIds.EST));
+		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.after(AUG_04_2015_NOON, ZoneIds.EST));
 	}
 
 	@Test
