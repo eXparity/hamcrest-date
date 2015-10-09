@@ -101,6 +101,9 @@ public abstract class Dates {
 	public static final LocalDate AUG_04_2016 = LocalDate.of(2016, Month.AUGUST, 4);
 
 	// LocalDateTime
+	public static final LocalDateTime JUN_14_2012_NOON = LocalDateTime.of(JUN_14_2012, NOON);
+	public static final LocalDateTime JUN_15_2012_11AM = LocalDateTime.of(JUN_15_2012, LocalTime.of(11, 0));
+	public static final LocalDateTime JUN_15_2012_NOON = LocalDateTime.of(JUN_15_2012, NOON);
 	public static final LocalDateTime JAN_01_2015_NOON = LocalDateTime.of(JAN_01_2015, NOON);
 	public static final LocalDateTime FEB_01_2015_NOON = LocalDateTime.of(FEB_01_2015, NOON);
 	public static final LocalDateTime MAR_01_2015_NOON = LocalDateTime.of(MAR_01_2015, NOON);
@@ -128,6 +131,9 @@ public abstract class Dates {
 	public static final LocalDateTime DEC_01_2015_NOON = LocalDateTime.of(DEC_01_2015, NOON);
 	public static final LocalDateTime AUG_04_2016_NOON = LocalDateTime.of(AUG_04_2016, NOON);
 
+	public static final ZonedDateTime JUN_14_2012_NOON_UTC = ZonedDateTime.of(JUN_14_2012_NOON, ZoneIds.UTC);
+	public static final ZonedDateTime JUN_15_2012_11AM_UTC = ZonedDateTime.of(JUN_15_2012_11AM, ZoneIds.UTC);
+	public static final ZonedDateTime JUN_15_2012_NOON_UTC = ZonedDateTime.of(JUN_15_2012_NOON, ZoneIds.UTC);
 	public static final ZonedDateTime JAN_01_2015_NOON_UTC = ZonedDateTime.of(JAN_01_2015_NOON, ZoneIds.UTC);
 	public static final ZonedDateTime FEB_01_2015_NOON_UTC = ZonedDateTime.of(FEB_01_2015_NOON, ZoneIds.UTC);
 	public static final ZonedDateTime MAR_01_2015_NOON_UTC = ZonedDateTime.of(MAR_01_2015_NOON, ZoneIds.UTC);

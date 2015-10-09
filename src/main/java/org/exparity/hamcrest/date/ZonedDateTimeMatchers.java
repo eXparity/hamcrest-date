@@ -1272,6 +1272,35 @@ public abstract class ZonedDateTimeMatchers {
 	}
 
 	/**
+	 * Creates a matcher that matches when the examined date is on the same day
+	 * or after the start of the reference date
+	 * <p/>
+	 * For example:
+	 *
+	 * <pre>
+	 * assertThat(myDate, sameHourOfDay(2012, Months.MAY, 12, 12, 0, 0, ZoneId.systemDefault()));
+	 * </pre>
+	 *
+	 * @param year the year against which the examined date is checked
+	 * @param month the month against which the examined date is checked
+	 * @param day the day of the month against which the examined date is
+	 *            checked
+	 * @param hour the hour of the day
+	 * @param minute the minute of the hour
+	 * @param second the second of the minute
+	 * @param timezone the reference time zone
+	 */
+	public static Matcher<ZonedDateTime> sameHourOfDay(final int year,
+	        final Month month,
+	        final int day,
+	        final int hour,
+	        final int minute,
+	        final int second,
+	        final ZoneId zone) {
+		return sameHourOfDay(LocalDateTime.of(year, month, day, hour, minute, second), zone);
+	}
+
+	/**
 	 * Creates a matcher that matches when the examined date is on the same hour
 	 * as the reference date
 	 * <p/>
