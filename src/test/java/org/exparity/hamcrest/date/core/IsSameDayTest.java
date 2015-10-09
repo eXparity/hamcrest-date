@@ -121,7 +121,7 @@ public class IsSameDayTest {
 
 	@Test
 	public void isLocalDateSameDaySameDate() {
-		assertThat(AUG_04_2015, LocalDateMatchers.sameDay(AUG_04_2015_AS_DATE));
+		assertThat(AUG_04_2015, LocalDateMatchers.sameDay(AUG_04_2015_NOON_AS_DATE));
 	}
 
 	@Test(expected = AssertionError.class)

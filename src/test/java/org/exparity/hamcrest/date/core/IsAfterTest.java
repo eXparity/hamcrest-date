@@ -136,7 +136,7 @@ public class IsAfterTest {
 
 	@Test(expected = AssertionError.class)
 	public void isLocalDateAfterSameDate() {
-		assertThat(AUG_04_2015, LocalDateMatchers.after(AUG_04_2015_AS_DATE));
+		assertThat(AUG_04_2015, LocalDateMatchers.after(AUG_04_2015_NOON_AS_DATE));
 	}
 
 	@Test

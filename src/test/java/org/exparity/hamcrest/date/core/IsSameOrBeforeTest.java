@@ -137,7 +137,7 @@ public class IsSameOrBeforeTest {
 
 	@Test
 	public void isLocalDateSameOrBeforeSameDate() {
-		assertThat(AUG_04_2015, LocalDateMatchers.sameOrBefore(AUG_04_2015_AS_DATE));
+		assertThat(AUG_04_2015, LocalDateMatchers.sameOrBefore(AUG_04_2015_NOON_AS_DATE));
 	}
 
 	@Test(expected = AssertionError.class)

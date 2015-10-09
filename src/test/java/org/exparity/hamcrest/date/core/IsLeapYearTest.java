@@ -26,7 +26,7 @@ public class IsLeapYearTest {
 
 	@Test(expected = AssertionError.class)
 	public void isDateNotLeapYear() {
-		assertThat(AUG_04_2015_AS_DATE, DateMatchers.isLeapYear());
+		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isLeapYear());
 	}
 
 	// LocalDate Matchers

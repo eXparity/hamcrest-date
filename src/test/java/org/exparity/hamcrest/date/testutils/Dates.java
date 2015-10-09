@@ -48,6 +48,13 @@ public abstract class Dates {
 	public static final Date DEC_01_2012_11AM_AS_DATE = DEC(1, 2012).at(11);
 	public static final Date JAN_01_2013_11AM_AS_DATE = JAN(1, 2013).at(11);
 	public static final Date JAN_01_2100_11AM_AS_DATE = JAN(1, 2100).at(11);
+	public static final Date JAN_01_2015_NOON_AS_DATE = JAN(1, 2015).at(12);
+	public static final Date FEB_01_2015_NOON_AS_DATE = FEB(1, 2015).at(12);
+	public static final Date MAR_01_2015_NOON_AS_DATE = MAR(1, 2015).at(12);
+	public static final Date APR_01_2015_NOON_AS_DATE = APR(1, 2015).at(12);
+	public static final Date MAY_01_2015_NOON_AS_DATE = MAY(1, 2015).at(12);
+	public static final Date JUN_01_2015_NOON_AS_DATE = JUN(1, 2015).at(12);
+	public static final Date JUL_01_2015_NOON_AS_DATE = JUL(1, 2015).at(12);
 	public static final Date AUG_01_2015_NOON_AS_DATE = AUG(1, 2015).at(12);
 	public static final Date AUG_03_2015_NOON_AS_DATE = AUG(3, 2015).at(12);
 	public static final Date AUG_04_2015_1159_AS_DATE = AUG(4, 2015).at(11, 59);
@@ -56,9 +63,12 @@ public abstract class Dates {
 	public static final Date AUG_05_2015_NOON_AS_DATE = AUG(5, 2015).at(12);
 	public static final Date AUG_31_2015_NOON_AS_DATE = AUG(31, 2015).at(12);
 	public static final Date SEP_04_2015_NOON_AS_DATE = SEP(4, 2015).at(12);
+	public static final Date SEP_01_2015_NOON_AS_DATE = SEP(1, 2015).at(12);
+	public static final Date OCT_01_2015_NOON_AS_DATE = OCT(1, 2015).at(12);
+	public static final Date NOV_01_2015_NOON_AS_DATE = NOV(1, 2015).at(12);
+	public static final Date DEC_01_2015_NOON_AS_DATE = DEC(1, 2015).at(12);
 	public static final Date AUG_04_2016_NOON_AS_DATE = AUG(4, 2016).at(12);
 	public static final Date AUG_03_2015_AS_DATE = FluentDate.AUG(3, 2015);
-	public static final Date AUG_04_2015_AS_DATE = FluentDate.AUG(4, 2015);
 	public static final Date AUG_05_2015_AS_DATE = FluentDate.AUG(5, 2015);
 	public static final Date SEP_04_2015_AS_DATE = FluentDate.SEP(4, 2015);
 	public static final Date AUG_04_2016_AS_DATE = FluentDate.AUG(4, 2016);
