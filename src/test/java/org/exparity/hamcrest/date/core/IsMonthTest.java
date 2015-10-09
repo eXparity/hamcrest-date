@@ -1,8 +1,12 @@
-package org.exparity.hamcrest.date;
+package org.exparity.hamcrest.date.core;
 
 import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.LocalDateMatchers;
+import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.junit.Test;
 
 /**
