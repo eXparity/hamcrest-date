@@ -14,7 +14,7 @@ import org.exparity.hamcrest.date.core.TemporalWrapper;
 /**
  * Implementation of a {@link TemporalWrapper} which wraps a
  * {@link LocalDateTime} instance
- * 
+ *
  * @author Stewart Bissett
  */
 public class LocalDateTimeWrapper implements TemporalWrapper<LocalDateTime> {
@@ -23,48 +23,48 @@ public class LocalDateTimeWrapper implements TemporalWrapper<LocalDateTime> {
 	private final TemporalUnit accuracy;
 
 	public LocalDateTimeWrapper(final Date date) {
-		this.wrapped = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-		this.accuracy = ChronoUnit.MILLIS;
+		wrapped = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		accuracy = ChronoUnit.MILLIS;
 	}
 
 	public LocalDateTimeWrapper(final LocalDateTime date) {
-		this.wrapped = date;
-		this.accuracy = ChronoUnit.NANOS;
+		wrapped = date;
+		accuracy = ChronoUnit.NANOS;
 	}
 
-	public LocalDateTimeWrapper(int year, Month month, int dayOfMonth) {
-		this.wrapped = LocalDateTime.of(LocalDate.of(year, month, dayOfMonth), LocalTime.NOON);
-		this.accuracy = ChronoUnit.DAYS;
+	public LocalDateTimeWrapper(final int year, final Month month, final int dayOfMonth) {
+		wrapped = LocalDateTime.of(LocalDate.of(year, month, dayOfMonth), LocalTime.NOON);
+		accuracy = ChronoUnit.DAYS;
 	}
 
-	public LocalDateTimeWrapper(int year, Month month, int dayOfMonth, int hour, int minute, int second) {
-		this.wrapped = LocalDateTime.of(year, month, dayOfMonth, hour, minute, second);
-		this.accuracy = ChronoUnit.SECONDS;
+	public LocalDateTimeWrapper(final int year, final Month month, final int dayOfMonth, final int hour, final int minute, final int second) {
+		wrapped = LocalDateTime.of(year, month, dayOfMonth, hour, minute, second);
+		accuracy = ChronoUnit.SECONDS;
 	}
 
 	@Override
-	public long difference(LocalDateTime other, ChronoUnit unit) {
+	public long difference(final LocalDateTime other, final ChronoUnit unit) {
 		return Math.abs(wrapped.truncatedTo(accuracy).until(other, unit));
 	}
 
 	@Override
-	public boolean isAfter(LocalDateTime other) {
+	public boolean isAfter(final LocalDateTime other) {
 		return wrapped.truncatedTo(accuracy).isAfter(other.truncatedTo(accuracy));
 	}
 
 	@Override
-	public boolean isBefore(LocalDateTime other) {
+	public boolean isBefore(final LocalDateTime other) {
 		return wrapped.truncatedTo(accuracy).isBefore(other.truncatedTo(accuracy));
 	}
 
 	@Override
-	public boolean isSame(LocalDateTime other) {
+	public boolean isSame(final LocalDateTime other) {
 		return wrapped.truncatedTo(accuracy).isEqual(other.truncatedTo(accuracy));
 	}
 
 	@Override
-	public boolean isSameDay(LocalDateTime other) {
-		return wrapped.truncatedTo(accuracy).isEqual(other.truncatedTo(accuracy));
+	public boolean isSameDay(final LocalDateTime other) {
+		return wrapped.truncatedTo(ChronoUnit.DAYS).isEqual(other.truncatedTo(ChronoUnit.DAYS));
 	}
 
 	@Override
