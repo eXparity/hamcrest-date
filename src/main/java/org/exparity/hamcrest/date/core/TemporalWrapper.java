@@ -1,18 +1,14 @@
 /**
- * 
+ *
  */
 package org.exparity.hamcrest.date.core;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 
 /**
  * Wrapper which wraps a temporal time so it can support the operations required
  * by the matchers
- * 
+ *
  * @author Stewart Bissett
  */
 public interface TemporalWrapper<T> {

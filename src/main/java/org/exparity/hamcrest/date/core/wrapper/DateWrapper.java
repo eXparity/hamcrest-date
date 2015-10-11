@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.exparity.hamcrest.date.core.wrapper;
 
@@ -14,12 +14,11 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
 import java.util.Date;
 
-import org.exparity.hamcrest.date.DayMonthYear;
 import org.exparity.hamcrest.date.core.TemporalWrapper;
 
 /**
  * Implementation of {@link TemporalWrapper} to wrap {@link Date} objects.
- * 
+ *
  * @author Stewart Bissett
  */
 public class DateWrapper implements TemporalWrapper<Date> {
@@ -28,13 +27,13 @@ public class DateWrapper implements TemporalWrapper<Date> {
 	private final TemporalUnit accuracy;
 
 	public DateWrapper(final Date date) {
-		this.wrapped = date.toInstant();
-		this.accuracy = ChronoUnit.MILLIS;
+		wrapped = date.toInstant();
+		accuracy = ChronoUnit.MILLIS;
 	}
 
 	public DateWrapper(final LocalDate date) {
-		this.wrapped = ZonedDateTime.of(date, LocalTime.NOON, ZoneId.systemDefault()).toInstant();
-		this.accuracy = ChronoUnit.DAYS;
+		wrapped = ZonedDateTime.of(date, LocalTime.NOON, ZoneId.systemDefault()).toInstant();
+		accuracy = ChronoUnit.DAYS;
 	}
 
 	public DateWrapper(final int year, final Month month, final int dayOfMonth) {
@@ -43,24 +42,24 @@ public class DateWrapper implements TemporalWrapper<Date> {
 
 	public DateWrapper(final int year, final Month month, final int dayOfMonth, final int hour, final int minute,
 			final int second) {
-		this.wrapped = ZonedDateTime
+		wrapped = ZonedDateTime
 				.of(LocalDateTime.of(year, month, dayOfMonth, hour, minute, second), ZoneId.systemDefault())
 					.toInstant();
-		this.accuracy = ChronoUnit.SECONDS;
+		accuracy = ChronoUnit.SECONDS;
 	}
 
 	public DateWrapper(final int year, final Month month, final int dayOfMonth, final int hour, final int minute,
 			final int second, final int millis) {
-		this.wrapped = ZonedDateTime
+		wrapped = ZonedDateTime
 				.of(
 						LocalDateTime.of(year, month, dayOfMonth, hour, minute, second, millis * 1000000),
 							ZoneId.systemDefault())
 					.toInstant();
-		this.accuracy = ChronoUnit.MILLIS;
+		accuracy = ChronoUnit.MILLIS;
 	}
 
 	@Override
-	public long difference(final Date other, ChronoUnit unit) {
+	public long difference(final Date other, final ChronoUnit unit) {
 		return Math.abs(wrapped.truncatedTo(accuracy).until(other.toInstant(), unit));
 	}
 
@@ -70,17 +69,17 @@ public class DateWrapper implements TemporalWrapper<Date> {
 	}
 
 	@Override
-	public boolean isBefore(Date other) {
+	public boolean isBefore(final Date other) {
 		return wrapped.truncatedTo(accuracy).isBefore(other.toInstant().truncatedTo(accuracy));
 	}
 
 	@Override
-	public boolean isSame(Date other) {
+	public boolean isSame(final Date other) {
 		return wrapped.truncatedTo(accuracy).equals(other.toInstant().truncatedTo(accuracy));
 	}
 
 	@Override
-	public boolean isSameDay(Date other) {
+	public boolean isSameDay(final Date other) {
 		return wrapped.truncatedTo(ChronoUnit.DAYS).equals(other.toInstant().truncatedTo(ChronoUnit.DAYS));
 	}
 

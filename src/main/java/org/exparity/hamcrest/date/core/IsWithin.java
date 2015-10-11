@@ -1,7 +1,6 @@
 package org.exparity.hamcrest.date.core;
 
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
@@ -9,7 +8,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 /**
  * A matcher that tests that the examined date is within a defined period of the
  * reference date
- * 
+ *
  * @author Stewart Bissett
  */
 public class IsWithin<T> extends TypeSafeDiagnosingMatcher<T> {
@@ -42,6 +41,7 @@ public class IsWithin<T> extends TypeSafeDiagnosingMatcher<T> {
 		}
 	}
 
+	@Override
 	public void describeTo(final Description description) {
 		description.appendText("the date is within " + period + " " + describeUnit() + " of " + describer.describe(expected.unwrap()));
 	}

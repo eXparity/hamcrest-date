@@ -1,10 +1,12 @@
 package org.exparity.hamcrest.date.core;
 
-import static org.exparity.dates.en.FluentDateTime.JUN;
-import static org.exparity.hamcrest.date.testutils.Dates.*;
-import static org.exparity.hamcrest.date.testutils.TimeZones.UTC_AS_TZ;
-import static org.exparity.hamcrest.date.testutils.ZoneIds.UTC;
+import static org.exparity.hamcrest.date.testutils.DateMatcherTestUtils.addDateField;
 import static org.hamcrest.MatcherAssert.assertThat;
+
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
@@ -19,84 +21,77 @@ import org.junit.Test;
 public class IsSameHourOfDayTest {
 
 	// Date Matchers
-
 	@Test
-	public void isDateSameHourOfDaySameDateSameHour() {
-		assertThat(JUN_15_2012_11AM_AS_DATE, DateMatchers.sameHourOfDay(JUN(15, 2012).at(11)));
+	public void isDateSameHour() {
+		Date date = new Date(), other = new Date(date.getTime());
+		assertThat(other, DateMatchers.sameHour(date));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isDateSameHourOfDaySameDateDifferentHour() {
-		assertThat(JUN_15_2012_11AM_AS_DATE, DateMatchers.sameHourOfDay(JUN(15, 2012).at(10)));
+	public void isDateNotSameHour() {
+		Date date = new Date(), other = addDateField(date, Calendar.HOUR, 1);
+		assertThat(other, DateMatchers.sameHour(date));
 	}
 
 	@Test
-	public void isDateSameHourOfDayDifferentDateSameHour() {
-		assertThat(JUN_15_2012_11AM_AS_DATE, DateMatchers.sameHourOfDay(JUN(14, 2012).at(11)));
+	public void isDateSameMonthDifferentDay() {
+		Date date = new Date(), other = addDateField(date, Calendar.DAY_OF_WEEK, 1);
+		assertThat(other, DateMatchers.sameHour(date));
+	}
+
+	@Test
+	public void isDateSameHourOfDay() {
+		Date date = new Date(), other = new Date(date.getTime());
+		assertThat(other, DateMatchers.sameHourOfDay(date));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isDateNotSameHourOfDay() {
+		Date date = new Date(), other = addDateField(date, Calendar.HOUR, 1);
+		assertThat(other, DateMatchers.sameHourOfDay(date));
+	}
+
+	@Test
+	public void isDateSameHourOfDayDifferentDay() {
+		Date date = new Date(), other = addDateField(date, Calendar.DAY_OF_WEEK, 1);
+		assertThat(other, DateMatchers.sameHourOfDay(date));
 	}
 
 	// LocalDateTime Matchers
-
 	@Test
-	public void isLocalDateTimeSameHourOfDaySameDateSameHour() {
-		assertThat(JUN_15_2012_NOON, LocalDateTimeMatchers.sameHourOfDay(JUN(15, 2012).at(12)));
+	public void isLocalDateTimeSameHourOfDay() {
+		LocalDateTime date = LocalDateTime.now(), other = date;
+		assertThat(other, LocalDateTimeMatchers.sameHourOfDay(date));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isLocalDateTimeSameHourOfDaySameDateDifferentHour() {
-		assertThat(JUN_15_2012_NOON, LocalDateTimeMatchers.sameHourOfDay(JUN(15, 2012).at(11)));
+	public void isLocalDateTimeNotSameHourOfDay() {
+		LocalDateTime date = LocalDateTime.now(), other = date.plusHours(1);
+		assertThat(other, LocalDateTimeMatchers.sameHourOfDay(date));
 	}
 
 	@Test
-	public void isLocalDateTimeSameHourOfDayDifferentDateSameHour() {
-		assertThat(JUN_15_2012_NOON, LocalDateTimeMatchers.sameHourOfDay(JUN(14, 2012).at(12)));
-	}
-
-	@Test
-	public void isLocalDateTimeSameHourOfDaySameLocalDateTimeSameHour() {
-		assertThat(JUN_15_2012_NOON, LocalDateTimeMatchers.sameHourOfDay(JUN_15_2012_NOON));
-	}
-
-	@Test(expected = AssertionError.class)
-	public void isLocalDateTimeSameHourOfDaySameLocalDateTimeDifferentHour() {
-		assertThat(JUN_15_2012_NOON, LocalDateTimeMatchers.sameHourOfDay(JUN_15_2012_11AM));
-	}
-
-	@Test
-	public void isLocalDateTimeSameHourOfDayDifferentLocalDateTimeSameHour() {
-		assertThat(JUN_15_2012_NOON, LocalDateTimeMatchers.sameHourOfDay(JUN_14_2012_NOON));
+	public void isLocalDateTimeSameHourOfDayDifferentDay() {
+		LocalDateTime date = LocalDateTime.now(), other = date.plusDays(1);
+		assertThat(other, LocalDateTimeMatchers.sameHourOfDay(date));
 	}
 
 	// ZonedDateTime Matchers
-
 	@Test
-	public void isZonedDateTimeSameHourOfDaySameDateSameHour() {
-		assertThat(JUN_15_2012_NOON_UTC, ZonedDateTimeMatchers.sameHourOfDay(JUN(15, 2012).at(12, UTC_AS_TZ), UTC));
+	public void isZonedDateTimeSameHourOfDay() {
+		ZonedDateTime date = ZonedDateTime.now(), other = date;
+		assertThat(other, ZonedDateTimeMatchers.sameHourOfDay(date));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isZonedDateTimeSameHourOfDaySameDateDifferentHour() {
-		assertThat(JUN_15_2012_NOON_UTC, ZonedDateTimeMatchers.sameHourOfDay(JUN(15, 2012).at(11, UTC_AS_TZ), UTC));
+	public void isZonedDateTimeNotSameHourOfDay() {
+		ZonedDateTime date = ZonedDateTime.now(), other = date.plusHours(1);
+		assertThat(other, ZonedDateTimeMatchers.sameHourOfDay(date));
 	}
 
 	@Test
-	public void isZonedDateTimeSameHourOfDayDifferentDateSameHour() {
-		assertThat(JUN_15_2012_NOON_UTC, ZonedDateTimeMatchers.sameHourOfDay(JUN(14, 2012).at(12, UTC_AS_TZ), UTC));
+	public void isZonedDateTimeSameHourOfDayDifferentDay() {
+		ZonedDateTime date = ZonedDateTime.now(), other = date.plusDays(1);
+		assertThat(other, ZonedDateTimeMatchers.sameHourOfDay(date));
 	}
-
-	@Test
-	public void isZonedDateTimeSameHourOfDaySameZonedDateTimeSameHour() {
-		assertThat(JUN_15_2012_NOON_UTC, ZonedDateTimeMatchers.sameHourOfDay(JUN_15_2012_NOON_UTC));
-	}
-
-	@Test(expected = AssertionError.class)
-	public void isZonedDateTimeSameHourOfDaySameZonedDateTimeDifferentHour() {
-		assertThat(JUN_15_2012_NOON_UTC, ZonedDateTimeMatchers.sameHourOfDay(JUN_15_2012_11AM_UTC));
-	}
-
-	@Test
-	public void isZonedDateTimeSameHourOfDayDifferentZonedDateTimeSameHour() {
-		assertThat(JUN_15_2012_NOON_UTC, ZonedDateTimeMatchers.sameHourOfDay(JUN_14_2012_NOON_UTC));
-	}
-
 }

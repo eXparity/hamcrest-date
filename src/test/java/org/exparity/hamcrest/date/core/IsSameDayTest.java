@@ -143,12 +143,12 @@ public class IsSameDayTest {
 
 	@Test(expected = AssertionError.class)
 	public void isLocalDateTimeSameDayEarlierLocalDateTime() {
-		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.sameDay(AUG_04_2015_1159));
+		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.sameDay(AUG_03_2015_NOON));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void isLocalDateTimeSameDayLaterLocalDateTime() {
-		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.sameDay(AUG_04_2015_1201));
+		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.sameDay(AUG_05_2015_NOON));
 	}
 
 	@Test

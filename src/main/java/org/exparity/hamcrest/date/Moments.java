@@ -10,6 +10,7 @@ import java.util.Date;
  *
  * @author Stewart Bissett
  */
+@Deprecated
 public abstract class Moments {
 
 	/**
