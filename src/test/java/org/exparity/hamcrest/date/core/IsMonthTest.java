@@ -3,9 +3,12 @@ package org.exparity.hamcrest.date.core;
 import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.Month;
+
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.Months;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.junit.Test;
 
@@ -17,6 +20,26 @@ import org.junit.Test;
 public class IsMonthTest {
 
 	// Date Matchers
+	@Test
+	public void isDateMonth() {
+		assertThat(JAN_01_2015_NOON_AS_DATE, DateMatchers.isMonth(Month.JANUARY));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isDateNotMonth() {
+		assertThat(JAN_01_2015_NOON_AS_DATE, DateMatchers.isMonth(Month.FEBRUARY));
+	}
+
+	@Test
+	public void isDateSameMonth() {
+		assertThat(JAN_01_2015_NOON_AS_DATE, DateMatchers.sameMonth(Months.JANUARY));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isDateNotSameMonth() {
+		assertThat(JAN_01_2015_NOON_AS_DATE, DateMatchers.sameMonth(Months.FEBRUARY));
+	}
+
 	@Test
 	public void isDateJanuary() {
 		assertThat(JAN_01_2015_NOON_AS_DATE, DateMatchers.isJanuary());

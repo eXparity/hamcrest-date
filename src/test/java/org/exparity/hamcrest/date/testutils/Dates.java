@@ -61,6 +61,7 @@ public abstract class Dates {
 	public static final Date AUG_04_2015_NOON_AS_DATE = AUG(4, 2015).at(12);
 	public static final Date AUG_04_2015_1201_AS_DATE = AUG(4, 2015).at(12, 1);
 	public static final Date AUG_05_2015_NOON_AS_DATE = AUG(5, 2015).at(12);
+	public static final Date AUG_07_2015_NOON_AS_DATE = AUG(7, 2015).at(12);
 	public static final Date AUG_31_2015_NOON_AS_DATE = AUG(31, 2015).at(12);
 	public static final Date SEP_04_2015_NOON_AS_DATE = SEP(4, 2015).at(12);
 	public static final Date SEP_01_2015_NOON_AS_DATE = SEP(1, 2015).at(12);

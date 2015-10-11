@@ -4,6 +4,8 @@ import static java.time.Month.AUGUST;
 import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.Month;
+
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.DayMonthYear;
 import org.exparity.hamcrest.date.LocalDateMatchers;
@@ -63,18 +65,33 @@ public class IsAfterTest {
 	}
 
 	@Test
-	public void isDateAfterEarlierDay() {
+	public void isDateAfterEarlierDeprecatedDateValues() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.after(2012, Months.JUNE, 14));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isDateAfterLaterDay() {
+	public void isDateAfterLaterDeprecatedDateValues() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.after(2012, Months.JUNE, 16));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isDateAfterSameDay() {
+	public void isDateAfterSameDeprecatedDateValues() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.after(2012, Months.JUNE, 15));
+	}
+
+	@Test
+	public void isDateAfterEarlierDateValues() {
+		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.after(2012, Month.JUNE, 14));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isDateAfterLaterDateValues() {
+		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.after(2012, Month.JUNE, 16));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isDateAfterSameDateValues() {
+		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.after(2012, Month.JUNE, 15));
 	}
 
 	@Test

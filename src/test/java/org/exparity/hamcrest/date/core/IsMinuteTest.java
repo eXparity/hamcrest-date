@@ -28,6 +28,16 @@ public class IsMinuteTest {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isMinute(1));
 	}
 
+	@Test
+	public void isDateSameMinute() {
+		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameMinute(0));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isDateNotSameMinute() {
+		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameMinute(1));
+	}
+
 	// LocalDateTime Matchers
 	@Test
 	public void isLocalDateTimeMinute() {

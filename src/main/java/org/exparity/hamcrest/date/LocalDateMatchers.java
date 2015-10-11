@@ -521,6 +521,22 @@ public abstract class LocalDateMatchers {
 	}
 
 	/**
+	 * Creates a matcher that matches when the examined date is on the same day
+	 * of the week as the reference date
+	 * <p/>
+	 * For example:
+	 *
+	 * <pre>
+	 * assertThat(myDate, sameDayOfWeek(LocalDate.now()))
+	 * </pre>
+	 *
+	 * @param date the reference date against which the examined date is checked
+	 */
+	public static Matcher<LocalDate> sameDayOfWeek(final LocalDate date) {
+		return isDayOfWeek(DayOfWeek.from(date));
+	}
+
+	/**
 	 * Creates a matcher that matches when the examined date is on a monday
 	 * <p/>
 	 * For example:

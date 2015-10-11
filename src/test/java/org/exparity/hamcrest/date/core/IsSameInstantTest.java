@@ -4,8 +4,11 @@ import static java.time.Month.AUGUST;
 import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.Month;
+
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.Months;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.exparity.hamcrest.date.testutils.ZoneIds;
 import org.junit.Test;
@@ -35,6 +38,16 @@ public class IsSameInstantTest {
 	}
 
 	@Test(expected = AssertionError.class)
+	public void isDateSameInstantSameDateDifferentTimeZone() {
+		assertThat(JAN_01_2012_11AM_PST_AS_DATE, DateMatchers.sameInstant(JAN_01_2012_11AM_GMT_AS_DATE));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isDateSameInstantLaterSameDateDifferentTimeZone() {
+		assertThat(JAN_01_2012_11AM_GMT_AS_DATE, DateMatchers.sameInstant(JAN_01_2012_11AM_PST_AS_DATE));
+	}
+
+	@Test(expected = AssertionError.class)
 	public void isDateSameInstantEarlierEpochTime() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.sameInstant(JUN_15_2012_11PM_AS_DATE.getTime() + 1));
 	}
@@ -50,13 +63,33 @@ public class IsSameInstantTest {
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isDateSameInstantSameDateDifferentTimeZone() {
-		assertThat(JAN_01_2012_11AM_PST_AS_DATE, DateMatchers.sameInstant(JAN_01_2012_11AM_GMT_AS_DATE));
+	public void isDateSameInstantEarlierDateValue() {
+		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.sameInstant(2012, Month.JUNE, 15, 23, 0, 0, 1));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void isDateSameInstantLaterSameDateDifferentTimeZone() {
-		assertThat(JAN_01_2012_11AM_GMT_AS_DATE, DateMatchers.sameInstant(JAN_01_2012_11AM_PST_AS_DATE));
+	public void isDateSameInstantLaterDateValue() {
+		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.sameInstant(2012, Month.JUNE, 15, 22, 59, 59, 59));
+	}
+
+	@Test
+	public void isDateSameInstantSameDateValue() {
+		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.sameInstant(2012, Month.JUNE, 15, 23, 0, 0, 0));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isDateSameInstantEarlierDeprecatedDateValue() {
+		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.sameInstant(2012, Months.JUNE, 15, 23, 0, 0, 1));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isDateSameInstantLaterDeprecatedDateValue() {
+		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.sameInstant(2012, Months.JUNE, 15, 22, 59, 59, 59));
+	}
+
+	@Test
+	public void isDateSameInstantSameDeprecatedDateValue() {
+		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.sameInstant(2012, Months.JUNE, 15, 23, 0, 0, 0));
 	}
 
 	// LocalDateTime Matchers

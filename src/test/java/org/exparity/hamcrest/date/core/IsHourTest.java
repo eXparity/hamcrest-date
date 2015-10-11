@@ -28,6 +28,16 @@ public class IsHourTest {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isHour(11));
 	}
 
+	@Test
+	public void isDateSameHour() {
+		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameHour(12));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isDateNotSameHour() {
+		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameHour(11));
+	}
+
 	// LocalDateTime Matchers
 	@Test
 	public void isLocalDateTimeHour() {

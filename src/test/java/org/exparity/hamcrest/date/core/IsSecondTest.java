@@ -28,6 +28,16 @@ public class IsSecondTest {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isSecond(1));
 	}
 
+	@Test
+	public void isDateSameSecond() {
+		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameSecond(0));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isDateNotSameSecond() {
+		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameSecond(1));
+	}
+
 	// LocalDateTime Matchers
 	@Test
 	public void isLocalDateTimeSecond() {

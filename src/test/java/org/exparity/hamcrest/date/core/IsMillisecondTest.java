@@ -23,4 +23,15 @@ public class IsMillisecondTest {
 	public void isDateNotMillisecond() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isMillisecond(1));
 	}
+
+	@Test
+	public void isDateSameMillisecond() {
+		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameMillisecond(0));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isDateNotSameMillisecond() {
+		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameMillisecond(1));
+	}
+
 }
