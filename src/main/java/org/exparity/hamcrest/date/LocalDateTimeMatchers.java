@@ -586,6 +586,7 @@ public abstract class LocalDateTimeMatchers {
 	 * @param hour the hour of the day
 	 * @param minute the minute of the hour
 	 * @param second the second of the minute
+	 * @param nanons the nanoseconds of the second
 	 */
 	public static Matcher<LocalDateTime> within(final long period,
 	        final ChronoUnit unit,
@@ -594,11 +595,12 @@ public abstract class LocalDateTimeMatchers {
 	        final int dayofMonth,
 	        final int hour,
 	        final int minute,
-	        final int second) {
+	        final int second,
+	        final int nanos) {
 		return new IsWithin<LocalDateTime>(
 		        period,
 		            unit,
-		            new LocalDateTimeWrapper(year, month, dayofMonth, hour, minute, second),
+		            new LocalDateTimeWrapper(year, month, dayofMonth, hour, minute, second, nanos),
 		            new LocalDateTimeFormatter());
 	}
 

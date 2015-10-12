@@ -791,6 +791,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param hour the hour of the day
 	 * @param minute the minute of the hour
 	 * @param second the second of the minute
+	 * @param nanos the nanonseconds of the second
 	 * @param tz the time zone of the reference date
 	 */
 	public static Matcher<ZonedDateTime> within(final long period,
@@ -801,11 +802,12 @@ public abstract class ZonedDateTimeMatchers {
 	        final int hour,
 	        final int minute,
 	        final int second,
+	        final int nanos,
 	        final ZoneId tz) {
 		return new IsWithin<ZonedDateTime>(
 		        period,
 		            unit,
-		            new ZonedDateTimeWrapper(year, month, dayofMonth, hour, minute, second, tz),
+		            new ZonedDateTimeWrapper(year, month, dayofMonth, hour, minute, second, nanos, tz),
 		            new ZonedDateTimeFormatter());
 	}
 

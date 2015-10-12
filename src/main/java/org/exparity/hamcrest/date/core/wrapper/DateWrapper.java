@@ -60,7 +60,7 @@ public class DateWrapper implements TemporalWrapper<Date> {
 
 	@Override
 	public long difference(final Date other, final ChronoUnit unit) {
-		return Math.abs(wrapped.truncatedTo(accuracy).until(other.toInstant(), unit));
+		return Math.abs(wrapped.truncatedTo(accuracy).until(other.toInstant().truncatedTo(accuracy), unit));
 	}
 
 	@Override
