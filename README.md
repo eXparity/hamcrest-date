@@ -7,13 +7,22 @@ Licensed under [BSD License][].
 
 What is Hamcrest Date?
 -----------------
-Hamcrest Date is an extension library for the [Java Hamcrest][] matcher library which provides Matcher implementations for dates.
+Hamcrest Date is an extension library for the [Java Hamcrest][] matcher library which provides Matcher implementations for Java date types including LocalDate, LocalDateTime, ZonedDateTime, and Date.
 
 Downloads
 ---------
-You can obtain Hamcrest binaries from [maven central][]. To include your project in:
+You can obtain Hamcrest binaries from [maven central][]. To include in your project:
 
 A maven project
+
+    <dependency>
+        <groupId>org.exparity</groupId>
+        <artifactId>hamcrest-date</artifactId>
+        <version>2.0.0</version>
+    </dependency>
+
+
+Versions 2.0.0 and updates require Java 8. If you are using an earlier version of Java 8 then include version
 
     <dependency>
         <groupId>org.exparity</groupId>
@@ -21,9 +30,7 @@ A maven project
         <version>1.1.0</version>
     </dependency>
 
-A project which uses ivy for dependency management
 
-    <dependency org="org.exparity" name="hamcrest-date" rev="1.1.0"/>
             
 Binaries
 --------
@@ -32,25 +39,30 @@ Hamcrest Date has a single binary, hamcrest-date.jar, which contains all the dat
 Usage
 -------------
 
-The matchers are exposed as static methods on the DateMatchers class. For Example
+The matchers are exposed as static methods on the LocalDateMatchers, LocalDateTimeMatchers, ZonedDateTimeMatchers, and DateMatchers class. For example
 
-    Date today = new Date(); myBirthday = new Date();
-    MatcherAssert.assertThat(today, DateMatchers.sameDay(myBirthday));
+    LocalDate today = LocalDate.now(); myBirthday = LocalDate.of(2015, AUGUST, 9);
+    MatcherAssert.assertThat(today, LocalDateMatchers.sameDay(myBirthday));
 
-or
+or to test if you're getting closer to your birthday
 
-    Date today = new Date(); myBirthday = new Date()
-    MatcherAssert.assertThat(today, DateMatchers.within(1, TimeUnit.DAY, myBirthday));
+    LocalDate today = LocalDate.now(); myBirthday = LocalDate.of(2015, AUGUST, 9);
+    MatcherAssert.assertThat(today, LocalDateMatchers.within(1, ChronoUnit.DAY, myBirthday));
 
 or after static importing
 
-    Date today = new Date(); myBirthday = new Date();
+    LocalDate today = LocalDate.now(); myBirthday = LocalDate.of(2015, AUGUST, 9);
     assertThat(today, within(1, DAY, myBirthday));
 
-A factories is provided for commonly used moments in time. For Example
+The same matchers are available for all date types so to match LocalDateTime values: 
 
-    Date myBirthday = new Date();
-    MatcherAssert.assertThat(myBirthday, DateMatchers.sameDay(Moments.today()));
+    LocalDateTime myAppointment = LocalDateTime.of(2015, AUGUST, 9, 10, 30, 0);
+    assertThat(LocalDateTime.now(), within(15, MINUTES, myAppointment));
+
+or to match ZonedDateTime values:
+
+    ZonedDateTime myAppointment = ZonedDateTime.of(LocalDateTime.of(2015, AUGUST, 9, 10, 30, 0), ZoneId.of("UTC"));
+    assertThat(ZonedDateTime.now(), within(15, MINUTES, myAppointment));
 
 
 The libary includes date matchers for:
@@ -59,15 +71,23 @@ The libary includes date matchers for:
 * __before__ - Test if the actual date is before the reference date
 * __within__ - Test if the actual date is within a given period (before or after) of the reference date
 * __sameDay__ - Test if the actual date is on the same day as the reference date
-* __sameHour__ - Test if the actual date is on the same hour of the day as the reference date
-* __sameInstant__ - Test if the actual date is the same, down to the millisecond, as the reference date
+* __sameHourOfDay__ - Test if the actual date is on the same hour of the day as the reference date
+* __sameInstant__ - Test if the actual date at the same instance as the reference date
 * __sameOrBefore__ - Test if the actual date is the same or before the reference date
 * __sameOrAfter__ - Test if the actual date is the same or after the reference date
-* __sameMinute__ - Test if the actual date is on the same minute of the hour as the reference date
-* __sameMonth__ - Test if the actual date is on the same month of the year as the reference date
-* __sameSecond__ - Test if the actual date is on the same second of the minute as the reference date
-* __sameWeekday__ - Test if the actual date is on the same week day as the reference date
+* __sameMinuteOfHour__ - Test if the actual date is on the same minute of the hour as the reference date
+* __sameMonthOfYear__ - Test if the actual date is on the same month of the year as the reference date
+* __sameSecondOfMinute__ - Test if the actual date is on the same second of the minute as the reference date
+* __sameDayOfWeek__ - Test if the actual date is on the same week day as the reference date
 * __sameYear__ - Test if the actual date is on the same year as the reference date
+* __isInstance__ - Test if the actual date is at the exact instant
+* __isSecond__ - Test if the actual date is on the given second
+* __isMinute__ - Test if the actual date is on the given minute
+* __isHour__ - Test if the actual date is on the given hour
+* __isDayOfWeek__ - Test if the actual date is on the given day of the week
+* __isDayOfMonth__ - Test if the actual date is on the given day of the month
+* __isMonth__ - Test if the actual date is on the given month
+* __isYear__ - Test if the actual date is on the given year
 * __isYesterday__ - Test if the actual date is yesterday
 * __isToday__ - Test if the actual date is today
 * __isTomorrow__ - Test if the actual date is tomorrow
@@ -107,6 +127,11 @@ The source includes a pom.xml for building with Maven
 
 Release Notes
 -------------
+Changes 1.1.0 -> 2.0.0
+  * Add Suppport for Java 8 date types.
+  * Add new is{*} matchers
+  * Move matcher classes to .core package
+  
 Changes 1.0.1 -> 1.1
   * Remove deprecated uk.co.it.modular.hamcrest.date.DateMatchers.
 
