@@ -12,7 +12,6 @@ import java.time.ZonedDateTime;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalField;
-import java.util.Date;
 
 import org.exparity.hamcrest.date.core.IsAfter;
 import org.exparity.hamcrest.date.core.IsBefore;
@@ -31,7 +30,9 @@ import org.exparity.hamcrest.date.core.IsSameOrBefore;
 import org.exparity.hamcrest.date.core.IsSecond;
 import org.exparity.hamcrest.date.core.IsWithin;
 import org.exparity.hamcrest.date.core.IsYear;
+import org.exparity.hamcrest.date.core.format.LocalDateTimeFormatter;
 import org.exparity.hamcrest.date.core.format.ZonedDateTimeFormatter;
+import org.exparity.hamcrest.date.core.wrapper.LocalDateTimeWrapper;
 import org.exparity.hamcrest.date.core.wrapper.ZonedDateTimeWrapper;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
@@ -43,40 +44,6 @@ import org.hamcrest.Matcher;
  * @author Stewart Bissett
  */
 public abstract class ZonedDateTimeMatchers {
-
-	/**
-	 * Creates a matcher that matches when the examined date is after the
-	 * reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * MatcherAssert.assertThat(myDate, after(new Date(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the timezone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> after(final Date date, final ZoneId tz) {
-		return new IsAfter<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is after the
-	 * reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * MatcherAssert.assertThat(myDate, after(LocalDateTime.now(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the timezone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> after(final LocalDateTime date, final ZoneId tz) {
-		return new IsAfter<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
-	}
 
 	/**
 	 * Creates a matcher that matches when the examined date is after the
@@ -111,6 +78,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param hour the hour of the day
 	 * @param minute the minute of the hour
 	 * @param second the second of the minute
+	 * @param nanos the nanos of the second
 	 */
 	public static Matcher<ZonedDateTime> after(final int year,
 	        final Month month,
@@ -118,42 +86,11 @@ public abstract class ZonedDateTimeMatchers {
 	        final int hour,
 	        final int minute,
 	        final int second,
+	        final int nanos,
 	        final ZoneId tz) {
 		return new IsAfter<ZonedDateTime>(
-		        new ZonedDateTimeWrapper(year, month, dayOfMonth, hour, minute, second, tz),
+		        new ZonedDateTimeWrapper(year, month, dayOfMonth, hour, minute, second, nanos, tz),
 		            new ZonedDateTimeFormatter());
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is before the
-	 * reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * MatcherAssert.assertThat(myDate, ZonedDateTimeMatchers.before(ZonedDateTime.now()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 */
-	public static Matcher<ZonedDateTime> before(final Date date, final ZoneId tz) {
-		return new IsBefore<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is before the
-	 * reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * MatcherAssert.assertThat(myDate, ZonedDateTimeMatchers.before(LocalDateTime.now(), ZoneId.systemDefailt()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 */
-	public static Matcher<ZonedDateTime> before(final LocalDateTime date, final ZoneId tz) {
-		return new IsBefore<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -189,6 +126,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param hour the hour of the day
 	 * @param minute the minute of the hour
 	 * @param second the second of the minute
+	 * @param nanos the nanoseconds of the second
 	 */
 	public static Matcher<ZonedDateTime> before(final int year,
 	        final Month month,
@@ -196,42 +134,11 @@ public abstract class ZonedDateTimeMatchers {
 	        final int hour,
 	        final int minute,
 	        final int second,
+	        final int nanos,
 	        final ZoneId tz) {
 		return new IsBefore<ZonedDateTime>(
 		        new ZonedDateTimeWrapper(year, month, dayOfMonth, hour, minute, second, tz),
 		            new ZonedDateTimeFormatter());
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same day
-	 * of the year as the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameDay(new Date(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 */
-	public static Matcher<ZonedDateTime> sameDay(final Date date, final ZoneId tz) {
-		return new IsSameDay<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same day
-	 * of the year as the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameDay(LocalDateTime.now(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 */
-	public static Matcher<ZonedDateTime> sameDay(final LocalDateTime date, final ZoneId tz) {
-		return new IsSameDay<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -267,48 +174,13 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param year the reference year against which the examined date is checked
 	 * @param tz the reference time zone
 	 */
-	public static Matcher<ZonedDateTime> sameDay(final int year,
+	public static Matcher<ZonedDateTime> isDay(final int year,
 	        final Month month,
 	        final int dayOfMonth,
 	        final ZoneId tz) {
 		return new IsSameDay<ZonedDateTime>(
 		        new ZonedDateTimeWrapper(year, month, dayOfMonth, tz),
 		            new ZonedDateTimeFormatter());
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same
-	 * instant of the year as the reference date down to the millisecond in the
-	 * specified time zone
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameInstant(new Date(), ZoneId.systemDefault())
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the timezone the reference date is in
-	 */
-	public static Matcher<ZonedDateTime> sameInstant(final Date date, final ZoneId tz) {
-		return new IsSame<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same
-	 * instant of the year as the reference date in the specified time zone
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameInstant(LocalDate.now(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone the reference date is in
-	 */
-	public static Matcher<ZonedDateTime> sameInstant(final LocalDateTime date, final ZoneId tz) {
-		return new IsSame<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -346,9 +218,9 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param minute the minute of the hour
 	 * @param second the second of the minute
 	 * @param nanos the nanosecond of the second
-	 * @param tz the timezone of the instant
+	 * @param tz the timezone
 	 */
-	public static Matcher<ZonedDateTime> sameInstant(final int year,
+	public static Matcher<ZonedDateTime> isInstant(final int year,
 	        final Month month,
 	        final int dayOfMonth,
 	        final int hour,
@@ -356,8 +228,9 @@ public abstract class ZonedDateTimeMatchers {
 	        final int second,
 	        final int nanos,
 	        final ZoneId tz) {
-		return sameInstant(
-		        ZonedDateTime.of(LocalDateTime.of(year, month, dayOfMonth, hour, minute, second, nanos), tz));
+		return new IsSame<ZonedDateTime>(
+		        new ZonedDateTimeWrapper(year, month, dayOfMonth, hour, minute, second, nanos, tz),
+		            new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -377,40 +250,6 @@ public abstract class ZonedDateTimeMatchers {
 	}
 
 	/**
-	 * Creates a matcher that matches when the examined date is at the same
-	 * instant or before the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameOrBefore(new Date(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> sameOrBefore(final Date date, final ZoneId tz) {
-		return new IsSameOrBefore<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is at the same
-	 * instant or before the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameOrBefore(LocalDateTime.now(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> sameOrBefore(final LocalDateTime date, final ZoneId tz) {
-		return new IsSameOrBefore<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
-	}
-
-	/**
 	 * Creates a matcher that matches when the examined date is on the same day
 	 * or before the start of the reference date
 	 * <p/>
@@ -427,6 +266,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param hour the hour of the day
 	 * @param minute the minute of the hour
 	 * @param second the second of the minute
+	 * @param nanos the nanosecond of the second
 	 * @param tz the time zone of the date to check against
 	 */
 	@Factory
@@ -436,44 +276,11 @@ public abstract class ZonedDateTimeMatchers {
 	        final int hour,
 	        final int minute,
 	        final int second,
+	        final int nanos,
 	        final ZoneId tz) {
 		return new IsSameOrBefore<ZonedDateTime>(
-		        new ZonedDateTimeWrapper(year, month, day, hour, minute, second, tz),
+		        new ZonedDateTimeWrapper(year, month, day, hour, minute, second, nanos, tz),
 		            new ZonedDateTimeFormatter());
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is at the same
-	 * instant or after the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameOrAfter(ZonedDateTime.now()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> sameOrAfter(final Date date, final ZoneId tz) {
-		return new IsSameOrAfter<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is at the same
-	 * instant or after the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameOrAfter(LocalDateTime.now(), ZoneId.systemDefaut()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> sameOrAfter(final LocalDateTime date, final ZoneId tz) {
-		return new IsSameOrAfter<ZonedDateTime>(new ZonedDateTimeWrapper(date, tz), new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -494,12 +301,12 @@ public abstract class ZonedDateTimeMatchers {
 
 	/**
 	 * Creates a matcher that matches when the examined date is on the same day
-	 * or after the start of the reference date
+	 * or before the start of the reference date
 	 * <p/>
 	 * For example:
 	 *
 	 * <pre>
-	 * assertThat(myDate, sameOrAfter(2012, Months.MAY, 12));
+	 * assertThat(myDate, sameOrAfter(2012, Months.MAY, 12, 11, 59, 59, ZoneId.systemDefault()));
 	 * </pre>
 	 *
 	 * @param year the year against which the examined date is checked
@@ -509,51 +316,21 @@ public abstract class ZonedDateTimeMatchers {
 	 * @param hour the hour of the day
 	 * @param minute the minute of the hour
 	 * @param second the second of the minute
+	 * @param nanos the nanosecond of the second
+	 * @param tz the time zone of the date to check against
 	 */
+	@Factory
 	public static Matcher<ZonedDateTime> sameOrAfter(final int year,
 	        final Month month,
 	        final int day,
 	        final int hour,
 	        final int minute,
 	        final int second,
+	        final int nanos,
 	        final ZoneId tz) {
 		return new IsSameOrAfter<ZonedDateTime>(
-		        new ZonedDateTimeWrapper(LocalDateTime.of(year, month, day, hour, minute, second), tz),
+		        new ZonedDateTimeWrapper(year, month, day, hour, minute, second, nanos, tz),
 		            new ZonedDateTimeFormatter());
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same
-	 * month as the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameMonth(new Date(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> sameMonthOfYear(final Date date, final ZoneId tz) {
-		return sameMonthOfYear(toZonedDateTime(date, tz));
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same
-	 * month as the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameMonth(LocalDateTime.now(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> sameMonthOfYear(final LocalDateTime date, final ZoneId tz) {
-		return sameMonthOfYear(toZonedDateTime(date, tz));
 	}
 
 	/**
@@ -570,40 +347,6 @@ public abstract class ZonedDateTimeMatchers {
 	 */
 	public static Matcher<ZonedDateTime> sameMonthOfYear(final ZonedDateTime date) {
 		return isMonth(date.getMonth());
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same day
-	 * of the month as the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameDayOfMonth(new Date(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> sameDayOfMonth(final Date date, final ZoneId tz) {
-		return sameDayOfMonth(toZonedDateTime(date, tz));
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same day
-	 * of the month as the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameDayOfMonth(LocalDateTime.now(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> sameDayOfMonth(final LocalDateTime date, final ZoneId tz) {
-		return sameDayOfMonth(toZonedDateTime(date, tz));
 	}
 
 	/**
@@ -645,40 +388,6 @@ public abstract class ZonedDateTimeMatchers {
 	 * For example:
 	 *
 	 * <pre>
-	 * assertThat(myDate, sameYear(new Date(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> sameYear(final Date date, final ZoneId tz) {
-		return isYear(toZonedDateTime(date, tz).getYear());
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same year
-	 * as the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameYear(LocalDateTime.now(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> sameYear(final LocalDateTime date, final ZoneId tz) {
-		return isYear(toZonedDateTime(date, tz).getYear());
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same year
-	 * as the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
 	 * assertThat(myDate, sameYear(ZonedDateTime.now()))
 	 * </pre>
 	 *
@@ -702,54 +411,6 @@ public abstract class ZonedDateTimeMatchers {
 	 */
 	public static Matcher<ZonedDateTime> isYear(final int year) {
 		return new IsYear<ZonedDateTime>(year, t -> t);
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is within a defined
-	 * period the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, within(10, TimeUnit.MINUTES, new Date(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> within(final long period,
-	        final ChronoUnit unit,
-	        final Date date,
-	        final ZoneId tz) {
-		return new IsWithin<ZonedDateTime>(
-		        period,
-		            unit,
-		            new ZonedDateTimeWrapper(date, tz),
-		            new ZonedDateTimeFormatter());
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is within a defined
-	 * period the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, within(10, TimeUnit.MINUTES, LocalDateTime.now(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> within(final long period,
-	        final ChronoUnit unit,
-	        final LocalDateTime date,
-	        final ZoneId tz) {
-		return new IsWithin<ZonedDateTime>(
-		        period,
-		            unit,
-		            new ZonedDateTimeWrapper(date, tz),
-		            new ZonedDateTimeFormatter());
 	}
 
 	/**
@@ -1262,69 +923,6 @@ public abstract class ZonedDateTimeMatchers {
 	 * For example:
 	 *
 	 * <pre>
-	 * assertThat(myDate, sameHourOfDay(new Date(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> sameHourOfDay(final Date date, final ZoneId tz) {
-		return sameHourOfDay(toZonedDateTime(date, tz));
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same hour
-	 * as the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameHourOfDay(LocalDateTime.now(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> sameHourOfDay(final LocalDateTime date, final ZoneId tz) {
-		return sameHourOfDay(toZonedDateTime(date, tz));
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same day
-	 * or after the start of the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameHourOfDay(2012, Months.MAY, 12, 12, 0, 0, ZoneId.systemDefault()));
-	 * </pre>
-	 *
-	 * @param year the year against which the examined date is checked
-	 * @param month the month against which the examined date is checked
-	 * @param day the day of the month against which the examined date is
-	 *            checked
-	 * @param hour the hour of the day
-	 * @param minute the minute of the hour
-	 * @param second the second of the minute
-	 * @param timezone the reference time zone
-	 */
-	public static Matcher<ZonedDateTime> sameHourOfDay(final int year,
-	        final Month month,
-	        final int day,
-	        final int hour,
-	        final int minute,
-	        final int second,
-	        final ZoneId zone) {
-		return sameHourOfDay(LocalDateTime.of(year, month, day, hour, minute, second), zone);
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same hour
-	 * as the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
 	 * assertThat(myDate, sameHourOfDay(ZonedDateTime.now()))
 	 * </pre>
 	 *
@@ -1348,40 +946,6 @@ public abstract class ZonedDateTimeMatchers {
 	 */
 	public static Matcher<ZonedDateTime> isMinute(final int minute) {
 		return new IsMinute<ZonedDateTime>(minute, t -> t);
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same
-	 * Minute as the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameMinuteOfHour(new Date(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> sameMinuteOfHour(final Date date, final ZoneId tz) {
-		return sameMinuteOfHour(toZonedDateTime(date, tz));
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same
-	 * Minute as the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameMinuteOfHour(LocalDateTime.now(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> sameMinuteOfHour(final LocalDateTime date, final ZoneId tz) {
-		return sameMinuteOfHour(toZonedDateTime(date, tz));
 	}
 
 	/**
@@ -1418,40 +982,6 @@ public abstract class ZonedDateTimeMatchers {
 
 	/**
 	 * Creates a matcher that matches when the examined date is on the same
-	 * Second as the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameSecondOfMinute(new Date(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> sameSecondOfMinute(final Date date, final ZoneId tz) {
-		return sameSecondOfMinute(toZonedDateTime(date, tz));
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same
-	 * Second as the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, sameSecondOfMinute(LocalDateTime.now(), ZoneId.systemDefault()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 * @param tz the time zone of the reference date
-	 */
-	public static Matcher<ZonedDateTime> sameSecondOfMinute(final LocalDateTime date, final ZoneId tz) {
-		return sameSecondOfMinute(toZonedDateTime(date, tz));
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is on the same
 	 * second as the reference date
 	 * <p/>
 	 * For example:
@@ -1465,13 +995,4 @@ public abstract class ZonedDateTimeMatchers {
 	public static Matcher<ZonedDateTime> sameSecondOfMinute(final ZonedDateTime date) {
 		return isSecond(date.getSecond());
 	}
-
-	private static ZonedDateTime toZonedDateTime(final Date date, final ZoneId tz) {
-		return date.toInstant().atZone(tz);
-	}
-
-	private static ZonedDateTime toZonedDateTime(final LocalDateTime date, final ZoneId tz) {
-		return ZonedDateTime.of(date, tz);
-	}
-
 }

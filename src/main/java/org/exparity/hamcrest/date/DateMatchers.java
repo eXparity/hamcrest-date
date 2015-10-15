@@ -500,11 +500,11 @@ public abstract class DateMatchers {
 	 * @param month the reference month against which the examined date is
 	 *            checked
 	 * @param year the reference year against which the examined date is checked
-	 * @deprecated Use {@link #sameDay(int, Month, int)}
+	 * @deprecated Use {@link #isDay(int, Month, int)}
 	 */
 	@Deprecated
 	public static Matcher<Date> sameDay(final int year, final Months month, final int day) {
-		return sameDay(year, month.month(), day);
+		return isDay(year, month.month(), day);
 	}
 
 	/**
@@ -523,7 +523,7 @@ public abstract class DateMatchers {
 	 *            checked
 	 * @param year the reference year against which the examined date is checked
 	 */
-	public static Matcher<Date> sameDay(final int year, final Month month, final int dayOfMonth) {
+	public static Matcher<Date> isDay(final int year, final Month month, final int dayOfMonth) {
 		return sameDay(LocalDate.of(year, month, dayOfMonth));
 	}
 
@@ -651,7 +651,7 @@ public abstract class DateMatchers {
 	 *            checked
 	 * @param milliseconds the milliseconds of the second against which the
 	 *            examined date is checked
-	 * @deprecated Use {@link #sameInstant(int, Month, int, int, int, int, int)}
+	 * @deprecated Use {@link #isInstant(int, Month, int, int, int, int, int)}
 	 */
 	@Deprecated
 	public static Matcher<Date> sameInstant(final int year,
@@ -661,7 +661,7 @@ public abstract class DateMatchers {
 	        final int minute,
 	        final int second,
 	        final int milliseconds) {
-		return sameInstant(year, month.month(), dayOfMonth, hour, minute, second, milliseconds);
+		return isInstant(year, month.month(), dayOfMonth, hour, minute, second, milliseconds);
 	}
 
 	/**
@@ -687,7 +687,7 @@ public abstract class DateMatchers {
 	 * @param milliseconds the milliseconds of the second against which the
 	 *            examined date is checked
 	 */
-	public static Matcher<Date> sameInstant(final int year,
+	public static Matcher<Date> isInstant(final int year,
 	        final Month month,
 	        final int dayOfMonth,
 	        final int hour,

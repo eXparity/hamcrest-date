@@ -126,21 +126,6 @@ public class IsSameOrAfterTest {
 	}
 
 	@Test
-	public void isLocalDateSameOrAfterEarlierDate() {
-		assertThat(AUG_04_2015, LocalDateMatchers.sameOrAfter(AUG_03_2015_AS_DATE));
-	}
-
-	@Test(expected = AssertionError.class)
-	public void isLocalDateSameOrAfterLaterDate() {
-		assertThat(AUG_04_2015, LocalDateMatchers.sameOrAfter(AUG_05_2015_AS_DATE));
-	}
-
-	@Test
-	public void isLocalDateSameOrAfterSameDate() {
-		assertThat(AUG_04_2015, LocalDateMatchers.sameOrAfter(AUG_04_2015_NOON_AS_DATE));
-	}
-
-	@Test
 	public void isLocalDateSameOrAfterEarlierDay() {
 		assertThat(AUG_04_2015, LocalDateMatchers.sameOrAfter(2015, AUGUST, 3));
 	}
@@ -170,21 +155,6 @@ public class IsSameOrAfterTest {
 	@Test
 	public void isLocalDateTimeSameOrAfterSameLocalDateTime() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.sameOrAfter(AUG_04_2015_NOON));
-	}
-
-	@Test
-	public void isLocalDateTimeSameOrAfterEarlierDate() {
-		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.sameOrAfter(AUG_04_2015_1159_AS_DATE));
-	}
-
-	@Test(expected = AssertionError.class)
-	public void isLocalDateTimeSameOrAfterLaterDate() {
-		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.sameOrAfter(AUG_04_2015_1201_AS_DATE));
-	}
-
-	@Test
-	public void isLocalDateTimeSameOrAfterSameDate() {
-		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.sameOrAfter(AUG_04_2015_NOON_AS_DATE));
 	}
 
 	@Test
@@ -230,77 +200,27 @@ public class IsSameOrAfterTest {
 	}
 
 	@Test
-	public void isZonedDateTimeSameOrAfterEarlierLocalDateTime() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(AUG_04_2015_1159, ZoneIds.UTC));
-	}
-
-	@Test(expected = AssertionError.class)
-	public void isZonedDateTimeSameOrAfterLaterLocalDateTime() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(AUG_04_2015_1201, ZoneIds.UTC));
-	}
-
-	@Test
-	public void isZonedDateTimeSameOrAfterSameLocalDateTime() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(AUG_04_2015_NOON, ZoneIds.UTC));
-	}
-
-	@Test
-	public void isZonedDateTimeSameOrAfterLocalDateTimeEarlierZone() {
-		assertThat(AUG_04_2015_NOON_UTC, sameOrAfter(AUG_04_2015_NOON, ZoneIds.CET));
-	}
-
-	@Test(expected = AssertionError.class)
-	public void isZonedDateTimeSameOrAfterLocalDateTimeLaterZone() {
-		assertThat(AUG_04_2015_NOON_UTC, sameOrAfter(AUG_04_2015_NOON, ZoneIds.EST));
-	}
-
-	@Test
-	public void isZonedDateTimeSameOrAfterEarlierDate() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(AUG_04_2015_1159_UTC_AS_DATE, ZoneIds.UTC));
-	}
-
-	@Test(expected = AssertionError.class)
-	public void isZonedDateTimeSameOrAfterLaterDate() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(AUG_04_2015_1201_UTC_AS_DATE, ZoneIds.UTC));
-	}
-
-	@Test
-	public void isZonedDateTimeSameOrAfterSameDate() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(AUG_04_2015_NOON_UTC_AS_DATE, ZoneIds.UTC));
-	}
-
-	@Test
-	public void isZonedDateTimeSameOrAfterDateEarlierZone() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(AUG_04_2015_NOON_CET_AS_DATE, ZoneIds.UTC));
-	}
-
-	@Test(expected = AssertionError.class)
-	public void isZonedDateTimeSameOrAfterDateLaterZone() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(AUG_04_2015_NOON_EST_AS_DATE, ZoneIds.UTC));
-	}
-
-	@Test
 	public void isZonedDateTimeSameOrAfterEarlierDateTime() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(2015, AUGUST, 4, 11, 59, 0, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(2015, AUGUST, 4, 11, 59, 0, 0, ZoneIds.UTC));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void isZonedDateTimeSameOrAfterLaterDateTime() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(2015, AUGUST, 4, 12, 0, 1, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(2015, AUGUST, 4, 12, 0, 1, 0, ZoneIds.UTC));
 	}
 
 	@Test
 	public void isZonedDateTimeSameOrAfterSameDateTime() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(2015, AUGUST, 4, 12, 0, 0, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(2015, AUGUST, 4, 12, 0, 0, 0, ZoneIds.UTC));
 	}
 
 	@Test
 	public void isZonedDateTimeSameOrAfterDateTimeEarlierZone() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(2015, AUGUST, 4, 12, 0, 0, ZoneIds.CET));
+		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(2015, AUGUST, 4, 12, 0, 0, 0, ZoneIds.CET));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void isZonedDateTimeSameOrAfterDateTimeLaterZone() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(2015, AUGUST, 4, 12, 0, 0, ZoneIds.EST));
+		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(2015, AUGUST, 4, 12, 0, 0, 0, ZoneIds.EST));
 	}
 }

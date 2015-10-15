@@ -1,7 +1,9 @@
 package org.exparity.hamcrest.date;
 
 import java.time.DayOfWeek;
+import java.time.format.TextStyle;
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Enumeration of days in a week
@@ -33,7 +35,7 @@ public enum Weekdays {
 	}
 
 	public String describe() {
-		return name().toLowerCase();
+		return dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH);
 	}
 
 	public DayOfWeek getAsDayOfWeek() {
