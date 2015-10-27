@@ -5,7 +5,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * A matcher that tests that the actual date is before or the same instant as the reference date
- * 
+ *
  * @author Stewart Bissett
  */
 public class IsSameOrBefore<T> extends TypeSafeDiagnosingMatcher<T> {
@@ -19,15 +19,16 @@ public class IsSameOrBefore<T> extends TypeSafeDiagnosingMatcher<T> {
 	}
 
 	@Override
-	protected boolean matchesSafely(T actual, Description mismatchDescription) {
+	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
 		if (expected.isBefore(actual)) {
-			mismatchDescription.appendText("date is " + describer.describe(expected.unwrap()));
+			mismatchDescription.appendText("date is " + describer.describe(actual));
 			return false;
 		} else {
 			return true;
 		}
 	}
 
+	@Override
 	public void describeTo(final Description description) {
 		description.appendText("the date is on same day or before " + describer.describe(expected.unwrap()));
 	}

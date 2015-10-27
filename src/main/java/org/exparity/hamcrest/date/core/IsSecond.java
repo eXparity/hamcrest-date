@@ -23,11 +23,11 @@ public class IsSecond<T> extends TypeSafeDiagnosingMatcher<T> {
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
 		int actualSecond = accessor.asTemporal(actual).get(ChronoField.SECOND_OF_MINUTE);
-		if (expected == actualSecond) {
-			return true;
-		} else {
+		if (expected != actualSecond) {
 			mismatchDescription.appendText("the date has the second " + actualSecond);
 			return false;
+		} else {
+			return true;
 		}
 	}
 

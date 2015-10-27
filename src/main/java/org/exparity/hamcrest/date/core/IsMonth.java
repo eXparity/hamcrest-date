@@ -27,11 +27,11 @@ public class IsMonth<T> extends TypeSafeDiagnosingMatcher<T> {
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
 		Month actualMonth = Month.of(accessor.asTemporal(actual).get(ChronoField.MONTH_OF_YEAR));
-		if (expectedMonth.equals(actualMonth)) {
-			return true;
-		} else {
+		if (!expectedMonth.equals(actualMonth)) {
 			mismatchDescription.appendText("the date is in " + describeMonth(actualMonth));
 			return false;
+		} else {
+			return true;
 		}
 	}
 

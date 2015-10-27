@@ -1920,7 +1920,7 @@ public abstract class DateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<Date> isLeapYear() {
-		return new IsLeapYear<Date>(DateMatchers::dateToZoneDateTime);
+		return new IsLeapYear<Date>(DateMatchers::dateToZoneDateTime, new DateFormatter());
 	}
 
 	private static ChronoUnit convertUnit(final TimeUnit unit) {

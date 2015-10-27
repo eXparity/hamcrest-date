@@ -29,11 +29,11 @@ public class IsMaximum<T> extends TypeSafeDiagnosingMatcher<T> {
 	protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
 		long actualValue = datePart.getFrom(adapter.asTemporal(actual));
 		ValueRange range = datePart.rangeRefinedBy(adapter.asTemporal(actual));
-		if (range.getMaximum() == actualValue) {
-			return true;
-		} else {
+		if (range.getMaximum() != actualValue) {
 			mismatchDesc.appendText("value is " + actualValue + " instead of " + range.getMaximum());
 			return false;
+		} else {
+			return true;
 		}
 	}
 

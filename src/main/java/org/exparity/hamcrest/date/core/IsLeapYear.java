@@ -13,18 +13,20 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 public class IsLeapYear<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	private final TemporalAdapter<T> adapter;
+	private final TemporalFormatter<T> formatter;
 
-	public IsLeapYear(final TemporalAdapter<T> adapter) {
+	public IsLeapYear(final TemporalAdapter<T> adapter, final TemporalFormatter<T> formatter) {
 		this.adapter = adapter;
+		this.formatter = formatter;
 	}
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
-		if (adapter.asTemporal(actual).query(localDate()).isLeapYear()) {
-			return true;
-		} else {
-			mismatchDesc.appendText("a leap year");
+		if (!adapter.asTemporal(actual).query(localDate()).isLeapYear()) {
+			mismatchDesc.appendText(formatter.describe(actual) + " is not leap year");
 			return false;
+		} else {
+			return true;
 		}
 	}
 

@@ -47,6 +47,6 @@ public class IsDayOfWeek<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	@Override
 	public void describeTo(final Description description) {
-		description.appendText("the date is on on the days of the week " + this.description);
+		description.appendText("the date is on the days of the week " + this.description);
 	}
 }

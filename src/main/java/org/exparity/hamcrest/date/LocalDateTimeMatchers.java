@@ -868,7 +868,7 @@ public abstract class LocalDateTimeMatchers {
 	 * </pre>
 	 */
 	public static Matcher<LocalDateTime> isLeapYear() {
-		return new IsLeapYear<LocalDateTime>(t -> t);
+		return new IsLeapYear<LocalDateTime>(t -> t, new LocalDateTimeFormatter());
 	}
 
 	/**

@@ -5,7 +5,6 @@ import static java.time.Month.*;
 import static java.util.Arrays.asList;
 
 import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -30,9 +29,7 @@ import org.exparity.hamcrest.date.core.IsSameOrBefore;
 import org.exparity.hamcrest.date.core.IsSecond;
 import org.exparity.hamcrest.date.core.IsWithin;
 import org.exparity.hamcrest.date.core.IsYear;
-import org.exparity.hamcrest.date.core.format.LocalDateTimeFormatter;
 import org.exparity.hamcrest.date.core.format.ZonedDateTimeFormatter;
-import org.exparity.hamcrest.date.core.wrapper.LocalDateTimeWrapper;
 import org.exparity.hamcrest.date.core.wrapper.ZonedDateTimeWrapper;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
@@ -897,7 +894,7 @@ public abstract class ZonedDateTimeMatchers {
 	 * </pre>
 	 */
 	public static Matcher<ZonedDateTime> isLeapYear() {
-		return new IsLeapYear<ZonedDateTime>(t -> t);
+		return new IsLeapYear<ZonedDateTime>(t -> t, new ZonedDateTimeFormatter());
 	}
 
 	/**

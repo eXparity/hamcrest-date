@@ -760,6 +760,6 @@ public abstract class LocalDateMatchers {
 	 * </pre>
 	 */
 	public static Matcher<LocalDate> isLeapYear() {
-		return new IsLeapYear<LocalDate>(t -> t);
+		return new IsLeapYear<LocalDate>(t -> t, new LocalDateFormatter());
 	}
 }

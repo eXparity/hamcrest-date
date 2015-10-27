@@ -24,11 +24,11 @@ public class IsYear<T> extends TypeSafeDiagnosingMatcher<T> {
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
 		int actualYear = accessor.asTemporal(actual).get(ChronoField.YEAR);
-		if (expected == actualYear) {
-			return true;
-		} else {
+		if (expected != actualYear) {
 			mismatchDescription.appendText("the date has year " + actualYear);
 			return false;
+		} else {
+			return true;
 		}
 	}
 

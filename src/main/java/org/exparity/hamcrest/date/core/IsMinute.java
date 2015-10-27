@@ -23,11 +23,11 @@ public class IsMinute<T> extends TypeSafeDiagnosingMatcher<T> {
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
 		int actualMinute = accessor.asTemporal(actual).get(ChronoField.MINUTE_OF_HOUR);
-		if (expected == actualMinute) {
-			return true;
-		} else {
+		if (expected != actualMinute) {
 			mismatchDescription.appendText("the date has the minute " + actualMinute);
 			return false;
+		} else {
+			return true;
 		}
 	}
 

@@ -5,7 +5,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * A matcher that tests that the examined date is the same as the reference date
- * 
+ *
  * @author Stewart Bissett
  */
 public class IsSame<T> extends TypeSafeDiagnosingMatcher<T> {
@@ -19,15 +19,16 @@ public class IsSame<T> extends TypeSafeDiagnosingMatcher<T> {
 	}
 
 	@Override
-	protected boolean matchesSafely(T actual, Description mismatchDescription) {
+	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
 		if (!expected.isSame(actual)) {
-			mismatchDescription.appendText("date is " + describer.describe(expected.unwrap()));
+			mismatchDescription.appendText("date is " + describer.describe(actual));
 			return false;
 		} else {
 			return true;
 		}
 	}
 
+	@Override
 	public void describeTo(final Description description) {
 		description.appendText("the same date as " + describer.describe(expected.unwrap()));
 	}
