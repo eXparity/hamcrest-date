@@ -22,7 +22,7 @@ public class IsSameDay<T> extends TypeSafeDiagnosingMatcher<T> {
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
 		if (!expected.isSameDay(actual)) {
-			mismatchDesc.appendText("date is " + describer.describe(actual));
+			mismatchDesc.appendText("day is " + describer.describeDate(actual));
 			return false;
 		} else {
 			return true;
@@ -31,6 +31,6 @@ public class IsSameDay<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	@Override
 	public void describeTo(final Description description) {
-		description.appendText("the same day as " + describer.describe(expected.unwrap()));
+		description.appendText("the same day as " + describer.describeDate(expected.unwrap()));
 	}
 }
