@@ -18,11 +18,11 @@ A maven project
     <dependency>
         <groupId>org.exparity</groupId>
         <artifactId>hamcrest-date</artifactId>
-        <version>2.0.0</version>
+        <version>2.0.1</version>
     </dependency>
 
 
-Versions 2.0.0 and updates require Java 8. If you are using an earlier version of Java 8 then include version
+Versions 2.x.x onwards require Java 8. If you are using an earlier version of Java 8 then include version
 
     <dependency>
         <groupId>org.exparity</groupId>
