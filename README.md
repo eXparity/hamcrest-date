@@ -7,18 +7,18 @@ Licensed under [BSD License][].
 
 What is Hamcrest Date?
 -----------------
-Hamcrest Date is an extension library for the [Java Hamcrest][] matcher library which provides Matcher implementations for Java date types including LocalDate, LocalDateTime, ZonedDateTime, and Date.
+Hamcrest Date is an extension library for the [Java Hamcrest][] matcher library which provides Matcher implementations for Java date types including LocalDate, LocalTime, LocalDateTime, ZonedDateTime, and Date.
 
 Downloads
 ---------
-You can obtain Hamcrest binaries from [maven central][]. To include in your project:
+You can obtain Hamcrest Date binaries from [maven central][]. To include in your project:
 
 A maven project
 
     <dependency>
         <groupId>org.exparity</groupId>
         <artifactId>hamcrest-date</artifactId>
-        <version>2.0.1</version>
+        <version>2.0.2</version>
     </dependency>
 
 
@@ -39,7 +39,7 @@ Hamcrest Date has a single binary, hamcrest-date.jar, which contains all the dat
 Usage
 -------------
 
-The matchers are exposed as static methods on the LocalDateMatchers, LocalDateTimeMatchers, ZonedDateTimeMatchers, and DateMatchers class. For example
+The matchers are exposed as static methods on the LocalDateMatchers, LocalTimeMatchers, LocalDateTimeMatchers, ZonedDateTimeMatchers, and DateMatchers class. For example
 
     LocalDate today = LocalDate.now(); myBirthday = LocalDate.of(2015, AUGUST, 9);
     MatcherAssert.assertThat(today, LocalDateMatchers.sameDay(myBirthday));
@@ -63,6 +63,11 @@ or to match ZonedDateTime values:
 
     ZonedDateTime myAppointment = ZonedDateTime.of(LocalDateTime.of(2015, AUGUST, 9, 10, 30, 0), ZoneId.of("UTC"));
     assertThat(ZonedDateTime.now(), within(15, MINUTES, myAppointment));
+
+or to match LocalTime values:
+
+    LocalTime myAppointment = LocalTime.NOON;
+    assertThat(LocalTime.now(), within(15, MINUTES, myAppointment));
 
 
 The libary includes date matchers for:
@@ -127,8 +132,11 @@ The source includes a pom.xml for building with Maven
 
 Release Notes
 -------------
+Changes 2.0.1 -> 2.0.2
+  * Add Support for LocalTime
+  
 Changes 1.1.0 -> 2.0.0
-  * Add Suppport for Java 8 date types.
+  * Add Support for Java 8 date types.
   * Add new is{*} matchers
   * Move matcher classes to .core package
   

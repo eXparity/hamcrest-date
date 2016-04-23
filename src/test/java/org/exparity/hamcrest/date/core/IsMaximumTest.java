@@ -70,6 +70,6 @@ public class IsMaximumTest {
 
 	@Test(expected = AssertionError.class)
 	public void isLocalTimeNotLastHourOfDay() {
-		assertThat(LocalTime.of(23, 0, 0), LocalTimeMatchers.isMaximum(ChronoField.HOUR_OF_DAY));
+		assertThat(LocalTime.of(22, 0, 0), LocalTimeMatchers.isMaximum(ChronoField.HOUR_OF_DAY));
 	}
 }
