@@ -5,8 +5,11 @@ import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_AS_DAT
 import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_UTC;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.LocalTime;
+
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.junit.Test;
 
@@ -47,6 +50,17 @@ public class IsSecondTest {
 	@Test(expected = AssertionError.class)
 	public void isLocalDateTimeNotSecond() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isSecond(1));
+	}
+
+	// LocalTime Matchers
+	@Test
+	public void isLocalTimeSecond() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.isSecond(0));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isLocalimeNotSecond() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.isSecond(1));
 	}
 
 	// ZonedDateTime Matchers

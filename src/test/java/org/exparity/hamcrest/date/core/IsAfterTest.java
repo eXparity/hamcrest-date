@@ -1,15 +1,34 @@
 package org.exparity.hamcrest.date.core;
 
 import static java.time.Month.AUGUST;
-import static org.exparity.hamcrest.date.testutils.Dates.*;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_03_2015;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_01PM_UTC;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_1159;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_11AM_UTC;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_1201;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_CET;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_EST;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_UTC;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_05_2015;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_01_2012_11AM_GMT_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_01_2012_11AM_PST_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.JUN_14_2012;
+import static org.exparity.hamcrest.date.testutils.Dates.JUN_15_2012;
+import static org.exparity.hamcrest.date.testutils.Dates.JUN_15_2012_11AM_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.JUN_15_2012_11PM_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.JUN_16_2012;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.LocalTime;
 import java.time.Month;
 
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.DayMonthYear;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.Months;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.exparity.hamcrest.date.testutils.ZoneIds;
@@ -238,5 +257,37 @@ public class IsAfterTest {
 	@Test(expected = AssertionError.class)
 	public void isZonedDateTimeAfterDateTimeLaterZone() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.after(2015, AUGUST, 4, 12, 0, 0, 0, ZoneIds.EST));
+	}
+
+	// LocalTime Matchers
+
+	@Test
+	public void isLocalTimeAfterEarlierLocalTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.after(LocalTime.NOON.minusSeconds(1)));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isLocalTimeAfterSameLocalTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.after(LocalTime.NOON));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isLocalTimeAfterLaterLocalTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.after(LocalTime.NOON.plusSeconds(1)));
+	}
+
+	@Test
+	public void isLocalTimeAfterEarlierTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.after(11, 59, 59));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isLocalTimeAfterSameTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.after(12, 0, 0));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isLocalTimeAfterLaterTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.after(12, 0, 1));
 	}
 }

@@ -3,12 +3,14 @@ package org.exparity.hamcrest.date.core;
 import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.LocalTime;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
 
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.exparity.hamcrest.date.testutils.ZoneIds;
 import org.junit.Test;
@@ -83,30 +85,26 @@ public class IsWithinTest {
 
 	@Test
 	public void isDateWithinSameDayMonthYearTime() {
-		assertThat(
-		        AUG_04_2015_NOON_AS_DATE,
-		            DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 0));
+		assertThat(AUG_04_2015_NOON_AS_DATE,
+				DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 0));
 	}
 
 	@Test
 	public void isDateWithinDayMonthYearTimeInsideLimit() {
-		assertThat(
-		        AUG_04_2015_NOON_AS_DATE,
-		            DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 1));
+		assertThat(AUG_04_2015_NOON_AS_DATE,
+				DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 1));
 	}
 
 	@Test
 	public void isDateWithinDayMonthYearTimeEqualLimit() {
-		assertThat(
-		        AUG_04_2015_NOON_AS_DATE,
-		            DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 2));
+		assertThat(AUG_04_2015_NOON_AS_DATE,
+				DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 2));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void isDateWithinDayMonthYearTimeOutsideLimit() {
-		assertThat(
-		        AUG_04_2015_NOON_AS_DATE,
-		            DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 3));
+		assertThat(AUG_04_2015_NOON_AS_DATE,
+				DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 3));
 	}
 
 	// LocalDate Matchers
@@ -173,30 +171,26 @@ public class IsWithinTest {
 
 	@Test
 	public void isLocalDateTimeWithinSameDayMonthYear() {
-		assertThat(
-		        AUG_04_2015_NOON,
-		            LocalDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 0));
+		assertThat(AUG_04_2015_NOON,
+				LocalDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 0));
 	}
 
 	@Test
 	public void isLocalDateTimeWithinDayMonthYearInsideLimit() {
-		assertThat(
-		        AUG_04_2015_NOON,
-		            LocalDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 1));
+		assertThat(AUG_04_2015_NOON,
+				LocalDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 1));
 	}
 
 	@Test
 	public void isLocalDateTimeWithinDayMonthYearEqualLimit() {
-		assertThat(
-		        AUG_04_2015_NOON,
-		            LocalDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 2));
+		assertThat(AUG_04_2015_NOON,
+				LocalDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 2));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void isLocalDateTimeWithinDayMonthYearOutsideLimit() {
-		assertThat(
-		        AUG_04_2015_NOON,
-		            LocalDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 3));
+		assertThat(AUG_04_2015_NOON,
+				LocalDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 3));
 	}
 
 	// ZonedDateTime Matchers
@@ -222,30 +216,66 @@ public class IsWithinTest {
 
 	@Test
 	public void isZonedDateTimeWithinSameDayMonthYear() {
-		assertThat(
-		        AUG_04_2015_NOON_UTC,
-		            ZonedDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 0, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC,
+				ZonedDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 0, ZoneIds.UTC));
 	}
 
 	@Test
 	public void isZonedDateTimeWithinDayMonthYearInsideLimit() {
-		assertThat(
-		        AUG_04_2015_NOON_UTC,
-		            ZonedDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 1, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC,
+				ZonedDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 1, ZoneIds.UTC));
 	}
 
 	@Test
 	public void isZonedDateTimeWithinDayMonthYearEqualLimit() {
-		assertThat(
-		        AUG_04_2015_NOON_UTC,
-		            ZonedDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 2, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC,
+				ZonedDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 2, ZoneIds.UTC));
 	}
 
 	@Test(expected = AssertionError.class)
 	public void isZonedDateTimeWithinDayMonthYearOutsideLimit() {
-		assertThat(
-		        AUG_04_2015_NOON_UTC,
-		            ZonedDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 3, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC,
+				ZonedDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 3, ZoneIds.UTC));
 	}
 
+	// LocalTime Matchers
+	@Test
+	public void isLocalTimeWithSameLocalTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.within(2, ChronoUnit.SECONDS, LocalTime.NOON));
+	}
+
+	@Test
+	public void isLocalTimeWithSameLocalTimeInsideLimit() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.within(2, ChronoUnit.SECONDS, LocalTime.NOON.plusSeconds(1)));
+	}
+
+	@Test
+	public void isLocalTimeWithSameLocalTimeEqualLimit() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.within(2, ChronoUnit.SECONDS, LocalTime.NOON.plusSeconds(2)));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isLocalTimeWithSameLocalTimeOutsideLimit() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.within(2, ChronoUnit.SECONDS, LocalTime.NOON.plusSeconds(3)));
+	}
+
+	@Test
+	public void isLocalTimeWithSameTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.within(2, ChronoUnit.SECONDS, 12, 0, 0));
+	}
+
+	@Test
+	public void isLocalTimeWithSameTimeInsideLimit() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.within(2, ChronoUnit.SECONDS, 12, 0, 1));
+	}
+
+	@Test
+	public void isLocalTimeWithSameTimeEqualLimit() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.within(2, ChronoUnit.SECONDS, 12, 0, 2));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isLocalTimeWithSameTimeOutsideLimit() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.within(2, ChronoUnit.SECONDS, 12, 0, 3));
+	}
 }

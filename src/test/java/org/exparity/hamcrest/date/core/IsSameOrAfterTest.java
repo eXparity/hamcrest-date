@@ -5,10 +5,13 @@ import static org.exparity.hamcrest.date.ZonedDateTimeMatchers.sameOrAfter;
 import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.LocalTime;
+
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.DayMonthYear;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.Months;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.exparity.hamcrest.date.testutils.ZoneIds;
@@ -222,5 +225,37 @@ public class IsSameOrAfterTest {
 	@Test(expected = AssertionError.class)
 	public void isZonedDateTimeSameOrAfterDateTimeLaterZone() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrAfter(2015, AUGUST, 4, 12, 0, 0, 0, ZoneIds.EST));
+	}
+
+	// LocalTime Matchers
+
+	@Test
+	public void isLocalTimeSameOrAfterEarlierLocalTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.sameOrAfter(LocalTime.NOON.minusSeconds(1)));
+	}
+
+	@Test
+	public void isLocalTimeSameOrAfterrSameLocalTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.sameOrAfter(LocalTime.NOON));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isLocalTimeSameOrAfterLaterLocalTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.sameOrAfter(LocalTime.NOON.plusSeconds(1)));
+	}
+
+	@Test
+	public void isLocalTimeSameOrAfterEarlierTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.sameOrAfter(11, 59, 59));
+	}
+
+	@Test
+	public void isLocalTimeSameOrAfterSameTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.sameOrAfter(12, 0, 0));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isLocalTimeSameOrAfterLaterTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.sameOrAfter(12, 0, 1));
 	}
 }

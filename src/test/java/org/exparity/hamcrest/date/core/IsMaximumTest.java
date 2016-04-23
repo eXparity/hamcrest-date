@@ -3,9 +3,13 @@ package org.exparity.hamcrest.date.core;
 import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.LocalTime;
+import java.time.temporal.ChronoField;
+
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.junit.Test;
 
@@ -58,4 +62,14 @@ public class IsMaximumTest {
 		assertThat(AUG_01_2015_NOON_UTC, ZonedDateTimeMatchers.isLastDayOfMonth());
 	}
 
+	// LocalTime Matchers
+	@Test
+	public void isLocalTimeLastHourOfDay() {
+		assertThat(LocalTime.of(23, 0, 0), LocalTimeMatchers.isMaximum(ChronoField.HOUR_OF_DAY));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isLocalTimeNotLastHourOfDay() {
+		assertThat(LocalTime.of(23, 0, 0), LocalTimeMatchers.isMaximum(ChronoField.HOUR_OF_DAY));
+	}
 }

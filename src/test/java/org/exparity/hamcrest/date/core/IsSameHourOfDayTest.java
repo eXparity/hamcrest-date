@@ -4,12 +4,14 @@ import static org.exparity.hamcrest.date.testutils.DateMatcherTestUtils.addDateF
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.junit.Test;
 
@@ -74,6 +76,19 @@ public class IsSameHourOfDayTest {
 	public void isLocalDateTimeSameHourOfDayDifferentDay() {
 		LocalDateTime date = LocalDateTime.now(), other = date.plusDays(1);
 		assertThat(other, LocalDateTimeMatchers.sameHourOfDay(date));
+	}
+
+	// LocalTime Matchers
+	@Test
+	public void isLocalTimeSameHourOfDay() {
+		LocalTime date = LocalTime.now(), other = date;
+		assertThat(other, LocalTimeMatchers.sameHourOfDay(date));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isLocalTimeNotSameHourOfDay() {
+		LocalTime date = LocalTime.now(), other = date.plusHours(1);
+		assertThat(other, LocalTimeMatchers.sameHourOfDay(date));
 	}
 
 	// ZonedDateTime Matchers

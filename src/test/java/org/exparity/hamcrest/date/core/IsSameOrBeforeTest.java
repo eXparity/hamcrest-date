@@ -5,10 +5,13 @@ import static org.exparity.hamcrest.date.ZonedDateTimeMatchers.sameOrBefore;
 import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.LocalTime;
+
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.DayMonthYear;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.Months;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.exparity.hamcrest.date.testutils.ZoneIds;
@@ -201,9 +204,8 @@ public class IsSameOrBeforeTest {
 
 	@Test(expected = AssertionError.class)
 	public void isZonedDateTimeSameOrBeforeLaterDateTime() {
-		assertThat(
-		        AUG_04_2015_NOON_UTC,
-		            ZonedDateTimeMatchers.sameOrBefore(2015, AUGUST, 4, 11, 59, 0, 0, ZoneIds.UTC));
+		assertThat(AUG_04_2015_NOON_UTC,
+				ZonedDateTimeMatchers.sameOrBefore(2015, AUGUST, 4, 11, 59, 0, 0, ZoneIds.UTC));
 	}
 
 	@Test
@@ -226,4 +228,35 @@ public class IsSameOrBeforeTest {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameOrBefore(2015, AUGUST, 4, 12, 0, 0, 0, ZoneIds.EST));
 	}
 
+	// LocalTime Matchers
+
+	@Test(expected = AssertionError.class)
+	public void isLocalTimeSameOrBeforeEarlierLocalTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.sameOrBefore(LocalTime.NOON.minusSeconds(1)));
+	}
+
+	@Test
+	public void isLocalTimeSameOrBeforeSameLocalTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.sameOrBefore(LocalTime.NOON));
+	}
+
+	@Test
+	public void isLocalTimeSameOrBeforeLaterLocalTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.sameOrBefore(LocalTime.NOON.plusSeconds(1)));
+	}
+
+	@Test(expected = AssertionError.class)
+	public void isLocalTimeSameOrBeforeEarlierTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.sameOrBefore(11, 59, 59));
+	}
+
+	@Test
+	public void isLocalTimeSameOrBeforeSameTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.sameOrBefore(12, 0, 0));
+	}
+
+	@Test
+	public void isLocalTimeSameOrBeforeLaterTime() {
+		assertThat(LocalTime.NOON, LocalTimeMatchers.sameOrBefore(12, 0, 1));
+	}
 }
