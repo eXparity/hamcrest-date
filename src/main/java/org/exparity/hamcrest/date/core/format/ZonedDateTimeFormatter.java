@@ -16,7 +16,7 @@ import org.exparity.hamcrest.date.core.TemporalFormatter;
  */
 public class ZonedDateTimeFormatter implements TemporalFormatter<ZonedDateTime> {
 
-	private static DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy hh:mm:ss.SSS Z");
+	private static DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy hh:mm:ss.SSS a Z");
 	private static DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy");
 
 	@Override

@@ -16,7 +16,7 @@ import org.exparity.hamcrest.date.core.TemporalFormatter;
  */
 public class LocalTimeFormatter implements TemporalFormatter<LocalTime> {
 
-	private static DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("hh:mm:ss");
+	private static DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("hh:mm:ss a");
 
 	@Override
 	public String describe(final LocalTime temporal) {
