@@ -7,11 +7,12 @@ import java.time.DayOfWeek;
 import java.util.Calendar;
 
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * @author Stewart Bissett
  */
+@SuppressWarnings("deprecation")
 public class WeekDaysTest {
 
 	@Test

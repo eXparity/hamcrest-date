@@ -20,8 +20,8 @@ public class IsSame<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
-		if (!expected.isSame(actual)) {
-			mismatchDescription.appendText("date is " + describer.describe(actual));
+		if (!this.expected.isSame(actual)) {
+			mismatchDescription.appendText("the date is " + this.describer.describe(actual));
 			return false;
 		} else {
 			return true;
@@ -30,6 +30,6 @@ public class IsSame<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	@Override
 	public void describeTo(final Description description) {
-		description.appendText("the same date as " + describer.describe(expected.unwrap()));
+		description.appendText("the same date as " + this.describer.describe(this.expected.unwrap()));
 	}
 }

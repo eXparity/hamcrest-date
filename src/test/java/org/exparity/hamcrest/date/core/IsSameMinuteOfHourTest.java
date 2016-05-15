@@ -13,14 +13,17 @@ import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * Unit Tests for the {@link DateMatchers} class
  *
  * @author Stewart Bissett
  */
+@SuppressWarnings("deprecation")
 public class IsSameMinuteOfHourTest {
+
+    private static final String ASSERTION_PATTERN = "\\s*Expected: the date has the minute [0-9]*\\s*but: the date has the minute [0-9]*";
 
 	// Date Matchers
 	@Test
@@ -29,7 +32,7 @@ public class IsSameMinuteOfHourTest {
 		assertThat(other, DateMatchers.sameMinute(date));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotSameMinute() {
 		Date date = new Date(), other = addDateField(date, Calendar.MINUTE, 1);
 		assertThat(other, DateMatchers.sameMinute(date));
@@ -47,7 +50,7 @@ public class IsSameMinuteOfHourTest {
 		assertThat(other, DateMatchers.sameMinuteOfHour(date));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotSameMinuteOfHour() {
 		Date date = new Date(), other = addDateField(date, Calendar.MINUTE, 1);
 		assertThat(other, DateMatchers.sameMinuteOfHour(date));
@@ -66,7 +69,7 @@ public class IsSameMinuteOfHourTest {
 		assertThat(other, LocalDateTimeMatchers.sameMinuteOfHour(date));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotSameMinuteOfHour() {
 		LocalDateTime date = LocalDateTime.now(), other = date.plusMinutes(1);
 		assertThat(other, LocalDateTimeMatchers.sameMinuteOfHour(date));
@@ -85,7 +88,7 @@ public class IsSameMinuteOfHourTest {
 		assertThat(other, LocalTimeMatchers.sameMinuteOfHour(date));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalTimeNotSameMinuteOfHour() {
 		LocalTime date = LocalTime.now(), other = date.plusMinutes(1);
 		assertThat(other, LocalTimeMatchers.sameMinuteOfHour(date));
@@ -104,7 +107,7 @@ public class IsSameMinuteOfHourTest {
 		assertThat(other, ZonedDateTimeMatchers.sameMinuteOfHour(date));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotSameMinuteOfHour() {
 		ZonedDateTime date = ZonedDateTime.now(), other = date.plusMinutes(1);
 		assertThat(other, ZonedDateTimeMatchers.sameMinuteOfHour(date));

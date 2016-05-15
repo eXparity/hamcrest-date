@@ -27,9 +27,9 @@ public class IsWithin<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
-		long actualDuration = expected.difference(actual, unit);
-		if (actualDuration > period) {
-			mismatchDesc.appendText("date is " + describer.describe(actual)
+		long actualDuration = this.expected.difference(actual, this.unit);
+		if (actualDuration > this.period) {
+			mismatchDesc.appendText("the date is " + this.describer.describe(actual)
 					+ " and "
 					+ actualDuration
 					+ " "
@@ -43,11 +43,11 @@ public class IsWithin<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	@Override
 	public void describeTo(final Description description) {
-		description.appendText("the date is within " + period + " " + describeUnit() + " of " + describer.describe(expected.unwrap()));
+		description.appendText("the date is within " + this.period + " " + describeUnit() + " of " + this.describer.describe(this.expected.unwrap()));
 	}
 
 	private String describeUnit() {
-		return unit.toString().toLowerCase();
+		return this.unit.toString().toLowerCase();
 	}
 
 }

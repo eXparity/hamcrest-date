@@ -11,14 +11,17 @@ import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * Unit Tests for the {@link IsSameMinuteOfDay} class
  *
  * @author Stewart Bissett
  */
+@SuppressWarnings("deprecation")
 public class IsMinuteTest {
+
+    private static final String ASSERTION_PATTERN = "\\s*Expected: the date has the minute [0-9]*\\s*but: the date has the minute [0-9]*";
 
 	// Date Matchers
 	@Test
@@ -26,7 +29,7 @@ public class IsMinuteTest {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isMinute(0));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotMinute() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isMinute(1));
 	}
@@ -36,7 +39,7 @@ public class IsMinuteTest {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameMinute(0));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotSameMinute() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameMinute(1));
 	}
@@ -47,7 +50,7 @@ public class IsMinuteTest {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isMinute(0));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotMinute() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isMinute(1));
 	}
@@ -58,7 +61,7 @@ public class IsMinuteTest {
 		assertThat(LocalTime.NOON, LocalTimeMatchers.isMinute(0));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalTimeNotMinute() {
 		assertThat(LocalTime.NOON, LocalTimeMatchers.isMinute(1));
 	}
@@ -69,7 +72,7 @@ public class IsMinuteTest {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isMinute(0));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotMinute() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isMinute(1));
 	}

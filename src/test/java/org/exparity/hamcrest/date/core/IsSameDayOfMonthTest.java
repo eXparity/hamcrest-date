@@ -7,12 +7,14 @@ import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * @author Stewart Bissett
  */
 public class IsSameDayOfMonthTest {
+
+    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is on the [0-9]* day of the month\\s*but: the date is on the [0-9]* day of the month";
 
 	// Date Matchers
 	@Test
@@ -20,7 +22,7 @@ public class IsSameDayOfMonthTest {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameDayOfMonth(AUG_04_2015_NOON_AS_DATE));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotSameDayOfMonth() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameDayOfMonth(AUG_01_2015_NOON_AS_DATE));
 	}
@@ -36,7 +38,7 @@ public class IsSameDayOfMonthTest {
 		assertThat(AUG_04_2015, LocalDateMatchers.sameDayOfMonth(AUG_04_2015));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotSameDayOfMonth() {
 		assertThat(AUG_04_2015, LocalDateMatchers.sameDayOfMonth(AUG_01_2015));
 	}
@@ -52,7 +54,7 @@ public class IsSameDayOfMonthTest {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.sameDayOfMonth(AUG_04_2015_NOON));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotSameDayOfMonth() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.sameDayOfMonth(AUG_01_2015_NOON));
 	}
@@ -68,7 +70,7 @@ public class IsSameDayOfMonthTest {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameDayOfMonth(AUG_04_2015_NOON_UTC));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotSameDayOfMonth() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameDayOfMonth(AUG_01_2015_NOON_UTC));
 	}

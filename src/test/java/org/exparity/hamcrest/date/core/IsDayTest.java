@@ -14,12 +14,14 @@ import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * @author Stewart Bissett
  */
 public class IsDayTest {
+
+    private static final String ASSERTION_PATTERN = "\\s*Expected: the same day as [A-Za-z0-9:,.+ ]*\\s*but: the day is [A-Za-z0-9:,.+ ]*";
 
 	// Date Matchers
 	@Test
@@ -27,7 +29,7 @@ public class IsDayTest {
 		assertThat(new Date(), DateMatchers.isToday());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotToday() {
 		assertThat(addDateField(new Date(), Calendar.DATE, 1), DateMatchers.isToday());
 	}
@@ -37,7 +39,7 @@ public class IsDayTest {
 		assertThat(addDateField(new Date(), Calendar.DATE, -1), DateMatchers.isYesterday());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotYesterday() {
 		assertThat(new Date(), DateMatchers.isYesterday());
 	}
@@ -47,7 +49,7 @@ public class IsDayTest {
 		assertThat(addDateField(new Date(), Calendar.DATE, 1), DateMatchers.isTomorrow());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotTomorrow() {
 		assertThat(new Date(), DateMatchers.isTomorrow());
 	}
@@ -58,7 +60,7 @@ public class IsDayTest {
 		assertThat(LocalDate.now(), LocalDateMatchers.isToday());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotToday() {
 		assertThat(LocalDate.now().plusDays(1), LocalDateMatchers.isToday());
 	}
@@ -68,7 +70,7 @@ public class IsDayTest {
 		assertThat(LocalDate.now().minusDays(1), LocalDateMatchers.isYesterday());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotYesterday() {
 		assertThat(LocalDate.now(), LocalDateMatchers.isYesterday());
 	}
@@ -78,7 +80,7 @@ public class IsDayTest {
 		assertThat(LocalDate.now().plusDays(1), LocalDateMatchers.isTomorrow());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotTomorrow() {
 		assertThat(LocalDate.now(), LocalDateMatchers.isTomorrow());
 	}
@@ -89,7 +91,7 @@ public class IsDayTest {
 		assertThat(LocalDateTime.now(), LocalDateTimeMatchers.isToday());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotToday() {
 		assertThat(LocalDateTime.now().plusDays(1), LocalDateTimeMatchers.isToday());
 	}
@@ -99,7 +101,7 @@ public class IsDayTest {
 		assertThat(LocalDateTime.now().minusDays(1), LocalDateTimeMatchers.isYesterday());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotYesterday() {
 		assertThat(LocalDateTime.now(), LocalDateTimeMatchers.isYesterday());
 	}
@@ -109,7 +111,7 @@ public class IsDayTest {
 		assertThat(LocalDateTime.now().plusDays(1), LocalDateTimeMatchers.isTomorrow());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotTomorrow() {
 		assertThat(LocalDateTime.now(), LocalDateTimeMatchers.isTomorrow());
 	}
@@ -120,7 +122,7 @@ public class IsDayTest {
 		assertThat(ZonedDateTime.now(), ZonedDateTimeMatchers.isToday());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotToday() {
 		assertThat(ZonedDateTime.now().plusDays(1), ZonedDateTimeMatchers.isToday());
 	}
@@ -130,7 +132,7 @@ public class IsDayTest {
 		assertThat(ZonedDateTime.now().minusDays(1), ZonedDateTimeMatchers.isYesterday());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotYesterday() {
 		assertThat(ZonedDateTime.now(), ZonedDateTimeMatchers.isYesterday());
 	}
@@ -140,7 +142,7 @@ public class IsDayTest {
 		assertThat(ZonedDateTime.now().plusDays(1), ZonedDateTimeMatchers.isTomorrow());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotTomorrow() {
 		assertThat(ZonedDateTime.now(), ZonedDateTimeMatchers.isTomorrow());
 	}

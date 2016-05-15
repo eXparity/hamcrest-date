@@ -23,9 +23,9 @@ public class IsYear<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
-		int actualYear = accessor.asTemporal(actual).get(ChronoField.YEAR);
-		if (expected != actualYear) {
-			mismatchDescription.appendText("the date has year " + actualYear);
+		int actualYear = this.accessor.asTemporal(actual).get(ChronoField.YEAR);
+		if (this.expected != actualYear) {
+			mismatchDescription.appendText("the date has the year " + actualYear);
 			return false;
 		} else {
 			return true;
@@ -34,6 +34,6 @@ public class IsYear<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	@Override
 	public void describeTo(final Description description) {
-		description.appendText("the date is in the year " + expected);
+		description.appendText("the date is in the year " + this.expected);
 	}
 }

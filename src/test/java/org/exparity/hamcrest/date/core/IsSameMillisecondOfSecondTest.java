@@ -7,14 +7,17 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.exparity.hamcrest.date.DateMatchers;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * Unit Tests for the {@link DateMatchers} class
  *
  * @author Stewart Bissett
  */
+@SuppressWarnings("deprecation")
 public class IsSameMillisecondOfSecondTest {
+
+    private static final String ASSERTION_PATTERN = "\\s*Expected: the date has the millisecond [0-9]*\\s*but: the date has the millisecond [0-9]*";
 
 	// Date Matchers
 	@Test
@@ -23,7 +26,7 @@ public class IsSameMillisecondOfSecondTest {
 		assertThat(other, DateMatchers.sameMillisecond(date));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotSameMillisecond() {
 		Date date = new Date(), other = addDateField(date, Calendar.MILLISECOND, 1);
 		assertThat(other, DateMatchers.sameMillisecond(date));
@@ -41,7 +44,7 @@ public class IsSameMillisecondOfSecondTest {
 		assertThat(other, DateMatchers.sameMillisecondOfSecond(date));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotSameMillisecondOfSecond() {
 		Date date = new Date(), other = addDateField(date, Calendar.MILLISECOND, 1);
 		assertThat(other, DateMatchers.sameMillisecondOfSecond(date));

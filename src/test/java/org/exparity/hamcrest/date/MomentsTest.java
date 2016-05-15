@@ -6,11 +6,12 @@ import static org.hamcrest.Matchers.equalTo;
 
 import java.time.LocalDate;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * @author Stewart Bissett
  */
+@SuppressWarnings("deprecation")
 public class MomentsTest {
 
 	@Test

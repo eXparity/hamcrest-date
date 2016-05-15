@@ -11,23 +11,26 @@ import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.Months;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * Unit Tests for the {@link DateMatchers} class
  *
  * @author Stewart Bissett
  */
+@SuppressWarnings("deprecation")
 public class IsSameDayTest {
+
+    private static final String ASSERTION_PATTERN = "\\s*Expected: the same day as [A-Za-z0-9:,.+ ]*\\s*but: the day is [A-Za-z0-9:,.+ ]*";
 
 	// Date Matchers
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateSameDayEarlierDate() {
 		assertThat(JUN_15_2012_11AM_AS_DATE, DateMatchers.sameDay(JUN_01_2012_11AM_AS_DATE));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateSameDayLaterDate() {
 		assertThat(JUN_15_2012_11AM_AS_DATE, DateMatchers.sameDay(JUN_01_2012_11AM_AS_DATE));
 	}
@@ -47,12 +50,12 @@ public class IsSameDayTest {
 		assertThat(JAN_01_2012_11AM_GMT_AS_DATE, DateMatchers.sameDay(JAN_01_2012_11AM_PST_AS_DATE));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateSameDayEarlierLocalDate() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.sameDay(JUN_14_2012));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateSameDayLaterLocalDate() {
 		assertThat(JUN_15_2012_11AM_AS_DATE, DateMatchers.sameDay(JUN_16_2012));
 	}
@@ -62,12 +65,12 @@ public class IsSameDayTest {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.sameDay(JUN_15_2012));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateSameDayEarlierDay() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.sameDay(2012, Months.JUNE, 14));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateSameDayLaterDay() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.sameDay(2012, Months.JUNE, 16));
 	}
@@ -77,12 +80,12 @@ public class IsSameDayTest {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.sameDay(2012, Months.JUNE, 15));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateSameDayEarlierDayMonthYear() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.sameDay(new DayMonthYear(14, Months.JUNE, 2012)));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateSameDayLaterDayMonthYear() {
 		assertThat(JUN_15_2012_11PM_AS_DATE, DateMatchers.sameDay(new DayMonthYear(16, Months.JUNE, 2012)));
 	}
@@ -94,12 +97,12 @@ public class IsSameDayTest {
 
 	// LocalDate Matchers
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateSameDayEarlierLocalDate() {
 		assertThat(AUG_04_2015, LocalDateMatchers.sameDay(AUG_03_2015));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateSameDayLaterLocalDate() {
 		assertThat(AUG_04_2015, LocalDateMatchers.sameDay(AUG_05_2015));
 	}
@@ -109,12 +112,12 @@ public class IsSameDayTest {
 		assertThat(AUG_04_2015, LocalDateMatchers.sameDay(AUG_04_2015));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateSameDayEarlierDay() {
 		assertThat(AUG_04_2015, LocalDateMatchers.isDay(2015, AUGUST, 3));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateSameDayLaterDay() {
 		assertThat(AUG_04_2015, LocalDateMatchers.isDay(2015, AUGUST, 5));
 	}
@@ -126,12 +129,12 @@ public class IsSameDayTest {
 
 	// LocalDateTime Matchers
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeSameDayEarlierLocalDateTime() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.sameDay(AUG_03_2015_NOON));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeSameDayLaterLocalDateTime() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.sameDay(AUG_05_2015_NOON));
 	}
@@ -141,12 +144,12 @@ public class IsSameDayTest {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.sameDay(AUG_04_2015_NOON));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeSameDayEarlierDay() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isDay(2015, AUGUST, 3));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeSameDayLaterDay() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isDay(2015, AUGUST, 5));
 	}
@@ -157,12 +160,12 @@ public class IsSameDayTest {
 	}
 
 	// ZonedDateTime Matchers
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeSameDayEarlierZonedDateTime() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameDay(AUG_03_2015_NOON_UTC));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeSameDayLaterZonedDateTime() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameDay(AUG_05_2015_NOON_UTC));
 	}
@@ -182,12 +185,12 @@ public class IsSameDayTest {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameDay(AUG_04_2015_NOON_EST));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeSameDayEarlierDay() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isDay(2015, AUGUST, 3, UTC));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeSameDayLaterDay() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isDay(2015, AUGUST, 5, UTC));
 	}

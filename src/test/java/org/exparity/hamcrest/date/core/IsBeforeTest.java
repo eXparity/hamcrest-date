@@ -23,6 +23,7 @@ import org.testng.annotations.Test;
  *
  * @author Stewart Bissett
  */
+@SuppressWarnings("deprecation")
 public class IsBeforeTest {
 
     private static final String ASSERTION_PATTERN = "\\s*Expected: the date is before [A-Za-z0-9:,.+ ]*\\s*but: date is [A-Za-z0-9:,.+ ]*";

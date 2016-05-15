@@ -4,14 +4,17 @@ import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_AS_DAT
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.exparity.hamcrest.date.DateMatchers;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * Unit Tests for the {@link IsSameMillisecondOfDay} class
  *
  * @author Stewart Bissett
  */
+@SuppressWarnings("deprecation")
 public class IsMillisecondTest {
+
+    private static final String ASSERTION_PATTERN = "\\s*Expected: the date has the millisecond [0-9]*\\s*but: the date has the millisecond [A-Za-z0-9:,.+ ]*";
 
 	// Date Matchers
 	@Test
@@ -19,7 +22,7 @@ public class IsMillisecondTest {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isMillisecond(0));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotMillisecond() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isMillisecond(1));
 	}
@@ -29,7 +32,7 @@ public class IsMillisecondTest {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameMillisecond(0));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotSameMillisecond() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameMillisecond(1));
 	}

@@ -8,8 +8,7 @@ import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
-import org.exparity.hamcrest.date.core.IsLeapYear;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * Unit test for {@link IsLeapYear}
@@ -18,13 +17,15 @@ import org.junit.Test;
  */
 public class IsLeapYearTest {
 
+    private static final String ASSERTION_PATTERN = "\\s*Expected: a leap year*\\s*but: the date [A-Za-z0-9:,.+ \\-]* is not a leap year";
+
 	// Date Matchers
 	@Test
 	public void isDateLeapYear() {
 		assertThat(AUG_04_2016_AS_DATE, DateMatchers.isLeapYear());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotLeapYear() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isLeapYear());
 	}
@@ -35,7 +36,7 @@ public class IsLeapYearTest {
 		assertThat(AUG_04_2016, LocalDateMatchers.isLeapYear());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotLeapYear() {
 		assertThat(AUG_04_2015, LocalDateMatchers.isLeapYear());
 	}
@@ -46,7 +47,7 @@ public class IsLeapYearTest {
 		assertThat(AUG_04_2016_NOON, LocalDateTimeMatchers.isLeapYear());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotLeapYear() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isLeapYear());
 	}
@@ -57,7 +58,7 @@ public class IsLeapYearTest {
 		assertThat(AUG_04_2016_NOON_UTC, ZonedDateTimeMatchers.isLeapYear());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotLeapYear() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isLeapYear());
 	}

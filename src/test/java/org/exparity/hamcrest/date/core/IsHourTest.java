@@ -11,14 +11,17 @@ import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * Unit Tests for the {@link IsSameHourOfDay} class
  *
  * @author Stewart Bissett
  */
+@SuppressWarnings("deprecation")
 public class IsHourTest {
+
+    private static final String ASSERTION_PATTERN = "\\s*Expected: the date has the hour [0-9]*\\s*but: the date has the hour [0-9]*";
 
 	// Date Matchers
 	@Test
@@ -26,17 +29,17 @@ public class IsHourTest {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isHour(12));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotHour() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isHour(11));
 	}
 
-	@Test
+    @Test
 	public void isDateSameHour() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameHour(12));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotSameHour() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameHour(11));
 	}
@@ -47,7 +50,7 @@ public class IsHourTest {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isHour(12));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotHour() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isHour(11));
 	}
@@ -58,7 +61,7 @@ public class IsHourTest {
 		assertThat(LocalTime.NOON, LocalTimeMatchers.isHour(12));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalTimeNotHour() {
 		assertThat(LocalTime.NOON, LocalTimeMatchers.isHour(11));
 	}
@@ -69,7 +72,7 @@ public class IsHourTest {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isHour(12));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotHour() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isHour(11));
 	}

@@ -22,8 +22,8 @@ public class IsLeapYear<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
-		if (!adapter.asTemporal(actual).query(localDate()).isLeapYear()) {
-			mismatchDesc.appendText(formatter.describe(actual) + " is not leap year");
+		if (!this.adapter.asTemporal(actual).query(localDate()).isLeapYear()) {
+			mismatchDesc.appendText("the date " + this.formatter.describe(actual) + " is not a leap year");
 			return false;
 		} else {
 			return true;

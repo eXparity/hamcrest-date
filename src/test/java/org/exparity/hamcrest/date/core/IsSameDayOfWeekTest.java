@@ -7,12 +7,14 @@ import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * @author Stewart Bissett
  */
 public class IsSameDayOfWeekTest {
+
+    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is on a [A-Za-z]*\\s*but: the date is on a [A-Za-z]*";
 
 	// Date Matchers
 	@Test
@@ -20,7 +22,7 @@ public class IsSameDayOfWeekTest {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameDayOfWeek(AUG_04_2015_NOON_AS_DATE));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotSameDayOfWeek() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameDayOfWeek(AUG_01_2015_NOON_AS_DATE));
 	}
@@ -36,7 +38,7 @@ public class IsSameDayOfWeekTest {
 		assertThat(AUG_04_2015, LocalDateMatchers.sameDayOfWeek(AUG_04_2015));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotSameDayOfWeek() {
 		assertThat(AUG_04_2015, LocalDateMatchers.sameDayOfWeek(AUG_03_2015));
 	}
@@ -52,7 +54,7 @@ public class IsSameDayOfWeekTest {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.sameDayOfWeek(AUG_04_2015_NOON));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotSameDayOfWeek() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.sameDayOfWeek(AUG_01_2015_NOON));
 	}
@@ -68,7 +70,7 @@ public class IsSameDayOfWeekTest {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameDayOfWeek(AUG_04_2015_NOON_UTC));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotSameDayOfWeek() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameDayOfWeek(AUG_01_2015_NOON_UTC));
 	}

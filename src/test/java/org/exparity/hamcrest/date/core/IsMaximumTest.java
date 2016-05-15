@@ -11,65 +11,67 @@ import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
- * @author <a href="mailto:stewart@modular-it.co.uk">Stewart Bissett</a>
+ * @author Stewart Bissett
  */
 public class IsMaximumTest {
 
-	// Date Matchers
-	@Test
-	public void isDateLastDayOfMonth() {
-		assertThat(AUG_31_2015_NOON_AS_DATE, DateMatchers.isLastDayOfMonth());
-	}
+    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is the maximum value for [A-Za-z ]*\\s*but: date is the [0-9]* [A-Za-z ]* instead of [0-9]* [A-Za-z ]*";
 
-	@Test(expected = AssertionError.class)
-	public void isDateNotLastDayOfMonth() {
-		assertThat(AUG_01_2015_NOON_AS_DATE, DateMatchers.isLastDayOfMonth());
-	}
+    // Date Matchers
+    @Test
+    public void isDateLastDayOfMonth() {
+        assertThat(AUG_31_2015_NOON_AS_DATE, DateMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
+    }
 
-	// LocalDate Matchers
-	@Test
-	public void isLocalDateLastDayOfMonth() {
-		assertThat(AUG_31_2015, LocalDateMatchers.isLastDayOfMonth());
-	}
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isDateNotLastDayOfMonth() {
+        assertThat(AUG_01_2015_NOON_AS_DATE, DateMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
+    }
 
-	@Test(expected = AssertionError.class)
-	public void isLocalDateNotLastDayOfMonth() {
-		assertThat(AUG_01_2015, LocalDateMatchers.isLastDayOfMonth());
-	}
+    // LocalDate Matchers
+    @Test
+    public void isLocalDateLastDayOfMonth() {
+        assertThat(AUG_31_2015, LocalDateMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
+    }
 
-	// LocalDateTime Matchers
-	@Test
-	public void isLocalDateTimeLastDayOfMonth() {
-		assertThat(AUG_31_2015_NOON, LocalDateTimeMatchers.isLastDayOfMonth());
-	}
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isLocalDateNotLastDayOfMonth() {
+        assertThat(AUG_01_2015, LocalDateMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
+    }
 
-	@Test(expected = AssertionError.class)
-	public void isLocalDateTimeNotLastDayOfMonth() {
-		assertThat(AUG_01_2015_NOON, LocalDateTimeMatchers.isLastDayOfMonth());
-	}
+    // LocalDateTime Matchers
+    @Test
+    public void isLocalDateTimeLastDayOfMonth() {
+        assertThat(AUG_31_2015_NOON, LocalDateTimeMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
+    }
 
-	// ZonedDateTime Matchers
-	@Test
-	public void isZonedDateTimeLastDayOfMonth() {
-		assertThat(AUG_31_2015_NOON_UTC, ZonedDateTimeMatchers.isLastDayOfMonth());
-	}
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isLocalDateTimeNotLastDayOfMonth() {
+        assertThat(AUG_01_2015_NOON, LocalDateTimeMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
+    }
 
-	@Test(expected = AssertionError.class)
-	public void isZonedDateTimeNotLastDayOfMonth() {
-		assertThat(AUG_01_2015_NOON_UTC, ZonedDateTimeMatchers.isLastDayOfMonth());
-	}
+    // ZonedDateTime Matchers
+    @Test
+    public void isZonedDateTimeLastDayOfMonth() {
+        assertThat(AUG_31_2015_NOON_UTC, ZonedDateTimeMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
+    }
 
-	// LocalTime Matchers
-	@Test
-	public void isLocalTimeLastHourOfDay() {
-		assertThat(LocalTime.of(23, 0, 0), LocalTimeMatchers.isMaximum(ChronoField.HOUR_OF_DAY));
-	}
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isZonedDateTimeNotLastDayOfMonth() {
+        assertThat(AUG_01_2015_NOON_UTC, ZonedDateTimeMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
+    }
 
-	@Test(expected = AssertionError.class)
-	public void isLocalTimeNotLastHourOfDay() {
-		assertThat(LocalTime.of(22, 0, 0), LocalTimeMatchers.isMaximum(ChronoField.HOUR_OF_DAY));
-	}
+    // LocalTime Matchers
+    @Test
+    public void isLocalTimeLastHourOfDay() {
+        assertThat(LocalTime.of(23, 0, 0), LocalTimeMatchers.isMaximum(ChronoField.HOUR_OF_DAY));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isLocalTimeNotLastHourOfDay() {
+        assertThat(LocalTime.of(22, 0, 0), LocalTimeMatchers.isMaximum(ChronoField.HOUR_OF_DAY));
+    }
 }

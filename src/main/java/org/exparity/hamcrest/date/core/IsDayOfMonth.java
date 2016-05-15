@@ -22,17 +22,17 @@ public class IsDayOfMonth<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
-		int actualValue = adapter.asTemporal(actual).get(ChronoField.DAY_OF_MONTH);
-		if (expected == actualValue) {
+		int actualValue = this.adapter.asTemporal(actual).get(ChronoField.DAY_OF_MONTH);
+		if (this.expected == actualValue) {
 			return true;
 		} else {
-			mismatchDescription.appendText("the date has the day of the month " + actualValue);
+			mismatchDescription.appendText("the date is on the " + actualValue + " day of the month");
 			return false;
 		}
 	}
 
 	@Override
 	public void describeTo(final Description description) {
-		description.appendText("the date has the day of the month " + expected);
+		description.appendText("the date is on the " + this.expected + " day of the month");
 	}
 }

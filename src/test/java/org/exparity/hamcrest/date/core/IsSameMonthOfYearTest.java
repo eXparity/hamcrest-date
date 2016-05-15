@@ -13,12 +13,15 @@ import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * @author Stewart Bissett
  */
+@SuppressWarnings("deprecation")
 public class IsSameMonthOfYearTest {
+
+    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is in [A-Za-z]*\\s*but: the date is in [A-Za-z]*";
 
 	// Date Matchers
 	@Test
@@ -27,7 +30,7 @@ public class IsSameMonthOfYearTest {
 		assertThat(other, DateMatchers.sameMonth(date));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotSameMonth() {
 		Date date = new Date(), other = addDateField(date, Calendar.MONTH, 1);
 		assertThat(other, DateMatchers.sameMonth(date));
@@ -45,7 +48,7 @@ public class IsSameMonthOfYearTest {
 		assertThat(other, DateMatchers.sameMonthOfYear(date));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotSameMonthOfYear() {
 		Date date = new Date(), other = addDateField(date, Calendar.MONTH, 1);
 		assertThat(other, DateMatchers.sameMonthOfYear(date));
@@ -64,7 +67,7 @@ public class IsSameMonthOfYearTest {
 		assertThat(other, LocalDateMatchers.sameMonthOfYear(date));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotSameMonthOfYear() {
 		LocalDate date = LocalDate.now(), other = date.plusMonths(1);
 		assertThat(other, LocalDateMatchers.sameMonthOfYear(date));
@@ -83,7 +86,7 @@ public class IsSameMonthOfYearTest {
 		assertThat(other, LocalDateTimeMatchers.sameMonthOfYear(date));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotSameMonthOfYear() {
 		LocalDateTime date = LocalDateTime.now(), other = date.plusMonths(1);
 		assertThat(other, LocalDateTimeMatchers.sameMonthOfYear(date));
@@ -102,7 +105,7 @@ public class IsSameMonthOfYearTest {
 		assertThat(other, ZonedDateTimeMatchers.sameMonthOfYear(date));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotSameMonthOfYear() {
 		ZonedDateTime date = ZonedDateTime.now(), other = date.plusMonths(1);
 		assertThat(other, ZonedDateTimeMatchers.sameMonthOfYear(date));

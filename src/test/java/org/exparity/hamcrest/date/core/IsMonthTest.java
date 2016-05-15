@@ -10,14 +10,17 @@ import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.Months;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * Unit Tests for the {@link IsSameMonthOfYear} class
  *
  * @author Stewart Bissett
  */
+@SuppressWarnings("deprecation")
 public class IsMonthTest {
+
+    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is in [A-Za-z]*\\s*but: the date is in [A-Za-z]*";
 
 	// Date Matchers
 	@Test
@@ -25,7 +28,7 @@ public class IsMonthTest {
 		assertThat(JAN_01_2015_NOON_AS_DATE, DateMatchers.isMonth(Month.JANUARY));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotMonth() {
 		assertThat(JAN_01_2015_NOON_AS_DATE, DateMatchers.isMonth(Month.FEBRUARY));
 	}
@@ -35,7 +38,7 @@ public class IsMonthTest {
 		assertThat(JAN_01_2015_NOON_AS_DATE, DateMatchers.sameMonth(Months.JANUARY));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotSameMonth() {
 		assertThat(JAN_01_2015_NOON_AS_DATE, DateMatchers.sameMonth(Months.FEBRUARY));
 	}
@@ -45,7 +48,7 @@ public class IsMonthTest {
 		assertThat(JAN_01_2015_NOON_AS_DATE, DateMatchers.isJanuary());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotJanuary() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isJanuary());
 	}
@@ -55,7 +58,7 @@ public class IsMonthTest {
 		assertThat(FEB_01_2015_NOON_AS_DATE, DateMatchers.isFebruary());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotFebruary() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isFebruary());
 	}
@@ -65,7 +68,7 @@ public class IsMonthTest {
 		assertThat(MAR_01_2015_NOON_AS_DATE, DateMatchers.isMarch());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotMarch() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isMarch());
 	}
@@ -75,7 +78,7 @@ public class IsMonthTest {
 		assertThat(APR_01_2015_NOON_AS_DATE, DateMatchers.isApril());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotApril() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isApril());
 	}
@@ -85,7 +88,7 @@ public class IsMonthTest {
 		assertThat(MAY_01_2015_NOON_AS_DATE, DateMatchers.isMay());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotMay() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isMay());
 	}
@@ -95,7 +98,7 @@ public class IsMonthTest {
 		assertThat(JUN_01_2015_NOON_AS_DATE, DateMatchers.isJune());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotJune() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isJune());
 	}
@@ -105,7 +108,7 @@ public class IsMonthTest {
 		assertThat(JUL_01_2015_NOON_AS_DATE, DateMatchers.isJuly());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotJuly() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isJuly());
 	}
@@ -115,7 +118,7 @@ public class IsMonthTest {
 		assertThat(AUG_01_2015_NOON_AS_DATE, DateMatchers.isAugust());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotAugust() {
 		assertThat(SEP_04_2015_AS_DATE, DateMatchers.isAugust());
 	}
@@ -125,7 +128,7 @@ public class IsMonthTest {
 		assertThat(SEP_04_2015_AS_DATE, DateMatchers.isSeptember());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotSeptember() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isSeptember());
 	}
@@ -135,7 +138,7 @@ public class IsMonthTest {
 		assertThat(OCT_01_2015_NOON_AS_DATE, DateMatchers.isOctober());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotOctober() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isOctober());
 	}
@@ -145,7 +148,7 @@ public class IsMonthTest {
 		assertThat(NOV_01_2015_NOON_AS_DATE, DateMatchers.isNovember());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotNovember() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isNovember());
 	}
@@ -155,7 +158,7 @@ public class IsMonthTest {
 		assertThat(DEC_01_2015_NOON_AS_DATE, DateMatchers.isDecember());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotDecember() {
 		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isDecember());
 	}
@@ -166,7 +169,7 @@ public class IsMonthTest {
 		assertThat(JAN_01_2015, LocalDateMatchers.isJanuary());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotJanuary() {
 		assertThat(AUG_04_2015, LocalDateMatchers.isJanuary());
 	}
@@ -176,7 +179,7 @@ public class IsMonthTest {
 		assertThat(FEB_01_2015, LocalDateMatchers.isFebruary());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotFebruary() {
 		assertThat(AUG_04_2015, LocalDateMatchers.isFebruary());
 	}
@@ -186,7 +189,7 @@ public class IsMonthTest {
 		assertThat(MAR_01_2015, LocalDateMatchers.isMarch());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotMarch() {
 		assertThat(AUG_04_2015, LocalDateMatchers.isMarch());
 	}
@@ -196,7 +199,7 @@ public class IsMonthTest {
 		assertThat(APR_01_2015, LocalDateMatchers.isApril());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotApril() {
 		assertThat(AUG_04_2015, LocalDateMatchers.isApril());
 	}
@@ -206,7 +209,7 @@ public class IsMonthTest {
 		assertThat(MAY_01_2015, LocalDateMatchers.isMay());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotMay() {
 		assertThat(AUG_04_2015, LocalDateMatchers.isMay());
 	}
@@ -216,7 +219,7 @@ public class IsMonthTest {
 		assertThat(JUN_01_2015, LocalDateMatchers.isJune());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotJune() {
 		assertThat(AUG_04_2015, LocalDateMatchers.isJune());
 	}
@@ -226,7 +229,7 @@ public class IsMonthTest {
 		assertThat(JUL_01_2015, LocalDateMatchers.isJuly());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotJuly() {
 		assertThat(AUG_04_2015, LocalDateMatchers.isJuly());
 	}
@@ -236,7 +239,7 @@ public class IsMonthTest {
 		assertThat(AUG_01_2015, LocalDateMatchers.isAugust());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotAugust() {
 		assertThat(SEP_04_2015, LocalDateMatchers.isAugust());
 	}
@@ -246,7 +249,7 @@ public class IsMonthTest {
 		assertThat(SEP_04_2015, LocalDateMatchers.isSeptember());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotSeptember() {
 		assertThat(AUG_04_2015, LocalDateMatchers.isSeptember());
 	}
@@ -256,7 +259,7 @@ public class IsMonthTest {
 		assertThat(OCT_01_2015, LocalDateMatchers.isOctober());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotOctober() {
 		assertThat(AUG_04_2015, LocalDateMatchers.isOctober());
 	}
@@ -266,7 +269,7 @@ public class IsMonthTest {
 		assertThat(NOV_01_2015, LocalDateMatchers.isNovember());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotNovember() {
 		assertThat(AUG_04_2015, LocalDateMatchers.isNovember());
 	}
@@ -276,7 +279,7 @@ public class IsMonthTest {
 		assertThat(DEC_01_2015, LocalDateMatchers.isDecember());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateNotDecember() {
 		assertThat(AUG_04_2015, LocalDateMatchers.isDecember());
 	}
@@ -287,7 +290,7 @@ public class IsMonthTest {
 		assertThat(JAN_01_2015_NOON, LocalDateTimeMatchers.isJanuary());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotJanuary() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isJanuary());
 	}
@@ -297,7 +300,7 @@ public class IsMonthTest {
 		assertThat(FEB_01_2015_NOON, LocalDateTimeMatchers.isFebruary());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotFebruary() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isFebruary());
 	}
@@ -307,7 +310,7 @@ public class IsMonthTest {
 		assertThat(MAR_01_2015_NOON, LocalDateTimeMatchers.isMarch());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotMarch() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isMarch());
 	}
@@ -317,7 +320,7 @@ public class IsMonthTest {
 		assertThat(APR_01_2015_NOON, LocalDateTimeMatchers.isApril());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotApril() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isApril());
 	}
@@ -327,7 +330,7 @@ public class IsMonthTest {
 		assertThat(MAY_01_2015_NOON, LocalDateTimeMatchers.isMay());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotMay() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isMay());
 	}
@@ -337,7 +340,7 @@ public class IsMonthTest {
 		assertThat(JUN_01_2015_NOON, LocalDateTimeMatchers.isJune());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotJune() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isJune());
 	}
@@ -347,7 +350,7 @@ public class IsMonthTest {
 		assertThat(JUL_01_2015_NOON, LocalDateTimeMatchers.isJuly());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotJuly() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isJuly());
 	}
@@ -357,7 +360,7 @@ public class IsMonthTest {
 		assertThat(AUG_01_2015_NOON, LocalDateTimeMatchers.isAugust());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotAugust() {
 		assertThat(SEP_04_2015_NOON, LocalDateTimeMatchers.isAugust());
 	}
@@ -367,7 +370,7 @@ public class IsMonthTest {
 		assertThat(SEP_04_2015_NOON, LocalDateTimeMatchers.isSeptember());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotSeptember() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isSeptember());
 	}
@@ -377,7 +380,7 @@ public class IsMonthTest {
 		assertThat(OCT_01_2015_NOON, LocalDateTimeMatchers.isOctober());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotOctober() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isOctober());
 	}
@@ -387,7 +390,7 @@ public class IsMonthTest {
 		assertThat(NOV_01_2015_NOON, LocalDateTimeMatchers.isNovember());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotNovember() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isNovember());
 	}
@@ -397,7 +400,7 @@ public class IsMonthTest {
 		assertThat(DEC_01_2015_NOON, LocalDateTimeMatchers.isDecember());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isLocalDateTimeNotDecember() {
 		assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isDecember());
 	}
@@ -408,7 +411,7 @@ public class IsMonthTest {
 		assertThat(JAN_01_2015_NOON_UTC, ZonedDateTimeMatchers.isJanuary());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotJanuary() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isJanuary());
 	}
@@ -418,7 +421,7 @@ public class IsMonthTest {
 		assertThat(FEB_01_2015_NOON_UTC, ZonedDateTimeMatchers.isFebruary());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotFebruary() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isFebruary());
 	}
@@ -428,7 +431,7 @@ public class IsMonthTest {
 		assertThat(MAR_01_2015_NOON_UTC, ZonedDateTimeMatchers.isMarch());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotMarch() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isMarch());
 	}
@@ -438,7 +441,7 @@ public class IsMonthTest {
 		assertThat(APR_01_2015_NOON_UTC, ZonedDateTimeMatchers.isApril());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotApril() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isApril());
 	}
@@ -448,7 +451,7 @@ public class IsMonthTest {
 		assertThat(MAY_01_2015_NOON_UTC, ZonedDateTimeMatchers.isMay());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotMay() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isMay());
 	}
@@ -458,7 +461,7 @@ public class IsMonthTest {
 		assertThat(JUN_01_2015_NOON_UTC, ZonedDateTimeMatchers.isJune());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotJune() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isJune());
 	}
@@ -468,7 +471,7 @@ public class IsMonthTest {
 		assertThat(JUL_01_2015_NOON_UTC, ZonedDateTimeMatchers.isJuly());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotJuly() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isJuly());
 	}
@@ -478,7 +481,7 @@ public class IsMonthTest {
 		assertThat(AUG_01_2015_NOON_UTC, ZonedDateTimeMatchers.isAugust());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotAugust() {
 		assertThat(SEP_04_2015_NOON_UTC, ZonedDateTimeMatchers.isAugust());
 	}
@@ -488,7 +491,7 @@ public class IsMonthTest {
 		assertThat(SEP_04_2015_NOON_UTC, ZonedDateTimeMatchers.isSeptember());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotSeptember() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isSeptember());
 	}
@@ -498,7 +501,7 @@ public class IsMonthTest {
 		assertThat(OCT_01_2015_NOON_UTC, ZonedDateTimeMatchers.isOctober());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotOctober() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isOctober());
 	}
@@ -508,7 +511,7 @@ public class IsMonthTest {
 		assertThat(NOV_01_2015_NOON_UTC, ZonedDateTimeMatchers.isNovember());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotNovember() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isNovember());
 	}
@@ -518,7 +521,7 @@ public class IsMonthTest {
 		assertThat(DEC_01_2015_NOON_UTC, ZonedDateTimeMatchers.isDecember());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeNotDecember() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isDecember());
 	}

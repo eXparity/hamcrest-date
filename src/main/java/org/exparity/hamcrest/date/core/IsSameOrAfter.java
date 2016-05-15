@@ -21,8 +21,8 @@ public class IsSameOrAfter<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
-		if (expected.isAfter(actual)) {
-			mismatchDescription.appendText("date is " + describer.describe(actual));
+		if (this.expected.isAfter(actual)) {
+			mismatchDescription.appendText("the date is " + this.describer.describe(actual));
 			return false;
 		} else {
 			return true;
@@ -31,7 +31,7 @@ public class IsSameOrAfter<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	@Override
 	public void describeTo(final Description description) {
-		description.appendText("the date is on same day or after " + describer.describe(expected.unwrap()));
+		description.appendText("the date is on the same date or after " + this.describer.describe(this.expected.unwrap()));
 	}
 
 }
