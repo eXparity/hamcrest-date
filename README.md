@@ -18,7 +18,7 @@ A maven project
     <dependency>
         <groupId>org.exparity</groupId>
         <artifactId>hamcrest-date</artifactId>
-        <version>2.0.3</version>
+        <version>2.0.4</version>
     </dependency>
 
 
@@ -132,6 +132,9 @@ The source includes a pom.xml for building with Maven
 
 Release Notes
 -------------
+Changes 2.0.3 -> 2.0.4
+  * Fix Issue 18 - Add test scope to testng
+ 
 Changes 2.0.2 -> 2.0.3
   * Fix Issue 16 - Incorrect assertion message for before
   * Fix Issue 17 - AM/PM Indicator missing in assertion message
