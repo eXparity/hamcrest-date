@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
 @SuppressWarnings("deprecation")
 public class IsSameDayTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the same day as [A-Za-z0-9:,.+ ]*\\s*but: the day is [A-Za-z0-9:,.+ ]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the same day as (?s:.)+?\\s     but: the day is (?s:.)+";
 
 	// Date Matchers
 

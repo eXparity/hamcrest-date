@@ -269,7 +269,7 @@ public abstract class LocalTimeMatchers {
      * assertThat(myTime, isMinute(12));
      * </pre>
      *
-     * @param Minute the minute of the day (0-59)
+     * @param minute the minute of the day (0-59)
      */
     public static Matcher<LocalTime> isMinute(final int minute) {
         return new IsMinute<LocalTime>(minute, t -> t);

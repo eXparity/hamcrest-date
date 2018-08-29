@@ -23,7 +23,7 @@ import org.testng.annotations.Test;
 @SuppressWarnings("deprecation")
 public class IsSameHourOfDayTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date has the hour [0-9]*\\s*but: the date has the hour [0-9]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date has the hour [0-9]+?\\s     but: the date has the hour [0-9]+";
 
 	// Date Matchers
 	@Test

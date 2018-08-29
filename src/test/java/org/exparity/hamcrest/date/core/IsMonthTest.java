@@ -13,14 +13,14 @@ import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
 
 /**
- * Unit Tests for the {@link IsSameMonthOfYear} class
+ * Unit Tests for the {@link IsMonth} class
  *
  * @author Stewart Bissett
  */
 @SuppressWarnings("deprecation")
 public class IsMonthTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is in [A-Za-z]*\\s*but: the date is in [A-Za-z]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date is in \\p{IsAlphabetic}+?\\s     but: the date is in \\p{IsAlphabetic}+";
 
 	// Date Matchers
 	@Test

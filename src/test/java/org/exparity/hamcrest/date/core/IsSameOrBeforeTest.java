@@ -25,7 +25,7 @@ import org.testng.annotations.Test;
 @SuppressWarnings("deprecation")
 public class IsSameOrBeforeTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is on the same date or before [A-Za-z0-9:,.+ ]*\\s*but: the date is [A-Za-z0-9:,.+ ]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date is on the same date or before (?s:.)+?\\s     but: the date is (?s:.)+";
 
 	// Date Matchers
 

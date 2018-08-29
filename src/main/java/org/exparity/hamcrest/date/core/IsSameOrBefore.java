@@ -1,14 +1,15 @@
 package org.exparity.hamcrest.date.core;
 
+import java.time.ZoneId;
+
 import org.hamcrest.Description;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * A matcher that tests that the actual date is before or the same instant as the reference date
  *
  * @author Stewart Bissett
  */
-public class IsSameOrBefore<T> extends TypeSafeDiagnosingMatcher<T> {
+public class IsSameOrBefore<T> extends DateMatcher<T> {
 
 	private final TemporalWrapper<T> expected;
 	private final TemporalFormatter<T> describer;
@@ -31,6 +32,11 @@ public class IsSameOrBefore<T> extends TypeSafeDiagnosingMatcher<T> {
 	@Override
 	public void describeTo(final Description description) {
 		description.appendText("the date is on the same date or before " + this.describer.describe(this.expected.unwrap()));
+	}
+
+	@Override
+	public DateMatcher<T> atZone(ZoneId zone) {
+		return new IsSameOrBefore<>(expected.withZone(zone), describer);
 	}
 
 }

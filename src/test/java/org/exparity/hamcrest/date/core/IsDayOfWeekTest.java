@@ -1,6 +1,3 @@
-/**
- *
- */
 package org.exparity.hamcrest.date.core;
 
 import static java.time.DayOfWeek.MONDAY;
@@ -22,7 +19,7 @@ import org.testng.annotations.Test;
 @SuppressWarnings("deprecation")
 public class IsDayOfWeekTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is on a [A-Za-z ,]*\\s*but: the date is on a [A-Za-z]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date is on a [\\p{IsAlphabetic}, ]+?\\s     but: the date is on a \\p{IsAlphabetic}+";
 
     // Date Matchers
     @Test

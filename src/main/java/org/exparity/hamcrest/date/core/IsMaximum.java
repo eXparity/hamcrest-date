@@ -1,19 +1,20 @@
 package org.exparity.hamcrest.date.core;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ValueRange;
 import java.util.function.Supplier;
 
 import org.exparity.hamcrest.date.core.format.DatePartFormatter;
 import org.hamcrest.Description;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * A base matcher that tests that the examined date has the maximum value for the given date part
  *
  * @author Stewart Bissett
  */
-public class IsMaximum<T> extends TypeSafeDiagnosingMatcher<T> {
+public class IsMaximum<T> extends DateMatcher<T> {
 
     private final ChronoField datePart;
     private final TemporalAdapter<T> adapter;
@@ -56,4 +57,11 @@ public class IsMaximum<T> extends TypeSafeDiagnosingMatcher<T> {
     public void describeTo(final Description description) {
         description.appendText(this.descriptionSupplier.get());
     }
+
+    @Override
+   	public DateMatcher<T> atZone(ZoneId zone) {
+   		return new IsMaximum<>(datePart, (T t) -> ZonedDateTime
+   			.from(adapter.asTemporal(t)).withZoneSameInstant(zone), formatter, descriptionSupplier);
+   	}
+
 }

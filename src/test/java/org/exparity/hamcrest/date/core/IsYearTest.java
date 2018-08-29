@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
  */
 public class IsYearTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is in the year [0-9]*\\s*but: the date has the year [0-9]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date is in the year [0-9]+?\\s     but: the date has the year [0-9]+";
 
 	// Date Matchers
 	@Test

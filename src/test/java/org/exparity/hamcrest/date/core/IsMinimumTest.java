@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
  */
 public class IsMinimumTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is the minimum value for [A-Za-z ]*\\s*but: date is the [0-9]* [A-Za-z ]* instead of [0-9]* [A-Za-z ]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date is the minimum value for [\\w ]+?\\s     but: date is the [0-9]+? [\\w ]+? instead of [0-9]+? [\\w ]+?";
 
     // Date Matchers
     @Test

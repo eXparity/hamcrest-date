@@ -237,7 +237,7 @@ public abstract class LocalDateMatchers {
      * assertThat(myDate, isDayOfMonth(4))
      * </pre>
      *
-     * @param date the expected day of the month
+     * @param dayOfMonth the expected day of the month
      */
     public static Matcher<LocalDate> isDayOfMonth(final int dayOfMonth) {
         return new IsDayOfMonth<LocalDate>(dayOfMonth, t -> t);

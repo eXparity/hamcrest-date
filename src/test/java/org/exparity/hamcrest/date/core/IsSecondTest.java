@@ -14,14 +14,14 @@ import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
 
 /**
- * Unit Tests for the {@link IsSameSecondOfDay} class
+ * Unit Tests for the {@link IsSecond} class
  *
  * @author Stewart Bissett
  */
 @SuppressWarnings("deprecation")
 public class IsSecondTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date has the second [0-9]*\\s*but: the date has the second [0-9]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date has the second [0-9]+?\\s     but: the date has the second [0-9]+";
 
     // Date Matchers
     @Test

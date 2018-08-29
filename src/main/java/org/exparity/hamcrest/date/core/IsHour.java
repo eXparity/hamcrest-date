@@ -1,16 +1,17 @@
 package org.exparity.hamcrest.date.core;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoField;
 
 import org.hamcrest.Description;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * A matcher that tests that the examined date is on the specified hour
  *
  * @author Stewart Bissett
  */
-public class IsHour<T> extends TypeSafeDiagnosingMatcher<T> {
+public class IsHour<T> extends DateMatcher<T> {
 
 	private final int expected;
 	private final TemporalAdapter<T> accessor;
@@ -35,4 +36,11 @@ public class IsHour<T> extends TypeSafeDiagnosingMatcher<T> {
 	public void describeTo(final Description description) {
 		description.appendText("the date has the hour " + expected);
 	}
+
+	@Override
+	public DateMatcher<T> atZone(ZoneId zone) {
+		return new IsHour<>(expected, (T t) -> ZonedDateTime
+			.from(accessor.asTemporal(t)).withZoneSameInstant(zone));
+	}
+
 }

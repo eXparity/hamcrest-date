@@ -26,7 +26,7 @@ import org.testng.annotations.Test;
 @SuppressWarnings("deprecation")
 public class IsBeforeTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is before [A-Za-z0-9:,.+ ]*\\s*but: date is [A-Za-z0-9:,.+ ]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date is before (?s:.)+?\\s     but: date is (?s:.)+";
 
     // Date Matchers
 

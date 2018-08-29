@@ -1,7 +1,8 @@
 package org.exparity.hamcrest.date.core;
 
+import java.time.ZoneId;
+
 import org.hamcrest.Description;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * A matcher that tests that the examined date is before or the same instant as
@@ -9,7 +10,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  *
  * @author Stewart Bissett
  */
-public class IsSameOrAfter<T> extends TypeSafeDiagnosingMatcher<T> {
+public class IsSameOrAfter<T> extends DateMatcher<T> {
 
 	private final TemporalWrapper<T> expected;
 	private final TemporalFormatter<T> describer;
@@ -32,6 +33,11 @@ public class IsSameOrAfter<T> extends TypeSafeDiagnosingMatcher<T> {
 	@Override
 	public void describeTo(final Description description) {
 		description.appendText("the date is on the same date or after " + this.describer.describe(this.expected.unwrap()));
+	}
+
+	@Override
+	public DateMatcher<T> atZone(ZoneId zone) {
+		return new IsSameOrAfter<>(expected.withZone(zone), describer);
 	}
 
 }

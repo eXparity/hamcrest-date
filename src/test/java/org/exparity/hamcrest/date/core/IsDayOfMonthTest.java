@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  */
 public class IsDayOfMonthTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is on the [0-9]* day of the month\\s*but: the date is on the [0-9]* day of the month";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date is on the [0-9]+? day of the month\\s     but: the date is on the [0-9]+? day of the month";
 
 	// LocalDate Matchers
 	@Test

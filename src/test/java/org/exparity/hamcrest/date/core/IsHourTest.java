@@ -14,14 +14,14 @@ import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
 
 /**
- * Unit Tests for the {@link IsSameHourOfDay} class
+ * Unit Tests for the {@link IsHour} class
  *
  * @author Stewart Bissett
  */
 @SuppressWarnings("deprecation")
 public class IsHourTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date has the hour [0-9]*\\s*but: the date has the hour [0-9]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date has the hour [0-9]+?\\s     but: the date has the hour [0-9]+";
 
 	// Date Matchers
 	@Test

@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
  */
 public class IsLeapYearTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: a leap year*\\s*but: the date [A-Za-z0-9:,.+ \\-]* is not a leap year";
+    private static final String ASSERTION_PATTERN = "\\sExpected: a leap year\\s     but: the date (?s:.)+? is not a leap year";
 
 	// Date Matchers
 	@Test

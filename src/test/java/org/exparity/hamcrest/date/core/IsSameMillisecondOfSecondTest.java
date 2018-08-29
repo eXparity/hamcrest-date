@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 @SuppressWarnings("deprecation")
 public class IsSameMillisecondOfSecondTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date has the millisecond [0-9]*\\s*but: the date has the millisecond [0-9]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date has the millisecond [0-9]+?\\s     but: the date has the millisecond [0-9]+";
 
 	// Date Matchers
 	@Test

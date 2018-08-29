@@ -16,13 +16,13 @@ import org.exparity.hamcrest.date.testutils.ZoneIds;
 import org.testng.annotations.Test;
 
 /**
- * Unit Tests for the {@link IsSameYear} class
+ * Unit Tests for the {@link IsWithin} class
  *
  * @author Stewart Bissett
  */
 public class IsWithinTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is within [0-9]* [a-z]* of [A-Za-z0-9:,.+ ]*\\s*but: the date is [A-Za-z0-9:,.+ ]* and [0-9]* [a-z]* different";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date is within [0-9]+? [\\w ]+? of (?s:.)+?\\s     but: the date is (?s:.)+? and [0-9]+? [\\w ]+? different";
 
 	// Date Matchers
 	@Test

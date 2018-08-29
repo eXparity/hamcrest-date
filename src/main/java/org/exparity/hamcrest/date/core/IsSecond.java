@@ -1,16 +1,17 @@
 package org.exparity.hamcrest.date.core;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoField;
 
 import org.hamcrest.Description;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * A matcher that tests that the examined date is on the specified second
  *
  * @author Stewart Bissett
  */
-public class IsSecond<T> extends TypeSafeDiagnosingMatcher<T> {
+public class IsSecond<T> extends DateMatcher<T> {
 
 	private final int expected;
 	private final TemporalAdapter<T> accessor;
@@ -35,4 +36,11 @@ public class IsSecond<T> extends TypeSafeDiagnosingMatcher<T> {
 	public void describeTo(final Description description) {
 		description.appendText("the date has the second " + expected);
 	}
+
+	@Override
+	public DateMatcher<T> atZone(ZoneId zone) {
+		return new IsSecond<>(expected, (T t) -> ZonedDateTime
+			.from(accessor.asTemporal(t)).withZoneSameInstant(zone));
+	}
+
 }

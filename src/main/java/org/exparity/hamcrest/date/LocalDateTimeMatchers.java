@@ -320,7 +320,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isDayOfMonth(4))
      * </pre>
      *
-     * @param date the expected day of the month
+     * @param dayOfMonth the expected day of the month
      */
     public static Matcher<LocalDateTime> isDayOfMonth(final int dayOfMonth) {
         return new IsDayOfMonth<LocalDateTime>(dayOfMonth, t -> t);
@@ -392,7 +392,7 @@ public abstract class LocalDateTimeMatchers {
      * @param hour the hour of the day
      * @param minute the minute of the hour
      * @param second the second of the minute
-     * @param nanons the nanoseconds of the second
+     * @param nanos the nanoseconds of the second
      */
     public static Matcher<LocalDateTime> within(final long period,
             final ChronoUnit unit,
@@ -875,7 +875,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isMinute(12));
      * </pre>
      *
-     * @param Minute the minute of the day (0-59)
+     * @param minute the minute of the day (0-59)
      */
     public static Matcher<LocalDateTime> isMinute(final int minute) {
         return new IsMinute<LocalDateTime>(minute, t -> t);

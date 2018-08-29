@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
  */
 public class IsLastDayOfMonthTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is the last day of the month\\s*but: date is the [0-9]* [A-Za-z ]* instead of [0-9]* [A-Za-z ]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date is the last day of the month\\s     but: date is the [0-9]+? day of month instead of [0-9]+? day of month";
 
 	// Date Matchers
 	@Test

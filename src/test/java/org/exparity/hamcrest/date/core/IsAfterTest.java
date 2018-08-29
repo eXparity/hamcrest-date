@@ -25,7 +25,7 @@ import org.testng.annotations.Test;
 @SuppressWarnings("deprecation")
 public class IsAfterTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is after [A-Za-z0-9:,.+ \\-]*\\s*but: date is [A-Za-z0-9:,.+ \\-]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date is after (?s:.)+?\\s     but: date is (?s:.)+";
 
 	// Date Matchers
 

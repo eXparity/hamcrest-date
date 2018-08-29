@@ -1,12 +1,13 @@
 package org.exparity.hamcrest.date.core;
 
 import java.time.Month;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.TextStyle;
 import java.time.temporal.ChronoField;
 import java.util.Locale;
 
 import org.hamcrest.Description;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * A matcher that tests that the examined date is on the same month of the year
@@ -14,7 +15,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  *
  * @author Stewart Bissett
  */
-public class IsMonth<T> extends TypeSafeDiagnosingMatcher<T> {
+public class IsMonth<T> extends DateMatcher<T> {
 
 	private final Month expectedMonth;
 	private final TemporalAdapter<T> accessor;
@@ -42,6 +43,12 @@ public class IsMonth<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	private String describeMonth(final Month m) {
 		return m.getDisplayName(TextStyle.FULL, Locale.getDefault());
+	}
+
+	@Override
+	public DateMatcher<T> atZone(ZoneId zone) {
+		return new IsMonth<>(expectedMonth, (T t) -> ZonedDateTime
+			.from(accessor.asTemporal(t)).withZoneSameInstant(zone));
 	}
 
 }

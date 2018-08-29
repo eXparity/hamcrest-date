@@ -1,8 +1,6 @@
-/**
- *
- */
 package org.exparity.hamcrest.date.core;
 
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 
 /**
@@ -17,34 +15,41 @@ public interface TemporalWrapper<T> {
 	 * @param other a temporal to test against
 	 * @return <code>true</code> if this temporal is after the other
 	 */
-	public boolean isAfter(final T other);
+	boolean isAfter(final T other);
 
 	/**
 	 * @param other a temporal to test against
 	 * @return <code>true</code> if this temporal is after the other
 	 */
-	public boolean isBefore(final T other);
+	boolean isBefore(final T other);
 
 	/**
 	 * @param other a temporal to test against
 	 * @return <code>true</code> if this temporal is after the other
 	 */
-	public boolean isSame(final T other);
+	boolean isSame(final T other);
 
 	/**
 	 * @param other a temporal to test against
 	 * @return <code>true</code> if this temporal is after the other
 	 */
-	public boolean isSameDay(final T other);
+	boolean isSameDay(final T other);
 
 	/**
 	 * @return a the wrapped value
 	 */
-	public T unwrap();
+	T unwrap();
 
 	/**
 	 * Return the difference in units between this time and the other time in the given units
 	 */
-	public long difference(final T other, final ChronoUnit unit);
+	long difference(final T other, final ChronoUnit unit);
+
+	/**
+	 *
+	 * @param zone a zone to apply to the wrapped value
+	 * @return a copy of the wrapper at the desired zone
+	 */
+	TemporalWrapper<T> withZone(ZoneId zone);
 
 }

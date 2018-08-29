@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
  */
 public class IsSameDayOfWeekTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is on a [A-Za-z]*\\s*but: the date is on a [A-Za-z]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date is on a \\p{IsAlphabetic}+?\\s     but: the date is on a \\p{IsAlphabetic}+";
 
 	// Date Matchers
 	@Test

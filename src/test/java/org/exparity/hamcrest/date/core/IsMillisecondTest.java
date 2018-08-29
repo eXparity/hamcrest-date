@@ -7,14 +7,14 @@ import org.exparity.hamcrest.date.DateMatchers;
 import org.testng.annotations.Test;
 
 /**
- * Unit Tests for the {@link IsSameMillisecondOfDay} class
+ * Unit Tests for the {@link IsMillisecond} class
  *
  * @author Stewart Bissett
  */
 @SuppressWarnings("deprecation")
 public class IsMillisecondTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date has the millisecond [0-9]*\\s*but: the date has the millisecond [A-Za-z0-9:,.+ ]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date has the millisecond [0-9]+?\\s     but: the date has the millisecond [0-9]+";
 
 	// Date Matchers
 	@Test

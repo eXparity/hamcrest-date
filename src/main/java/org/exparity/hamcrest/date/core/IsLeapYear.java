@@ -2,15 +2,17 @@ package org.exparity.hamcrest.date.core;
 
 import static java.time.temporal.TemporalQueries.localDate;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
 import org.hamcrest.Description;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * A matcher that tests that the examined date is a leap year
  *
  * @author Stewart Bissett
  */
-public class IsLeapYear<T> extends TypeSafeDiagnosingMatcher<T> {
+public class IsLeapYear<T> extends DateMatcher<T> {
 
 	private final TemporalAdapter<T> adapter;
 	private final TemporalFormatter<T> formatter;
@@ -34,4 +36,11 @@ public class IsLeapYear<T> extends TypeSafeDiagnosingMatcher<T> {
 	public void describeTo(final Description description) {
 		description.appendText("a leap year");
 	}
+
+	@Override
+	public DateMatcher<T> atZone(ZoneId zone) {
+		return new IsLeapYear<>((T t) -> ZonedDateTime
+			.from(adapter.asTemporal(t)).withZoneSameInstant(zone), formatter);
+	}
+
 }
