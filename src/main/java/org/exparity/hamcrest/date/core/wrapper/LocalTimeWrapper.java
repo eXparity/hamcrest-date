@@ -17,11 +17,11 @@ public class LocalTimeWrapper implements TemporalWrapper<LocalTime> {
 	private final LocalTime wrapped;
 
 	public LocalTimeWrapper(final LocalTime date) {
-		wrapped = date;
+		this.wrapped = date;
 	}
 
 	public LocalTimeWrapper(final int hour, final int minute, final int second) {
-		wrapped = LocalTime.of(hour, minute, second);
+		this(LocalTime.of(hour, minute, second));
 	}
 
 	@Override
@@ -45,17 +45,12 @@ public class LocalTimeWrapper implements TemporalWrapper<LocalTime> {
 	}
 
 	@Override
-	public boolean isSameDay(final LocalTime other) {
-		throw new UnsupportedOperationException("IsSameDay comparison is invalid on LocalTime");
-	}
-
-	@Override
 	public LocalTime unwrap() {
 		return wrapped;
 	}
 
 	@Override
-	public TemporalWrapper<LocalTime> withZone(ZoneId zone) {
+	public TemporalWrapper<LocalTime> withZone(final ZoneId zone) {
 		return this;
 	}
 

@@ -48,11 +48,11 @@ public enum Months {
 		throw new IllegalArgumentException("Unknown calendar month value '" + calendarMonth + "'");
 	}
 
-	private final int calendarMonth;;
-	private final Month month;
+	private final int calendarMonth;
+  private final Month month;
 	private final String description;
 
-	private Months(final int calendarMonth, final Month month, final String description) {
+	Months(final int calendarMonth, final Month month, final String description) {
 		this.calendarMonth = calendarMonth;
 		this.month = month;
 		this.description = description;

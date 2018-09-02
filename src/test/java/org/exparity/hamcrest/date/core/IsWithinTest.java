@@ -1,6 +1,7 @@
 package org.exparity.hamcrest.date.core;
 
 import static org.exparity.hamcrest.date.testutils.Dates.*;
+import static org.exparity.hamcrest.date.testutils.ZoneIds.UTC;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.LocalTime;
@@ -27,86 +28,86 @@ public class IsWithinTest {
 	// Date Matchers
 	@Test
 	public void isDateWithinSameDate() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, AUG_04_2015_NOON_AS_DATE));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, AUG_04_2015_NOON_UTC_AS_DATE).atZone(UTC));
 	}
 
 	@Test
 	public void isDateWithinDateInsideLimit() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, AUG_05_2015_NOON_AS_DATE));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, AUG_05_2015_NOON_UTC_AS_DATE).atZone(UTC));
 	}
 
 	@Test
 	public void isDateWithinDateEqualLimit() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, AUG_06_2015_NOON_AS_DATE));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, AUG_06_2015_NOON_UTC_AS_DATE).atZone(UTC));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateWithinDateOutsideLimit() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, AUG_07_2015_NOON_AS_DATE));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, AUG_07_2015_NOON_UTC_AS_DATE).atZone(UTC));
 	}
 
 	@Test
 	public void isDateWithinSameLocalDate() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, AUG_04_2015));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, AUG_04_2015).atZone(UTC));
 	}
 
 	@Test
 	public void isDateWithinLocalDateInsideLimit() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, AUG_05_2015));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, AUG_05_2015).atZone(UTC));
 	}
 
 	@Test
 	public void isDateWithinLocalDateEqualLimit() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, AUG_06_2015));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, AUG_06_2015).atZone(UTC));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateWithinLocalDateOutsideLimit() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, AUG_07_2015));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, AUG_07_2015).atZone(UTC));
 	}
 
 	@Test
 	public void isDateWithinSameDayMonthYear() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, 2015, Month.AUGUST, 4));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, 2015, Month.AUGUST, 4).atZone(UTC));
 	}
 
 	@Test
 	public void isDateWithinDayMonthYearInsideLimit() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, 2015, Month.AUGUST, 5));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, 2015, Month.AUGUST, 5).atZone(UTC));
 	}
 
 	@Test
 	public void isDateWithinDayMonthYearEqualLimit() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, 2015, Month.AUGUST, 6));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, 2015, Month.AUGUST, 6).atZone(UTC));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateWithinDayMonthYearOutsideLimit() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, 2015, Month.AUGUST, 7));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.within(2, ChronoUnit.DAYS, 2015, Month.AUGUST, 7).atZone(UTC));
 	}
 
 	@Test
 	public void isDateWithinSameDayMonthYearTime() {
-		assertThat(AUG_04_2015_NOON_AS_DATE,
-				DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 0));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE,
+				DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 0).atZone(UTC));
 	}
 
 	@Test
 	public void isDateWithinDayMonthYearTimeInsideLimit() {
-		assertThat(AUG_04_2015_NOON_AS_DATE,
-				DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 1));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE,
+				DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 1).atZone(UTC));
 	}
 
 	@Test
 	public void isDateWithinDayMonthYearTimeEqualLimit() {
-		assertThat(AUG_04_2015_NOON_AS_DATE,
-				DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 2));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE,
+				DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 2).atZone(UTC));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateWithinDayMonthYearTimeOutsideLimit() {
-		assertThat(AUG_04_2015_NOON_AS_DATE,
-				DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 3));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE,
+				DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 3).atZone(UTC));
 	}
 
 	// LocalDate Matchers

@@ -17,17 +17,17 @@ import org.testng.annotations.Test;
  */
 public class IsYearTest {
 
-    private static final String ASSERTION_PATTERN = "\\sExpected: the date is in the year [0-9]+?\\s     but: the date has the year [0-9]+";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date has the year [0-9]+?\\s     but: the date has the year [0-9]+";
 
 	// Date Matchers
 	@Test
 	public void isDateYear() {
-		assertThat(AUG_04_2016_AS_DATE, DateMatchers.isYear(2016));
+		assertThat(AUG_04_2016_MIDNIGHT_UTC_AS_DATE, DateMatchers.isYear(2016));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotYear() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isYear(2016));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.isYear(2016));
 	}
 
 	// LocalDate Matchers

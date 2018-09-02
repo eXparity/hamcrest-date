@@ -1,8 +1,6 @@
 package org.exparity.hamcrest.date.core;
 
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoField;
 
 import org.hamcrest.Description;
 
@@ -13,19 +11,24 @@ import org.hamcrest.Description;
  */
 public class IsSecond<T> extends DateMatcher<T> {
 
-	private final int expected;
-	private final TemporalAdapter<T> accessor;
+	private final TemporalFieldWrapper<T> expected;
+	private final TemporalFieldAdapter<T> accessor;
+	private final ZoneId zone;
 
-	public IsSecond(final int expected, final TemporalAdapter<T> accessor) {
+	private IsSecond(final TemporalFieldWrapper<T> expected, final TemporalFieldAdapter<T> accessor, final ZoneId zone) {
 		this.expected = expected;
 		this.accessor = accessor;
+		this.zone = zone;
+	}
+
+	public IsSecond(final TemporalFieldWrapper<T> expected, final TemporalFieldAdapter<T> accessor) {
+		this(expected, accessor, ZoneId.systemDefault());
 	}
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
-		int actualSecond = accessor.asTemporal(actual).get(ChronoField.SECOND_OF_MINUTE);
-		if (expected != actualSecond) {
-			mismatchDescription.appendText("the date has the second " + actualSecond);
+		if (!this.expected.isSame(actual)) {
+			mismatchDescription.appendText("the date has the second " + accessor.asTemporalField(actual, zone));
 			return false;
 		} else {
 			return true;
@@ -34,13 +37,12 @@ public class IsSecond<T> extends DateMatcher<T> {
 
 	@Override
 	public void describeTo(final Description description) {
-		description.appendText("the date has the second " + expected);
+		description.appendText("the date has the second " + expected.unwrap());
 	}
 
 	@Override
 	public DateMatcher<T> atZone(ZoneId zone) {
-		return new IsSecond<>(expected, (T t) -> ZonedDateTime
-			.from(accessor.asTemporal(t)).withZoneSameInstant(zone));
+		return new IsSecond<>(expected.withZone(zone), accessor);
 	}
 
 }

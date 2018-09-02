@@ -19,7 +19,7 @@ public class LocalDateWrapper implements TemporalWrapper<LocalDate> {
 	private final Supplier<LocalDate> wrapped;
 	private final ZoneId zone;
 
-	private LocalDateWrapper(Supplier<LocalDate> wrapped, ZoneId zone) {
+	private LocalDateWrapper(final Supplier<LocalDate> wrapped, final ZoneId zone) {
 		this.wrapped = wrapped;
 		this.zone = zone;
 	}
@@ -35,29 +35,25 @@ public class LocalDateWrapper implements TemporalWrapper<LocalDate> {
 	}
 
 	@Override
-	public long difference(LocalDate other, ChronoUnit unit) {
+	public long difference(final LocalDate other, ChronoUnit unit) {
 		return Math.abs(wrapped.get().until(other, unit));
 	}
 
 	@Override
-	public boolean isAfter(LocalDate other) {
+	public boolean isAfter(final LocalDate other) {
 		return wrapped.get().isAfter(other);
 	}
 
 	@Override
-	public boolean isBefore(LocalDate other) {
+	public boolean isBefore(final LocalDate other) {
 		return wrapped.get().isBefore(other);
 	}
 
 	@Override
-	public boolean isSame(LocalDate other) {
+	public boolean isSame(final LocalDate other) {
 		return wrapped.get().isEqual(other);
 	}
 
-	@Override
-	public boolean isSameDay(LocalDate other) {
-		return wrapped.get().isEqual(other);
-	}
 
 	@Override
 	public LocalDate unwrap() {
@@ -70,7 +66,7 @@ public class LocalDateWrapper implements TemporalWrapper<LocalDate> {
 	}
 
 	@Override
-	public TemporalWrapper<LocalDate> withZone(ZoneId zone) {
+	public TemporalWrapper<LocalDate> withZone(final ZoneId zone) {
 		return new LocalDateWrapper(this.wrapped, zone);
 	}
 

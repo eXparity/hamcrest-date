@@ -1,6 +1,3 @@
-/**
- *
- */
 package org.exparity.hamcrest.date.core.format;
 
 import java.time.LocalDateTime;
@@ -16,8 +13,8 @@ import org.exparity.hamcrest.date.core.TemporalFormatter;
  */
 public class LocalDateTimeFormatter implements TemporalFormatter<LocalDateTime> {
 
-	private static DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy hh:mm:ss.SSS a");
-	private static DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy");
+	private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy hh:mm:ss.SSS a");
+	private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy");
 
 	@Override
 	public String describe(final LocalDateTime temporal) {

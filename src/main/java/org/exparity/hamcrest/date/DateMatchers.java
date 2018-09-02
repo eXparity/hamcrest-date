@@ -19,42 +19,20 @@ import static java.time.Month.MAY;
 import static java.time.Month.NOVEMBER;
 import static java.time.Month.OCTOBER;
 import static java.time.Month.SEPTEMBER;
-import static java.time.ZoneId.systemDefault;
-import static java.util.Collections.singletonList;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
-import org.exparity.hamcrest.date.core.DateMatcher;
-import org.exparity.hamcrest.date.core.IsAfter;
-import org.exparity.hamcrest.date.core.IsBefore;
-import org.exparity.hamcrest.date.core.IsDayOfMonth;
-import org.exparity.hamcrest.date.core.IsDayOfWeek;
-import org.exparity.hamcrest.date.core.IsHour;
-import org.exparity.hamcrest.date.core.IsLeapYear;
-import org.exparity.hamcrest.date.core.IsMaximum;
-import org.exparity.hamcrest.date.core.IsMillisecond;
-import org.exparity.hamcrest.date.core.IsMinimum;
-import org.exparity.hamcrest.date.core.IsMinute;
-import org.exparity.hamcrest.date.core.IsMonth;
-import org.exparity.hamcrest.date.core.IsSame;
-import org.exparity.hamcrest.date.core.IsSameDay;
-import org.exparity.hamcrest.date.core.IsSameOrAfter;
-import org.exparity.hamcrest.date.core.IsSameOrBefore;
-import org.exparity.hamcrest.date.core.IsSecond;
-import org.exparity.hamcrest.date.core.IsWithin;
-import org.exparity.hamcrest.date.core.IsYear;
+import org.exparity.hamcrest.date.core.*;
 import org.exparity.hamcrest.date.core.format.DateFormatter;
 import org.exparity.hamcrest.date.core.format.DatePartFormatter;
 import org.exparity.hamcrest.date.core.wrapper.DateWrapper;
+import org.exparity.hamcrest.date.core.wrapper.FieldDateWrapper;
 
 /**
  * Static factory for creating {@link org.hamcrest.Matcher} instances for comparing dates
@@ -75,7 +53,7 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> after(final Date date) {
-        return new IsAfter<Date>(new DateWrapper(date), new DateFormatter());
+        return new IsAfter<>(new DateWrapper(date), new DateFormatter());
     }
 
     /**
@@ -107,7 +85,7 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> after(final LocalDate date) {
-        return new IsAfter<Date>(new DateWrapper(date), new DateFormatter());
+        return new IsAfter<>(new DateWrapper(date), new DateFormatter());
     }
 
     /**
@@ -126,7 +104,7 @@ public abstract class DateMatchers {
      */
     @Deprecated
     public static DateMatcher<Date> after(final int year, final Months month, final int day) {
-        return new IsAfter<Date>(new DateWrapper(year, month.month(), day), new DateFormatter());
+        return new IsAfter<>(new DateWrapper(year, month.month(), day), new DateFormatter());
     }
 
     /**
@@ -143,7 +121,7 @@ public abstract class DateMatchers {
      * @param day the day of the month against which the examined date is checked
      */
     public static DateMatcher<Date> after(final int year, final Month month, final int day) {
-        return new IsAfter<Date>(new DateWrapper(year, month, day), new DateFormatter());
+        return new IsAfter<>(new DateWrapper(year, month, day), new DateFormatter());
     }
 
     /**
@@ -195,7 +173,7 @@ public abstract class DateMatchers {
             final int hour,
             final int minute,
             final int second) {
-        return new IsAfter<Date>(new DateWrapper(year, month, dayOfMonth, hour, minute, second), new DateFormatter());
+        return new IsAfter<>(new DateWrapper(year, month, dayOfMonth, hour, minute, second), new DateFormatter());
     }
 
     /**
@@ -210,7 +188,7 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> before(final Date date) {
-        return new IsBefore<Date>(new DateWrapper(date), new DateFormatter());
+        return new IsBefore<>(new DateWrapper(date), new DateFormatter());
     }
 
     /**
@@ -225,7 +203,7 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> before(final LocalDate date) {
-        return new IsBefore<Date>(new DateWrapper(date), new DateFormatter());
+        return new IsBefore<>(new DateWrapper(date), new DateFormatter());
     }
 
     /**
@@ -261,7 +239,7 @@ public abstract class DateMatchers {
      */
     @Deprecated
     public static DateMatcher<Date> before(final int year, final Months month, final int dayOfMonth) {
-        return new IsBefore<Date>(new DateWrapper(year, month.month(), dayOfMonth), new DateFormatter());
+        return new IsBefore<>(new DateWrapper(year, month.month(), dayOfMonth), new DateFormatter());
     }
 
     /**
@@ -278,7 +256,7 @@ public abstract class DateMatchers {
      * @param dayOfMonth the day of the month against which the examined date is checked
      */
     public static DateMatcher<Date> before(final int year, final Month month, final int dayOfMonth) {
-        return new IsBefore<Date>(new DateWrapper(year, month, dayOfMonth), new DateFormatter());
+        return new IsBefore<>(new DateWrapper(year, month, dayOfMonth), new DateFormatter());
     }
 
     /**
@@ -330,7 +308,7 @@ public abstract class DateMatchers {
             final int hour,
             final int minute,
             final int second) {
-        return new IsBefore<Date>(new DateWrapper(year, month, dayOfMonth, hour, minute, second), new DateFormatter());
+        return new IsBefore<>(new DateWrapper(year, month, dayOfMonth, hour, minute, second), new DateFormatter());
     }
 
     /**
@@ -362,7 +340,7 @@ public abstract class DateMatchers {
      */
     @Deprecated
     public static DateMatcher<Date> isDayOfWeek(final Weekdays dayOfWeek) {
-        return new IsDayOfWeek<Date>(singletonList(dayOfWeek.getAsDayOfWeek()), DateMatchers::dateToZoneDateTime);
+        return isDayOfWeek(dayOfWeek.getAsDayOfWeek());
     }
 
     /**
@@ -374,10 +352,31 @@ public abstract class DateMatchers {
      * assertThat(myDate, isDayOfWeek(DayOfWeek.MONDAY))
      * </pre>
      *
-     * @param daysOfWeek the reference weekday against which the examined date is checked
+     * @param dayOfWeek the reference weekday against which the examined date is checked
+     */
+    public static DateMatcher<Date> isDayOfWeek(final DayOfWeek dayOfWeek) {
+      return new IsDayOfWeek<>(
+          new FieldDateWrapper(dayOfWeek.getValue(), ChronoField.DAY_OF_WEEK),
+          (d, z) -> d.toInstant().atZone(z).get(ChronoField.DAY_OF_WEEK)
+      );
+    }
+
+    /**
+     * Creates a matcher that matches when the examined date is on the same day of the week as any of the supplied days
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, isDayOfWeek(DayOfWeek.MONDAY, DayOfWeek.TUESDAY))
+     * </pre>
+     *
+     * @param daysOfWeek the reference weekdays against which the examined date is checked
      */
     public static DateMatcher<Date> isDayOfWeek(final DayOfWeek... daysOfWeek) {
-        return new IsDayOfWeek<Date>(Arrays.asList(daysOfWeek), DateMatchers::dateToZoneDateTime);
+      return new AnyOf<>(
+          Stream.of(daysOfWeek).map(DateMatchers::isDayOfWeek),
+          (d, z) -> "the date is on a " + d.toInstant().atZone(z).getDayOfWeek().name().toLowerCase()
+      );
     }
 
     /**
@@ -392,7 +391,10 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameDayOfMonth(final Date date) {
-        return isDayOfMonth(extractField(date, ChronoField.DAY_OF_MONTH));
+      return new IsDayOfMonth<>(
+          new FieldDateWrapper(date, ChronoField.DAY_OF_MONTH),
+          (d, z) -> d.toInstant().atZone(z).get(ChronoField.DAY_OF_MONTH)
+      );
     }
 
     /**
@@ -407,7 +409,10 @@ public abstract class DateMatchers {
      * @param dayOfMonth the expected day of the month
      */
     public static DateMatcher<Date> isDayOfMonth(final int dayOfMonth) {
-        return new IsDayOfMonth<Date>(dayOfMonth, DateMatchers::dateToZoneDateTime);
+        return new IsDayOfMonth<>(
+            new FieldDateWrapper(dayOfMonth, ChronoField.DAY_OF_MONTH),
+          (d, z) -> d.toInstant().atZone(z).get(ChronoField.DAY_OF_MONTH)
+      );
     }
 
     /**
@@ -422,7 +427,7 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameDay(final Date date) {
-        return new IsSameDay<Date>(new DateWrapper(date), new DateFormatter());
+        return new IsSameDay<>(new DateWrapper(date, ChronoUnit.DAYS), new DateFormatter());
     }
 
     /**
@@ -454,7 +459,7 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameDay(final LocalDate date) {
-        return new IsSameDay<Date>(new DateWrapper(date), new DateFormatter());
+        return new IsSameDay<>(new DateWrapper(date), new DateFormatter());
     }
 
     /**
@@ -522,7 +527,10 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameHourOfDay(final Date date) {
-        return isHour(extractField(date, ChronoField.HOUR_OF_DAY));
+        return new IsHour<>(
+            new FieldDateWrapper(date, ChronoField.HOUR_OF_DAY),
+            (d, z) -> d.toInstant().atZone(z).get(ChronoField.HOUR_OF_DAY)
+        );
     }
 
     /**
@@ -537,7 +545,6 @@ public abstract class DateMatchers {
      * @param hour the reference hour against which the examined date is checked
      * @deprecated Use {@link #isHour(int)} instead
      */
-
     @Deprecated
     public static DateMatcher<Date> sameHour(final int hour) {
         return isHour(hour);
@@ -556,7 +563,10 @@ public abstract class DateMatchers {
      */
 
     public static DateMatcher<Date> isHour(final int hour) {
-        return new IsHour<Date>(hour, DateMatchers::dateToZoneDateTime);
+        return new IsHour<>(
+            new FieldDateWrapper(hour, ChronoField.HOUR_OF_DAY),
+            (d, z) -> d.toInstant().atZone(z).get(ChronoField.HOUR_OF_DAY)
+        );
     }
 
     /**
@@ -571,7 +581,7 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameInstant(final Date date) {
-        return new IsSame<Date>(new DateWrapper(date), new DateFormatter());
+        return new IsSame<>(new DateWrapper(date), new DateFormatter());
     }
 
     /**
@@ -587,7 +597,7 @@ public abstract class DateMatchers {
      * @param timestamp the time as milliseconds since the Unix epoch time
      */
     public static DateMatcher<Date> sameInstant(final long timestamp) {
-        return new IsSame<Date>(new DateWrapper(new Date(timestamp)), new DateFormatter());
+        return new IsSame<>(new DateWrapper(new Date(timestamp)), new DateFormatter());
     }
 
     /**
@@ -643,8 +653,8 @@ public abstract class DateMatchers {
             final int minute,
             final int second,
             final int milliseconds) {
-        return new IsSame<Date>(new DateWrapper(year, month, dayOfMonth, hour, minute, second, milliseconds),
-                new DateFormatter());
+        return new IsSame<>(new DateWrapper(year, month, dayOfMonth, hour, minute, second, milliseconds),
+            new DateFormatter());
     }
 
     /**
@@ -659,7 +669,7 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameOrBefore(final Date date) {
-        return new IsSameOrBefore<Date>(new DateWrapper(date), new DateFormatter());
+        return new IsSameOrBefore<>(new DateWrapper(date), new DateFormatter());
     }
 
     /**
@@ -674,7 +684,7 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameOrBefore(final LocalDate date) {
-        return new IsSameOrBefore<Date>(new DateWrapper(date), new DateFormatter());
+        return new IsSameOrBefore<>(new DateWrapper(date), new DateFormatter());
     }
 
     /**
@@ -729,7 +739,7 @@ public abstract class DateMatchers {
      * @param dayOfMonth the day of the month against which the examined date is checked
      */
     public static DateMatcher<Date> sameOrBefore(final int year, final Month month, final int dayOfMonth) {
-        return new IsSameOrBefore<Date>(new DateWrapper(LocalDate.of(year, month, dayOfMonth)), new DateFormatter());
+        return new IsSameOrBefore<>(new DateWrapper(LocalDate.of(year, month, dayOfMonth)), new DateFormatter());
     }
 
     /**
@@ -784,8 +794,8 @@ public abstract class DateMatchers {
             final int hour,
             final int minute,
             final int second) {
-        return new IsSameOrBefore<Date>(new DateWrapper(year, month, dayOfMonth, hour, minute, second),
-                new DateFormatter());
+        return new IsSameOrBefore<>(new DateWrapper(year, month, dayOfMonth, hour, minute, second),
+            new DateFormatter());
     }
 
     /**
@@ -800,7 +810,7 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameOrAfter(final Date date) {
-        return new IsSameOrAfter<Date>(new DateWrapper(date), new DateFormatter());
+        return new IsSameOrAfter<>(new DateWrapper(date), new DateFormatter());
     }
 
     /**
@@ -815,7 +825,7 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameOrAfter(final LocalDate date) {
-        return new IsSameOrAfter<Date>(new DateWrapper(date), new DateFormatter());
+        return new IsSameOrAfter<>(new DateWrapper(date), new DateFormatter());
     }
 
     /**
@@ -868,7 +878,7 @@ public abstract class DateMatchers {
      * @param dayOfMonth the day of the month against which the examined date is checked
      */
     public static DateMatcher<Date> sameOrAfter(final int year, final Month month, final int dayOfMonth) {
-        return new IsSameOrAfter<Date>(new DateWrapper(year, month, dayOfMonth), new DateFormatter());
+        return new IsSameOrAfter<>(new DateWrapper(year, month, dayOfMonth), new DateFormatter());
     }
 
     /**
@@ -923,8 +933,8 @@ public abstract class DateMatchers {
             final int hour,
             final int minute,
             final int second) {
-        return new IsSameOrAfter<Date>(new DateWrapper(year, month, dayOfMonth, hour, minute, second),
-                new DateFormatter());
+        return new IsSameOrAfter<>(new DateWrapper(year, month, dayOfMonth, hour, minute, second),
+            new DateFormatter());
     }
 
     /**
@@ -956,7 +966,10 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameMinuteOfHour(final Date date) {
-        return isMinute(extractField(date, ChronoField.MINUTE_OF_HOUR));
+        return new IsMinute<>(
+            new FieldDateWrapper(date, ChronoField.MINUTE_OF_HOUR),
+            (d, z) -> d.toInstant().atZone(z).get(ChronoField.MINUTE_OF_HOUR)
+        );
     }
 
     /**
@@ -988,7 +1001,10 @@ public abstract class DateMatchers {
      * @param minute the reference minute against which the examined date is checked
      */
     public static DateMatcher<Date> isMinute(final int minute) {
-        return new IsMinute<Date>(minute, DateMatchers::dateToZoneDateTime);
+        return new IsMinute<>(
+            new FieldDateWrapper(minute, ChronoField.MINUTE_OF_HOUR),
+            (d, z) -> d.toInstant().atZone(z).get(ChronoField.MINUTE_OF_HOUR)
+        );
     }
 
     /**
@@ -1086,7 +1102,10 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameSecondOfMinute(final Date date) {
-        return isSecond(extractField(date, ChronoField.SECOND_OF_MINUTE));
+        return new IsSecond<>(
+            new FieldDateWrapper(date, ChronoField.SECOND_OF_MINUTE),
+            (d, z) -> d.toInstant().atZone(z).get(ChronoField.SECOND_OF_MINUTE)
+        );
     }
 
     /**
@@ -1118,7 +1137,10 @@ public abstract class DateMatchers {
      * @param second the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> isSecond(final int second) {
-        return new IsSecond<Date>(second, DateMatchers::dateToZoneDateTime);
+        return new IsSecond<>(
+            new FieldDateWrapper(second, ChronoField.SECOND_OF_MINUTE),
+            (d, z) -> d.toInstant().atZone(z).get(ChronoField.SECOND_OF_MINUTE)
+        );
     }
 
     /**
@@ -1150,7 +1172,10 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameMillisecondOfSecond(final Date date) {
-        return isMillisecond(extractField(date, ChronoField.MILLI_OF_SECOND));
+        return new IsMillisecond<>(
+            new FieldDateWrapper(date, ChronoField.MILLI_OF_SECOND),
+            (d, z) -> d.toInstant().atZone(z).get(ChronoField.MILLI_OF_SECOND)
+        );
     }
 
     /**
@@ -1182,7 +1207,10 @@ public abstract class DateMatchers {
      * @param millisecond the millisecond against which the examined date is checked
      */
     public static DateMatcher<Date> isMillisecond(final int millisecond) {
-        return new IsMillisecond<Date>(millisecond, DateMatchers::dateToZoneDateTime);
+        return new IsMillisecond<>(
+            new FieldDateWrapper(millisecond, ChronoField.MILLI_OF_SECOND),
+            (d, z) -> d.toInstant().atZone(z).get(ChronoField.MILLI_OF_SECOND)
+        );
     }
 
     /**
@@ -1197,7 +1225,10 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameYear(final Date date) {
-        return isYear(extractField(date, ChronoField.YEAR));
+        return new IsYear<>(
+            new FieldDateWrapper(date, ChronoField.YEAR),
+            (d, z) -> d.toInstant().atZone(z).get(ChronoField.YEAR)
+        );
     }
 
     /**
@@ -1212,7 +1243,10 @@ public abstract class DateMatchers {
      * @param year the reference year against which the examined date is checked
      */
     public static DateMatcher<Date> isYear(final int year) {
-        return new IsYear<Date>(year, DateMatchers::dateToZoneDateTime);
+        return new IsYear<>(
+            new FieldDateWrapper(year, ChronoField.YEAR),
+            (d, z) -> d.toInstant().atZone(z).get(ChronoField.YEAR)
+        );
     }
 
     /**
@@ -1244,7 +1278,7 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> within(final long period, final ChronoUnit unit, final Date date) {
-        return new IsWithin<Date>(period, unit, new DateWrapper(date), new DateFormatter());
+        return new IsWithin<>(period, unit, new DateWrapper(date), new DateFormatter());
     }
 
     /**
@@ -1259,7 +1293,7 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> within(final long period, final ChronoUnit unit, final LocalDate date) {
-        return new IsWithin<Date>(period, unit, new DateWrapper(date), new DateFormatter());
+        return new IsWithin<>(period, unit, new DateWrapper(date), new DateFormatter());
     }
 
     /**
@@ -1388,10 +1422,10 @@ public abstract class DateMatchers {
             final int minute,
             final int second,
             final int milliseconds) {
-        return new IsWithin<Date>(period,
-                unit,
-                new DateWrapper(year, month, dayOfMonth, hour, minute, second, milliseconds),
-                new DateFormatter());
+        return new IsWithin<>(period,
+            unit,
+            new DateWrapper(year, month, dayOfMonth, hour, minute, second, milliseconds),
+            new DateFormatter());
     }
 
     /**
@@ -1443,7 +1477,7 @@ public abstract class DateMatchers {
      * </pre>
      */
     public static DateMatcher<Date> isMonday() {
-        return new IsDayOfWeek<Date>(DayOfWeek.MONDAY, DateMatchers::dateToZoneDateTime);
+        return isDayOfWeek(DayOfWeek.MONDAY);
     }
 
     /**
@@ -1456,7 +1490,7 @@ public abstract class DateMatchers {
      * </pre>
      */
     public static DateMatcher<Date> isTuesday() {
-        return new IsDayOfWeek<Date>(DayOfWeek.TUESDAY, DateMatchers::dateToZoneDateTime);
+        return isDayOfWeek(DayOfWeek.TUESDAY);
     }
 
     /**
@@ -1469,7 +1503,7 @@ public abstract class DateMatchers {
      * </pre>
      */
     public static DateMatcher<Date> isWednesday() {
-        return new IsDayOfWeek<Date>(DayOfWeek.WEDNESDAY, DateMatchers::dateToZoneDateTime);
+        return isDayOfWeek(DayOfWeek.WEDNESDAY);
     }
 
     /**
@@ -1482,7 +1516,7 @@ public abstract class DateMatchers {
      * </pre>
      */
     public static DateMatcher<Date> isThursday() {
-        return new IsDayOfWeek<Date>(DayOfWeek.THURSDAY, DateMatchers::dateToZoneDateTime);
+        return isDayOfWeek(DayOfWeek.THURSDAY);
     }
 
     /**
@@ -1495,7 +1529,7 @@ public abstract class DateMatchers {
      * </pre>
      */
     public static DateMatcher<Date> isFriday() {
-        return new IsDayOfWeek<Date>(DayOfWeek.FRIDAY, DateMatchers::dateToZoneDateTime);
+        return isDayOfWeek(DayOfWeek.FRIDAY);
     }
 
     /**
@@ -1508,7 +1542,7 @@ public abstract class DateMatchers {
      * </pre>
      */
     public static DateMatcher<Date> isSaturday() {
-        return new IsDayOfWeek<Date>(DayOfWeek.SATURDAY, DateMatchers::dateToZoneDateTime);
+        return isDayOfWeek(DayOfWeek.SATURDAY);
     }
 
     /**
@@ -1521,7 +1555,7 @@ public abstract class DateMatchers {
      * </pre>
      */
     public static DateMatcher<Date> isSunday() {
-        return new IsDayOfWeek<Date>(DayOfWeek.SUNDAY, DateMatchers::dateToZoneDateTime);
+        return isDayOfWeek(DayOfWeek.SUNDAY);
     }
 
     /**
@@ -1560,9 +1594,13 @@ public abstract class DateMatchers {
      * </pre>
      */
     public static DateMatcher<Date> isFirstDayOfMonth() {
-        return new IsMinimum<Date>(ChronoField.DAY_OF_MONTH, DateMatchers::dateToZoneDateTime,
-                new DatePartFormatter(),
-                () -> "the date is the first day of the month");
+        return new IsMinimum<>(
+            ChronoField.DAY_OF_MONTH,
+            (d, z) -> d.toInstant().atZone(z).get(ChronoField.DAY_OF_MONTH),
+            (d, z) -> ChronoField.DAY_OF_MONTH.rangeRefinedBy(d.toInstant().atZone(z)),
+            new DatePartFormatter(),
+            () -> "the date is the first day of the month"
+        );
     }
 
     /**
@@ -1578,7 +1616,12 @@ public abstract class DateMatchers {
      * @param field the temporal field to check
      */
     public static DateMatcher<Date> isMinimum(final ChronoField field) {
-        return new IsMinimum<Date>(field, DateMatchers::dateToZoneDateTime, new DatePartFormatter());
+        return new IsMinimum<>(
+            field,
+            (d, z) -> d.toInstant().atZone(z).get(field),
+            (d, z) -> field.rangeRefinedBy(d.toInstant().atZone(z)),
+            new DatePartFormatter()
+        );
     }
 
     /**
@@ -1591,9 +1634,12 @@ public abstract class DateMatchers {
      * </pre>
      */
     public static DateMatcher<Date> isLastDayOfMonth() {
-        return new IsMaximum<Date>(ChronoField.DAY_OF_MONTH, DateMatchers::dateToZoneDateTime,
-                new DatePartFormatter(),
-                () -> "the date is the last day of the month");
+        return new IsMaximum<>(
+            ChronoField.DAY_OF_MONTH,
+            (d, z) -> d.toInstant().atZone(z).get(ChronoField.DAY_OF_MONTH),
+            (d, z) -> ChronoField.DAY_OF_MONTH.rangeRefinedBy(d.toInstant().atZone(z)),
+            new DatePartFormatter(),
+            () -> "the date is the last day of the month");
     }
 
     /**
@@ -1609,7 +1655,12 @@ public abstract class DateMatchers {
      * @param field the temporal field to check
      */
     public static DateMatcher<Date> isMaximum(final ChronoField field) {
-        return new IsMaximum<Date>(field, DateMatchers::dateToZoneDateTime, new DatePartFormatter());
+        return new IsMaximum<>(
+            field,
+            (d, z) -> d.toInstant().atZone(z).get(field),
+            (d, z) -> field.rangeRefinedBy(d.toInstant().atZone(z)),
+            new DatePartFormatter()
+        );
     }
 
     /**
@@ -1622,7 +1673,10 @@ public abstract class DateMatchers {
      * </pre>
      */
     public static DateMatcher<Date> isMonth(final Month month) {
-        return new IsMonth<Date>(month, DateMatchers::dateToZoneDateTime);
+        return new IsMonth<>(
+            new FieldDateWrapper(month.getValue(), ChronoField.MONTH_OF_YEAR),
+            (d, z) -> d.toInstant().atZone(z).get(ChronoField.MONTH_OF_YEAR)
+        );
     }
 
     /**
@@ -1791,7 +1845,7 @@ public abstract class DateMatchers {
      * </pre>
      */
     public static DateMatcher<Date> isLeapYear() {
-        return new IsLeapYear<Date>(DateMatchers::dateToZoneDateTime, new DateFormatter());
+        return new IsLeapYear<>(DateMatchers::dateToZoneDateTime, new DateFormatter());
     }
 
     private static ChronoUnit convertUnit(final TimeUnit unit) {
@@ -1815,12 +1869,8 @@ public abstract class DateMatchers {
         }
     }
 
-    private static int extractField(final Date date, final ChronoField field) {
-        return dateToZoneDateTime(date).get(field);
-    }
-
-    private static Temporal dateToZoneDateTime(final Date date) {
-        return date.toInstant().atZone(systemDefault());
+    private static Temporal dateToZoneDateTime(final Date date, final ZoneId zone) {
+        return date.toInstant().atZone(zone);
     }
 
 }

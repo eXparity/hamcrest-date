@@ -1,8 +1,6 @@
 package org.exparity.hamcrest.date.core;
 
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoField;
 
 import org.hamcrest.Description;
 
@@ -14,19 +12,24 @@ import org.hamcrest.Description;
  */
 public class IsYear<T> extends DateMatcher<T> {
 
-	private final int expected;
-	private final TemporalAdapter<T> accessor;
+	private final TemporalFieldWrapper<T> expected;
+	private final TemporalFieldAdapter<T> accessor;
+	private final ZoneId zone;
 
-	public IsYear(final int expected, final TemporalAdapter<T> accessor) {
+	private IsYear(final TemporalFieldWrapper<T> expected, final TemporalFieldAdapter<T> accessor, final ZoneId zone) {
 		this.expected = expected;
 		this.accessor = accessor;
+		this.zone = zone;
+	}
+
+	public IsYear(final TemporalFieldWrapper<T> expected, final TemporalFieldAdapter<T> accessor) {
+		this(expected, accessor, ZoneId.systemDefault());
 	}
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
-		int actualYear = this.accessor.asTemporal(actual).get(ChronoField.YEAR);
-		if (this.expected != actualYear) {
-			mismatchDescription.appendText("the date has the year " + actualYear);
+		if (!this.expected.isSame(actual)) {
+			mismatchDescription.appendText("the date has the year " + accessor.asTemporalField(actual, zone));
 			return false;
 		} else {
 			return true;
@@ -35,12 +38,12 @@ public class IsYear<T> extends DateMatcher<T> {
 
 	@Override
 	public void describeTo(final Description description) {
-		description.appendText("the date is in the year " + this.expected);
+		description.appendText("the date has the year " + expected.unwrap());
 	}
 
 	@Override
 	public DateMatcher<T> atZone(ZoneId zone) {
-		return new IsYear<>(expected, (T t) -> ZonedDateTime.from(accessor.asTemporal(t)).withZoneSameInstant(zone));
+		return new IsYear<>(expected.withZone(zone), accessor);
 	}
 
 }

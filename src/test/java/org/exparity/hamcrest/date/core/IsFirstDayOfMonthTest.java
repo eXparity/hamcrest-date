@@ -19,12 +19,12 @@ public class IsFirstDayOfMonthTest {
 	// Date Matchers
 	@Test
 	public void isDateFirstDayOfMonth() {
-		assertThat(AUG_01_2015_NOON_AS_DATE, DateMatchers.isFirstDayOfMonth());
+		assertThat(AUG_01_2015_NOON_UTC_AS_DATE, DateMatchers.isFirstDayOfMonth());
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotFirstDayOfMonth() {
-		assertThat(AUG_31_2015_NOON_AS_DATE, DateMatchers.isFirstDayOfMonth());
+		assertThat(AUG_31_2015_NOON_UTC_AS_DATE, DateMatchers.isFirstDayOfMonth());
 	}
 
 	// LocalDate Matchers

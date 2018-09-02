@@ -15,13 +15,13 @@ public class DateFormatterTest {
 
     @Test
     public void canDescribe() {
-        String description = new DateFormatter().describe(Dates.AUG_04_2015_1159_AS_DATE);
+        String description = new DateFormatter().describe(Dates.AUG_04_2015_1159_DEFAULT_AS_DATE);
         assertThat(description, Matchers.equalTo("Tue, 04 Aug 2015 11:59:00.000 AM"));
     }
 
     @Test
     public void canDescribeDate() {
-        String description = new DateFormatter().describeDate(Dates.AUG_04_2015_1159_AS_DATE);
+        String description = new DateFormatter().describeDate(Dates.AUG_04_2015_1159_DEFAULT_AS_DATE);
         assertThat(description, Matchers.equalTo("Tue, 04 Aug 2015"));
     }
 

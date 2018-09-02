@@ -23,12 +23,12 @@ public class IsMaximumTest {
     // Date Matchers
     @Test
     public void isDateLastDayOfMonth() {
-        assertThat(AUG_31_2015_NOON_AS_DATE, DateMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
+        assertThat(AUG_31_2015_NOON_UTC_AS_DATE, DateMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
     }
 
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
     public void isDateNotLastDayOfMonth() {
-        assertThat(AUG_01_2015_NOON_AS_DATE, DateMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
+        assertThat(AUG_01_2015_NOON_UTC_AS_DATE, DateMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
     }
 
     // LocalDate Matchers

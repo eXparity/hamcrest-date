@@ -22,7 +22,7 @@ public class IsSameDay<T> extends DateMatcher<T> {
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
-		if (!this.expected.isSameDay(actual)) {
+		if (!this.expected.isSame(actual)) {
 			mismatchDesc.appendText("the day is " + this.describer.describeDate(actual));
 			return false;
 		} else {

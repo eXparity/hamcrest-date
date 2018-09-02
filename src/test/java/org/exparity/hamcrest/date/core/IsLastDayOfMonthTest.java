@@ -19,12 +19,12 @@ public class IsLastDayOfMonthTest {
 	// Date Matchers
 	@Test
 	public void isDateLastDayOfMonth() {
-		assertThat(AUG_31_2015_NOON_AS_DATE, DateMatchers.isLastDayOfMonth());
+		assertThat(AUG_31_2015_NOON_UTC_AS_DATE, DateMatchers.isLastDayOfMonth());
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotLastDayOfMonth() {
-		assertThat(AUG_01_2015_NOON_AS_DATE, DateMatchers.isLastDayOfMonth());
+		assertThat(AUG_01_2015_NOON_UTC_AS_DATE, DateMatchers.isLastDayOfMonth());
 	}
 
 	// LocalDate Matchers

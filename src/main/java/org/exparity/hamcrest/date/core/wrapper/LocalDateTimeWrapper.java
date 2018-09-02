@@ -23,40 +23,48 @@ public class LocalDateTimeWrapper implements TemporalWrapper<LocalDateTime> {
 	private final ZoneId zone;
 	private final TemporalUnit accuracy;
 
-	private LocalDateTimeWrapper(Supplier<LocalDateTime> wrapped, ZoneId zone, TemporalUnit accuracy) {
+	private LocalDateTimeWrapper(final Supplier<LocalDateTime> wrapped, final ZoneId zone, final TemporalUnit accuracy) {
 		this.wrapped = wrapped;
 		this.zone = zone;
 		this.accuracy = accuracy;
 	}
 
 	public LocalDateTimeWrapper(final Date date) {
-		zone = ZoneId.systemDefault();
-		wrapped = () -> date.toInstant().atZone(zone).toLocalDateTime();
-		accuracy = ChronoUnit.MILLIS;
+		this(date, ChronoUnit.MILLIS);
+	}
+
+	public LocalDateTimeWrapper(final Date date, final TemporalUnit accuracy) {
+		this.zone = ZoneId.systemDefault();
+		this.wrapped = () -> date.toInstant().atZone(zone).toLocalDateTime();
+		this.accuracy = accuracy;
 	}
 
 	public LocalDateTimeWrapper(final LocalDateTime date) {
-		zone = ZoneId.systemDefault();
-		wrapped = () -> date;
-		accuracy = ChronoUnit.NANOS;
+		this(date, ChronoUnit.NANOS);
+	}
+
+	public LocalDateTimeWrapper(final LocalDateTime date, final TemporalUnit accuracy) {
+		this.zone = ZoneId.systemDefault();
+		this.wrapped = () -> date;
+		this.accuracy = accuracy;
 	}
 
 	public LocalDateTimeWrapper(final int year, final Month month, final int dayOfMonth) {
-		zone = ZoneId.systemDefault();
-		wrapped = () -> LocalDate.of(year, month, dayOfMonth).atStartOfDay();
-		accuracy = ChronoUnit.DAYS;
+		this.zone = ZoneId.systemDefault();
+		this.wrapped = () -> LocalDate.of(year, month, dayOfMonth).atStartOfDay();
+		this.accuracy = ChronoUnit.DAYS;
 	}
 
 	public LocalDateTimeWrapper(final int year, final Month month, final int dayOfMonth, final int hour, final int minute, final int second) {
-		zone = ZoneId.systemDefault();
-		wrapped = () -> LocalDateTime.of(year, month, dayOfMonth, hour, minute, second);
-		accuracy = ChronoUnit.SECONDS;
+		this.zone = ZoneId.systemDefault();
+		this.wrapped = () -> LocalDateTime.of(year, month, dayOfMonth, hour, minute, second);
+		this.accuracy = ChronoUnit.SECONDS;
 	}
 
 	public LocalDateTimeWrapper(final int year, final Month month, final int dayOfMonth, final int hour, final int minute, final int second, final int nanos) {
-		zone = ZoneId.systemDefault();
-		wrapped = () -> LocalDateTime.of(year, month, dayOfMonth, hour, minute, second, nanos);
-		accuracy = ChronoUnit.NANOS;
+		this.zone = ZoneId.systemDefault();
+		this.wrapped = () -> LocalDateTime.of(year, month, dayOfMonth, hour, minute, second, nanos);
+		this.accuracy = ChronoUnit.NANOS;
 	}
 
 	@Override
@@ -80,17 +88,12 @@ public class LocalDateTimeWrapper implements TemporalWrapper<LocalDateTime> {
 	}
 
 	@Override
-	public boolean isSameDay(final LocalDateTime other) {
-		return wrapped.get().truncatedTo(ChronoUnit.DAYS).isEqual(other.truncatedTo(ChronoUnit.DAYS));
-	}
-
-	@Override
 	public LocalDateTime unwrap() {
 		return wrapped.get();
 	}
 
 	@Override
-	public LocalDateTimeWrapper withZone(ZoneId zone) {
+	public LocalDateTimeWrapper withZone(final ZoneId zone) {
 		return new LocalDateTimeWrapper(wrapped, zone, accuracy);
 	}
 

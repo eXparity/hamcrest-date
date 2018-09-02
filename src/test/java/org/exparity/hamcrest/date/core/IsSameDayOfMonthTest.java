@@ -14,22 +14,22 @@ import org.testng.annotations.Test;
  */
 public class IsSameDayOfMonthTest {
 
-    private static final String ASSERTION_PATTERN = "\\sExpected: the date is on the [0-9]+? day of the month\\s     but: the date is on the [0-9]+? day of the month";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date has the day of month [0-9]+?\\s     but: the date has the day of month [0-9]+?";
 
 	// Date Matchers
 	@Test
 	public void isDateSameDayOfMonth() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameDayOfMonth(AUG_04_2015_NOON_AS_DATE));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameDayOfMonth(AUG_04_2015_NOON_UTC_AS_DATE));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotSameDayOfMonth() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameDayOfMonth(AUG_01_2015_NOON_AS_DATE));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameDayOfMonth(AUG_01_2015_NOON_UTC_AS_DATE));
 	}
 
 	@Test
 	public void isDateSameDayOfMonthDifferentMonth() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameDayOfMonth(SEP_04_2015_NOON_AS_DATE));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameDayOfMonth(SEP_04_2015_NOON_UTC_AS_DATE));
 	}
 
 	// LocalDate Matchers

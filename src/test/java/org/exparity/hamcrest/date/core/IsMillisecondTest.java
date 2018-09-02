@@ -1,6 +1,6 @@
 package org.exparity.hamcrest.date.core;
 
-import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_UTC_AS_DATE;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.exparity.hamcrest.date.DateMatchers;
@@ -19,22 +19,22 @@ public class IsMillisecondTest {
 	// Date Matchers
 	@Test
 	public void isDateMillisecond() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isMillisecond(0));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.isMillisecond(0));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotMillisecond() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isMillisecond(1));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.isMillisecond(1));
 	}
 
 	@Test
 	public void isDateSameMillisecond() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameMillisecond(0));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameMillisecond(0));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotSameMillisecond() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameMillisecond(1));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameMillisecond(1));
 	}
 
 }

@@ -19,21 +19,15 @@ public interface TemporalWrapper<T> {
 
 	/**
 	 * @param other a temporal to test against
-	 * @return <code>true</code> if this temporal is after the other
+	 * @return <code>true</code> if this temporal is before the other
 	 */
 	boolean isBefore(final T other);
 
 	/**
 	 * @param other a temporal to test against
-	 * @return <code>true</code> if this temporal is after the other
+	 * @return <code>true</code> if this temporal is the same as the other
 	 */
 	boolean isSame(final T other);
-
-	/**
-	 * @param other a temporal to test against
-	 * @return <code>true</code> if this temporal is after the other
-	 */
-	boolean isSameDay(final T other);
 
 	/**
 	 * @return a the wrapped value

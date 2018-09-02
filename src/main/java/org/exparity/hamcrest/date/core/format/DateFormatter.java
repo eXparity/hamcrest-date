@@ -1,6 +1,3 @@
-/**
- *
- */
 package org.exparity.hamcrest.date.core.format;
 
 import java.text.SimpleDateFormat;

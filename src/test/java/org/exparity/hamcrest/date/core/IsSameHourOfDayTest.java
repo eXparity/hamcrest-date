@@ -1,6 +1,8 @@
 package org.exparity.hamcrest.date.core;
 
 import static org.exparity.hamcrest.date.testutils.DateMatcherTestUtils.addDateField;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_01_2012_MIDNIGHT_CET_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_01_2012_MIDNIGHT_GMT_AS_DATE;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.LocalDateTime;
@@ -13,6 +15,7 @@ import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
+import org.exparity.hamcrest.date.testutils.ZoneIds;
 import org.testng.annotations.Test;
 
 /**
@@ -60,6 +63,16 @@ public class IsSameHourOfDayTest {
 	public void isDateSameHourOfDayDifferentDay() {
 		Date date = new Date(), other = addDateField(date, Calendar.DAY_OF_WEEK, 1);
 		assertThat(other, DateMatchers.sameHourOfDay(date));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isDateSameHourOfDayMidnightLocallyDifferentTimeZoneLowerOffsetPerspective() {
+		assertThat(JAN_01_2012_MIDNIGHT_GMT_AS_DATE, DateMatchers.sameHourOfDay(JAN_01_2012_MIDNIGHT_CET_AS_DATE).atZone(ZoneIds.GMT));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isDateSameHourOfDayMidnightLocallyDifferentTimeZoneHigherOffsetPerspective() {
+		assertThat(JAN_01_2012_MIDNIGHT_GMT_AS_DATE, DateMatchers.sameHourOfDay(JAN_01_2012_MIDNIGHT_CET_AS_DATE).atZone(ZoneIds.CET));
 	}
 
 	// LocalDateTime Matchers

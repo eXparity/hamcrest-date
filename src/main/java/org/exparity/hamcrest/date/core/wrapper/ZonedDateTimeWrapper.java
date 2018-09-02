@@ -1,14 +1,10 @@
 package org.exparity.hamcrest.date.core.wrapper;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
 import java.util.Date;
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 import org.exparity.hamcrest.date.core.TemporalWrapper;
 
@@ -20,86 +16,93 @@ import org.exparity.hamcrest.date.core.TemporalWrapper;
  */
 public class ZonedDateTimeWrapper implements TemporalWrapper<ZonedDateTime> {
 
-	private final Supplier<ZonedDateTime> wrapped;
+	private final Function<ZoneId, ZonedDateTime> wrapped;
 	private final ZoneId zone;
 	private final TemporalUnit accuracy;
 
-	public ZonedDateTimeWrapper(final Date date) {
-		zone = ZoneId.systemDefault();
-		wrapped = () -> date.toInstant().atZone(zone);
-		accuracy = ChronoUnit.MILLIS;
-	}
-
-	public ZonedDateTimeWrapper(final ZonedDateTime date) {
-		zone = ZoneId.systemDefault();
-		wrapped = () -> date;
-		accuracy = ChronoUnit.NANOS;
-	}
-
-	public ZonedDateTimeWrapper(final LocalDateTime date, final ZoneId zone) {
-		this.zone = ZoneId.systemDefault();
-		wrapped = () -> date.atZone(zone);
-		accuracy = ChronoUnit.NANOS;
-	}
-
-	public ZonedDateTimeWrapper(final int year, final Month month, final int dayOfMonth, final int hour,
-	        final int minute, final int second, final ZoneId zone) {
-		this.zone = ZoneId.systemDefault();
-		wrapped = () -> LocalDateTime.of(year, month, dayOfMonth, hour, minute, second).atZone(zone);
-		accuracy = ChronoUnit.SECONDS;
-	}
-
-	public ZonedDateTimeWrapper(final int year, final Month month, final int dayOfMonth, final int hour,
-	        final int minute, final int second, final int nanos, final ZoneId zone) {
-		this.zone = ZoneId.systemDefault();
-		wrapped = () -> LocalDateTime.of(year, month, dayOfMonth, hour, minute, second, nanos).atZone(zone);
-		accuracy = ChronoUnit.NANOS;
-	}
-
-	public ZonedDateTimeWrapper(final int year, final Month month, final int dayOfMonth, final ZoneId zone) {
-		this.zone = ZoneId.systemDefault();
-		wrapped = () -> LocalDate.of(year, month, dayOfMonth).atStartOfDay().atZone(zone);
-		accuracy = ChronoUnit.DAYS;
-	}
-
-	private ZonedDateTimeWrapper(Supplier<ZonedDateTime> wrapped, ZoneId zone, TemporalUnit accuracy) {
+	private ZonedDateTimeWrapper(final Function<ZoneId, ZonedDateTime> wrapped, final ZoneId zone, final TemporalUnit accuracy) {
 		this.wrapped = wrapped;
 		this.zone = zone;
 		this.accuracy = accuracy;
 	}
 
+	public ZonedDateTimeWrapper(final Date date) {
+		this(date, ChronoUnit.MILLIS);
+	}
+
+	public ZonedDateTimeWrapper(final Date date, final TemporalUnit accuracy) {
+		this.zone = ZoneId.systemDefault();
+		this.wrapped = z -> date.toInstant().atZone(z);
+		this.accuracy = accuracy;
+	}
+
+	public ZonedDateTimeWrapper(final ZonedDateTime date) {
+		this(date, ChronoUnit.NANOS);
+	}
+
+	public ZonedDateTimeWrapper(final ZonedDateTime date, final TemporalUnit accuracy) {
+		this.zone = ZoneId.systemDefault();
+		this.wrapped = date::withZoneSameInstant;
+		this.accuracy = accuracy;
+	}
+
+	public ZonedDateTimeWrapper(final LocalDateTime date, final ZoneId zone) {
+		this(date, zone, ChronoUnit.NANOS);
+	}
+
+	public ZonedDateTimeWrapper(final LocalDateTime date, final ZoneId zone, final TemporalUnit accuracy) {
+		this.zone = zone;
+		this.wrapped = date::atZone;
+		this.accuracy = accuracy;
+	}
+
+	public ZonedDateTimeWrapper(final int year, final Month month, final int dayOfMonth, final int hour,
+	        final int minute, final int second, final ZoneId zone) {
+		this.zone = zone;
+		this.wrapped = z -> LocalDateTime.of(year, month, dayOfMonth, hour, minute, second).atZone(zone);
+		this.accuracy = ChronoUnit.SECONDS;
+	}
+
+	public ZonedDateTimeWrapper(final int year, final Month month, final int dayOfMonth, final int hour,
+	        final int minute, final int second, final int nanos, final ZoneId zone) {
+		this.zone = zone;
+		this.wrapped = z -> LocalDateTime.of(year, month, dayOfMonth, hour, minute, second, nanos).atZone(zone);
+		this.accuracy = ChronoUnit.NANOS;
+	}
+
+	public ZonedDateTimeWrapper(final int year, final Month month, final int dayOfMonth, final ZoneId zone) {
+		this.zone = zone;
+		this.wrapped = z -> LocalDate.of(year, month, dayOfMonth).atStartOfDay().atZone(zone);
+		this.accuracy = ChronoUnit.DAYS;
+	}
+
 	@Override
 	public long difference(final ZonedDateTime other, final ChronoUnit unit) {
-		return Math.abs(wrapped.get().truncatedTo(accuracy).until(other, unit));
+		return Math.abs(wrapped.apply(zone).truncatedTo(accuracy).toInstant().until(other.toInstant(), unit));
 	}
 
 	@Override
 	public boolean isAfter(final ZonedDateTime other) {
-		return wrapped.get().truncatedTo(accuracy).isAfter(other.truncatedTo(accuracy));
+		return wrapped.apply(zone).truncatedTo(accuracy).toInstant().isAfter(other.truncatedTo(accuracy).toInstant());
 	}
 
 	@Override
 	public boolean isBefore(final ZonedDateTime other) {
-		return wrapped.get().truncatedTo(accuracy).isBefore(other.truncatedTo(accuracy));
+		return wrapped.apply(zone).truncatedTo(accuracy).toInstant().isBefore(other.truncatedTo(accuracy).toInstant());
 	}
 
 	@Override
 	public boolean isSame(final ZonedDateTime other) {
-		return wrapped.get().truncatedTo(accuracy).isEqual(other.truncatedTo(accuracy));
-	}
-
-	@Override
-	public boolean isSameDay(final ZonedDateTime other) {
-		return wrapped.get().toLocalDate().isEqual(other.toLocalDate());
+		return wrapped.apply(zone).truncatedTo(accuracy).toInstant().equals(other.truncatedTo(accuracy).toInstant());
 	}
 
 	@Override
 	public ZonedDateTime unwrap() {
-		return wrapped.get();
+		return wrapped.apply(zone);
 	}
 
 	@Override
-	public TemporalWrapper<ZonedDateTime> withZone(ZoneId zone) {
+	public TemporalWrapper<ZonedDateTime> withZone(final ZoneId zone) {
 		return new ZonedDateTimeWrapper(wrapped, zone, accuracy);
 	}
 
