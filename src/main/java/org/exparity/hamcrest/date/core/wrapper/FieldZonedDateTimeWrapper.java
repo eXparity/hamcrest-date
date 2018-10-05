@@ -1,12 +1,17 @@
 package org.exparity.hamcrest.date.core.wrapper;
 
-import org.exparity.hamcrest.date.core.TemporalFieldWrapper;
-
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoField;
 import java.util.function.ToIntFunction;
 
+import org.exparity.hamcrest.date.core.TemporalFieldWrapper;
+
+/**
+ * Implementation of {@link TemporalFieldWrapper} which wraps a temporal field of a {@link ZonedDateTime} instance.
+ *
+ * @author Thomas Naskali
+ */
 public class FieldZonedDateTimeWrapper implements TemporalFieldWrapper<ZonedDateTime> {
 
   private final ToIntFunction<ZoneId> wrapped;

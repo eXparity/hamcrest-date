@@ -40,9 +40,10 @@ public interface TemporalWrapper<T> {
 	long difference(final T other, final ChronoUnit unit);
 
 	/**
+	 * Makes a copy of this wrapper based on a given time zone.
 	 *
-	 * @param zone a zone to apply to the wrapped value
-	 * @return a copy of the wrapper at the desired zone
+	 * @param zone a new reference time zone
+	 * @return a copy of the wrapper based on the new reference time zone
 	 */
 	TemporalWrapper<T> withZone(ZoneId zone);
 

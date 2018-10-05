@@ -10,34 +10,35 @@ import java.time.ZoneId;
  */
 public interface TemporalFieldWrapper<T> {
 
-  /**
-   * @param other a temporal to test against
-   * @return <code>true</code> if this temporal field is after the other
-   */
-  boolean isAfter(final T other);
+	/**
+	 * @param other a temporal to test against
+	 * @return <code>true</code> if this temporal field is after the other
+	 */
+	boolean isAfter(final T other);
 
-  /**
-   * @param other a temporal to test against
-   * @return <code>true</code> if this temporal field is before the other
-   */
-  boolean isBefore(final T other);
+    /**
+     * @param other a temporal to test against
+     * @return <code>true</code> if this temporal field is before the other
+     */
+    boolean isBefore(final T other);
 
-  /**
-   * @param other a temporal to test against
-   * @return <code>true</code> if this temporal field is the same as the other
-   */
-  boolean isSame(final T other);
+    /**
+     * @param other a temporal to test against
+     * @return <code>true</code> if this temporal field is the same as the other
+     */
+    boolean isSame(final T other);
 
-  /**
-   * @return a the wrapped value
-   */
-  int unwrap();
+    /**
+     * @return a the wrapped value
+     */
+    int unwrap();
 
-  /**
-   *
-   * @param zone a zone to apply to the wrapped value
-   * @return a copy of the wrapper at the desired zone
-   */
-  TemporalFieldWrapper<T> withZone(ZoneId zone);
+	/**
+	 * Makes a copy of this wrapper based on a given time zone.
+	 *
+	 * @param zone a new reference time zone
+	 * @return a copy of the wrapper based on the new reference time zone
+	 */
+	TemporalFieldWrapper<T> withZone(ZoneId zone);
 
 }
