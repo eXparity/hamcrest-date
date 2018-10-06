@@ -2,36 +2,18 @@ package org.exparity.hamcrest.date;
 
 import static java.time.DayOfWeek.*;
 import static java.time.Month.*;
-import static java.util.Arrays.asList;
 
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
-import java.time.Month;
+import java.time.*;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
+import java.util.stream.Stream;
 
-import org.exparity.hamcrest.date.core.IsAfter;
-import org.exparity.hamcrest.date.core.IsBefore;
-import org.exparity.hamcrest.date.core.IsDayOfMonth;
-import org.exparity.hamcrest.date.core.IsDayOfWeek;
-import org.exparity.hamcrest.date.core.IsHour;
-import org.exparity.hamcrest.date.core.IsLeapYear;
-import org.exparity.hamcrest.date.core.IsMaximum;
-import org.exparity.hamcrest.date.core.IsMinimum;
-import org.exparity.hamcrest.date.core.IsMinute;
-import org.exparity.hamcrest.date.core.IsMonth;
-import org.exparity.hamcrest.date.core.IsSame;
-import org.exparity.hamcrest.date.core.IsSameDay;
-import org.exparity.hamcrest.date.core.IsSameOrAfter;
-import org.exparity.hamcrest.date.core.IsSameOrBefore;
-import org.exparity.hamcrest.date.core.IsSecond;
-import org.exparity.hamcrest.date.core.IsWithin;
-import org.exparity.hamcrest.date.core.IsYear;
+import org.exparity.hamcrest.date.core.*;
 import org.exparity.hamcrest.date.core.format.DatePartFormatter;
 import org.exparity.hamcrest.date.core.format.LocalDateTimeFormatter;
+import org.exparity.hamcrest.date.core.wrapper.FieldLocalDateTimeWrapper;
 import org.exparity.hamcrest.date.core.wrapper.LocalDateTimeWrapper;
 import org.hamcrest.Factory;
-import org.hamcrest.Matcher;
 
 /**
  * Static factory for creating {@link org.hamcrest.Matcher} instances for comparing {@link LocalDateTime} instances
@@ -51,8 +33,8 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static Matcher<LocalDateTime> after(final LocalDateTime date) {
-        return new IsAfter<LocalDateTime>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
+    public static DateMatcher<LocalDateTime> after(final LocalDateTime date) {
+        return new IsAfter<>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
     }
 
     /**
@@ -71,14 +53,14 @@ public abstract class LocalDateTimeMatchers {
      * @param minute the minute of the hour
      * @param second the second of the minute
      */
-    public static Matcher<LocalDateTime> after(final int year,
+    public static DateMatcher<LocalDateTime> after(final int year,
             final Month month,
             final int dayOfMonth,
             final int hour,
             final int minute,
             final int second) {
-        return new IsAfter<LocalDateTime>(new LocalDateTimeWrapper(year, month, dayOfMonth, hour, minute, second),
-                new LocalDateTimeFormatter());
+        return new IsAfter<>(new LocalDateTimeWrapper(year, month, dayOfMonth, hour, minute, second),
+            new LocalDateTimeFormatter());
     }
 
     /**
@@ -92,8 +74,8 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static Matcher<LocalDateTime> before(final LocalDateTime date) {
-        return new IsBefore<LocalDateTime>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
+    public static DateMatcher<LocalDateTime> before(final LocalDateTime date) {
+        return new IsBefore<>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
     }
 
     /**
@@ -112,14 +94,14 @@ public abstract class LocalDateTimeMatchers {
      * @param minute the minute of the hour
      * @param second the second of the minute
      */
-    public static Matcher<LocalDateTime> before(final int year,
+    public static DateMatcher<LocalDateTime> before(final int year,
             final Month month,
             final int dayOfMonth,
             final int hour,
             final int minute,
             final int second) {
-        return new IsBefore<LocalDateTime>(new LocalDateTimeWrapper(year, month, dayOfMonth, hour, minute, second),
-                new LocalDateTimeFormatter());
+        return new IsBefore<>(new LocalDateTimeWrapper(year, month, dayOfMonth, hour, minute, second),
+            new LocalDateTimeFormatter());
     }
 
     /**
@@ -133,8 +115,11 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static Matcher<LocalDateTime> sameDay(final LocalDateTime date) {
-        return new IsSameDay<LocalDateTime>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
+    public static DateMatcher<LocalDateTime> sameDay(final LocalDateTime date) {
+        return new IsSameDay<>(
+            new LocalDateTimeWrapper(date),
+            new LocalDateTimeFormatter()
+        );
     }
 
     /**
@@ -150,9 +135,11 @@ public abstract class LocalDateTimeMatchers {
      * @param month the reference month against which the examined date is checked
      * @param year the reference year against which the examined date is checked
      */
-    public static Matcher<LocalDateTime> isDay(final int year, final Month month, final int dayOfMonth) {
-        return new IsSameDay<LocalDateTime>(new LocalDateTimeWrapper(year, month, dayOfMonth),
-                new LocalDateTimeFormatter());
+    public static DateMatcher<LocalDateTime> isDay(final int year, final Month month, final int dayOfMonth) {
+        return new IsSameDay<>(
+            new LocalDateTimeWrapper(year, month, dayOfMonth),
+            new LocalDateTimeFormatter()
+        );
     }
 
     /**
@@ -166,8 +153,8 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static Matcher<LocalDateTime> sameInstant(final LocalDateTime date) {
-        return new IsSame<LocalDateTime>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
+    public static DateMatcher<LocalDateTime> sameInstant(final LocalDateTime date) {
+        return new IsSame<>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
     }
 
     /**
@@ -187,15 +174,15 @@ public abstract class LocalDateTimeMatchers {
      * @param second the second of the minute
      * @param nanos the nanosecond of the second
      */
-    public static Matcher<LocalDateTime> isInstant(final int year,
+    public static DateMatcher<LocalDateTime> isInstant(final int year,
             final Month month,
             final int dayOfMonth,
             final int hour,
             final int minute,
             final int second,
             final int nanos) {
-        return new IsSame<LocalDateTime>(new LocalDateTimeWrapper(year, month, dayOfMonth, hour, minute, second, nanos),
-                new LocalDateTimeFormatter());
+        return new IsSame<>(new LocalDateTimeWrapper(year, month, dayOfMonth, hour, minute, second, nanos),
+            new LocalDateTimeFormatter());
     }
 
     /**
@@ -209,8 +196,8 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static Matcher<LocalDateTime> sameOrBefore(final LocalDateTime date) {
-        return new IsSameOrBefore<LocalDateTime>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
+    public static DateMatcher<LocalDateTime> sameOrBefore(final LocalDateTime date) {
+        return new IsSameOrBefore<>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
     }
 
     /**
@@ -231,14 +218,14 @@ public abstract class LocalDateTimeMatchers {
      * @param second the second of the minute
      */
     @Factory
-    public static Matcher<LocalDateTime> sameOrBefore(final int year,
+    public static DateMatcher<LocalDateTime> sameOrBefore(final int year,
             final Month month,
             final int day,
             final int hour,
             final int minute,
             final int second) {
-        return new IsSameOrBefore<LocalDateTime>(new LocalDateTimeWrapper(year, month, day, hour, minute, second),
-                new LocalDateTimeFormatter());
+        return new IsSameOrBefore<>(new LocalDateTimeWrapper(year, month, day, hour, minute, second),
+            new LocalDateTimeFormatter());
     }
 
     /**
@@ -252,8 +239,8 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static Matcher<LocalDateTime> sameOrAfter(final LocalDateTime date) {
-        return new IsSameOrAfter<LocalDateTime>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
+    public static DateMatcher<LocalDateTime> sameOrAfter(final LocalDateTime date) {
+        return new IsSameOrAfter<>(new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
     }
 
     /**
@@ -272,7 +259,7 @@ public abstract class LocalDateTimeMatchers {
      * @param minute the minute of the hour
      * @param second the second of the minute
      */
-    public static Matcher<LocalDateTime> sameOrAfter(final int year,
+    public static DateMatcher<LocalDateTime> sameOrAfter(final int year,
             final Month month,
             final int day,
             final int hour,
@@ -292,8 +279,11 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static Matcher<LocalDateTime> sameMonthOfYear(final LocalDateTime date) {
-        return isMonth(date.getMonth());
+    public static DateMatcher<LocalDateTime> sameMonthOfYear(final LocalDateTime date) {
+        return new IsMonth<>(
+            new FieldLocalDateTimeWrapper(date, ChronoField.MONTH_OF_YEAR),
+            (d, z) -> ZonedDateTime.of(d, z).getMonthValue()
+        );
     }
 
     /**
@@ -307,8 +297,11 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static Matcher<LocalDateTime> sameDayOfMonth(final LocalDateTime date) {
-        return isDayOfMonth(date.getDayOfMonth());
+    public static DateMatcher<LocalDateTime> sameDayOfMonth(final LocalDateTime date) {
+        return new IsDayOfMonth<>(
+            new FieldLocalDateTimeWrapper(date, ChronoField.DAY_OF_MONTH),
+            (d, z) -> ZonedDateTime.of(d, z).getDayOfMonth()
+        );
     }
 
     /**
@@ -320,10 +313,13 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isDayOfMonth(4))
      * </pre>
      *
-     * @param date the expected day of the month
+     * @param dayOfMonth the expected day of the month
      */
-    public static Matcher<LocalDateTime> isDayOfMonth(final int dayOfMonth) {
-        return new IsDayOfMonth<LocalDateTime>(dayOfMonth, t -> t);
+    public static DateMatcher<LocalDateTime> isDayOfMonth(final int dayOfMonth) {
+        return new IsDayOfMonth<>(
+            new FieldLocalDateTimeWrapper(dayOfMonth, ChronoField.DAY_OF_MONTH),
+            (d, z) -> ZonedDateTime.of(d, z).getDayOfMonth()
+        );
     }
 
     /**
@@ -337,8 +333,11 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static Matcher<LocalDateTime> sameYear(final LocalDateTime date) {
-        return isYear(date.getYear());
+    public static DateMatcher<LocalDateTime> sameYear(final LocalDateTime date) {
+        return new IsYear<>(
+            new FieldLocalDateTimeWrapper(date, ChronoField.YEAR),
+            (d, z) -> ZonedDateTime.of(d ,z).getYear()
+        );
     }
 
     /**
@@ -352,8 +351,11 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param year the reference year against which the examined date is checked
      */
-    public static Matcher<LocalDateTime> isYear(final int year) {
-        return new IsYear<LocalDateTime>(year, t -> t);
+    public static DateMatcher<LocalDateTime> isYear(final int year) {
+        return new IsYear<>(
+            new FieldLocalDateTimeWrapper(year, ChronoField.YEAR),
+            (d, z) -> ZonedDateTime.of(d ,z).getYear()
+        );
     }
 
     /**
@@ -367,8 +369,8 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static Matcher<LocalDateTime> within(final long period, final ChronoUnit unit, final LocalDateTime date) {
-        return new IsWithin<LocalDateTime>(period, unit, new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
+    public static DateMatcher<LocalDateTime> within(final long period, final ChronoUnit unit, final LocalDateTime date) {
+        return new IsWithin<>(period, unit, new LocalDateTimeWrapper(date), new LocalDateTimeFormatter());
     }
 
     /**
@@ -385,16 +387,12 @@ public abstract class LocalDateTimeMatchers {
      * @param year the year against which the examined date is checked
      * @param month the month against which the examined date is checked
      * @param dayofMonth the day of the month against which the examined date is checked
-     * @param hour
      * @param hour the hour of the day
      * @param minute the minute of the hour
      * @param second the second of the minute
-     * @param hour the hour of the day
-     * @param minute the minute of the hour
-     * @param second the second of the minute
-     * @param nanons the nanoseconds of the second
+     * @param nanos the nanoseconds of the second
      */
-    public static Matcher<LocalDateTime> within(final long period,
+    public static DateMatcher<LocalDateTime> within(final long period,
             final ChronoUnit unit,
             final int year,
             final Month month,
@@ -403,9 +401,9 @@ public abstract class LocalDateTimeMatchers {
             final int minute,
             final int second,
             final int nanos) {
-        return new IsWithin<LocalDateTime>(period, unit,
-                new LocalDateTimeWrapper(year, month, dayofMonth, hour, minute, second, nanos),
-                new LocalDateTimeFormatter());
+        return new IsWithin<>(period, unit,
+            new LocalDateTimeWrapper(year, month, dayofMonth, hour, minute, second, nanos),
+            new LocalDateTimeFormatter());
     }
 
     /**
@@ -417,7 +415,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isToday());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isYesterday() {
+    public static DateMatcher<LocalDateTime> isYesterday() {
         return sameDay(LocalDateTime.now().minusDays(1));
     }
 
@@ -430,7 +428,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isToday());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isToday() {
+    public static DateMatcher<LocalDateTime> isToday() {
         return sameDay(LocalDateTime.now());
     }
 
@@ -443,8 +441,8 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isTomorrow());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isTomorrow() {
-        return sameDay(LocalDateTime.now().plusDays(1));
+    public static DateMatcher<LocalDateTime> isTomorrow() {
+        return sameDay(LocalDateTime.now(ZoneId.systemDefault()).plusDays(1));
     }
 
     /**
@@ -458,7 +456,7 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static Matcher<LocalDateTime> sameDayOfWeek(final LocalDateTime date) {
+    public static DateMatcher<LocalDateTime> sameDayOfWeek(final LocalDateTime date) {
         return isDayOfWeek(DayOfWeek.from(date));
     }
 
@@ -471,8 +469,11 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isMonday());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isDayOfWeek(final DayOfWeek... dayOfWeek) {
-        return new IsDayOfWeek<LocalDateTime>(asList(dayOfWeek), t -> t);
+    public static DateMatcher<LocalDateTime> isDayOfWeek(final DayOfWeek dayOfWeek) {
+        return new IsDayOfWeek<>(
+            new FieldLocalDateTimeWrapper(dayOfWeek.getValue(), ChronoField.DAY_OF_WEEK),
+            (d, z) -> ZonedDateTime.of(d, z).getDayOfWeek().getValue()
+        );
     }
 
     /**
@@ -484,7 +485,23 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isMonday());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isMonday() {
+    public static DateMatcher<LocalDateTime> isDayOfWeek(final DayOfWeek... daysOfWeek) {
+        return new AnyOf<>(
+            Stream.of(daysOfWeek).map(LocalDateTimeMatchers::isDayOfWeek),
+            (d, z) -> "the date is on a " + d.atZone(z).getDayOfWeek().name().toLowerCase()
+        );
+    }
+
+    /**
+     * Creates a matcher that matches when the examined date is on a monday
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, isMonday());
+     * </pre>
+     */
+    public static DateMatcher<LocalDateTime> isMonday() {
         return isDayOfWeek(MONDAY);
     }
 
@@ -497,7 +514,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isTuesday());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isTuesday() {
+    public static DateMatcher<LocalDateTime> isTuesday() {
         return isDayOfWeek(TUESDAY);
     }
 
@@ -510,7 +527,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isWednesday());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isWednesday() {
+    public static DateMatcher<LocalDateTime> isWednesday() {
         return isDayOfWeek(WEDNESDAY);
     }
 
@@ -523,7 +540,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isThursday());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isThursday() {
+    public static DateMatcher<LocalDateTime> isThursday() {
         return isDayOfWeek(THURSDAY);
     }
 
@@ -536,7 +553,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isFriday());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isFriday() {
+    public static DateMatcher<LocalDateTime> isFriday() {
         return isDayOfWeek(FRIDAY);
     }
 
@@ -549,7 +566,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isSaturday());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isSaturday() {
+    public static DateMatcher<LocalDateTime> isSaturday() {
         return isDayOfWeek(SATURDAY);
     }
 
@@ -562,7 +579,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isSunday());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isSunday() {
+    public static DateMatcher<LocalDateTime> isSunday() {
         return isDayOfWeek(SUNDAY);
     }
 
@@ -575,7 +592,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isWeekday());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isWeekday() {
+    public static DateMatcher<LocalDateTime> isWeekday() {
         return isDayOfWeek(MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY);
     }
 
@@ -588,7 +605,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isWeekend());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isWeekend() {
+    public static DateMatcher<LocalDateTime> isWeekend() {
         return isDayOfWeek(SATURDAY, SUNDAY);
     }
 
@@ -601,10 +618,13 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isFirstDayOfMonth());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isFirstDayOfMonth() {
-        return new IsMinimum<LocalDateTime>(ChronoField.DAY_OF_MONTH, t -> t,
-                new DatePartFormatter(),
-                () -> "the date is the first day of the month");
+    public static DateMatcher<LocalDateTime> isFirstDayOfMonth() {
+        return new IsMinimum<>(
+            ChronoField.DAY_OF_MONTH,
+            (d, z) -> d.atZone(z).get(ChronoField.DAY_OF_MONTH),
+            (d, z) -> ChronoField.DAY_OF_MONTH.rangeRefinedBy(d.atZone(z)),
+            new DatePartFormatter(),
+            () -> "the date is the first day of the month");
     }
 
     /**
@@ -619,8 +639,13 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param field the temporal field to check
      */
-    public static Matcher<LocalDateTime> isMinimum(final ChronoField field) {
-        return new IsMinimum<LocalDateTime>(field, t -> t, new DatePartFormatter());
+    public static DateMatcher<LocalDateTime> isMinimum(final ChronoField field) {
+        return new IsMinimum<>(
+            field,
+            (d, z) -> d.atZone(z).get(field),
+            (d, z) -> field.rangeRefinedBy(d.atZone(z)),
+            new DatePartFormatter()
+        );
     }
 
     /**
@@ -632,10 +657,13 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isFirstDayOfMonth());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isLastDayOfMonth() {
-        return new IsMaximum<LocalDateTime>(ChronoField.DAY_OF_MONTH, t -> t,
-                new DatePartFormatter(),
-                () -> "the date is the last day of the month");
+    public static DateMatcher<LocalDateTime> isLastDayOfMonth() {
+        return new IsMaximum<>(
+            ChronoField.DAY_OF_MONTH,
+            (d, z) -> d.atZone(z).get(ChronoField.DAY_OF_MONTH),
+            (d, z) -> ChronoField.DAY_OF_MONTH.rangeRefinedBy(d.atZone(z)),
+            new DatePartFormatter(),
+            () -> "the date is the last day of the month");
     }
 
     /**
@@ -650,8 +678,13 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param field the temporal field to check
      */
-    public static Matcher<LocalDateTime> isMaximum(final ChronoField field) {
-        return new IsMaximum<LocalDateTime>(field, t -> t, new DatePartFormatter());
+    public static DateMatcher<LocalDateTime> isMaximum(final ChronoField field) {
+        return new IsMaximum<>(
+            field,
+            (d, z) -> d.atZone(z).get(field),
+            (d, z) -> field.rangeRefinedBy(d.atZone(z)),
+            new DatePartFormatter()
+        );
     }
 
     /**
@@ -663,8 +696,11 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isMonth(Month.AUGUST));
      * </pre>
      */
-    public static Matcher<LocalDateTime> isMonth(final Month month) {
-        return new IsMonth<LocalDateTime>(month, t -> t);
+    public static DateMatcher<LocalDateTime> isMonth(final Month month) {
+        return new IsMonth<>(
+            new FieldLocalDateTimeWrapper(month.getValue(), ChronoField.MONTH_OF_YEAR),
+            (d, z) -> ZonedDateTime.of(d, z).getMonthValue()
+        );
     }
 
     /**
@@ -676,7 +712,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isJanuary());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isJanuary() {
+    public static DateMatcher<LocalDateTime> isJanuary() {
         return isMonth(JANUARY);
     }
 
@@ -689,7 +725,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isFebruary());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isFebruary() {
+    public static DateMatcher<LocalDateTime> isFebruary() {
         return isMonth(FEBRUARY);
     }
 
@@ -702,7 +738,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isMarch());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isMarch() {
+    public static DateMatcher<LocalDateTime> isMarch() {
         return isMonth(MARCH);
     }
 
@@ -715,7 +751,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isApril());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isApril() {
+    public static DateMatcher<LocalDateTime> isApril() {
         return isMonth(APRIL);
     }
 
@@ -728,7 +764,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isMay());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isMay() {
+    public static DateMatcher<LocalDateTime> isMay() {
         return isMonth(MAY);
     }
 
@@ -741,7 +777,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isJune());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isJune() {
+    public static DateMatcher<LocalDateTime> isJune() {
         return isMonth(JUNE);
     }
 
@@ -754,7 +790,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isJuly());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isJuly() {
+    public static DateMatcher<LocalDateTime> isJuly() {
         return isMonth(JULY);
     }
 
@@ -767,7 +803,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isAugust());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isAugust() {
+    public static DateMatcher<LocalDateTime> isAugust() {
         return isMonth(AUGUST);
     }
 
@@ -780,7 +816,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isSeptember());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isSeptember() {
+    public static DateMatcher<LocalDateTime> isSeptember() {
         return isMonth(SEPTEMBER);
     }
 
@@ -793,7 +829,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isOctober());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isOctober() {
+    public static DateMatcher<LocalDateTime> isOctober() {
         return isMonth(OCTOBER);
     }
 
@@ -806,7 +842,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isNovember());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isNovember() {
+    public static DateMatcher<LocalDateTime> isNovember() {
         return isMonth(NOVEMBER);
     }
 
@@ -819,7 +855,7 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isDecember());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isDecember() {
+    public static DateMatcher<LocalDateTime> isDecember() {
         return isMonth(DECEMBER);
     }
 
@@ -832,8 +868,8 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isLeapYear());
      * </pre>
      */
-    public static Matcher<LocalDateTime> isLeapYear() {
-        return new IsLeapYear<LocalDateTime>(t -> t, new LocalDateTimeFormatter());
+    public static DateMatcher<LocalDateTime> isLeapYear() {
+        return new IsLeapYear<>((d, z) -> d, new LocalDateTimeFormatter());
     }
 
     /**
@@ -847,8 +883,11 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param hour the hour of the day (0-23)
      */
-    public static Matcher<LocalDateTime> isHour(final int hour) {
-        return new IsHour<LocalDateTime>(hour, t -> t);
+    public static DateMatcher<LocalDateTime> isHour(final int hour) {
+        return new IsHour<>(
+            new FieldLocalDateTimeWrapper(hour, ChronoField.HOUR_OF_DAY),
+            (d, z) -> ZonedDateTime.of(d, z).getHour()
+        );
     }
 
     /**
@@ -862,8 +901,11 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static Matcher<LocalDateTime> sameHourOfDay(final LocalDateTime date) {
-        return isHour(date.getHour());
+    public static DateMatcher<LocalDateTime> sameHourOfDay(final LocalDateTime date) {
+        return new IsHour<>(
+            new FieldLocalDateTimeWrapper(date, ChronoField.HOUR_OF_DAY),
+            (d, z) -> ZonedDateTime.of(d, z).getHour()
+        );
     }
 
     /**
@@ -875,10 +917,13 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isMinute(12));
      * </pre>
      *
-     * @param Minute the minute of the day (0-59)
+     * @param minute the minute of the day (0-59)
      */
-    public static Matcher<LocalDateTime> isMinute(final int minute) {
-        return new IsMinute<LocalDateTime>(minute, t -> t);
+    public static DateMatcher<LocalDateTime> isMinute(final int minute) {
+        return new IsMinute<>(
+            new FieldLocalDateTimeWrapper(minute, ChronoField.MINUTE_OF_HOUR),
+            (d, z) -> ZonedDateTime.of(d, z).getMinute()
+        );
     }
 
     /**
@@ -892,8 +937,11 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static Matcher<LocalDateTime> sameMinuteOfHour(final LocalDateTime date) {
-        return isMinute(date.getMinute());
+    public static DateMatcher<LocalDateTime> sameMinuteOfHour(final LocalDateTime date) {
+        return new IsMinute<>(
+            new FieldLocalDateTimeWrapper(date, ChronoField.MINUTE_OF_HOUR),
+            (d, z) -> ZonedDateTime.of(d, z).getMinute()
+        );
     }
 
     /**
@@ -905,10 +953,13 @@ public abstract class LocalDateTimeMatchers {
      * assertThat(myDate, isSecond(12));
      * </pre>
      *
-     * @param Second the second of the day (0-59)
+     * @param second the second of the day (0-59)
      */
-    public static Matcher<LocalDateTime> isSecond(final int Second) {
-        return new IsSecond<LocalDateTime>(Second, t -> t);
+    public static DateMatcher<LocalDateTime> isSecond(final int second) {
+        return new IsSecond<>(
+            new FieldLocalDateTimeWrapper(second, ChronoField.SECOND_OF_MINUTE),
+            (d, z) -> ZonedDateTime.of(d, z).getSecond()
+        );
     }
 
     /**
@@ -922,7 +973,10 @@ public abstract class LocalDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static Matcher<LocalDateTime> sameSecondOfMinute(final LocalDateTime date) {
-        return isSecond(date.getSecond());
+    public static DateMatcher<LocalDateTime> sameSecondOfMinute(final LocalDateTime date) {
+        return new IsSecond<>(
+            new FieldLocalDateTimeWrapper(date, ChronoField.SECOND_OF_MINUTE),
+            (d, z) -> ZonedDateTime.of(d, z).getSecond()
+        );
     }
 }

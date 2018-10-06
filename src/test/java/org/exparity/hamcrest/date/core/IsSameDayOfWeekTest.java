@@ -14,22 +14,22 @@ import org.testng.annotations.Test;
  */
 public class IsSameDayOfWeekTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is on a [A-Za-z]*\\s*but: the date is on a [A-Za-z]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date is on a \\p{IsAlphabetic}+?\\s     but: the date is on a \\p{IsAlphabetic}+";
 
 	// Date Matchers
 	@Test
 	public void isDateSameDayOfWeek() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameDayOfWeek(AUG_04_2015_NOON_AS_DATE));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameDayOfWeek(AUG_04_2015_NOON_UTC_AS_DATE));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotSameDayOfWeek() {
-		assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameDayOfWeek(AUG_01_2015_NOON_AS_DATE));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameDayOfWeek(AUG_01_2015_NOON_UTC_AS_DATE));
 	}
 
 	@Test
 	public void isDateSameDayOfWeekDifferentMonth() {
-		assertThat(AUG_07_2015_NOON_AS_DATE, DateMatchers.sameDayOfWeek(SEP_04_2015_NOON_AS_DATE));
+		assertThat(AUG_07_2015_NOON_UTC_AS_DATE, DateMatchers.sameDayOfWeek(SEP_04_2015_NOON_UTC_AS_DATE));
 	}
 
 	// LocalDate Matchers

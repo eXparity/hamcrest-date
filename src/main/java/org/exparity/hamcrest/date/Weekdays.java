@@ -25,7 +25,7 @@ public enum Weekdays {
 	private final int calendarDay;
 	private final DayOfWeek dayOfWeek;
 
-	private Weekdays(final int calendarDay, final DayOfWeek dayOfWeek) {
+	Weekdays(final int calendarDay, final DayOfWeek dayOfWeek) {
 		this.calendarDay = calendarDay;
 		this.dayOfWeek = dayOfWeek;
 	}

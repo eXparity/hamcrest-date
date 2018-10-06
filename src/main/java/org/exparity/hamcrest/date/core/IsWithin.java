@@ -1,9 +1,9 @@
 package org.exparity.hamcrest.date.core;
 
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 
 import org.hamcrest.Description;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * A matcher that tests that the examined date is within a defined period of the
@@ -11,7 +11,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  *
  * @author Stewart Bissett
  */
-public class IsWithin<T> extends TypeSafeDiagnosingMatcher<T> {
+public class IsWithin<T> extends DateMatcher<T> {
 
 	private final long period;
 	private final ChronoUnit unit;
@@ -48,6 +48,11 @@ public class IsWithin<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	private String describeUnit() {
 		return this.unit.toString().toLowerCase();
+	}
+
+	@Override
+	public DateMatcher<T> atZone(ZoneId zone) {
+		return new IsWithin<>(period, unit, expected.withZone(zone), describer);
 	}
 
 }

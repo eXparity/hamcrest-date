@@ -1,12 +1,8 @@
 package org.exparity.hamcrest.date.core;
 
-import java.time.Month;
-import java.time.format.TextStyle;
-import java.time.temporal.ChronoField;
-import java.util.Locale;
+import java.time.ZoneId;
 
 import org.hamcrest.Description;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * A matcher that tests that the examined date is on the same month of the year
@@ -14,21 +10,26 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  *
  * @author Stewart Bissett
  */
-public class IsMonth<T> extends TypeSafeDiagnosingMatcher<T> {
+public class IsMonth<T> extends DateMatcher<T> {
 
-	private final Month expectedMonth;
-	private final TemporalAdapter<T> accessor;
+	private final TemporalFieldWrapper<T> expected;
+	private final TemporalFieldAdapter<T> accessor;
+	private final ZoneId zone;
 
-	public IsMonth(final Month month, final TemporalAdapter<T> accessor) {
-		this.expectedMonth = month;
+	private IsMonth(final TemporalFieldWrapper<T> expected, final TemporalFieldAdapter<T> accessor, final ZoneId zone) {
+		this.expected = expected;
 		this.accessor = accessor;
+		this.zone = zone;
+	}
+
+	public IsMonth(final TemporalFieldWrapper<T> expected, final TemporalFieldAdapter<T> accessor) {
+		this(expected, accessor, ZoneId.systemDefault());
 	}
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
-		Month actualMonth = Month.of(this.accessor.asTemporal(actual).get(ChronoField.MONTH_OF_YEAR));
-		if (!this.expectedMonth.equals(actualMonth)) {
-			mismatchDescription.appendText("the date is in " + describeMonth(actualMonth));
+		if (!this.expected.isSame(actual)) {
+			mismatchDescription.appendText("the date has the month " + accessor.asTemporalField(actual, zone));
 			return false;
 		} else {
 			return true;
@@ -37,11 +38,12 @@ public class IsMonth<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	@Override
 	public void describeTo(final Description description) {
-		description.appendText("the date is in " + describeMonth(this.expectedMonth));
+		description.appendText("the date has the month " + expected.unwrap());
 	}
 
-	private String describeMonth(final Month m) {
-		return m.getDisplayName(TextStyle.FULL, Locale.getDefault());
+	@Override
+	public DateMatcher<T> atZone(ZoneId zone) {
+		return new IsMonth<>(expected.withZone(zone), accessor);
 	}
 
 }

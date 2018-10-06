@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
 @SuppressWarnings("deprecation")
 public class IsSameMonthOfYearTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is in [A-Za-z]*\\s*but: the date is in [A-Za-z]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date has the month [0-9]+?\\s     but: the date has the month [0-9]+?";
 
 	// Date Matchers
 	@Test

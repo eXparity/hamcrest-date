@@ -1,6 +1,7 @@
 package org.exparity.hamcrest.date.core.wrapper;
 
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 
 import org.exparity.hamcrest.date.core.TemporalWrapper;
@@ -16,11 +17,11 @@ public class LocalTimeWrapper implements TemporalWrapper<LocalTime> {
 	private final LocalTime wrapped;
 
 	public LocalTimeWrapper(final LocalTime date) {
-		wrapped = date;
+		this.wrapped = date;
 	}
 
 	public LocalTimeWrapper(final int hour, final int minute, final int second) {
-		wrapped = LocalTime.of(hour, minute, second);
+		this(LocalTime.of(hour, minute, second));
 	}
 
 	@Override
@@ -44,13 +45,13 @@ public class LocalTimeWrapper implements TemporalWrapper<LocalTime> {
 	}
 
 	@Override
-	public boolean isSameDay(final LocalTime other) {
-		throw new UnsupportedOperationException("IsSameDay comparison is invalid on LocalTime");
+	public LocalTime unwrap() {
+		return wrapped;
 	}
 
 	@Override
-	public LocalTime unwrap() {
-		return wrapped;
+	public TemporalWrapper<LocalTime> withZone(final ZoneId zone) {
+		return this;
 	}
 
 }

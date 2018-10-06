@@ -1,14 +1,15 @@
 package org.exparity.hamcrest.date.core;
 
+import java.time.ZoneId;
+
 import org.hamcrest.Description;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * A matcher that tests that the examined date is before the reference date
  *
  * @author Stewart Bissett
  */
-public class IsBefore<T> extends TypeSafeDiagnosingMatcher<T> {
+public class IsBefore<T> extends DateMatcher<T> {
 
 	private final TemporalWrapper<T> expected;
 	private final TemporalFormatter<T> describer;
@@ -32,4 +33,10 @@ public class IsBefore<T> extends TypeSafeDiagnosingMatcher<T> {
 	public void describeTo(final Description description) {
 		description.appendText("the date is before " + this.describer.describe(this.expected.unwrap()));
 	}
+
+	@Override
+	public DateMatcher<T> atZone(ZoneId zone) {
+		return new IsBefore<>(expected.withZone(zone), describer);
+	}
+
 }

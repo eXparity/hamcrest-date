@@ -18,17 +18,17 @@ import org.testng.annotations.Test;
  */
 public class IsMinimumTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is the minimum value for [A-Za-z ]*\\s*but: date is the [0-9]* [A-Za-z ]* instead of [0-9]* [A-Za-z ]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date is the minimum value for [\\w ]+?\\s     but: date is the [0-9]+? [\\w ]+? instead of [0-9]+? [\\w ]+?";
 
     // Date Matchers
     @Test
     public void isDateFirstDayOfMonth() {
-        assertThat(AUG_01_2015_NOON_AS_DATE, DateMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
+        assertThat(AUG_01_2015_NOON_UTC_AS_DATE, DateMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
     }
 
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
     public void isDateNotFirstDayOfMonth() {
-        assertThat(AUG_31_2015_NOON_AS_DATE, DateMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
+        assertThat(AUG_31_2015_NOON_UTC_AS_DATE, DateMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
     }
 
     // LocalDate Matchers

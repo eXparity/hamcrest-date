@@ -14,17 +14,17 @@ import org.testng.annotations.Test;
  */
 public class IsFirstDayOfMonthTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date is the first day of the month\\s*but: date is the [0-9]* [A-Za-z ]* instead of [0-9]* [A-Za-z ]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date is the first day of the month\\s     but: date is the [0-9]+? day of month instead of [0-9]+? day of month";
 
 	// Date Matchers
 	@Test
 	public void isDateFirstDayOfMonth() {
-		assertThat(AUG_01_2015_NOON_AS_DATE, DateMatchers.isFirstDayOfMonth());
+		assertThat(AUG_01_2015_NOON_UTC_AS_DATE, DateMatchers.isFirstDayOfMonth());
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotFirstDayOfMonth() {
-		assertThat(AUG_31_2015_NOON_AS_DATE, DateMatchers.isFirstDayOfMonth());
+		assertThat(AUG_31_2015_NOON_UTC_AS_DATE, DateMatchers.isFirstDayOfMonth());
 	}
 
 	// LocalDate Matchers

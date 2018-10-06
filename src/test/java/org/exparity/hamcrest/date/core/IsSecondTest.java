@@ -1,7 +1,7 @@
 package org.exparity.hamcrest.date.core;
 
 import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON;
-import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_UTC_AS_DATE;
 import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_UTC;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -14,34 +14,34 @@ import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
 
 /**
- * Unit Tests for the {@link IsSameSecondOfDay} class
+ * Unit Tests for the {@link IsSecond} class
  *
  * @author Stewart Bissett
  */
 @SuppressWarnings("deprecation")
 public class IsSecondTest {
 
-    private static final String ASSERTION_PATTERN = "\\s*Expected: the date has the second [0-9]*\\s*but: the date has the second [0-9]*";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date has the second [0-9]+?\\s     but: the date has the second [0-9]+";
 
     // Date Matchers
     @Test
     public void isDateSecond() {
-        assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isSecond(0));
+        assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.isSecond(0));
     }
 
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
     public void isDateNotSecond() {
-        assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.isSecond(1));
+        assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.isSecond(1));
     }
 
     @Test
     public void isDateSameSecond() {
-        assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameSecond(0));
+        assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameSecond(0));
     }
 
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
     public void isDateNotSameSecond() {
-        assertThat(AUG_04_2015_NOON_AS_DATE, DateMatchers.sameSecond(1));
+        assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameSecond(1));
     }
 
     // LocalDateTime Matchers

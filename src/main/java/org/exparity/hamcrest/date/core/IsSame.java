@@ -1,14 +1,15 @@
 package org.exparity.hamcrest.date.core;
 
+import java.time.ZoneId;
+
 import org.hamcrest.Description;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * A matcher that tests that the examined date is the same as the reference date
  *
  * @author Stewart Bissett
  */
-public class IsSame<T> extends TypeSafeDiagnosingMatcher<T> {
+public class IsSame<T> extends DateMatcher<T> {
 
 	private final TemporalWrapper<T> expected;
 	private final TemporalFormatter<T> describer;
@@ -32,4 +33,10 @@ public class IsSame<T> extends TypeSafeDiagnosingMatcher<T> {
 	public void describeTo(final Description description) {
 		description.appendText("the same date as " + this.describer.describe(this.expected.unwrap()));
 	}
+
+	@Override
+	public DateMatcher<T> atZone(ZoneId zone) {
+		return new IsSame<>(expected.withZone(zone), describer);
+	}
+
 }

@@ -12,11 +12,11 @@ public interface TemporalFormatter<T> {
 	 * @param temporal the temporal value to describe
 	 * @return a pretty description of the temporal value as a date
 	 */
-	public String describe(T temporal);
+	String describe(T temporal);
 
 	/**
 	 * @param temporal the temporal value to describe
 	 * @return a pretty description of the date portion of the temporal
 	 */
-	public String describeDate(T unwrap);
+	String describeDate(T temporal);
 }

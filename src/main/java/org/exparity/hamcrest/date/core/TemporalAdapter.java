@@ -1,8 +1,6 @@
-/**
- *
- */
 package org.exparity.hamcrest.date.core;
 
+import java.time.ZoneId;
 import java.time.temporal.Temporal;
 
 /**
@@ -16,7 +14,8 @@ public interface TemporalAdapter<T> {
 	/**
 	 * Return the value as a {@link Temporal}
 	 * @param source the source value to convert
+	 * @param zone the reference time zone
 	 * @return the value of the field
 	 */
-	public Temporal asTemporal(final T source);
+	Temporal asTemporal(final T source, final ZoneId zone);
 }

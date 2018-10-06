@@ -1,7 +1,8 @@
 package org.exparity.hamcrest.date.core;
 
+import java.time.ZoneId;
+
 import org.hamcrest.Description;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * A matcher that tests that the examined date is the same date as the reference
@@ -9,7 +10,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  *
  * @author Stewart Bissett
  */
-public class IsSameDay<T> extends TypeSafeDiagnosingMatcher<T> {
+public class IsSameDay<T> extends DateMatcher<T> {
 
 	private final TemporalWrapper<T> expected;
 	private final TemporalFormatter<T> describer;
@@ -21,7 +22,7 @@ public class IsSameDay<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
-		if (!this.expected.isSameDay(actual)) {
+		if (!this.expected.isSame(actual)) {
 			mismatchDesc.appendText("the day is " + this.describer.describeDate(actual));
 			return false;
 		} else {
@@ -33,4 +34,10 @@ public class IsSameDay<T> extends TypeSafeDiagnosingMatcher<T> {
 	public void describeTo(final Description description) {
 		description.appendText("the same day as " + this.describer.describeDate(this.expected.unwrap()));
 	}
+
+	@Override
+	public DateMatcher<T> atZone(ZoneId zone) {
+		return new IsSameDay<>(expected.withZone(zone), describer);
+	}
+
 }
