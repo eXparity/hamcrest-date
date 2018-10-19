@@ -3,14 +3,30 @@ package org.exparity.hamcrest.date.testutils;
 
 import static java.time.LocalTime.MIDNIGHT;
 import static java.time.LocalTime.NOON;
-import static org.exparity.dates.en.FluentDateTime.*;
-import static org.exparity.hamcrest.date.testutils.TimeZones.*;
+import static org.exparity.dates.en.FluentDateTime.APR;
+import static org.exparity.dates.en.FluentDateTime.AUG;
+import static org.exparity.dates.en.FluentDateTime.DEC;
+import static org.exparity.dates.en.FluentDateTime.FEB;
+import static org.exparity.dates.en.FluentDateTime.JAN;
+import static org.exparity.dates.en.FluentDateTime.JUL;
+import static org.exparity.dates.en.FluentDateTime.JUN;
+import static org.exparity.dates.en.FluentDateTime.MAR;
+import static org.exparity.dates.en.FluentDateTime.MAY;
+import static org.exparity.dates.en.FluentDateTime.NOV;
+import static org.exparity.dates.en.FluentDateTime.OCT;
+import static org.exparity.dates.en.FluentDateTime.SEP;
+import static org.exparity.hamcrest.date.testutils.TimeZones.CET_AS_TZ;
+import static org.exparity.hamcrest.date.testutils.TimeZones.EST_AS_TZ;
+import static org.exparity.hamcrest.date.testutils.TimeZones.GMT_AS_TZ;
+import static org.exparity.hamcrest.date.testutils.TimeZones.PST_AS_TZ;
 
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.TimeZone;
-
-import org.exparity.dates.en.FluentDate;
 
 /**
  * Static repository of dates used for testing

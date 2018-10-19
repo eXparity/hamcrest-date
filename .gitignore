@@ -1,9 +1,11 @@
 *.class
 
 # Package Files #
+.idea/
 *.jar
 *.war
 *.ear
+*.iml
 /.settings
 /target
 /test-output

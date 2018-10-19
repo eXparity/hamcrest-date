@@ -1,11 +1,7 @@
 package org.exparity.hamcrest.date.core;
 
-import java.time.ZoneId;
-import java.time.temporal.ChronoField;
-import java.time.temporal.ValueRange;
 import java.util.function.Supplier;
 
-import org.exparity.hamcrest.date.core.format.DatePartFormatter;
 import org.hamcrest.Description;
 
 /**
@@ -13,21 +9,21 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsMaximum<T> extends DateMatcher<T> {
+public class IsMaximum<T, U, Z> extends ZonedTemporalMatcher<T, Z> {
 
-    private final ChronoField datePart;
-    private final TemporalFieldAdapter<T> adapter;
-    private final TemporalFieldRangeAdapter<T> rangeAdapter;
-    private final DatePartFormatter formatter;
+    private final U datePart;
+    private final TemporalFieldAdapter<T, Z> adapter;
+    private final TemporalFieldRangeAdapter<T, Z> rangeAdapter;
+    private final TemporalUnitFormatter<U> formatter;
     private final Supplier<String> descriptionSupplier;
-    private final ZoneId zone;
+    private final Z zone;
 
-    private IsMaximum(final ChronoField datePart,
-                      final TemporalFieldAdapter<T> adapter,
-                      final TemporalFieldRangeAdapter<T> rangeAdapter,
-                      final DatePartFormatter formatter,
+    public IsMaximum(final U datePart,
+                      final TemporalFieldAdapter<T, Z> adapter,
+                      final TemporalFieldRangeAdapter<T, Z> rangeAdapter,
+                      final TemporalUnitFormatter<U> formatter,
                       final Supplier<String> descriptionSupplier,
-                      final ZoneId zone) {
+                      final Z zone) {
         this.datePart = datePart;
         this.adapter = adapter;
         this.rangeAdapter = rangeAdapter;
@@ -36,36 +32,24 @@ public class IsMaximum<T> extends DateMatcher<T> {
         this.zone = zone;
     }
 
-    public IsMaximum(final ChronoField datePart,
-                     final TemporalFieldAdapter<T> adapter,
-                     final TemporalFieldRangeAdapter<T> rangeAdapter,
-                     final DatePartFormatter formatter,
-                     final Supplier<String> descriptionSupplier) {
-        this.datePart = datePart;
-        this.adapter = adapter;
-        this.rangeAdapter = rangeAdapter;
-        this.formatter = formatter;
-        this.descriptionSupplier = descriptionSupplier;
-        this.zone = ZoneId.systemDefault();
-    }
-
-    public IsMaximum(final ChronoField datePart,
-                     final TemporalFieldAdapter<T> adapter,
-                     final TemporalFieldRangeAdapter<T> rangeAdapter,
-                     final DatePartFormatter formatter) {
-        this(datePart, adapter, rangeAdapter, formatter, () -> "the date is the maximum value for " + formatter.describe(datePart));
+    public IsMaximum(final U datePart,
+                     final TemporalFieldAdapter<T, Z> adapter,
+                     final TemporalFieldRangeAdapter<T, Z> rangeAdapter,
+                     final TemporalUnitFormatter<U> formatter,
+                     final Z zone) {
+        this(datePart, adapter, rangeAdapter, formatter, () -> "the date is the maximum value for " + formatter.describe(datePart), zone);
     }
 
     @Override
     protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
         long actualValue = this.adapter.asTemporalField(actual, zone);
-        ValueRange range = this.rangeAdapter.asTemporalFieldRange(actual, zone);
-        if (range.getMaximum() != actualValue) {
+        long maximumValue = this.rangeAdapter.getExtremum(actual, zone);
+        if (maximumValue != actualValue) {
             mismatchDesc.appendText("date is the " + actualValue
                     + " "
                     + this.formatter.describe(this.datePart)
                     + " instead of "
-                    + range.getMinimum()
+                    + maximumValue
                     + " "
                     + this.formatter.describe(this.datePart));
             return false;
@@ -80,14 +64,14 @@ public class IsMaximum<T> extends DateMatcher<T> {
     }
 
     @Override
-   	public DateMatcher<T> atZone(ZoneId zone) {
+   	public ZonedTemporalMatcher<T, Z> atZone(Z zone) {
    		return new IsMaximum<>(
    		    datePart,
-          adapter,
-          rangeAdapter,
-          formatter,
-          descriptionSupplier,
-          zone
+            adapter,
+            rangeAdapter,
+            formatter,
+            descriptionSupplier,
+            zone
       );
    	}
 

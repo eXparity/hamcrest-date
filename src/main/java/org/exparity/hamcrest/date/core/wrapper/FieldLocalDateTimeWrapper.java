@@ -1,9 +1,8 @@
 package org.exparity.hamcrest.date.core.wrapper;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.temporal.ChronoField;
-import java.util.function.ToIntFunction;
+import java.util.function.IntSupplier;
 
 import org.exparity.hamcrest.date.core.TemporalFieldWrapper;
 
@@ -12,53 +11,47 @@ import org.exparity.hamcrest.date.core.TemporalFieldWrapper;
  *
  * @author Thomas Naskali
  */
-public class FieldLocalDateTimeWrapper implements TemporalFieldWrapper<LocalDateTime> {
+public class FieldLocalDateTimeWrapper implements TemporalFieldWrapper<LocalDateTime, Void> {
 
-	private final ToIntFunction<ZoneId> wrapped;
+	private final IntSupplier wrapped;
 	private final ChronoField field;
-	private final ZoneId zone;
 
-	private FieldLocalDateTimeWrapper(final ToIntFunction<ZoneId> wrapped, final ChronoField field, final ZoneId zone) {
+ 	public FieldLocalDateTimeWrapper(final IntSupplier wrapped, final ChronoField field) {
 		this.wrapped = wrapped;
 		this.field = field;
-		this.zone = zone;
 	}
 
 	public FieldLocalDateTimeWrapper(final int value, final ChronoField field) {
-		this.wrapped = (ignored) -> value;
-		this.field = field;
-		this.zone = ZoneId.systemDefault();
+		this(() -> value, field);
 	}
 
 	public FieldLocalDateTimeWrapper(final LocalDateTime date, final ChronoField field) {
-		this.wrapped = z -> date.atZone(z).get(field);
-		this.field = field;
-		this.zone = ZoneId.systemDefault();
+		this(() -> date.get(field), field);
 	}
 
 	@Override
 	public boolean isAfter(final LocalDateTime other) {
-		return wrapped.applyAsInt(zone) > other.atZone(zone).get(field);
+		return wrapped.getAsInt() > other.get(field);
 	}
 
 	@Override
 	public boolean isBefore(final LocalDateTime other) {
-		return wrapped.applyAsInt(zone) < other.atZone(zone).get(field);
+		return wrapped.getAsInt() < other.get(field);
 	}
 
 	@Override
 	public boolean isSame(final LocalDateTime other) {
-		return wrapped.applyAsInt(zone) == other.atZone(zone).get(field);
+		return wrapped.getAsInt() == other.get(field);
 	}
 
 	@Override
 	public int unwrap() {
-		return wrapped.applyAsInt(zone);
+		return wrapped.getAsInt();
 	}
 
 	@Override
-	public TemporalFieldWrapper<LocalDateTime> withZone(final ZoneId zone) {
-		return new FieldLocalDateTimeWrapper(wrapped, field, zone);
+	public TemporalFieldWrapper<LocalDateTime, Void> withZone(final Void ignored) {
+		return this;
 	}
 
 }

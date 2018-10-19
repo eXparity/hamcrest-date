@@ -12,53 +12,60 @@ import org.exparity.hamcrest.date.core.TemporalFieldWrapper;
  *
  * @author Thomas Naskali
  */
-public class FieldDateWrapper implements TemporalFieldWrapper<Date> {
+public class FieldDateWrapper implements TemporalFieldWrapper<Date, ZoneId> {
 
-  private final ToIntFunction<ZoneId> wrapped;
-  private final ChronoField field;
-  private final ZoneId zone;
+	private final ToIntFunction<ZoneId> wrapped;
+	private final ChronoField field;
+	private final ZoneId zone;
 
-  private FieldDateWrapper(final ToIntFunction<ZoneId> wrapped, final ChronoField field, final ZoneId zone) {
-    this.wrapped = wrapped;
-    this.field = field;
-    this.zone = zone;
-  }
+	private FieldDateWrapper(final ToIntFunction<ZoneId> wrapped, final ChronoField field, final ZoneId zone) {
+ 		this.wrapped = wrapped;
+ 		this.field = field;
+ 		this.zone = zone;
+ 	}
 
-  public FieldDateWrapper(final int value, final ChronoField field) {
-    this.wrapped = (ignored) -> value;
-    this.field = field;
-    this.zone = ZoneId.systemDefault();
-  }
+	private FieldDateWrapper(final ToIntFunction<ZoneId> wrapped, final ChronoField field) {
+		this(wrapped, field, null);
+	}
 
-  public FieldDateWrapper(Date date, ChronoField field) {
-    this.wrapped = z -> date.toInstant().atZone(z).get(field);
-    this.field = field;
-    this.zone = ZoneId.systemDefault();
-  }
+	public FieldDateWrapper(final int value, final ChronoField field) {
+		this(ignored -> value, field);
+	}
 
-  @Override
-  public boolean isAfter(Date other) {
-    return wrapped.applyAsInt(zone) > other.toInstant().atZone(zone).get(field);
-  }
+	public FieldDateWrapper(Date date, ChronoField field) {
+		this(z -> date.toInstant().atZone(z).get(field), field);
+	}
 
-  @Override
-  public boolean isBefore(Date other) {
-    return wrapped.applyAsInt(zone) < other.toInstant().atZone(zone).get(field);
-  }
+ 	private ZoneId getReferenceZone() {
+ 		return zone != null ? zone : ZoneId.systemDefault();
+ 	}
 
-  @Override
-  public boolean isSame(Date other) {
-    return wrapped.applyAsInt(zone) == other.toInstant().atZone(zone).get(field);
-  }
+	@Override
+	public boolean isAfter(Date other) {
+		ZoneId referenceZone = getReferenceZone();
+		return wrapped.applyAsInt(referenceZone) > other.toInstant().atZone(referenceZone).get(field);
+	}
 
-  @Override
-  public int unwrap() {
-    return wrapped.applyAsInt(zone);
-  }
+	@Override
+	public boolean isBefore(Date other) {
+		ZoneId referenceZone = getReferenceZone();
+		return wrapped.applyAsInt(referenceZone) < other.toInstant().atZone(referenceZone).get(field);
+	}
 
-  @Override
-  public TemporalFieldWrapper<Date> withZone(ZoneId zone) {
-    return new FieldDateWrapper(wrapped, field, zone);
-  }
+	@Override
+	public boolean isSame(Date other) {
+		ZoneId referenceZone = getReferenceZone();
+		return wrapped.applyAsInt(referenceZone) == other.toInstant().atZone(referenceZone).get(field);
+	}
+
+	@Override
+	public int unwrap() {
+		return wrapped.applyAsInt(getReferenceZone());
+	}
+
+	@Override
+	public TemporalFieldWrapper<Date, ZoneId> withZone(ZoneId zone) {
+		return new FieldDateWrapper(wrapped, field, zone);
+	}
 
 }

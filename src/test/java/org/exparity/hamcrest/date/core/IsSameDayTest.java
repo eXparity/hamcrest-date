@@ -1,7 +1,27 @@
 package org.exparity.hamcrest.date.core;
 
 import static java.time.Month.AUGUST;
-import static org.exparity.hamcrest.date.testutils.Dates.*;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_03_2015;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_03_2015_NOON;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_03_2015_NOON_UTC;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_CET;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_EST;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_UTC;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_05_2015;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_05_2015_NOON;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_05_2015_NOON_UTC;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_01_2012_11AM_GMT_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_01_2012_11AM_PST_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_01_2012_MIDNIGHT_CET_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_01_2012_MIDNIGHT_GMT_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.JUN_01_2012_11AM_UTC_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.JUN_14_2012;
+import static org.exparity.hamcrest.date.testutils.Dates.JUN_15_2012;
+import static org.exparity.hamcrest.date.testutils.Dates.JUN_15_2012_11AM_UTC_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.JUN_15_2012_11PM_UTC_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.JUN_16_2012;
 import static org.exparity.hamcrest.date.testutils.ZoneIds.UTC;
 import static org.hamcrest.MatcherAssert.assertThat;
 

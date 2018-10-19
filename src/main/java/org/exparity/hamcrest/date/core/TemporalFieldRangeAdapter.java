@@ -1,22 +1,19 @@
 package org.exparity.hamcrest.date.core;
 
-import java.time.ZoneId;
-import java.time.temporal.ValueRange;
-
 /**
- * Adapter which can convert a value to a {@link ValueRange}
+ * Adapter which can convert a temporal value to an extremum
  *
  * @author Thomas Naskali
  */
 @FunctionalInterface
-public interface TemporalFieldRangeAdapter<T> {
+public interface TemporalFieldRangeAdapter<T, Z> {
 
 	/**
-	 * Return the value as a {@link ValueRange}
+	 * Return the extremum value for a temporal
 	 * @param source the source value to convert
 	 * @param zone the reference time zone
-	 * @return the value of the range
+	 * @return the extremum value for this temporal
 	 */
-	ValueRange asTemporalFieldRange(final T source, final ZoneId zone);
+	long getExtremum(final T source, final Z zone);
 
 }

@@ -1,14 +1,12 @@
 package org.exparity.hamcrest.date.core;
 
-import java.time.ZoneId;
-
 /**
  * Wrapper which wraps a temporal field so it can support the operations required
  * by the matchers
  *
  * @author Thomas Naskali
  */
-public interface TemporalFieldWrapper<T> {
+public interface TemporalFieldWrapper<T, Z> {
 
 	/**
 	 * @param other a temporal to test against
@@ -39,6 +37,6 @@ public interface TemporalFieldWrapper<T> {
 	 * @param zone a new reference time zone
 	 * @return a copy of the wrapper based on the new reference time zone
 	 */
-	TemporalFieldWrapper<T> withZone(ZoneId zone);
+	TemporalFieldWrapper<T, Z> withZone(Z zone);
 
 }

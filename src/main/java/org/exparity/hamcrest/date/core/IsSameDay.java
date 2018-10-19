@@ -1,7 +1,5 @@
 package org.exparity.hamcrest.date.core;
 
-import java.time.ZoneId;
-
 import org.hamcrest.Description;
 
 /**
@@ -10,12 +8,12 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsSameDay<T> extends DateMatcher<T> {
+public class IsSameDay<T, U, Z> extends ZonedTemporalMatcher<T, Z> {
 
-	private final TemporalWrapper<T> expected;
+	private final TemporalWrapper<T, U, Z> expected;
 	private final TemporalFormatter<T> describer;
 
-	public IsSameDay(final TemporalWrapper<T> expected, final TemporalFormatter<T> describer) {
+	public IsSameDay(final TemporalWrapper<T, U, Z> expected, final TemporalFormatter<T> describer) {
 		this.expected = expected;
 		this.describer = describer;
 	}
@@ -36,7 +34,7 @@ public class IsSameDay<T> extends DateMatcher<T> {
 	}
 
 	@Override
-	public DateMatcher<T> atZone(ZoneId zone) {
+	public ZonedTemporalMatcher<T, Z> atZone(Z zone) {
 		return new IsSameDay<>(expected.withZone(zone), describer);
 	}
 

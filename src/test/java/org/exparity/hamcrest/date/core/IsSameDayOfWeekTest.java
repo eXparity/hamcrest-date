@@ -1,6 +1,21 @@
 package org.exparity.hamcrest.date.core;
 
-import static org.exparity.hamcrest.date.testutils.Dates.*;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_01_2015_NOON;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_01_2015_NOON_UTC;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_01_2015_NOON_UTC_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_03_2015;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_UTC;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_UTC_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_07_2015;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_07_2015_NOON;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_07_2015_NOON_UTC;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_07_2015_NOON_UTC_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.SEP_04_2015;
+import static org.exparity.hamcrest.date.testutils.Dates.SEP_04_2015_NOON;
+import static org.exparity.hamcrest.date.testutils.Dates.SEP_04_2015_NOON_UTC;
+import static org.exparity.hamcrest.date.testutils.Dates.SEP_04_2015_NOON_UTC_AS_DATE;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.exparity.hamcrest.date.DateMatchers;

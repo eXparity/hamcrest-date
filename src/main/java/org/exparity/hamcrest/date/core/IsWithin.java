@@ -1,8 +1,5 @@
 package org.exparity.hamcrest.date.core;
 
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
-
 import org.hamcrest.Description;
 
 /**
@@ -11,14 +8,14 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsWithin<T> extends DateMatcher<T> {
+public class IsWithin<T, U, Z> extends ZonedTemporalMatcher<T, Z> {
 
 	private final long period;
-	private final ChronoUnit unit;
-	private final TemporalWrapper<T> expected;
+	private final U unit;
+	private final TemporalWrapper<T, U, Z> expected;
 	private final TemporalFormatter<T> describer;
 
-	public IsWithin(final long period, final ChronoUnit unit, final TemporalWrapper<T> expected, final TemporalFormatter<T> describer) {
+	public IsWithin(final long period, final U unit, final TemporalWrapper<T, U, Z> expected, final TemporalFormatter<T> describer) {
 		this.period = period;
 		this.unit = unit;
 		this.expected = expected;
@@ -51,7 +48,7 @@ public class IsWithin<T> extends DateMatcher<T> {
 	}
 
 	@Override
-	public DateMatcher<T> atZone(ZoneId zone) {
+	public ZonedTemporalMatcher<T, Z> atZone(Z zone) {
 		return new IsWithin<>(period, unit, expected.withZone(zone), describer);
 	}
 

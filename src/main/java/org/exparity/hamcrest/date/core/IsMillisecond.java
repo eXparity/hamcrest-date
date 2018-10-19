@@ -1,7 +1,5 @@
 package org.exparity.hamcrest.date.core;
 
-import java.time.ZoneId;
-
 import org.hamcrest.Description;
 
 /**
@@ -9,20 +7,16 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsMillisecond<T> extends DateMatcher<T> {
+public class IsMillisecond<T, Z> extends ZonedTemporalMatcher<T, Z> {
 
-	private final TemporalFieldWrapper<T> expected;
-	private final TemporalFieldAdapter<T> accessor;
-	private final ZoneId zone;
+	private final TemporalFieldWrapper<T, Z> expected;
+	private final TemporalFieldAdapter<T, Z> accessor;
+	private final Z zone;
 
-	private IsMillisecond(final TemporalFieldWrapper<T> expected, final TemporalFieldAdapter<T> accessor, final ZoneId zone) {
+	public IsMillisecond(final TemporalFieldWrapper<T, Z> expected, final TemporalFieldAdapter<T, Z> accessor, final Z zone) {
 		this.expected = expected;
 		this.accessor = accessor;
 		this.zone = zone;
-	}
-
-	public IsMillisecond(final TemporalFieldWrapper<T> expected, final TemporalFieldAdapter<T> accessor) {
-		this(expected, accessor, ZoneId.systemDefault());
 	}
 
 	@Override
@@ -41,8 +35,8 @@ public class IsMillisecond<T> extends DateMatcher<T> {
 	}
 
 	@Override
-	public DateMatcher<T> atZone(ZoneId zone) {
-		return new IsMillisecond<>(expected.withZone(zone), accessor);
+	public ZonedTemporalMatcher<T, Z> atZone(Z zone) {
+		return new IsMillisecond<>(expected.withZone(zone), accessor, zone);
 	}
 
 }

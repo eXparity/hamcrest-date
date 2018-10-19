@@ -1,12 +1,31 @@
 package org.exparity.hamcrest.date.core;
 
 import static java.time.Month.AUGUST;
-import static org.exparity.hamcrest.date.testutils.Dates.*;
+import static java.time.Month.JUNE;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_03_2015;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_01PM_UTC;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_1159;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_11AM_UTC;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_1201;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_CET;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_EST;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_UTC;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_05_2015;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_01_2012_11AM_GMT_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.JAN_01_2012_11AM_PST_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.JUN_14_2012;
+import static org.exparity.hamcrest.date.testutils.Dates.JUN_15_2012;
+import static org.exparity.hamcrest.date.testutils.Dates.JUN_15_2012_11AM_UTC_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.JUN_15_2012_11PM_UTC_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.JUN_16_2012;
+import static org.exparity.hamcrest.date.testutils.ZoneIds.CET;
+import static org.exparity.hamcrest.date.testutils.ZoneIds.EST;
 import static org.exparity.hamcrest.date.testutils.ZoneIds.UTC;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.LocalTime;
-import java.time.Month;
 
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.DayMonthYear;
@@ -15,7 +34,6 @@ import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.Months;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
-import org.exparity.hamcrest.date.testutils.ZoneIds;
 import org.testng.annotations.Test;
 
 /**
@@ -87,17 +105,17 @@ public class IsAfterTest {
 
 	@Test
 	public void isDateAfterEarlierDateValues() {
-		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.after(2012, Month.JUNE, 14).atZone(UTC));
+		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.after(2012, JUNE, 14).atZone(UTC));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateAfterLaterDateValues() {
-		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.after(2012, Month.JUNE, 16).atZone(UTC));
+		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.after(2012, JUNE, 16).atZone(UTC));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateAfterSameDateValues() {
-		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.after(2012, Month.JUNE, 15).atZone(UTC));
+		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.after(2012, JUNE, 15).atZone(UTC));
 	}
 
 	@Test
@@ -238,12 +256,12 @@ public class IsAfterTest {
 
 	@Test
 	public void isZonedDateTimeAfterDateTimeEarlierZone() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.after(2015, AUGUST, 4, 12, 0, 0, 0, ZoneIds.CET).atZone(UTC));
+		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.after(2015, AUGUST, 4, 12, 0, 0, 0, CET).atZone(UTC));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeAfterDateTimeLaterZone() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.after(2015, AUGUST, 4, 12, 0, 0, 0, ZoneIds.EST).atZone(UTC));
+		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.after(2015, AUGUST, 4, 12, 0, 0, 0, EST).atZone(UTC));
 	}
 
 	// LocalTime Matchers
