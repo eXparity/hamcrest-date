@@ -427,7 +427,7 @@ public abstract class LocalDateMatchers {
      * </pre>
      */
     public static Matcher<LocalDate> isDayOfWeek(final DayOfWeek... daysOfWeek) {
-        return new AnyOfTemporals<LocalDate>(
+        return new AnyOfTemporals<>(
             Stream.of(daysOfWeek).map(LocalDateMatchers::isDayOfWeek),
             (d) -> "the date is on a " + d.getDayOfWeek().name().toLowerCase()
         );
