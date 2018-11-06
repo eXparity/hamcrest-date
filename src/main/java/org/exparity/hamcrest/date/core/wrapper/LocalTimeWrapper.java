@@ -1,8 +1,7 @@
 package org.exparity.hamcrest.date.core.wrapper;
 
 import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 
 import org.exparity.hamcrest.date.core.TemporalWrapper;
 
@@ -12,7 +11,7 @@ import org.exparity.hamcrest.date.core.TemporalWrapper;
  *
  * @author Stewart Bissett
  */
-public class LocalTimeWrapper implements TemporalWrapper<LocalTime> {
+public class LocalTimeWrapper implements TemporalWrapper<LocalTime, TemporalUnit, Void> {
 
 	private final LocalTime wrapped;
 
@@ -25,7 +24,7 @@ public class LocalTimeWrapper implements TemporalWrapper<LocalTime> {
 	}
 
 	@Override
-	public long difference(final LocalTime other, final ChronoUnit unit) {
+	public long difference(final LocalTime other, final TemporalUnit unit) {
 		return Math.abs(wrapped.until(other, unit));
 	}
 
@@ -50,7 +49,7 @@ public class LocalTimeWrapper implements TemporalWrapper<LocalTime> {
 	}
 
 	@Override
-	public TemporalWrapper<LocalTime> withZone(final ZoneId zone) {
+	public TemporalWrapper<LocalTime, TemporalUnit, Void> withZone(final Void zone) {
 		return this;
 	}
 

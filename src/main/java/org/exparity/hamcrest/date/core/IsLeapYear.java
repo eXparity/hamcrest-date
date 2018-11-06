@@ -1,10 +1,5 @@
 package org.exparity.hamcrest.date.core;
 
-import static java.time.temporal.TemporalQueries.localDate;
-
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-
 import org.hamcrest.Description;
 
 /**
@@ -12,27 +7,21 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsLeapYear<T> extends DateMatcher<T> {
+public class IsLeapYear<T, Z> extends ZonedTemporalMatcher<T, Z> {
 
-	private final TemporalAdapter<T> adapter;
+	private final LeapYearAdapter<T, Z> adapter;
 	private final TemporalFormatter<T> formatter;
-	private final ZoneId zone;
+	private final Z zone;
 
-	private IsLeapYear(final TemporalAdapter<T> adapter, final TemporalFormatter<T> formatter, final ZoneId zone) {
+	public IsLeapYear(final LeapYearAdapter<T, Z> adapter, final TemporalFormatter<T> formatter, final Z zone) {
 		this.adapter = adapter;
 		this.formatter = formatter;
 		this.zone = zone;
 	}
 
-	public IsLeapYear(final TemporalAdapter<T> adapter, final TemporalFormatter<T> formatter) {
-		this.adapter = adapter;
-		this.formatter = formatter;
-		this.zone = ZoneId.systemDefault();
-	}
-
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
-		if (!this.adapter.asTemporal(actual, zone).query(localDate()).isLeapYear()) {
+		if (!this.adapter.isLeapYear(actual, zone)) {
 			mismatchDesc.appendText("the date " + this.formatter.describe(actual) + " is not a leap year");
 			return false;
 		} else {
@@ -46,7 +35,7 @@ public class IsLeapYear<T> extends DateMatcher<T> {
 	}
 
 	@Override
-	public DateMatcher<T> atZone(ZoneId zone) {
+	public ZonedTemporalMatcher<T, Z> atZone(Z zone) {
 		return new IsLeapYear<>(adapter, formatter, zone);
 	}
 

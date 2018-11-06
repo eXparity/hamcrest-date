@@ -1,8 +1,17 @@
 package org.exparity.hamcrest.date.core;
 
-import static org.exparity.hamcrest.date.testutils.Dates.*;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_01_2015;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_01_2015_NOON;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_01_2015_NOON_UTC;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_01_2015_NOON_UTC_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_31_2015;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_31_2015_NOON;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_31_2015_NOON_UTC;
+import static org.exparity.hamcrest.date.testutils.Dates.AUG_31_2015_NOON_UTC_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.TimeZones.UTC;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
@@ -14,6 +23,27 @@ import org.testng.annotations.Test;
 public class IsDayOfMonthTest {
 
     private static final String ASSERTION_PATTERN = "\\sExpected: the date has the day of month [0-9]+?\\s     but: the date has the day of month [0-9]+?";
+
+    // Date Matchers
+ 	@Test
+ 	public void isDateFirstDayOfMonth() {
+ 		assertThat(AUG_01_2015_NOON_UTC_AS_DATE, DateMatchers.isDayOfMonth(1).atZone(UTC));
+ 	}
+
+ 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+ 	public void isDateNotFirstDayOfMonth() {
+ 		assertThat(AUG_31_2015_NOON_UTC_AS_DATE, DateMatchers.isDayOfMonth(1).atZone(UTC));
+ 	}
+
+ 	@Test
+ 	public void isDateLastDayOfMonth() {
+ 		assertThat(AUG_31_2015_NOON_UTC_AS_DATE, DateMatchers.isDayOfMonth(31).atZone(UTC));
+ 	}
+
+ 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+ 	public void isDateNotLastDayOfMonth() {
+ 		assertThat(AUG_01_2015_NOON_UTC_AS_DATE, DateMatchers.isDayOfMonth(31).atZone(UTC));
+ 	}
 
 	// LocalDate Matchers
 	@Test

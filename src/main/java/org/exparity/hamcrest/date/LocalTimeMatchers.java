@@ -1,10 +1,20 @@
 package org.exparity.hamcrest.date;
 
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 
-import org.exparity.hamcrest.date.core.*;
+import org.exparity.hamcrest.date.core.IsAfter;
+import org.exparity.hamcrest.date.core.IsBefore;
+import org.exparity.hamcrest.date.core.IsHour;
+import org.exparity.hamcrest.date.core.IsMaximum;
+import org.exparity.hamcrest.date.core.IsMinimum;
+import org.exparity.hamcrest.date.core.IsMinute;
+import org.exparity.hamcrest.date.core.IsSameOrAfter;
+import org.exparity.hamcrest.date.core.IsSameOrBefore;
+import org.exparity.hamcrest.date.core.IsSecond;
+import org.exparity.hamcrest.date.core.IsWithin;
 import org.exparity.hamcrest.date.core.format.DatePartFormatter;
 import org.exparity.hamcrest.date.core.format.LocalTimeFormatter;
 import org.exparity.hamcrest.date.core.wrapper.FieldLocalTimeWrapper;
@@ -206,8 +216,9 @@ public abstract class LocalTimeMatchers {
         return new IsMinimum<>(
             field,
             (d, z) -> d.get(field),
-            (d, z) -> field.rangeRefinedBy(d),
-            new DatePartFormatter()
+            (d, z) -> field.rangeRefinedBy(d).getMinimum(),
+            new DatePartFormatter(),
+            ZoneId.systemDefault()
         );
     }
 
@@ -227,8 +238,9 @@ public abstract class LocalTimeMatchers {
         return new IsMaximum<>(
             field,
             (d, z) -> d.get(field),
-            (d, z) -> field.rangeRefinedBy(d),
-            new DatePartFormatter()
+            (d, z) -> field.rangeRefinedBy(d).getMaximum(),
+            new DatePartFormatter(),
+            ZoneId.systemDefault()
         );
     }
 
@@ -246,7 +258,8 @@ public abstract class LocalTimeMatchers {
     public static Matcher<LocalTime> isHour(final int hour) {
         return new IsHour<>(
             new FieldLocalTimeWrapper(hour, ChronoField.HOUR_OF_DAY),
-            (d, ignored) -> d.getHour()
+            (d, ignored) -> d.getHour(),
+            null
         );
     }
 
@@ -264,7 +277,8 @@ public abstract class LocalTimeMatchers {
     public static Matcher<LocalTime> sameHourOfDay(final LocalTime time) {
         return new IsHour<>(
             new FieldLocalTimeWrapper(time, ChronoField.HOUR_OF_DAY),
-            (d, ignored) -> d.getHour()
+            (d, ignored) -> d.getHour(),
+            null
         );
     }
 
@@ -282,7 +296,8 @@ public abstract class LocalTimeMatchers {
     public static Matcher<LocalTime> isMinute(final int minute) {
         return new IsMinute<>(
             new FieldLocalTimeWrapper(minute, ChronoField.MINUTE_OF_HOUR),
-            (d, ignored) -> d.getMinute()
+            (d, ignored) -> d.getMinute(),
+            null
         );
     }
 
@@ -300,7 +315,8 @@ public abstract class LocalTimeMatchers {
     public static Matcher<LocalTime> sameMinuteOfHour(final LocalTime time) {
         return new IsMinute<>(
             new FieldLocalTimeWrapper(time, ChronoField.MINUTE_OF_HOUR),
-            (d, ignored) -> d.getMinute()
+            (d, ignored) -> d.getMinute(),
+            null
         );
     }
 
@@ -318,7 +334,8 @@ public abstract class LocalTimeMatchers {
     public static Matcher<LocalTime> isSecond(final int second) {
         return new IsSecond<>(
             new FieldLocalTimeWrapper(second, ChronoField.SECOND_OF_MINUTE),
-            (d, ignored) -> d.getSecond()
+            (d, ignored) -> d.getSecond(),
+            null
         );
     }
 
@@ -336,7 +353,8 @@ public abstract class LocalTimeMatchers {
     public static Matcher<LocalTime> sameSecondOfMinute(final LocalTime time) {
         return new IsSecond<>(
             new FieldLocalTimeWrapper(time, ChronoField.SECOND_OF_MINUTE),
-            (d, ignored) -> d.getSecond()
+            (d, ignored) -> d.getSecond(),
+            null
         );
     }
 }

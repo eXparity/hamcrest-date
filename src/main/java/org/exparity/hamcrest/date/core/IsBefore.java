@@ -1,7 +1,5 @@
 package org.exparity.hamcrest.date.core;
 
-import java.time.ZoneId;
-
 import org.hamcrest.Description;
 
 /**
@@ -9,20 +7,20 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsBefore<T> extends DateMatcher<T> {
+public class IsBefore<T, U, Z> extends ZonedTemporalMatcher<T, Z> {
 
-	private final TemporalWrapper<T> expected;
+	private final TemporalWrapper<T, U, Z> expected;
 	private final TemporalFormatter<T> describer;
 
-	public IsBefore(final TemporalWrapper<T> expected, final TemporalFormatter<T> describer) {
+	public IsBefore(final TemporalWrapper<T, U, Z> expected, final TemporalFormatter<T> describer) {
 		this.expected = expected;
 		this.describer = describer;
 	}
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
-		if (this.expected.isSame(actual) || this.expected.isBefore(actual)) {
-			mismatchDescription.appendText("date is " + this.describer.describe(actual));
+		if (expected.isSame(actual) || expected.isBefore(actual)) {
+			mismatchDescription.appendText("date is " + describer.describe(actual));
 			return false;
 		} else {
 			return true;
@@ -31,11 +29,11 @@ public class IsBefore<T> extends DateMatcher<T> {
 
 	@Override
 	public void describeTo(final Description description) {
-		description.appendText("the date is before " + this.describer.describe(this.expected.unwrap()));
+		description.appendText("the date is before " + describer.describe(expected.unwrap()));
 	}
 
 	@Override
-	public DateMatcher<T> atZone(ZoneId zone) {
+	public ZonedTemporalMatcher<T, Z> atZone(Z zone) {
 		return new IsBefore<>(expected.withZone(zone), describer);
 	}
 

@@ -1,11 +1,7 @@
 package org.exparity.hamcrest.date.core;
 
-import java.time.ZoneId;
-import java.time.temporal.ChronoField;
-import java.time.temporal.ValueRange;
 import java.util.function.Supplier;
 
-import org.exparity.hamcrest.date.core.format.DatePartFormatter;
 import org.hamcrest.Description;
 
 /**
@@ -13,21 +9,21 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsMinimum<T> extends DateMatcher<T> {
+public class IsMinimum<T, U, Z> extends ZonedTemporalMatcher<T, Z> {
 
-    private final ChronoField datePart;
-    private final TemporalFieldAdapter<T> adapter;
-    private final TemporalFieldRangeAdapter<T> rangeAdapter;
-    private final DatePartFormatter formatter;
+    private final U datePart;
+    private final TemporalFieldAdapter<T, Z> adapter;
+    private final TemporalFieldRangeAdapter<T, Z> rangeAdapter;
+    private final TemporalUnitFormatter<U> formatter;
     private final Supplier<String> descriptionSupplier;
-    private final ZoneId zone;
+    private final Z zone;
 
-    private IsMinimum(final ChronoField datePart,
-                      final TemporalFieldAdapter<T> adapter,
-                      final TemporalFieldRangeAdapter<T> rangeAdapter,
-                      final DatePartFormatter formatter,
+    public IsMinimum(final U datePart,
+                      final TemporalFieldAdapter<T, Z> adapter,
+                      final TemporalFieldRangeAdapter<T, Z> rangeAdapter,
+                      final TemporalUnitFormatter<U> formatter,
                       final Supplier<String> descriptionSupplier,
-                      final ZoneId zone) {
+                      final Z zone) {
         this.datePart = datePart;
         this.adapter = adapter;
         this.rangeAdapter = rangeAdapter;
@@ -36,36 +32,24 @@ public class IsMinimum<T> extends DateMatcher<T> {
         this.zone = zone;
     }
 
-    public IsMinimum(final ChronoField datePart,
-            final TemporalFieldAdapter<T> adapter,
-            final TemporalFieldRangeAdapter<T> rangeAdapter,
-            final DatePartFormatter formatter,
-            final Supplier<String> descriptionSupplier) {
-        this.datePart = datePart;
-        this.adapter = adapter;
-        this.rangeAdapter = rangeAdapter;
-        this.formatter = formatter;
-        this.descriptionSupplier = descriptionSupplier;
-        this.zone = ZoneId.systemDefault();
-    }
-
-    public IsMinimum(final ChronoField datePart,
-                     final TemporalFieldAdapter<T> adapter,
-                     final TemporalFieldRangeAdapter<T> minimumAdapter,
-                     final DatePartFormatter formatter) {
-        this(datePart, adapter, minimumAdapter, formatter, () -> "the date is the minimum value for " + formatter.describe(datePart));
+    public IsMinimum(final U datePart,
+                     final TemporalFieldAdapter<T, Z> adapter,
+                     final TemporalFieldRangeAdapter<T, Z> minimumAdapter,
+                     final TemporalUnitFormatter<U> formatter,
+                     final Z zone) {
+        this(datePart, adapter, minimumAdapter, formatter, () -> "the date is the minimum value for " + formatter.describe(datePart), zone);
     }
 
     @Override
     protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
-        int actualValue = this.adapter.asTemporalField(actual, zone);
-        ValueRange range = this.rangeAdapter.asTemporalFieldRange(actual, zone);
-        if (range.getMinimum() != actualValue) {
+        long actualValue = this.adapter.asTemporalField(actual, zone);
+        long minimumValue = this.rangeAdapter.getExtremum(actual, zone);
+        if (minimumValue != actualValue) {
             mismatchDesc.appendText("date is the " + actualValue
                     + " "
                     + this.formatter.describe(this.datePart)
                     + " instead of "
-                    + range.getMinimum()
+                    + minimumValue
                     + " "
                     + this.formatter.describe(this.datePart));
             return false;
@@ -80,9 +64,9 @@ public class IsMinimum<T> extends DateMatcher<T> {
     }
 
     @Override
-   	public DateMatcher<T> atZone(ZoneId zone) {
+   	public ZonedTemporalMatcher<T, Z> atZone(Z zone) {
    		return new IsMinimum<>(
-   		    datePart,
+          datePart,
           adapter,
           rangeAdapter,
           formatter,

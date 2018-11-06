@@ -1,9 +1,8 @@
 package org.exparity.hamcrest.date.core.wrapper;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
+import java.time.temporal.TemporalUnit;
 import java.util.function.Supplier;
 
 import org.exparity.hamcrest.date.core.TemporalWrapper;
@@ -14,28 +13,22 @@ import org.exparity.hamcrest.date.core.TemporalWrapper;
  * 
  * @author Stewart Bissett
  */
-public class LocalDateWrapper implements TemporalWrapper<LocalDate> {
+public class LocalDateWrapper implements TemporalWrapper<LocalDate, TemporalUnit, Void> {
 
 	private final Supplier<LocalDate> wrapped;
-	private final ZoneId zone;
+	private final TemporalUnit accuracy;
 
-	private LocalDateWrapper(final Supplier<LocalDate> wrapped, final ZoneId zone) {
+	public LocalDateWrapper(final Supplier<LocalDate> wrapped, final TemporalUnit accuracy) {
 		this.wrapped = wrapped;
-		this.zone = zone;
-	}
-
-	public LocalDateWrapper(final Date date) {
-		this.zone = ZoneId.systemDefault();
-		this.wrapped = () -> date.toInstant().atZone(zone).toLocalDate();
+		this.accuracy = accuracy;
 	}
 
 	public LocalDateWrapper(final LocalDate date) {
-		this.zone = ZoneId.systemDefault();
-		this.wrapped = () -> date;
+		this(() -> date, ChronoUnit.DAYS);
 	}
 
 	@Override
-	public long difference(final LocalDate other, ChronoUnit unit) {
+	public long difference(final LocalDate other, TemporalUnit unit) {
 		return Math.abs(wrapped.get().until(other, unit));
 	}
 
@@ -54,7 +47,6 @@ public class LocalDateWrapper implements TemporalWrapper<LocalDate> {
 		return wrapped.get().isEqual(other);
 	}
 
-
 	@Override
 	public LocalDate unwrap() {
 		return wrapped.get();
@@ -66,8 +58,8 @@ public class LocalDateWrapper implements TemporalWrapper<LocalDate> {
 	}
 
 	@Override
-	public TemporalWrapper<LocalDate> withZone(final ZoneId zone) {
-		return new LocalDateWrapper(this.wrapped, zone);
+	public TemporalWrapper<LocalDate, TemporalUnit, Void> withZone(final Void ignored) {
+		return this;
 	}
 
 }

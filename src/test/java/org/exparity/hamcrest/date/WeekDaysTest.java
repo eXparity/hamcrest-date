@@ -1,6 +1,12 @@
 package org.exparity.hamcrest.date;
 
-import static org.exparity.hamcrest.date.Weekdays.*;
+import static org.exparity.hamcrest.date.Weekdays.FRIDAY;
+import static org.exparity.hamcrest.date.Weekdays.MONDAY;
+import static org.exparity.hamcrest.date.Weekdays.SATURDAY;
+import static org.exparity.hamcrest.date.Weekdays.SUNDAY;
+import static org.exparity.hamcrest.date.Weekdays.THURSDAY;
+import static org.exparity.hamcrest.date.Weekdays.TUESDAY;
+import static org.exparity.hamcrest.date.Weekdays.WEDNESDAY;
 import static org.junit.Assert.assertThat;
 
 import java.time.DayOfWeek;

@@ -1,15 +1,12 @@
 package org.exparity.hamcrest.date.core;
 
-import java.time.ZoneId;
-
 /**
- * Adapter which can convert a value to a temporal field
+ * Adapter which can convert a value to a temporal field.
  *
- * @see java.time.temporal.TemporalField
  * @author Thomas Naskali
  */
 @FunctionalInterface
-public interface TemporalFieldAdapter<T> {
+public interface TemporalFieldAdapter<T, Z> {
 
 	/**
 	 * Return the value as a temporal field
@@ -17,6 +14,6 @@ public interface TemporalFieldAdapter<T> {
 	 * @param zone the reference time zone
 	 * @return the value of the temporal field
 	 */
-	int asTemporalField(final T source, final ZoneId zone);
+	long asTemporalField(final T source, final Z zone);
 
 }

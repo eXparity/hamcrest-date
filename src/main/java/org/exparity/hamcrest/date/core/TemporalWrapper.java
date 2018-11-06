@@ -1,15 +1,12 @@
 package org.exparity.hamcrest.date.core;
 
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
-
 /**
  * Wrapper which wraps a temporal time so it can support the operations required
  * by the matchers
  *
  * @author Stewart Bissett
  */
-public interface TemporalWrapper<T> {
+public interface TemporalWrapper<T, U, Z> {
 
 	/**
 	 * @param other a temporal to test against
@@ -37,7 +34,7 @@ public interface TemporalWrapper<T> {
 	/**
 	 * Return the difference in units between this time and the other time in the given units
 	 */
-	long difference(final T other, final ChronoUnit unit);
+	long difference(final T other, final U unit);
 
 	/**
 	 * Makes a copy of this wrapper based on a given time zone.
@@ -45,6 +42,6 @@ public interface TemporalWrapper<T> {
 	 * @param zone a new reference time zone
 	 * @return a copy of the wrapper based on the new reference time zone
 	 */
-	TemporalWrapper<T> withZone(ZoneId zone);
+	TemporalWrapper<T, U, Z> withZone(Z zone);
 
 }
