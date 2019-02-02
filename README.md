@@ -18,7 +18,7 @@ A maven project
     <dependency>
         <groupId>org.exparity</groupId>
         <artifactId>hamcrest-date</artifactId>
-        <version>2.0.4</version>
+        <version>2.0.5</version>
     </dependency>
 
 
@@ -132,6 +132,10 @@ The source includes a pom.xml for building with Maven
 
 Release Notes
 -------------
+Changes 2.0.4 -> 2.0.5
+  * Fix Issue 20 - (DateMatchers.isDay(int, Month, int) not adapted for non-zero time zones)
+  * Support for time zones in temporal fields matchers
+  
 Changes 2.0.3 -> 2.0.4
   * Fix Issue 18 - Add test scope to testng
  
