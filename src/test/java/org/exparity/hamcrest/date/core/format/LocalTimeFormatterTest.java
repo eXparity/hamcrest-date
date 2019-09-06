@@ -4,6 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Locale;
 
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
@@ -17,13 +18,13 @@ public class LocalTimeFormatterTest {
 
     @Test
     public void canDescribe() {
-        String description = new LocalTimeFormatter().describe(LocalTime.NOON.minus(1, ChronoUnit.SECONDS));
+        String description = new LocalTimeFormatter(Locale.US).describe(LocalTime.NOON.minus(1, ChronoUnit.SECONDS));
         assertThat(description, Matchers.equalTo("11:59:59 AM"));
     }
 
     @Test(expectedExceptions = UnsupportedOperationException.class)
     public void canDescribeDate() {
-        new LocalTimeFormatter().describeDate(LocalTime.NOON.minus(1, ChronoUnit.SECONDS));
+        new LocalTimeFormatter(Locale.UK).describeDate(LocalTime.NOON.minus(1, ChronoUnit.SECONDS));
     }
 
 }

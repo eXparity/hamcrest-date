@@ -15,6 +15,7 @@ import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.Months;
+import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.exparity.hamcrest.date.testutils.ZoneIds;
 import org.testng.annotations.Test;
@@ -131,6 +132,83 @@ public class IsBeforeTest {
         assertThat(JUN_15_2012_11AM_UTC_AS_DATE, DateMatchers.before(2012, Months.JUNE, 15, 11, 0, 0).atZone(UTC));
     }
 
+    @Test
+    public void isSqlDateBeforeLaterDate() {
+        assertThat(AUG_04_2015_AS_SQL, DateMatchers.before(AUG_05_2015_NOON_UTC_AS_DATE).atZone(UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isSqlDateBeforeEarlierDate() {
+        assertThat(AUG_04_2015_AS_SQL, DateMatchers.before(AUG_03_2015_NOON_UTC_AS_DATE).atZone(UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isSqlDateBeforeLaterSameDate() {
+        assertThat(AUG_04_2015_AS_SQL, DateMatchers.before(AUG_04_2015_NOON_UTC_AS_DATE).atZone(UTC));
+    }
+
+    // 	// java.sql.Date Matchers
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isSqlDateBeforeLaterSqlDate() {
+        assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.before(AUG_03_2015_AS_SQL));
+    }
+
+    @Test
+    public void isSqlDateBeforeEarlierSqlDate() {
+        assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.before(AUG_05_2015_AS_SQL));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isSqlDateBeforeLaterSameSqlDate() {
+        assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.before(AUG_04_2015_AS_SQL));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isSqlDateBeforeLaterLocalJavaDate() {
+        assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.before(AUG_03_2015_NOON_UTC_AS_DATE));
+    }
+
+    @Test
+    public void isSqlDateBeforeEarlierJavaDate() {
+        assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.before(AUG_05_2015_NOON_UTC_AS_DATE));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isSqlDateBeforeLaterSameJavaDate() {
+        assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.before(AUG_04_2015_NOON_UTC_AS_DATE));
+    }
+    
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isSqlDateBeforeLaterLocalDate() {
+        assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.before(AUG_03_2015));
+    }
+
+    @Test
+    public void isSqlDateBeforeEarlierLocalDate() {
+        assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.before(AUG_05_2015));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isSqlDateBeforeLaterSameLocalDate() {
+        assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.before(AUG_04_2015));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isSqlDateBeforeLaterDay() {
+        assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.before(2015, AUGUST, 3));
+    }
+
+    @Test
+    public void isSqlDateBeforeEarlierDay() {
+        assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.before(2015, AUGUST, 5));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isSqlDateBeforeSameDay() {
+        assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.before(2015, AUGUST, 4));
+    }
+    
     // LocalDate Matchers
 
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)

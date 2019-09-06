@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
 
@@ -30,6 +31,37 @@ public class IsSameDayOfMonthTest {
 	@Test
 	public void isDateSameDayOfMonthDifferentMonth() {
 		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameDayOfMonth(SEP_04_2015_NOON_UTC_AS_DATE));
+	}
+
+	// LocalDate Matchers
+	@Test
+	public void isSqlDateSameDayOfMonth() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.sameDayOfMonth(AUG_04_2015_AS_SQL));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotSameDayOfMonth() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.sameDayOfMonth(AUG_01_2015_AS_SQL));
+	}
+
+	@Test
+	public void isSqlDateSameDayOfMonthDifferentMonth() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.sameDayOfMonth(SEP_04_2015_AS_SQL));
+	}
+	
+	@Test
+	public void isSqlDateSameDayOfMonthUsingDateMatchers() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameDayOfMonth(AUG_04_2015_NOON_UTC_AS_DATE));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotSameDayOfMonthUsingDateMatchers() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameDayOfMonth(AUG_01_2015_NOON_UTC_AS_DATE));
+	}
+
+	@Test
+	public void isSqlDateSameDayOfMonthDifferentMonthUsingDateMatchers() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameDayOfMonth(SEP_04_2015_NOON_UTC_AS_DATE));
 	}
 
 	// LocalDate Matchers

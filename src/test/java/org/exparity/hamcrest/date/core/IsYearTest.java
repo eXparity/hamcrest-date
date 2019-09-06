@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
 
@@ -30,6 +31,27 @@ public class IsYearTest {
 		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.isYear(2016));
 	}
 
+	// java.sql.Date Matchers
+	@Test
+	public void isSqlDateYear() {
+		assertThat(AUG_04_2016_AS_SQL, SqlDateMatchers.isYear(2016));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotYear() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.isYear(2016));
+	}
+
+	@Test
+	public void isSqlDateYearUsingDateMatchers() {
+		assertThat(AUG_04_2016_AS_SQL, DateMatchers.isYear(2016));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotYearUsingDateMatchers() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.isYear(2016));
+	}
+	
 	// LocalDate Matchers
 	@Test
 	public void isLocalDateYear() {

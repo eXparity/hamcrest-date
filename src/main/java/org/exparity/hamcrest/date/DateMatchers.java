@@ -31,6 +31,8 @@ import java.util.stream.Stream;
 import org.exparity.hamcrest.date.core.*;
 import org.exparity.hamcrest.date.core.format.DateFormatter;
 import org.exparity.hamcrest.date.core.format.DatePartFormatter;
+import org.exparity.hamcrest.date.core.wrapper.FieldDateAdaptor;
+import org.exparity.hamcrest.date.core.wrapper.FieldDateRangeAdaptor;
 import org.exparity.hamcrest.date.core.wrapper.DateWrapper;
 import org.exparity.hamcrest.date.core.wrapper.FieldDateWrapper;
 
@@ -40,7 +42,9 @@ import org.exparity.hamcrest.date.core.wrapper.FieldDateWrapper;
  * @author Stewart Bissett
  */
 public abstract class DateMatchers {
-
+	
+	public static final String UNSUPPORTED_SQL_DATE_UNIT = "java.sql.Date does not support time-based comparisons. Prefer SqlDateMatchers for java.sql.Date appropriate matchers";
+	
     /**
      * Creates a matcher that matches when the examined date is after the reference date
      * <p/>
@@ -56,6 +60,21 @@ public abstract class DateMatchers {
         return new IsAfter<>(new DateWrapper(date), new DateFormatter());
     }
 
+    /**
+     * Creates a matcher that matches when the examined date is after the reference date
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, after(new Date()))
+     * </pre>
+     *
+     * @param date the reference date against which the examined date is checked
+     */
+    public static DateMatcher<Date> after(final java.sql.Date date) {
+        return new IsAfter<>(new DateWrapper(date), new DateFormatter());
+    }
+    
     /**
      * Creates a matcher that matches when the examined date is after the reference date
      * <p/>
@@ -197,6 +216,21 @@ public abstract class DateMatchers {
      * For example:
      *
      * <pre>
+     * assertThat(myDate, before(new Date()))
+     * </pre>
+     *
+     * @param date the reference date against which the examined date is checked
+     */
+    public static DateMatcher<Date> before(final java.sql.Date date) {
+        return new IsBefore<>(new DateWrapper(date), new DateFormatter());
+    }
+    
+    /**
+     * Creates a matcher that matches when the examined date is before the reference date
+     * <p/>
+     * For example:
+     *
+     * <pre>
      * assertThat(myDate, before(LocalDate.now()))
      * </pre>
      *
@@ -323,9 +357,24 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameDayOfWeek(final Date date) {
-        return isDayOfWeek(DayOfWeek.from(date.toInstant().atZone(ZoneId.systemDefault())));
+        return isDayOfWeek(toDayOfWeek(date, ZoneId.systemDefault()));
     }
 
+    /**
+     * Creates a matcher that matches when the examined date is on the same day of the week as the reference date
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, sameWeekday(new Date()))
+     * </pre>
+     *
+     * @param date the reference date against which the examined date is checked
+     */
+    public static DateMatcher<Date> sameDayOfWeek(final java.sql.Date date) {
+        return isDayOfWeek(date.toLocalDate().getDayOfWeek());
+    }
+    
     /**
      * Creates a matcher that matches when the examined date is on the same day of the week as the supplied day
      * <p/>
@@ -355,10 +404,8 @@ public abstract class DateMatchers {
      * @param dayOfWeek the reference weekday against which the examined date is checked
      */
     public static DateMatcher<Date> isDayOfWeek(final DayOfWeek dayOfWeek) {
-      return new IsDayOfWeek<>(
-          new FieldDateWrapper(dayOfWeek.getValue(), ChronoField.DAY_OF_WEEK),
-          (d, z) -> d.toInstant().atZone(z).get(ChronoField.DAY_OF_WEEK)
-      );
+        return new IsDayOfWeek<>(new FieldDateWrapper(dayOfWeek.getValue(), ChronoField.DAY_OF_WEEK),
+                new FieldDateAdaptor(ChronoField.DAY_OF_WEEK));
     }
 
     /**
@@ -373,10 +420,24 @@ public abstract class DateMatchers {
      * @param daysOfWeek the reference weekdays against which the examined date is checked
      */
     public static DateMatcher<Date> isDayOfWeek(final DayOfWeek... daysOfWeek) {
-      return new AnyOf<>(
-          Stream.of(daysOfWeek).map(DateMatchers::isDayOfWeek),
-          (d, z) -> "the date is on a " + d.toInstant().atZone(z).getDayOfWeek().name().toLowerCase()
-      );
+        return new AnyOf<>(Stream.of(daysOfWeek).map(DateMatchers::isDayOfWeek),
+                (d, z) -> "the date is on a " + toDayOfWeek(d, z).name().toLowerCase());
+    }
+    
+    /**
+     * Creates a matcher that matches when the examined date is on the same day of the month as the reference date
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, sameDayOfMonth(new Date()))
+     * </pre>
+     *
+     * @param date the reference date against which the examined date is checked
+     */
+    public static DateMatcher<Date> sameDayOfMonth(final Date date) {
+        return new IsDayOfMonth<>(new FieldDateWrapper(date, ChronoField.DAY_OF_MONTH),
+                new FieldDateAdaptor(ChronoField.DAY_OF_MONTH));
     }
 
     /**
@@ -390,13 +451,11 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameDayOfMonth(final Date date) {
-      return new IsDayOfMonth<>(
-          new FieldDateWrapper(date, ChronoField.DAY_OF_MONTH),
-          (d, z) -> d.toInstant().atZone(z).get(ChronoField.DAY_OF_MONTH)
-      );
+    public static DateMatcher<Date> sameDayOfMonth(final java.sql.Date date) {
+        return new IsDayOfMonth<>(new FieldDateWrapper(date, ChronoField.DAY_OF_MONTH),
+                new FieldDateAdaptor(ChronoField.DAY_OF_MONTH));
     }
-
+    
     /**
      * Creates a matcher that matches when the examined date is on the expected day of the month
      * <p/>
@@ -409,10 +468,8 @@ public abstract class DateMatchers {
      * @param dayOfMonth the expected day of the month
      */
     public static DateMatcher<Date> isDayOfMonth(final int dayOfMonth) {
-        return new IsDayOfMonth<>(
-            new FieldDateWrapper(dayOfMonth, ChronoField.DAY_OF_MONTH),
-          (d, z) -> d.toInstant().atZone(z).get(ChronoField.DAY_OF_MONTH)
-      );
+        return new IsDayOfMonth<>(new FieldDateWrapper(dayOfMonth, ChronoField.DAY_OF_MONTH),
+                new FieldDateAdaptor(ChronoField.DAY_OF_MONTH));
     }
 
     /**
@@ -430,6 +487,21 @@ public abstract class DateMatchers {
         return new IsSameDay<>(new DateWrapper(date, ChronoUnit.DAYS), new DateFormatter());
     }
 
+    /**
+     * Creates a matcher that matches when the examined date is on the same day of the year as the reference date
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, sameDay(new Date()))
+     * </pre>
+     *
+     * @param date the reference date against which the examined date is checked
+     */
+    public static DateMatcher<Date> sameDay(final java.sql.Date date) {
+        return new IsSameDay<>(new DateWrapper(date, ChronoUnit.DAYS), new DateFormatter());
+    }
+    
     /**
      * Creates a matcher that matches when the examined date is on the same day of the year as the reference date
      * <p/>
@@ -514,6 +586,17 @@ public abstract class DateMatchers {
     public static DateMatcher<Date> sameHour(final Date date) {
         return sameHourOfDay(date);
     }
+    
+	/**
+	 * @deprecated java.sql.Date does not support time-based comparisons. Prefer {@link SqlDateMatchers} for
+	 * java.sql.Date appropriate matchers
+	 * @param date the reference date against which the examined date is checked
+	 * @throws IllegalArgumentException
+	 */
+	@Deprecated
+    public static DateMatcher<Date> sameHour(final java.sql.Date date) {
+    	throw new IllegalArgumentException(UNSUPPORTED_SQL_DATE_UNIT);
+    }
 
     /**
      * Creates a matcher that matches when the examined date is on the same hour as the reference date
@@ -527,12 +610,26 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameHourOfDay(final Date date) {
-        return new IsHour<>(
-            new FieldDateWrapper(date, ChronoField.HOUR_OF_DAY),
-            (d, z) -> d.toInstant().atZone(z).get(ChronoField.HOUR_OF_DAY)
-        );
+        return new IsHour<>(new FieldDateWrapper(date, ChronoField.HOUR_OF_DAY),
+                new FieldDateAdaptor(ChronoField.HOUR_OF_DAY));
     }
 
+    /**
+     * Creates a matcher that matches when the examined date is on the same hour as the reference date
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, sameHourOfDay(new Date()))
+     * </pre>
+     *
+     * @param date the reference date against which the examined date is checked
+     */
+    public static DateMatcher<Date> sameHourOfDay(final java.sql.Date date) {
+        return new IsHour<>(new FieldDateWrapper(date, ChronoField.HOUR_OF_DAY),
+                new FieldDateAdaptor(ChronoField.HOUR_OF_DAY));
+    }
+    
     /**
      * Creates a matcher that matches when the examined date is on the same hour as the reference date
      * <p/>
@@ -563,10 +660,8 @@ public abstract class DateMatchers {
      */
 
     public static DateMatcher<Date> isHour(final int hour) {
-        return new IsHour<>(
-            new FieldDateWrapper(hour, ChronoField.HOUR_OF_DAY),
-            (d, z) -> d.toInstant().atZone(z).get(ChronoField.HOUR_OF_DAY)
-        );
+        return new IsHour<>(new FieldDateWrapper(hour, ChronoField.HOUR_OF_DAY),
+                new FieldDateAdaptor(ChronoField.HOUR_OF_DAY));
     }
 
     /**
@@ -584,6 +679,17 @@ public abstract class DateMatchers {
         return new IsSame<>(new DateWrapper(date), new DateFormatter());
     }
 
+	/**
+	 * @deprecated java.sql.Date does not support time-based comparisons. Prefer {@link SqlDateMatchers} for
+	 * java.sql.Date appropriate matchers
+	 * @param date the reference date against which the examined date is checked
+	 * @throws IllegalArgumentException
+	 */
+	@Deprecated
+    public static DateMatcher<Date> sameInstant(final java.sql.Date date) {
+    	throw new IllegalArgumentException(UNSUPPORTED_SQL_DATE_UNIT);
+    }
+    
     /**
      * Creates a matcher that matches when the examined date is on the same UTC instant as the reference UTC epoch time
      * supplied
@@ -654,7 +760,7 @@ public abstract class DateMatchers {
             final int second,
             final int milliseconds) {
         return new IsSame<>(new DateWrapper(year, month, dayOfMonth, hour, minute, second, milliseconds),
-            new DateFormatter());
+                new DateFormatter());
     }
 
     /**
@@ -672,6 +778,21 @@ public abstract class DateMatchers {
         return new IsSameOrBefore<>(new DateWrapper(date), new DateFormatter());
     }
 
+    /**
+     * Creates a matcher that matches when the examined date is at the same instant or before the reference date
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, sameOrBefore(new Date()))
+     * </pre>
+     *
+     * @param date the reference date against which the examined date is checked
+     */
+    public static DateMatcher<Date> sameOrBefore(final java.sql.Date date) {
+        return new IsSameOrBefore<>(new DateWrapper(date), new DateFormatter());
+    }
+    
     /**
      * Creates a matcher that matches when the examined date is at the same instant or before the reference date
      * <p/>
@@ -787,7 +908,6 @@ public abstract class DateMatchers {
      * @param minute the minute of the hour against which the examined date is checked
      * @param second the second of the minute against which the examined date is checked
      */
-
     public static DateMatcher<Date> sameOrBefore(final int year,
             final Month month,
             final int dayOfMonth,
@@ -795,7 +915,7 @@ public abstract class DateMatchers {
             final int minute,
             final int second) {
         return new IsSameOrBefore<>(new DateWrapper(year, month, dayOfMonth, hour, minute, second),
-            new DateFormatter());
+                new DateFormatter());
     }
 
     /**
@@ -813,6 +933,21 @@ public abstract class DateMatchers {
         return new IsSameOrAfter<>(new DateWrapper(date), new DateFormatter());
     }
 
+    /**
+     * F Creates a matcher that matches when the examined date is at the same instant or after the reference date
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, sameOrAfter(new Date()))
+     * </pre>
+     *
+     * @param date the reference date against which the examined date is checked
+     */
+    public static DateMatcher<Date> sameOrAfter(final java.sql.Date date) {
+        return new IsSameOrAfter<>(new DateWrapper(date), new DateFormatter());
+    }
+    
     /**
      * F Creates a matcher that matches when the examined date is at the same instant or after the reference date
      * <p/>
@@ -933,8 +1068,7 @@ public abstract class DateMatchers {
             final int hour,
             final int minute,
             final int second) {
-        return new IsSameOrAfter<>(new DateWrapper(year, month, dayOfMonth, hour, minute, second),
-            new DateFormatter());
+        return new IsSameOrAfter<>(new DateWrapper(year, month, dayOfMonth, hour, minute, second), new DateFormatter());
     }
 
     /**
@@ -964,14 +1098,45 @@ public abstract class DateMatchers {
      * </pre>
      *
      * @param date the reference date against which the examined date is checked
+     * @deprecated Use {@link #sameMinuteOfHour(Date)} instead
+     */
+    @Deprecated
+    public static DateMatcher<Date> sameMinute(final java.sql.Date date) {
+        return sameMinuteOfHour(date);
+    }
+    
+    /**
+     * Creates a matcher that matches when the examined date is on the same minute as the reference date
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, sameMinute(new Date()))
+     * </pre>
+     *
+     * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameMinuteOfHour(final Date date) {
-        return new IsMinute<>(
-            new FieldDateWrapper(date, ChronoField.MINUTE_OF_HOUR),
-            (d, z) -> d.toInstant().atZone(z).get(ChronoField.MINUTE_OF_HOUR)
-        );
+        return new IsMinute<>(new FieldDateWrapper(date, ChronoField.MINUTE_OF_HOUR),
+                new FieldDateAdaptor(ChronoField.MINUTE_OF_HOUR));
     }
 
+    /**
+     * Creates a matcher that matches when the examined date is on the same minute as the reference date
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, sameMinute(new Date()))
+     * </pre>
+     *
+     * @param date the reference date against which the examined date is checked
+     */
+    public static DateMatcher<Date> sameMinuteOfHour(final java.sql.Date date) {
+        return new IsMinute<>(new FieldDateWrapper(date, ChronoField.MINUTE_OF_HOUR),
+                new FieldDateAdaptor(ChronoField.MINUTE_OF_HOUR));
+    }
+    
     /**
      * Creates a matcher that matches when the examined date is on the reference minute
      * <p/>
@@ -1001,10 +1166,8 @@ public abstract class DateMatchers {
      * @param minute the reference minute against which the examined date is checked
      */
     public static DateMatcher<Date> isMinute(final int minute) {
-        return new IsMinute<>(
-            new FieldDateWrapper(minute, ChronoField.MINUTE_OF_HOUR),
-            (d, z) -> d.toInstant().atZone(z).get(ChronoField.MINUTE_OF_HOUR)
-        );
+        return new IsMinute<>(new FieldDateWrapper(minute, ChronoField.MINUTE_OF_HOUR),
+                new FieldDateAdaptor(ChronoField.MINUTE_OF_HOUR));
     }
 
     /**
@@ -1034,9 +1197,41 @@ public abstract class DateMatchers {
      * </pre>
      *
      * @param date the reference date against which the examined date is checked
+     * @deprecated Use {@link #sameMonthOfYear(Date)} instead
+     */
+    @Deprecated
+    public static DateMatcher<Date> sameMonth(final java.sql.Date date) {
+        return sameMonthOfYear(date);
+    }
+
+    /**
+     * Creates a matcher that matches when the examined date is on the same month as the reference date
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, sameMonth(new Date()))
+     * </pre>
+     *
+     * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameMonthOfYear(final Date date) {
-        return isMonth(Month.of(date.toInstant().atZone(ZoneId.systemDefault()).get(ChronoField.MONTH_OF_YEAR)));
+        return isMonth(date.toInstant().atZone(ZoneId.systemDefault()).getMonth());
+    }
+    
+    /**
+     * Creates a matcher that matches when the examined date is on the same month as the reference date
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, sameMonth(new Date()))
+     * </pre>
+     *
+     * @param date the reference date against which the examined date is checked
+     */
+    public static DateMatcher<Date> sameMonthOfYear(final java.sql.Date date) {
+        return isMonth(date.toLocalDate().getMonth());
     }
 
     /**
@@ -1090,6 +1285,17 @@ public abstract class DateMatchers {
         return sameSecondOfMinute(date);
     }
 
+	/**
+	 * @deprecated java.sql.Date does not support time-based comparisons. Prefer {@link SqlDateMatchers} for
+	 * java.sql.Date appropriate matchers
+	 * @param date the reference date against which the examined date is checked
+	 * @throws IllegalArgumentException
+	 */
+	@Deprecated
+	public static DateMatcher<Date> sameSecond(final java.sql.Date date) {
+		return sameSecondOfMinute(date);
+	}
+    
     /**
      * Creates a matcher that matches when the examined date is on the same second as the reference date
      * <p/>
@@ -1102,12 +1308,21 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameSecondOfMinute(final Date date) {
-        return new IsSecond<>(
-            new FieldDateWrapper(date, ChronoField.SECOND_OF_MINUTE),
-            (d, z) -> d.toInstant().atZone(z).get(ChronoField.SECOND_OF_MINUTE)
-        );
+        return new IsSecond<>(new FieldDateWrapper(date, ChronoField.SECOND_OF_MINUTE),
+                new FieldDateAdaptor(ChronoField.SECOND_OF_MINUTE));
     }
 
+	/**
+	 * @deprecated java.sql.Date does not support time-based comparisons. Prefer {@link SqlDateMatchers} for
+	 * java.sql.Date appropriate matchers
+	 * @param date the reference date against which the examined date is checked
+	 * @throws IllegalArgumentException
+	 */
+	@Deprecated
+    public static DateMatcher<Date> sameSecondOfMinute(final java.sql.Date date) {
+    	throw new IllegalArgumentException(UNSUPPORTED_SQL_DATE_UNIT);
+    }
+    
     /**
      * Creates a matcher that matches when the examined date is on the reference second
      * <p/>
@@ -1137,10 +1352,8 @@ public abstract class DateMatchers {
      * @param second the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> isSecond(final int second) {
-        return new IsSecond<>(
-            new FieldDateWrapper(second, ChronoField.SECOND_OF_MINUTE),
-            (d, z) -> d.toInstant().atZone(z).get(ChronoField.SECOND_OF_MINUTE)
-        );
+        return new IsSecond<>(new FieldDateWrapper(second, ChronoField.SECOND_OF_MINUTE),
+                new FieldDateAdaptor(ChronoField.SECOND_OF_MINUTE));
     }
 
     /**
@@ -1160,6 +1373,17 @@ public abstract class DateMatchers {
         return sameMillisecondOfSecond(date);
     }
 
+	/**
+	 * @deprecated java.sql.Date does not support time-based comparisons. Prefer {@link SqlDateMatchers} for
+	 * java.sql.Date appropriate matchers
+	 * @param date the reference date against which the examined date is checked
+	 * @throws IllegalArgumentException
+	 */
+	@Deprecated
+    public static DateMatcher<Date> sameMillisecond(final java.sql.Date date) {
+        return sameMillisecondOfSecond(date);
+    }
+    
     /**
      * Creates a matcher that matches when the examined date is on the same millisecond as the reference date
      * <p/>
@@ -1172,12 +1396,21 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameMillisecondOfSecond(final Date date) {
-        return new IsMillisecond<>(
-            new FieldDateWrapper(date, ChronoField.MILLI_OF_SECOND),
-            (d, z) -> d.toInstant().atZone(z).get(ChronoField.MILLI_OF_SECOND)
-        );
+        return new IsMillisecond<>(new FieldDateWrapper(date, ChronoField.MILLI_OF_SECOND),
+                new FieldDateAdaptor(ChronoField.MILLI_OF_SECOND));
     }
 
+	/**
+	 * @deprecated java.sql.Date does not support time-based comparisons. Prefer {@link SqlDateMatchers} for
+	 * java.sql.Date appropriate matchers
+	 * @param date the reference date against which the examined date is checked
+	 * @throws IllegalArgumentException
+	 */
+	@Deprecated
+    public static DateMatcher<Date> sameMillisecondOfSecond(final java.sql.Date date) {
+    	throw new IllegalArgumentException(UNSUPPORTED_SQL_DATE_UNIT);
+    }
+    
     /**
      * Creates a matcher that matches when the examined date is on the reference second
      * <p/>
@@ -1207,10 +1440,8 @@ public abstract class DateMatchers {
      * @param millisecond the millisecond against which the examined date is checked
      */
     public static DateMatcher<Date> isMillisecond(final int millisecond) {
-        return new IsMillisecond<>(
-            new FieldDateWrapper(millisecond, ChronoField.MILLI_OF_SECOND),
-            (d, z) -> d.toInstant().atZone(z).get(ChronoField.MILLI_OF_SECOND)
-        );
+        return new IsMillisecond<>(new FieldDateWrapper(millisecond, ChronoField.MILLI_OF_SECOND),
+                new FieldDateAdaptor(ChronoField.MILLI_OF_SECOND));
     }
 
     /**
@@ -1225,12 +1456,24 @@ public abstract class DateMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<Date> sameYear(final Date date) {
-        return new IsYear<>(
-            new FieldDateWrapper(date, ChronoField.YEAR),
-            (d, z) -> d.toInstant().atZone(z).get(ChronoField.YEAR)
-        );
+        return new IsYear<>(new FieldDateWrapper(date, ChronoField.YEAR), new FieldDateAdaptor(ChronoField.YEAR));
     }
 
+    /**
+     * Creates a matcher that matches when the examined date is on the same year as the reference date
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, sameYear(new Date()))
+     * </pre>
+     *
+     * @param date the reference date against which the examined date is checked
+     */
+    public static DateMatcher<Date> sameYear(final java.sql.Date date) {
+        return new IsYear<>(new FieldDateWrapper(date, ChronoField.YEAR), new FieldDateAdaptor(ChronoField.YEAR));
+    }
+    
     /**
      * Creates a matcher that matches when the examined date is on the same year as the reference year
      * <p/>
@@ -1243,10 +1486,7 @@ public abstract class DateMatchers {
      * @param year the reference year against which the examined date is checked
      */
     public static DateMatcher<Date> isYear(final int year) {
-        return new IsYear<>(
-            new FieldDateWrapper(year, ChronoField.YEAR),
-            (d, z) -> d.toInstant().atZone(z).get(ChronoField.YEAR)
-        );
+        return new IsYear<>(new FieldDateWrapper(year, ChronoField.YEAR), new FieldDateAdaptor(ChronoField.YEAR));
     }
 
     /**
@@ -1281,6 +1521,38 @@ public abstract class DateMatchers {
         return new IsWithin<>(period, unit, new DateWrapper(date), new DateFormatter());
     }
 
+    /**
+     * Creates a matcher that matches when the examined date is within a defined period the reference date
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, within(10, TimeUnit.MINUTES, new Date()))
+     * </pre>
+     *
+     * @param date the reference date against which the examined date is checked
+     * @deprecated Use {@link #within(long, ChronoUnit, Date)}
+     */
+    @Deprecated
+    public static DateMatcher<Date> within(final long period, final TimeUnit unit, final java.sql.Date date) {
+        return within(period, convertUnit(unit), date);
+    }
+
+    /**
+     * Creates a matcher that matches when the examined date is within a defined period the reference date
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, within(10, TimeUnit.MINUTES, new Date()))
+     * </pre>
+     *
+     * @param date the reference date against which the examined date is checked
+     */
+    public static DateMatcher<Date> within(final long period, final ChronoUnit unit, final java.sql.Date date) {
+        return new IsWithin<>(period, unit, new DateWrapper(date), new DateFormatter());
+    }
+    
     /**
      * Creates a matcher that matches when the examined date is within a defined period the reference date
      * <p/>
@@ -1423,9 +1695,9 @@ public abstract class DateMatchers {
             final int second,
             final int milliseconds) {
         return new IsWithin<>(period,
-            unit,
-            new DateWrapper(year, month, dayOfMonth, hour, minute, second, milliseconds),
-            new DateFormatter());
+                unit,
+                new DateWrapper(year, month, dayOfMonth, hour, minute, second, milliseconds),
+                new DateFormatter());
     }
 
     /**
@@ -1594,13 +1866,11 @@ public abstract class DateMatchers {
      * </pre>
      */
     public static DateMatcher<Date> isFirstDayOfMonth() {
-        return new IsMinimum<>(
-            ChronoField.DAY_OF_MONTH,
-            (d, z) -> d.toInstant().atZone(z).get(ChronoField.DAY_OF_MONTH),
-            (d, z) -> ChronoField.DAY_OF_MONTH.rangeRefinedBy(d.toInstant().atZone(z)),
-            new DatePartFormatter(),
-            () -> "the date is the first day of the month"
-        );
+        return new IsMinimum<>(ChronoField.DAY_OF_MONTH,
+                new FieldDateAdaptor(ChronoField.DAY_OF_MONTH),
+                new FieldDateRangeAdaptor(ChronoField.DAY_OF_MONTH),
+                new DatePartFormatter(),
+                () -> "the date is the first day of the month");
     }
 
     /**
@@ -1616,12 +1886,10 @@ public abstract class DateMatchers {
      * @param field the temporal field to check
      */
     public static DateMatcher<Date> isMinimum(final ChronoField field) {
-        return new IsMinimum<>(
-            field,
-            (d, z) -> d.toInstant().atZone(z).get(field),
-            (d, z) -> field.rangeRefinedBy(d.toInstant().atZone(z)),
-            new DatePartFormatter()
-        );
+        return new IsMinimum<>(field,
+                new FieldDateAdaptor(field),
+                new FieldDateRangeAdaptor(field),
+                new DatePartFormatter());
     }
 
     /**
@@ -1634,12 +1902,11 @@ public abstract class DateMatchers {
      * </pre>
      */
     public static DateMatcher<Date> isLastDayOfMonth() {
-        return new IsMaximum<>(
-            ChronoField.DAY_OF_MONTH,
-            (d, z) -> d.toInstant().atZone(z).get(ChronoField.DAY_OF_MONTH),
-            (d, z) -> ChronoField.DAY_OF_MONTH.rangeRefinedBy(d.toInstant().atZone(z)),
-            new DatePartFormatter(),
-            () -> "the date is the last day of the month");
+        return new IsMaximum<>(ChronoField.DAY_OF_MONTH,
+                new FieldDateAdaptor(ChronoField.DAY_OF_MONTH),
+                new FieldDateRangeAdaptor(ChronoField.DAY_OF_MONTH),
+                new DatePartFormatter(),
+                () -> "the date is the last day of the month");
     }
 
     /**
@@ -1655,12 +1922,10 @@ public abstract class DateMatchers {
      * @param field the temporal field to check
      */
     public static DateMatcher<Date> isMaximum(final ChronoField field) {
-        return new IsMaximum<>(
-            field,
-            (d, z) -> d.toInstant().atZone(z).get(field),
-            (d, z) -> field.rangeRefinedBy(d.toInstant().atZone(z)),
-            new DatePartFormatter()
-        );
+        return new IsMaximum<>(field,
+                new FieldDateAdaptor(field),
+                new FieldDateRangeAdaptor(field),
+                new DatePartFormatter());
     }
 
     /**
@@ -1673,10 +1938,8 @@ public abstract class DateMatchers {
      * </pre>
      */
     public static DateMatcher<Date> isMonth(final Month month) {
-        return new IsMonth<>(
-            new FieldDateWrapper(month.getValue(), ChronoField.MONTH_OF_YEAR),
-            (d, z) -> d.toInstant().atZone(z).get(ChronoField.MONTH_OF_YEAR)
-        );
+        return new IsMonth<>(new FieldDateWrapper(month.getValue(), ChronoField.MONTH_OF_YEAR),
+                new FieldDateAdaptor(ChronoField.MONTH_OF_YEAR));
     }
 
     /**
@@ -1845,7 +2108,7 @@ public abstract class DateMatchers {
      * </pre>
      */
     public static DateMatcher<Date> isLeapYear() {
-        return new IsLeapYear<>(DateMatchers::dateToZoneDateTime, new DateFormatter());
+        return new IsLeapYear<>(DateMatchers::toZoneDateTime, new DateFormatter());
     }
 
     private static ChronoUnit convertUnit(final TimeUnit unit) {
@@ -1869,8 +2132,19 @@ public abstract class DateMatchers {
         }
     }
 
-    private static Temporal dateToZoneDateTime(final Date date, final ZoneId zone) {
-        return date.toInstant().atZone(zone);
+    private static Temporal toZoneDateTime(final Date date, final ZoneId zone) {
+        if (date instanceof java.sql.Date) {
+            return ((java.sql.Date) date).toLocalDate();
+        } else {
+            return date.toInstant().atZone(zone);
+        }
     }
-
+    
+	private static DayOfWeek toDayOfWeek(Date date, ZoneId zone) {
+		if ( date instanceof java.sql.Date) {
+			return ((java.sql.Date) date).toLocalDate().getDayOfWeek();
+		} else {
+			return date.toInstant().atZone(zone).getDayOfWeek();
+		}
+	}
 }

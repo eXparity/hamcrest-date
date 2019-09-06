@@ -37,7 +37,20 @@ public class IsSameMillisecondOfSecondTest {
 		Date date = new Date(), other = addDateField(date, Calendar.SECOND, 1);
 		assertThat(other, DateMatchers.sameMillisecond(date));
 	}
-
+	
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isSqlDateSameMillisecond() {
+		Date date = new Date(), other = new java.sql.Date(date.getTime());
+		assertThat(other, DateMatchers.sameMillisecond(date));
+	}
+	
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isDateSameMillisecondSqlDate() {
+		Date date = new Date();
+		java.sql.Date other = new java.sql.Date(date.getTime());
+		assertThat(date, DateMatchers.sameMillisecond(other));
+	}
+	
 	@Test
 	public void isDateSameMillisecondOfSecond() {
 		Date date = new Date(), other = new Date(date.getTime());
@@ -54,5 +67,18 @@ public class IsSameMillisecondOfSecondTest {
 	public void isDateSameMillisecondOfSecondDifferentSecond() {
 		Date date = new Date(), other = addDateField(date, Calendar.SECOND, 1);
 		assertThat(other, DateMatchers.sameMillisecondOfSecond(date));
+	}
+	
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isSqlDateSameMillisecondOfSecond() {
+		Date date = new Date(), other = new java.sql.Date(date.getTime());
+		assertThat(other, DateMatchers.sameMillisecondOfSecond(date));
+	}
+
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isDateSameMillisecondOfSecondSqlDate() {
+		Date date = new Date();
+		java.sql.Date other = new java.sql.Date(date.getTime());
+		assertThat(date, DateMatchers.sameMillisecondOfSecond(other));
 	}
 }

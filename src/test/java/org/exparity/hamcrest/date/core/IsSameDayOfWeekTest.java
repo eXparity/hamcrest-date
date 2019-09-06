@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
 
@@ -32,6 +33,67 @@ public class IsSameDayOfWeekTest {
 		assertThat(AUG_07_2015_NOON_UTC_AS_DATE, DateMatchers.sameDayOfWeek(SEP_04_2015_NOON_UTC_AS_DATE));
 	}
 
+	@Test
+	public void isDateSameDayOfWeekAsSqlDate() {
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameDayOfWeek(AUG_04_2015_AS_SQL));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isDateNotSameDayOfWeekAsSqlDate() {
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameDayOfWeek(AUG_01_2015_AS_SQL));
+	}
+
+	@Test
+	public void isDateSameDayOfWeekDifferentMonthAsSqlDate() {
+		assertThat(AUG_07_2015_NOON_UTC_AS_DATE, DateMatchers.sameDayOfWeek(SEP_04_2015_AS_SQL));
+	}
+	
+	// java.sql.Date Matchers
+	@Test
+	public void isSqlDateSameDayOfWeek() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.sameDayOfWeek(AUG_04_2015_AS_SQL));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotSameDayOfWeek() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.sameDayOfWeek(AUG_01_2015_AS_SQL));
+	}
+
+	@Test
+	public void isSqlDateSameDayOfWeekDifferentMonth() {
+		assertThat(AUG_07_2015_AS_SQL, SqlDateMatchers.sameDayOfWeek(SEP_04_2015_AS_SQL));
+	}
+
+	@Test
+	public void isSqlDateSameDayOfWeekAsDate() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.sameDayOfWeek(AUG_04_2015_NOON_UTC_AS_DATE));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotSameDayOfWeekAsDate() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.sameDayOfWeek(AUG_01_2015_NOON_UTC_AS_DATE));
+	}
+
+	@Test
+	public void isSqlDateSameDayOfWeekDifferentMonthAsDate() {
+		assertThat(AUG_07_2015_AS_SQL, SqlDateMatchers.sameDayOfWeek(SEP_04_2015_NOON_UTC_AS_DATE));
+	}
+	
+	@Test
+	public void isSqlDateSameDayOfWeekUsingDateMatchers() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameDayOfWeek(AUG_04_2015_NOON_UTC_AS_DATE));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotSameDayOfWeekUsingDateMatchers() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameDayOfWeek(AUG_01_2015_NOON_UTC_AS_DATE));
+	}
+
+	@Test
+	public void isSqlDateSameDayOfWeekDifferentMonthUsingDateMatchers() {
+		assertThat(AUG_07_2015_AS_SQL, DateMatchers.sameDayOfWeek(SEP_04_2015_NOON_UTC_AS_DATE));
+	}
+	
 	// LocalDate Matchers
 	@Test
 	public void isLocalDateSameDayOfWeek() {

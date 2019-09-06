@@ -47,6 +47,19 @@ public class IsSameHourOfDayTest {
 		assertThat(other, DateMatchers.sameHour(date));
 	}
 
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isSqlDateSameHour() {
+		Date date = new Date(), other = new java.sql.Date(date.getTime());
+		assertThat(other, DateMatchers.sameHour(date));
+	}
+
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isDateSameHourSqlDate() {
+		Date date = new Date();
+		java.sql.Date other = new java.sql.Date(date.getTime());
+		assertThat(date, DateMatchers.sameHour(other));
+	}
+	
 	@Test
 	public void isDateSameHourOfDay() {
 		Date date = new Date(), other = new Date(date.getTime());
@@ -64,7 +77,7 @@ public class IsSameHourOfDayTest {
 		Date date = new Date(), other = addDateField(date, Calendar.DAY_OF_WEEK, 1);
 		assertThat(other, DateMatchers.sameHourOfDay(date));
 	}
-
+	
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateSameHourOfDayMidnightLocallyDifferentTimeZoneLowerOffsetPerspective() {
 		assertThat(JAN_01_2012_MIDNIGHT_GMT_AS_DATE, DateMatchers.sameHourOfDay(JAN_01_2012_MIDNIGHT_CET_AS_DATE).atZone(ZoneIds.GMT));
@@ -73,6 +86,13 @@ public class IsSameHourOfDayTest {
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateSameHourOfDayMidnightLocallyDifferentTimeZoneHigherOffsetPerspective() {
 		assertThat(JAN_01_2012_MIDNIGHT_GMT_AS_DATE, DateMatchers.sameHourOfDay(JAN_01_2012_MIDNIGHT_CET_AS_DATE).atZone(ZoneIds.CET));
+	}
+
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isDateSameHourOfDaySqlDate() {
+		Date date = new Date();
+		java.sql.Date other = new java.sql.Date(date.getTime());
+		assertThat(date, DateMatchers.sameHourOfDay(other));
 	}
 
 	// LocalDateTime Matchers

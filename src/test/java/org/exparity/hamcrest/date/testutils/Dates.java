@@ -10,8 +10,6 @@ import java.time.*;
 import java.util.Date;
 import java.util.TimeZone;
 
-import org.exparity.dates.en.FluentDate;
-
 /**
  * Static repository of dates used for testing
  *
@@ -38,6 +36,7 @@ public abstract class Dates {
 	public static final Date JUN_01_2012_11AM_UTC_AS_DATE = JUN(1, 2012).at(11, TimeZones.UTC_AS_TZ);
 	public static final Date JUN_15_2012_11AM_UTC_AS_DATE = JUN(15, 2012).at(11, TimeZones.UTC_AS_TZ);
 	public static final Date JUN_15_2012_11PM_UTC_AS_DATE = JUN(15, 2012).at(23, TimeZones.UTC_AS_TZ);
+	public static final Date JUN_16_2012_11PM_UTC_AS_DATE = JUN(16, 2012).at(23, TimeZones.UTC_AS_TZ);
 	public static final Date JUL_01_2012_11AM_UTC_AS_DATE = JUL(1, 2012).at(11, TimeZones.UTC_AS_TZ);
 	public static final Date AUG_01_2012_11AM_UTC_AS_DATE = AUG(1, 2012).at(11, TimeZones.UTC_AS_TZ);
 	public static final Date SEP_01_2012_11AM_UTC_AS_DATE = SEP(1, 2012).at(11, TimeZones.UTC_AS_TZ);
@@ -83,7 +82,7 @@ public abstract class Dates {
 	public static final Date AUG_04_2015_NOON_EST_AS_DATE = AUG(4, 2015).at(12, EST_AS_TZ);
 
 	public static final Date AUG_04_2015_1159_DEFAULT_AS_DATE = AUG(4, 2015).at(11, 59, TimeZone.getDefault());
-
+	
 	// LocalDate
 	public static final LocalDate JAN_01_2012 = LocalDate.of(2012, Month.JANUARY, 1);
 	public static final LocalDate JUN_14_2012 = LocalDate.of(2012, Month.JUNE, 14);
@@ -111,7 +110,7 @@ public abstract class Dates {
 	public static final LocalDate NOV_01_2015 = LocalDate.of(2015, Month.NOVEMBER, 1);
 	public static final LocalDate DEC_01_2015 = LocalDate.of(2015, Month.DECEMBER, 1);
 	public static final LocalDate AUG_04_2016 = LocalDate.of(2016, Month.AUGUST, 4);
-
+	
 	// LocalDateTime
 	public static final LocalDateTime JAN_01_2012_MIDNIGHT = LocalDateTime.of(JAN_01_2012, MIDNIGHT);
 	public static final LocalDateTime JUN_14_2012_NOON = LocalDateTime.of(JUN_14_2012, NOON);
@@ -172,10 +171,41 @@ public abstract class Dates {
 	public static final ZonedDateTime NOV_01_2015_NOON_UTC = ZonedDateTime.of(NOV_01_2015_NOON, ZoneIds.UTC);
 	public static final ZonedDateTime DEC_01_2015_NOON_UTC = ZonedDateTime.of(DEC_01_2015_NOON, ZoneIds.UTC);
 	public static final ZonedDateTime AUG_04_2016_NOON_UTC = ZonedDateTime.of(AUG_04_2016_NOON, ZoneIds.UTC);
-
 	public static final ZonedDateTime AUG_03_2015_11PM_EST = ZonedDateTime.of(AUG_03_2015_11PM, ZoneIds.EST);
 	public static final ZonedDateTime AUG_04_2015_NOON_EST = ZonedDateTime.of(AUG_04_2015_NOON, ZoneIds.EST);
 	public static final ZonedDateTime AUG_04_2015_01PM_EST = ZonedDateTime.of(AUG_04_2015_NOON, ZoneIds.EST);
 	public static final ZonedDateTime AUG_04_2015_NOON_CET = ZonedDateTime.of(AUG_04_2015_NOON, ZoneIds.CET);
 	public static final ZonedDateTime AUG_05_2015_01AM_CET = ZonedDateTime.of(AUG_05_2015_01AM, ZoneIds.CET);
+	
+	// SQL Date
+	public static final java.sql.Date JAN_01_2012_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2012, 1, 1));
+	public static final java.sql.Date JAN_02_2012_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2012, 1, 2));
+	public static final java.sql.Date JAN_03_2012_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2012, 1, 3));
+	public static final java.sql.Date JAN_04_2012_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2012, 1, 4));
+	public static final java.sql.Date JAN_05_2012_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2012, 1, 5));
+	public static final java.sql.Date JAN_06_2012_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2012, 1, 6));
+	public static final java.sql.Date JAN_07_2012_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2012, 1, 7));
+	public static final java.sql.Date JUN_14_2012_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2012, 6, 14));	
+	public static final java.sql.Date JUN_15_2012_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2012, 6, 15));	
+	public static final java.sql.Date JUN_16_2012_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2012, 6, 16));	
+	public static final java.sql.Date JAN_01_2015_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2015, 1, 1));
+	public static final java.sql.Date FEB_01_2015_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2015, 2, 1));
+	public static final java.sql.Date MAR_01_2015_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2015, 3, 1));
+	public static final java.sql.Date APR_01_2015_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2015, 4, 1));
+	public static final java.sql.Date MAY_01_2015_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2015, 5, 1));
+	public static final java.sql.Date JUN_01_2015_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2015, 6, 1));
+	public static final java.sql.Date JUL_01_2015_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2015, 7, 1));
+	public static final java.sql.Date AUG_01_2015_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2015, 8, 1));
+	public static final java.sql.Date AUG_03_2015_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2015, 8, 3));
+	public static final java.sql.Date AUG_04_2015_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2015, 8, 4));
+	public static final java.sql.Date AUG_05_2015_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2015, 8, 5));
+	public static final java.sql.Date AUG_06_2015_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2015, 8, 6));
+	public static final java.sql.Date AUG_07_2015_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2015, 8, 7));
+	public static final java.sql.Date SEP_01_2015_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2015, 9, 1));
+	public static final java.sql.Date SEP_04_2015_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2015, 9, 4));
+	public static final java.sql.Date OCT_01_2015_AS_SQL = java.sql.Date.valueOf(OCT_01_2015);
+	public static final java.sql.Date NOV_01_2015_AS_SQL = java.sql.Date.valueOf(NOV_01_2015);
+	public static final java.sql.Date DEC_01_2015_AS_SQL = java.sql.Date.valueOf(DEC_01_2015);
+	public static final java.sql.Date AUG_04_2016_AS_SQL = java.sql.Date.valueOf(AUG_04_2016);
+	public static final java.sql.Date AUG_31_2015_AS_SQL = java.sql.Date.valueOf(AUG_31_2015);
 }

@@ -1,8 +1,6 @@
 package org.exparity.hamcrest.date.core;
 
-import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON;
-import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_UTC_AS_DATE;
-import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_UTC;
+import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.LocalTime;
@@ -33,6 +31,11 @@ public class IsMinuteTest {
 	public void isDateNotMinute() {
 		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.isMinute(1));
 	}
+	
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isSqlDateMinute() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.isMinute(0));
+	}
 
 	@Test
 	public void isDateSameMinute() {
@@ -44,6 +47,11 @@ public class IsMinuteTest {
 		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameMinute(1));
 	}
 
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isSqlDateSameMinute() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameMinute(0));
+	}
+	
 	// LocalDateTime Matchers
 	@Test
 	public void isLocalDateTimeMinute() {

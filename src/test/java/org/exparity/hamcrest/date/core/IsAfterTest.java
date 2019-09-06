@@ -14,6 +14,7 @@ import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.Months;
+import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.exparity.hamcrest.date.testutils.ZoneIds;
 import org.testng.annotations.Test;
@@ -26,7 +27,7 @@ import org.testng.annotations.Test;
 @SuppressWarnings("deprecation")
 public class IsAfterTest {
 
-    private static final String ASSERTION_PATTERN = "\\sExpected: the date is after (?s:.)+?\\s     but: date is (?s:.)+";
+	private static final String ASSERTION_PATTERN = "\\sExpected: the date is after (?s:.)+?\\s     but: date is (?s:.)+";
 
 	// Date Matchers
 
@@ -102,17 +103,20 @@ public class IsAfterTest {
 
 	@Test
 	public void isDateAfterEarlierDayMonthYear() {
-		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.after(new DayMonthYear(14, Months.JUNE, 2012)).atZone(UTC));
+		assertThat(JUN_15_2012_11PM_UTC_AS_DATE,
+				DateMatchers.after(new DayMonthYear(14, Months.JUNE, 2012)).atZone(UTC));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateAfterLaterDayMonthYear() {
-		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.after(new DayMonthYear(16, Months.JUNE, 2012)).atZone(UTC));
+		assertThat(JUN_15_2012_11PM_UTC_AS_DATE,
+				DateMatchers.after(new DayMonthYear(16, Months.JUNE, 2012)).atZone(UTC));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateAfterSameDayMonthYear() {
-		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.after(new DayMonthYear(15, Months.JUNE, 2012)).atZone(UTC));
+		assertThat(JUN_15_2012_11PM_UTC_AS_DATE,
+				DateMatchers.after(new DayMonthYear(15, Months.JUNE, 2012)).atZone(UTC));
 	}
 
 	@Test
@@ -130,8 +134,85 @@ public class IsAfterTest {
 		assertThat(JUN_15_2012_11AM_UTC_AS_DATE, DateMatchers.after(2012, Months.JUNE, 15, 11, 0, 0).atZone(UTC));
 	}
 
-	// LocalDate Matchers
+	@Test
+	public void isSqlDateAfterEarlierDate() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.after(AUG_03_2015_NOON_UTC_AS_DATE));
+	}
 
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateAfterLaterDate() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.after(AUG_05_2015_NOON_UTC_AS_DATE));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateAfterSameDate() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.after(AUG_04_2015_NOON_UTC_AS_DATE));
+	}
+
+	// java.sql.Date Matchers
+	
+	@Test
+	public void isSqlDateAfterEarlierSqlDate() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.after(AUG_03_2015_AS_SQL));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateAfterLaterSqlDate() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.after(AUG_05_2015_AS_SQL));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateAfterSameSqlDate() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.after(AUG_04_2015_AS_SQL));
+	}
+
+	@Test
+	public void isSqlDateAfterEarlierJavaDate() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.after(AUG_03_2015_NOON_UTC_AS_DATE));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateAfterLaterJavaDate() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.after(AUG_05_2015_NOON_UTC_AS_DATE));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateAfterSameJavaDate() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.after(AUG_04_2015_NOON_UTC_AS_DATE));
+	}
+	
+	@Test
+	public void isSqlDateAfterEarlierLocalDate() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.after(AUG_03_2015));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateAfterLaterLocalDate() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.after(AUG_05_2015));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateAfterSameLocalDate() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.after(AUG_04_2015));
+	}
+
+	@Test
+	public void isSqlDateAfterEarlierDay() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.after(2015, AUGUST, 3));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateAfterLaterDay() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.after(2015, AUGUST, 5));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateAfterLaterSameDay() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.after(2015, AUGUST, 4));
+	}
+
+	// LocalDate Matchers
+	
 	@Test
 	public void isLocalDateAfterEarlierLocalDate() {
 		assertThat(AUG_04_2015, LocalDateMatchers.after(AUG_03_2015));
@@ -238,12 +319,14 @@ public class IsAfterTest {
 
 	@Test
 	public void isZonedDateTimeAfterDateTimeEarlierZone() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.after(2015, AUGUST, 4, 12, 0, 0, 0, ZoneIds.CET).atZone(UTC));
+		assertThat(AUG_04_2015_NOON_UTC,
+				ZonedDateTimeMatchers.after(2015, AUGUST, 4, 12, 0, 0, 0, ZoneIds.CET).atZone(UTC));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isZonedDateTimeAfterDateTimeLaterZone() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.after(2015, AUGUST, 4, 12, 0, 0, 0, ZoneIds.EST).atZone(UTC));
+		assertThat(AUG_04_2015_NOON_UTC,
+				ZonedDateTimeMatchers.after(2015, AUGUST, 4, 12, 0, 0, 0, ZoneIds.EST).atZone(UTC));
 	}
 
 	// LocalTime Matchers

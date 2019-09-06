@@ -13,6 +13,7 @@ import java.util.Date;
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
 
@@ -54,6 +55,67 @@ public class IsDayTest {
 		assertThat(new Date(), DateMatchers.isTomorrow());
 	}
 
+	// java.sql.Date Matchers
+	@Test
+	public void isSqlDateToday() {
+		assertThat(java.sql.Date.valueOf(LocalDate.now()), SqlDateMatchers.isToday());
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotToday() {
+		assertThat(java.sql.Date.valueOf(LocalDate.now().plusDays(1)), SqlDateMatchers.isToday());
+	}
+
+	@Test
+	public void isSqlDateYesterday() {
+		assertThat(java.sql.Date.valueOf(LocalDate.now().minusDays(1)), SqlDateMatchers.isYesterday());
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotYesterday() {
+		assertThat(java.sql.Date.valueOf(LocalDate.now()), SqlDateMatchers.isYesterday());
+	}
+
+	@Test
+	public void isSqlDateTomorrow() {
+		assertThat(java.sql.Date.valueOf(LocalDate.now().plusDays(1)), SqlDateMatchers.isTomorrow());
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotTomorrow() {
+		assertThat(java.sql.Date.valueOf(LocalDate.now()), SqlDateMatchers.isTomorrow());
+	}
+
+	@Test
+	public void isSqlDateTodayUsingDateMatchers() {
+		assertThat(java.sql.Date.valueOf(LocalDate.now()), DateMatchers.isToday());
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotTodayUsingDateMatchers() {
+		assertThat(java.sql.Date.valueOf(LocalDate.now().plusDays(1)), DateMatchers.isToday());
+	}
+
+	@Test
+	public void isSqlDateYesterdayUsingDateMatchers() {
+		assertThat(java.sql.Date.valueOf(LocalDate.now().minusDays(1)), DateMatchers.isYesterday());
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotYesterdayUsingDateMatchers() {
+		assertThat(java.sql.Date.valueOf(LocalDate.now()), DateMatchers.isYesterday());
+	}
+
+	@Test
+	public void isSqlDateTomorrowUsingDateMatchers() {
+		assertThat(java.sql.Date.valueOf(LocalDate.now().plusDays(1)), DateMatchers.isTomorrow());
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotTomorrowUsingDateMatchers() {
+		assertThat(java.sql.Date.valueOf(LocalDate.now()), DateMatchers.isTomorrow());
+	}
+	
 	// LocalDate Matchers
 	@Test
 	public void isLocalDateToday() {

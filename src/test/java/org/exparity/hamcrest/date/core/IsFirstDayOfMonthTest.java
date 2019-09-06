@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
 
@@ -25,6 +26,28 @@ public class IsFirstDayOfMonthTest {
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotFirstDayOfMonth() {
 		assertThat(AUG_31_2015_NOON_UTC_AS_DATE, DateMatchers.isFirstDayOfMonth());
+	}
+
+	// java.sql.Date Matchers
+	@Test
+	public void isSqlDateFirstDayOfMonth() {
+		assertThat(AUG_01_2015_AS_SQL, SqlDateMatchers.isFirstDayOfMonth());
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotFirstDayOfMonth() {
+		assertThat(AUG_31_2015_AS_SQL, SqlDateMatchers.isFirstDayOfMonth());
+	}
+
+	// java.sql.Date Matchers
+	@Test
+	public void isSqlDateFirstDayOfMonthUsingDateMatchers() {
+		assertThat(AUG_01_2015_AS_SQL, DateMatchers.isFirstDayOfMonth());
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotFirstDayOfMonthUsingDateMatchers() {
+		assertThat(AUG_31_2015_AS_SQL, DateMatchers.isFirstDayOfMonth());
 	}
 
 	// LocalDate Matchers
