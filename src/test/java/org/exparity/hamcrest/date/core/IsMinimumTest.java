@@ -10,6 +10,7 @@ import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
+import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
 
@@ -31,6 +32,27 @@ public class IsMinimumTest {
         assertThat(AUG_31_2015_NOON_UTC_AS_DATE, DateMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
     }
 
+    // java.sql.Date Matchers
+    @Test
+    public void isSqlDateFirstDayOfMonth() {
+        assertThat(AUG_01_2015_AS_SQL, SqlDateMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isSqlDateNotFirstDayOfMonth() {
+        assertThat(AUG_31_2015_AS_SQL, SqlDateMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
+    }
+    
+    @Test
+    public void isSqlDateFirstDayOfMonthUsingDateMatchers() {
+        assertThat(AUG_01_2015_AS_SQL, DateMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isSqlDateNotFirstDayOfMonthUsingDateMatchers() {
+        assertThat(AUG_31_2015_AS_SQL, DateMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
+    }
+    
     // LocalDate Matchers
     @Test
     public void isLocalDateFirstDayOfMonth() {

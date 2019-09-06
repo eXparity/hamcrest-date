@@ -1,6 +1,6 @@
 package org.exparity.hamcrest.date.core;
 
-import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_UTC_AS_DATE;
+import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.exparity.hamcrest.date.DateMatchers;
@@ -27,6 +27,11 @@ public class IsMillisecondTest {
 		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.isMillisecond(1));
 	}
 
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isSqlDateMillisecond() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.isMillisecond(0));
+	}
+
 	@Test
 	public void isDateSameMillisecond() {
 		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameMillisecond(0));
@@ -37,4 +42,8 @@ public class IsMillisecondTest {
 		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameMillisecond(1));
 	}
 
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isSqlDateSameMillisecond() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameMillisecond(0));
+	}
 }

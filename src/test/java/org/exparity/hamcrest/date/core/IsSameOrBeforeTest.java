@@ -31,7 +31,7 @@ public class IsSameOrBeforeTest {
 	// Date Matchers
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
-	public void isDateSameOrBeforeLaterDate() {
+	public void isDateSameOrBeforeLaterTimeOnSameDay() {
 		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.sameOrBefore(JUN_15_2012_11AM_UTC_AS_DATE).atZone(UTC));
 	}
 
@@ -115,6 +115,83 @@ public class IsSameOrBeforeTest {
 		assertThat(JUN_15_2012_11AM_UTC_AS_DATE, DateMatchers.sameOrBefore(2012, Months.JUNE, 15, 11, 0, 0).atZone(UTC));
 	}
 
+	// java.sql.Date Matchers
+
+	@Test
+	public void isSqlDateSameOrBeforeLaterDate() {
+		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(JUN_16_2012_11PM_UTC_AS_DATE).atZone(UTC));
+	}
+
+	@Test
+	public void isSqlDateSameOrBeforeDate() {
+		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(JUN_15_2012_11PM_UTC_AS_DATE).atZone(UTC));
+	}
+
+	@Test
+	public void isSqlDateSameOrBeforeSameDate() {
+		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(JUN_15_2012_11PM_UTC_AS_DATE).atZone(UTC));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateSameOrBeforeLaterLocalDate() {
+		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(JUN_14_2012).atZone(UTC));
+	}
+
+	@Test
+	public void isSqlDateSameOrBeforeLocalDate() {
+		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(JUN_16_2012).atZone(UTC));
+	}
+
+	@Test
+	public void isSqlDateSameOrBeforeSameLocalDate() {
+		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(JUN_15_2012).atZone(UTC));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateSameOrBeforeLaterDay() {
+		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(2012, Months.JUNE, 14).atZone(UTC));
+	}
+
+	@Test
+	public void isSqlDateSameOrBeforeDay() {
+		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(2012, Months.JUNE, 16).atZone(UTC));
+	}
+
+	@Test
+	public void isSqlDateSameOrBeforeSameDay() {
+		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(2012, Months.JUNE, 15).atZone(UTC));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateSameOrBeforeLaterDayMonthYear() {
+		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(new DayMonthYear(14, Months.JUNE, 2012)).atZone(UTC));
+	}
+
+	@Test
+	public void isSqlDateSameOrBeforeDayMonthYear() {
+		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(new DayMonthYear(16, Months.JUNE, 2012)).atZone(UTC));
+	}
+
+	@Test
+	public void isSqlDateSameOrBeforeSameDayMonthYear() {
+		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(new DayMonthYear(15, Months.JUNE, 2012)).atZone(UTC));
+	}
+
+	@Test
+	public void isSqlDateSameOrBeforeLaterDateTimeOnSameDay() {
+		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(2012, Months.JUNE, 15, 10, 59, 59).atZone(UTC));
+	}
+
+	@Test
+	public void isSqlDateSameOrBeforeDateTime() {
+		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(2012, Months.JUNE, 15, 11, 0, 1).atZone(UTC));
+	}
+
+	@Test
+	public void isSqlDateSameOrBeforeSameDateTime() {
+		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(2012, Months.JUNE, 15, 11, 0, 0).atZone(UTC));
+	}
+	
 	// LocalDate Matchers
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)

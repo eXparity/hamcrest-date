@@ -96,6 +96,38 @@ public class IsSameInstantTest {
 		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.sameInstant(2012, Months.JUNE, 15, 23, 0, 0, 0).atZone(UTC));
 	}
 
+	// java.sql.Date Matchers
+	
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isDateSameInstantEarlierSqlDate() {
+		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.sameInstant(JUN_14_2012_AS_SQL).atZone(UTC));
+	}
+
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isDateSameInstantLaterSqlDate() {
+		assertThat(JUN_15_2012_11AM_UTC_AS_DATE, DateMatchers.sameInstant(JUN_16_2012_AS_SQL).atZone(UTC));
+	}
+
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isDateSameInstantSameSqlDate() {
+		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.sameInstant(JUN_15_2012_AS_SQL).atZone(UTC));
+	}
+	
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isSqlDateSameInstantLaterDate() {
+        assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameInstant(AUG_05_2015_NOON_UTC_AS_DATE).atZone(UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isSqlDateSameInstantEarlierDate() {
+        assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameInstant(AUG_03_2015_NOON_UTC_AS_DATE).atZone(UTC));
+    }
+
+    @Test
+    public void isSqlDateSameInstantSameDate() {
+        assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameInstant(AUG_04_2015_NOON_UTC_AS_DATE).atZone(UTC));
+    }
+	
 	// LocalDateTime Matchers
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)

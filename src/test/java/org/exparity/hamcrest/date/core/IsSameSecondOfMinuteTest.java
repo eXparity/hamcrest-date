@@ -27,7 +27,7 @@ public class IsSameSecondOfMinuteTest {
 
 	// Date Matchers
 	@Test
-	public void isDateSameHour() {
+	public void isDateSameSecond() {
 		Date date = new Date(), other = new Date(date.getTime());
 		assertThat(other, DateMatchers.sameSecond(date));
 	}
@@ -44,6 +44,19 @@ public class IsSameSecondOfMinuteTest {
 		assertThat(other, DateMatchers.sameSecond(date));
 	}
 
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isSqlDateSameSecond() {
+		Date date = new Date(), other = new java.sql.Date(date.getTime());
+		assertThat(other, DateMatchers.sameSecond(date));
+	}
+
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isDateSameSecondSqlDate() {
+		Date date = new Date();
+		java.sql.Date other = new java.sql.Date(date.getTime());
+		assertThat(date, DateMatchers.sameSecond(other));
+	}
+	
 	@Test
 	public void isDateSameSecondOfMinute() {
 		Date date = new Date(), other = new Date(date.getTime());
@@ -62,6 +75,19 @@ public class IsSameSecondOfMinuteTest {
 		assertThat(other, DateMatchers.sameSecondOfMinute(date));
 	}
 
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isSqlDateSameSecondOfMinute() {
+		Date date = new Date(), other = new java.sql.Date(date.getTime());
+		assertThat(other, DateMatchers.sameSecondOfMinute(date));
+	}
+
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isDateSameSecondOfMinuteSqlDate() {
+		Date date = new Date();
+		java.sql.Date other = new java.sql.Date(date.getTime());
+		assertThat(date, DateMatchers.sameSecondOfMinute(other));
+	}
+	
 	// LocalDateTime Matchers
 	@Test
 	public void isLocalDateTimeSameSecondOfMinute() {

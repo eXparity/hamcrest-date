@@ -27,7 +27,7 @@ public class IsSameMinuteOfHourTest {
 
 	// Date Matchers
 	@Test
-	public void isDateSameHour() {
+	public void isDateSameMinute() {
 		Date date = new Date(), other = new Date(date.getTime());
 		assertThat(other, DateMatchers.sameMinute(date));
 	}
@@ -44,6 +44,19 @@ public class IsSameMinuteOfHourTest {
 		assertThat(other, DateMatchers.sameMinute(date));
 	}
 
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isSqlDateSameMinute() {
+		Date date = new Date(), other = new java.sql.Date(date.getTime());
+		assertThat(other, DateMatchers.sameMinute(date));
+	}
+
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isDateSameMinuteSqlDate() {
+		Date date = new Date();
+		java.sql.Date other = new java.sql.Date(date.getTime());
+		assertThat(other, DateMatchers.sameMinute(date));
+	}
+	
 	@Test
 	public void isDateSameMinuteOfHour() {
 		Date date = new Date(), other = new Date(date.getTime());
@@ -61,7 +74,20 @@ public class IsSameMinuteOfHourTest {
 		Date date = new Date(), other = addDateField(date, Calendar.HOUR, 1);
 		assertThat(other, DateMatchers.sameMinuteOfHour(date));
 	}
+	
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isSqlDateSameMinuteOfHour() {
+		Date date = new Date(), other = new java.sql.Date(date.getTime());
+		assertThat(other, DateMatchers.sameMinuteOfHour(date));
+	}
 
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	public void isSameMinuteOfHourSqlDate() {
+		Date date = new Date();
+		java.sql.Date other = new java.sql.Date(date.getTime());
+		assertThat(other, DateMatchers.sameMinuteOfHour(date));
+	}
+	
 	// LocalDateTime Matchers
 	@Test
 	public void isLocalDateTimeSameMinuteOfHour() {

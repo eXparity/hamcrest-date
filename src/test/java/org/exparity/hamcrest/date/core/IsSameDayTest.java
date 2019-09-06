@@ -106,6 +106,38 @@ public class IsSameDayTest {
 		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.sameDay(new DayMonthYear(15, Months.JUNE, 2012)).atZone(UTC));
 	}
 
+	// java.sql.Date Matchers
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateSameDayEarlierLocalDate() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameDay(AUG_03_2015_NOON_UTC_AS_DATE));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateSameDayLaterLocalDate() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameDay(AUG_05_2015_NOON_UTC_AS_DATE));
+	}
+
+	@Test
+	public void isSqlDateSameDaySameLocalDate() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameDay(AUG_04_2015_NOON_UTC_AS_DATE));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateSameDayEarlierDay() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.isDay(2015, AUGUST, 3));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateSameDayLaterDay() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.isDay(2015, AUGUST, 5));
+	}
+
+	@Test
+	public void isSqlDateSameDaySameDay() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.isDay(2015, AUGUST, 4));
+	}
+	
 	// LocalDate Matchers
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
@@ -134,7 +166,7 @@ public class IsSameDayTest {
 	}
 
 	@Test
-	public void isLocalDateSameDayLaterSameDay() {
+	public void isLocalDateSameDaySameDay() {
 		assertThat(AUG_04_2015, LocalDateMatchers.isDay(2015, AUGUST, 4));
 	}
 

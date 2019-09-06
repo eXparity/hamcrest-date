@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.exparity.hamcrest.date.testutils.ZoneIds;
 import org.testng.annotations.Test;
@@ -41,6 +42,27 @@ public class IsLeapYearTest {
 		assertThat(JAN_01_2012_MIDNIGHT_CET_AS_DATE, DateMatchers.isLeapYear().atZone(ZoneIds.UTC));
 	}
 
+	// java.sql.Date Matchers
+	@Test
+	public void isSqlDateLeapYear() {
+		assertThat(AUG_04_2016_AS_SQL, SqlDateMatchers.isLeapYear());
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotLeapYear() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.isLeapYear());
+	}
+
+	@Test
+	public void isSqlDateLeapYearUsingDateMatchers() {
+		assertThat(AUG_04_2016_AS_SQL, DateMatchers.isLeapYear());
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotLeapYearUsingDateMatchers() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.isLeapYear());
+	}
+	
 	// LocalDate Matchers
 	@Test
 	public void isLocalDateLeapYear() {

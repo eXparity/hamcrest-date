@@ -1,8 +1,6 @@
 package org.exparity.hamcrest.date.core;
 
-import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON;
-import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_UTC_AS_DATE;
-import static org.exparity.hamcrest.date.testutils.Dates.AUG_04_2015_NOON_UTC;
+import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.LocalTime;
@@ -34,6 +32,11 @@ public class IsSecondTest {
         assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.isSecond(1));
     }
 
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+    public void isSqlDateSecond() {
+        assertThat(AUG_04_2015_AS_SQL, DateMatchers.isSecond(0));
+    }
+    
     @Test
     public void isDateSameSecond() {
         assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameSecond(0));
@@ -44,6 +47,11 @@ public class IsSecondTest {
         assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameSecond(1));
     }
 
+	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+    public void isSqlDateSameSecond() {
+        assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameSecond(0));
+    }
+	
     // LocalDateTime Matchers
     @Test
     public void isLocalDateTimeSecond() {

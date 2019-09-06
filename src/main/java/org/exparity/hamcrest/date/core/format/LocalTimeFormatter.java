@@ -2,6 +2,7 @@ package org.exparity.hamcrest.date.core.format;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import org.exparity.hamcrest.date.core.TemporalFormatter;
 
@@ -13,11 +14,20 @@ import org.exparity.hamcrest.date.core.TemporalFormatter;
  */
 public class LocalTimeFormatter implements TemporalFormatter<LocalTime> {
 
-	private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("hh:mm:ss a");
+	private static final String TIME_PATTERN = "hh:mm:ss a";
+	private final DateTimeFormatter formatter;;
+
+	public LocalTimeFormatter(Locale locale) {
+		this.formatter = DateTimeFormatter.ofPattern(TIME_PATTERN, locale);
+	}
+	
+	public LocalTimeFormatter() {
+		this(Locale.getDefault(Locale.Category.FORMAT));
+	}
 
 	@Override
 	public String describe(final LocalTime temporal) {
-		return temporal.format(DATE_TIME_FORMAT);
+		return temporal.format(formatter);
 	}
 
 	@Override

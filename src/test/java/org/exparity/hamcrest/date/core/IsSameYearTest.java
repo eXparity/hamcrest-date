@@ -1,17 +1,16 @@
 package org.exparity.hamcrest.date.core;
 
-import static java.util.Calendar.YEAR;
-import static org.exparity.hamcrest.date.testutils.DateMatcherTestUtils.addDateField;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.exparity.hamcrest.date.testutils.Dates.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-import java.util.Date;
 
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
 
@@ -25,16 +24,65 @@ public class IsSameYearTest {
 	// Date Matchers
 	@Test
 	public void isDateSameYear() {
-		Date date = new Date(), other = new Date(date.getTime());
-		assertThat(other, DateMatchers.sameYear(date));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameYear(SEP_04_2015_NOON_UTC_AS_DATE));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateNotSameYear() {
-		Date date = new Date(), other = addDateField(date, YEAR, 1);
-		assertThat(other, DateMatchers.sameYear(date));
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameYear(AUG_04_2016_NOON_UTC_AS_DATE));
 	}
 
+	@Test
+	public void isDateSameYearAsSqlDate() {
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameYear(SEP_04_2015_AS_SQL));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isDateNotSameYearAsSqlDate() {
+		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameYear(AUG_04_2016_AS_SQL));
+	}
+	
+	// java.sql.Date Matchers
+	@Test
+	public void isSqlDateSameYear() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.sameYear(AUG_04_2015_AS_SQL));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotSameYear() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.sameYear(AUG_04_2016_AS_SQL));
+	}
+	
+	@Test
+	public void isSqlDateSameYearAsDate() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.sameYear(AUG_04_2015_NOON_UTC_AS_DATE));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotSameYearAsDate() {
+		assertThat(AUG_04_2015_AS_SQL, SqlDateMatchers.sameYear(AUG_04_2016_NOON_UTC_AS_DATE));
+	}
+	
+	@Test
+	public void isSqlDateSameYearUsingDateMatchers() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameYear(AUG_04_2015_AS_SQL));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotSameYearUsingDateMatchers() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameYear(AUG_04_2016_AS_SQL));
+	}
+	
+	@Test
+	public void isSqlDateSameYearAsDateUsingDateMatchers() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameYear(AUG_04_2015_NOON_UTC_AS_DATE));
+	}
+
+	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	public void isSqlDateNotSameYearAsDateUsingDateMatchers() {
+		assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameYear(AUG_04_2016_NOON_UTC_AS_DATE));
+	}
+	
 	// LocalDate Matchers
 	@Test
 	public void isLocalDateSameYear() {
