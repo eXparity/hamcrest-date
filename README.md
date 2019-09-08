@@ -21,7 +21,6 @@ A maven project
         <version>2.0.5</version>
     </dependency>
 
-
 Versions 2.x.x onwards require Java 8. If you are using an earlier version of Java 8 then include version
 
     <dependency>
@@ -29,8 +28,6 @@ Versions 2.x.x onwards require Java 8. If you are using an earlier version of Ja
         <artifactId>hamcrest-date</artifactId>
         <version>1.1.0</version>
     </dependency>
-
-
             
 Binaries
 --------
@@ -39,7 +36,7 @@ Hamcrest Date has a single binary, hamcrest-date.jar, which contains all the dat
 Usage
 -------------
 
-The matchers are exposed as static methods on the LocalDateMatchers, LocalTimeMatchers, LocalDateTimeMatchers, ZonedDateTimeMatchers, and DateMatchers class. For example
+The matchers are exposed as static methods on the LocalDateMatchers, LocalTimeMatchers, LocalDateTimeMatchers, ZonedDateTimeMatchers, SqlDateMatchers and DateMatchers class. For example
 
     LocalDate today = LocalDate.now(); myBirthday = LocalDate.of(2015, AUGUST, 9);
     MatcherAssert.assertThat(today, LocalDateMatchers.sameDay(myBirthday));
@@ -69,6 +66,10 @@ or to match LocalTime values:
     LocalTime myAppointment = LocalTime.NOON;
     assertThat(LocalTime.now(), within(15, MINUTES, myAppointment));
 
+or to match java.sql.Date values:
+
+    java.sql.Date myAppointment = java.sql.Date.valueOf(LocalDate.of(2015, AUGUST, 9);
+    assertThat(new java.sql.Date(), within(15, MINUTES, myAppointment));
 
 The libary includes date matchers for:
 
@@ -132,6 +133,11 @@ The source includes a pom.xml for building with Maven
 
 Release Notes
 -------------
+Changes 2.0.5 -> 2.0.6
+  * Fix Issue 27 - (UnsupportedOperationException with java.sql.Date)
+  * Handle java.sql.Date in DateMatchers
+  * Add SqlDateMatchers
+  
 Changes 2.0.4 -> 2.0.5
   * Fix Issue 20 - (DateMatchers.isDay(int, Month, int) not adapted for non-zero time zones)
   * Support for time zones in temporal fields matchers
