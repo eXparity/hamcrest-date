@@ -20,8 +20,8 @@ import org.testng.annotations.Test;
 @SuppressWarnings("deprecation")
 public class IsDayOfWeekTest {
 
-    private static final String ASSERTION_PATTERN = "\\sExpected: the date is on a \\p{IsAlphabetic}+?\\s     but: the date is on a \\p{IsAlphabetic}+";
-    private static final String ASSERTION_PATTERN_ANYOF = "\\sExpected: \\(the date is on a \\p{IsAlphabetic}+?( or the date is on a \\p{IsAlphabetic}+?)+?\\)\\s     but: the date is on a \\p{IsAlphabetic}+";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date is on a [A-Z][a-z]+?\\s     but: the date is on a [A-Z][a-z]+";
+    private static final String ASSERTION_PATTERN_MULTIPLE_DAYS = "\\sExpected: the date is on a [A-Za-z, ]+?\\s     but: the date is on a [A-Z][a-z]+";
 
     // Date Matchers
     @Test
@@ -70,27 +70,27 @@ public class IsDayOfWeekTest {
         assertThat(JAN_07_2012_11AM_UTC_AS_DATE, DateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isDateMondayIsNotWeekend() {
         assertThat(JAN_02_2012_11AM_UTC_AS_DATE, DateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isDateTuesdayIsNotWeekend() {
         assertThat(JAN_03_2012_11AM_UTC_AS_DATE, DateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isDateWednesdayIsNotWeekend() {
         assertThat(JAN_04_2012_11AM_UTC_AS_DATE, DateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isDateThursdayIsNotWeekend() {
         assertThat(JAN_05_2012_11AM_UTC_AS_DATE, DateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isDateFridayIsNotWeekend() {
         assertThat(JAN_06_2012_11AM_UTC_AS_DATE, DateMatchers.isWeekend());
     }
@@ -104,12 +104,12 @@ public class IsDayOfWeekTest {
         assertThat(JAN_06_2012_11AM_UTC_AS_DATE, DateMatchers.isWeekday());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isDateSaturdayIsNotWeekday() {
         assertThat(JAN_07_2012_11AM_UTC_AS_DATE, DateMatchers.isWeekday());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isDateSundayIsNotWeekday() {
         assertThat(JAN_01_2012_11AM_UTC_AS_DATE, DateMatchers.isWeekday());
     }
@@ -211,27 +211,27 @@ public class IsDayOfWeekTest {
         assertThat(JAN_07_2012_AS_SQL, SqlDateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isSqlDateMondayIsNotWeekend() {
         assertThat(JAN_02_2012_AS_SQL, SqlDateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isSqlDateTuesdayIsNotWeekend() {
         assertThat(JAN_03_2012_AS_SQL, SqlDateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isSqlDateWednesdayIsNotWeekend() {
         assertThat(JAN_04_2012_AS_SQL, SqlDateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isSqlDateThursdayIsNotWeekend() {
         assertThat(JAN_05_2012_AS_SQL, SqlDateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isSqlDateFridayIsNotWeekend() {
         assertThat(JAN_06_2012_AS_SQL, SqlDateMatchers.isWeekend());
     }
@@ -245,12 +245,12 @@ public class IsDayOfWeekTest {
         assertThat(JAN_06_2012_AS_SQL, SqlDateMatchers.isWeekday());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isSqlDateSaturdayIsNotWeekday() {
         assertThat(JAN_07_2012_AS_SQL, SqlDateMatchers.isWeekday());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isSqlDateSundayIsNotWeekday() {
         assertThat(JAN_01_2012_AS_SQL, SqlDateMatchers.isWeekday());
     }
@@ -351,27 +351,27 @@ public class IsDayOfWeekTest {
         assertThat(JAN_07_2012_AS_SQL, DateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isSqlDateMondayIsNotWeekendUsingDateMatchers() {
         assertThat(JAN_02_2012_AS_SQL, DateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isSqlDateTuesdayIsNotWeekendUsingDateMatchers() {
         assertThat(JAN_03_2012_AS_SQL, DateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isSqlDateWednesdayIsNotWeekendUsingDateMatchers() {
         assertThat(JAN_04_2012_AS_SQL, DateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isSqlDateThursdayIsNotWeekendUsingDateMatchers() {
         assertThat(JAN_05_2012_AS_SQL, DateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isSqlDateFridayIsNotWeekendUsingDateMatchers() {
         assertThat(JAN_06_2012_AS_SQL, DateMatchers.isWeekend());
     }
@@ -385,12 +385,12 @@ public class IsDayOfWeekTest {
         assertThat(JAN_06_2012_AS_SQL, DateMatchers.isWeekday());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isSqlDateSaturdayIsNotWeekdayUsingDateMatchers() {
         assertThat(JAN_07_2012_AS_SQL, DateMatchers.isWeekday());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isSqlDateSundayIsNotWeekdayUsingDateMatchers() {
         assertThat(JAN_01_2012_AS_SQL, DateMatchers.isWeekday());
     }
@@ -535,12 +535,12 @@ public class IsDayOfWeekTest {
         assertThat(AUG_07_2015, LocalDateMatchers.isWeekday());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isLocalDateNotWeekdayOnSaturday() {
         assertThat(AUG_08_2015, LocalDateMatchers.isWeekday());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isLocalDateNotWeekdayOnSunday() {
         assertThat(AUG_09_2015, LocalDateMatchers.isWeekday());
     }
@@ -551,27 +551,27 @@ public class IsDayOfWeekTest {
         assertThat(AUG_09_2015, LocalDateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isLocalDateNotWeekendOnMonday() {
         assertThat(AUG_03_2015, LocalDateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isLocalDateNotWeekendOnTuesday() {
         assertThat(AUG_04_2015, LocalDateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isLocalDateNotWeekendOnWednesday() {
         assertThat(AUG_05_2015, LocalDateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isLocalDateNotWeekendOnThursday() {
         assertThat(AUG_06_2015, LocalDateMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isLocalDateNotWeekendOnFriday() {
         assertThat(AUG_07_2015, LocalDateMatchers.isWeekend());
     }
@@ -666,12 +666,12 @@ public class IsDayOfWeekTest {
         assertThat(AUG_07_2015_NOON, LocalDateTimeMatchers.isWeekday());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isLocalDateTimeNotWeekdayOnSaturday() {
         assertThat(AUG_08_2015_NOON, LocalDateTimeMatchers.isWeekday());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isLocalDateTimeNotWeekdayOnSunday() {
         assertThat(AUG_09_2015_NOON, LocalDateTimeMatchers.isWeekday());
     }
@@ -682,27 +682,27 @@ public class IsDayOfWeekTest {
         assertThat(AUG_09_2015_NOON, LocalDateTimeMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isLocalDateTimeNotWeekendOnMonday() {
         assertThat(AUG_03_2015_NOON, LocalDateTimeMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isLocalDateTimeNotWeekendOnTuesday() {
         assertThat(AUG_04_2015_NOON, LocalDateTimeMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isLocalDateTimeNotWeekendOnWednesday() {
         assertThat(AUG_05_2015_NOON, LocalDateTimeMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isLocalDateTimeNotWeekendOnThursday() {
         assertThat(AUG_06_2015_NOON, LocalDateTimeMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isLocalDateTimeNotWeekendOnFriday() {
         assertThat(AUG_07_2015_NOON, LocalDateTimeMatchers.isWeekend());
     }
@@ -797,12 +797,12 @@ public class IsDayOfWeekTest {
         assertThat(AUG_07_2015_NOON_UTC, ZonedDateTimeMatchers.isWeekday());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isZonedDateTimeNotWeekdayOnSaturday() {
         assertThat(AUG_08_2015_NOON_UTC, ZonedDateTimeMatchers.isWeekday());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isZonedDateTimeNotWeekdayOnSunday() {
         assertThat(AUG_09_2015_NOON_UTC, ZonedDateTimeMatchers.isWeekday());
     }
@@ -813,27 +813,27 @@ public class IsDayOfWeekTest {
         assertThat(AUG_09_2015_NOON_UTC, ZonedDateTimeMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isZonedDateTimeNotWeekendOnMonday() {
         assertThat(AUG_03_2015_NOON_UTC, ZonedDateTimeMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isZonedDateTimeNotWeekendOnTuesday() {
         assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isZonedDateTimeNotWeekendOnWednesday() {
         assertThat(AUG_05_2015_NOON_UTC, ZonedDateTimeMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isZonedDateTimeNotWeekendOnThursday() {
         assertThat(AUG_06_2015_NOON_UTC, ZonedDateTimeMatchers.isWeekend());
     }
 
-    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_ANYOF)
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isZonedDateTimeNotWeekendOnFriday() {
         assertThat(AUG_07_2015_NOON_UTC, ZonedDateTimeMatchers.isWeekend());
     }

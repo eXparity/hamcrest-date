@@ -27,7 +27,7 @@ public class IsMillisecondTest {
 		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.isMillisecond(1));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateMillisecond() {
 		assertThat(AUG_04_2015_AS_SQL, DateMatchers.isMillisecond(0));
 	}
@@ -42,7 +42,7 @@ public class IsMillisecondTest {
 		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameMillisecond(1));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateSameMillisecond() {
 		assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameMillisecond(0));
 	}

@@ -2,6 +2,10 @@ package org.exparity.hamcrest.date;
 
 import static java.time.DayOfWeek.*;
 import static java.time.Month.*;
+import static org.exparity.hamcrest.date.core.TemporalConverters.*;
+import static org.exparity.hamcrest.date.core.TemporalFunctions.LOCALDATE;
+import static org.exparity.hamcrest.date.core.TemporalFunctions.SQLDATE;
+import static org.exparity.hamcrest.date.core.TemporalProviders.*;
 
 import java.sql.Date;
 import java.time.DayOfWeek;
@@ -11,14 +15,14 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Stream;
 
-import org.exparity.hamcrest.date.core.AnyOf;
 import org.exparity.hamcrest.date.core.DateMatcher;
 import org.exparity.hamcrest.date.core.IsAfter;
 import org.exparity.hamcrest.date.core.IsBefore;
 import org.exparity.hamcrest.date.core.IsDayOfMonth;
 import org.exparity.hamcrest.date.core.IsDayOfWeek;
+import org.exparity.hamcrest.date.core.IsFirstDayOfMonth;
+import org.exparity.hamcrest.date.core.IsLastDayOfMonth;
 import org.exparity.hamcrest.date.core.IsLeapYear;
 import org.exparity.hamcrest.date.core.IsMaximum;
 import org.exparity.hamcrest.date.core.IsMinimum;
@@ -28,12 +32,7 @@ import org.exparity.hamcrest.date.core.IsSameOrAfter;
 import org.exparity.hamcrest.date.core.IsSameOrBefore;
 import org.exparity.hamcrest.date.core.IsWithin;
 import org.exparity.hamcrest.date.core.IsYear;
-import org.exparity.hamcrest.date.core.format.DatePartFormatter;
-import org.exparity.hamcrest.date.core.format.SqlDateFormatter;
-import org.exparity.hamcrest.date.core.wrapper.FieldSqlDateAdaptor;
-import org.exparity.hamcrest.date.core.wrapper.FieldSqlDateRangeAdaptor;
-import org.exparity.hamcrest.date.core.wrapper.FieldSqlDateWrapper;
-import org.exparity.hamcrest.date.core.wrapper.SqlDateWrapper;
+import org.exparity.hamcrest.date.core.types.Interval;
 
 /**
  * Static factory for creating {@link org.hamcrest.Matcher} instances for comparing dates
@@ -54,7 +53,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> after(final Date date) {
-		return new IsAfter<>(new SqlDateWrapper(date), new SqlDateFormatter());
+		return new IsAfter<>(SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
 	/**
@@ -69,7 +68,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> after(final java.util.Date date) {
-		return new IsAfter<>(new SqlDateWrapper(date), new SqlDateFormatter());
+		return new IsAfter<>(SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
 	/**
@@ -101,7 +100,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> after(final LocalDate date) {
-		return new IsAfter<>(new SqlDateWrapper(date), new SqlDateFormatter());
+		return new IsAfter<>(SQLDATE_AS_LOCALDATE, localDate(date), LOCALDATE);
 	}
 
 	/**
@@ -120,7 +119,7 @@ public abstract class SqlDateMatchers {
 	 */
 	@Deprecated
 	public static DateMatcher<java.sql.Date> after(final int year, final Months month, final int day) {
-		return new IsAfter<>(new SqlDateWrapper(year, month.month(), day), new SqlDateFormatter());
+		return after(year, month.month(), day);
 	}
 
 	/**
@@ -137,7 +136,7 @@ public abstract class SqlDateMatchers {
 	 * @param day the day of the month against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> after(final int year, final Month month, final int day) {
-		return new IsAfter<>(new SqlDateWrapper(year, month, day), new SqlDateFormatter());
+		return after(LocalDate.of(year, month, day));
 	}
 
 	/**
@@ -152,7 +151,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> before(final Date date) {
-		return new IsBefore<>(new SqlDateWrapper(date), new SqlDateFormatter());
+		return new IsBefore<>(SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
 	/**
@@ -167,7 +166,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> before(final java.util.Date date) {
-		return new IsBefore<>(new SqlDateWrapper(date), new SqlDateFormatter());
+		return new IsBefore<>(SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
 	/**
@@ -176,22 +175,7 @@ public abstract class SqlDateMatchers {
 	 * For example:
 	 *
 	 * <pre>
-	 * assertThat(myDate, before(LocalDate.now()))
-	 * </pre>
-	 *
-	 * @param date the reference date against which the examined date is checked
-	 */
-	public static DateMatcher<java.sql.Date> before(final LocalDate date) {
-		return new IsBefore<>(new SqlDateWrapper(date), new SqlDateFormatter());
-	}
-
-	/**
-	 * Creates a matcher that matches when the examined date is before the reference date
-	 * <p/>
-	 * For example:
-	 *
-	 * <pre>
-	 * assertThat(myDate, before(Moments.today()));
+	 * assertThat(myDate, before(Moments.today()))
 	 * </pre>
 	 *
 	 * @param date the reference date against which the examined date is checked
@@ -203,26 +187,22 @@ public abstract class SqlDateMatchers {
 	}
 
 	/**
-	 * Creates a matcher that matches when the examined date is before the start of reference day
+	 * Creates a matcher that matches when the examined date is before the reference date
 	 * <p/>
 	 * For example:
 	 *
 	 * <pre>
-	 * assertThat(myDate, before(2012, Months.MAY, 12));
+	 * assertThat(myDate, before(Moments.today()))
 	 * </pre>
 	 *
-	 * @param year the year against which the examined date is checked
-	 * @param month the month against which the examined date is checked
-	 * @param dayOfMonth the day of the month against which the examined date is checked
-	 * @deprecated Use {@link #before(int, Month, int)}
+	 * @param date the reference date against which the examined date is checked
 	 */
-	@Deprecated
-	public static DateMatcher<java.sql.Date> before(final int year, final Months month, final int dayOfMonth) {
-		return new IsBefore<>(new SqlDateWrapper(year, month.month(), dayOfMonth), new SqlDateFormatter());
+	public static DateMatcher<java.sql.Date> before(final LocalDate date) {
+		return new IsBefore<>(SQLDATE_AS_LOCALDATE, localDate(date), LOCALDATE);
 	}
 
 	/**
-	 * Creates a matcher that matches when the examined date is before the start of reference day
+	 * Creates a matcher that matches when the examined date is before the end of the reference year
 	 * <p/>
 	 * For example:
 	 *
@@ -232,10 +212,29 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param year the year against which the examined date is checked
 	 * @param month the month against which the examined date is checked
-	 * @param dayOfMonth the day of the month against which the examined date is checked
+	 * @param day the day of the month against which the examined date is checked
+	 * @deprecated Use {@link #before(int, Month, int)}
 	 */
-	public static DateMatcher<java.sql.Date> before(final int year, final Month month, final int dayOfMonth) {
-		return new IsBefore<>(new SqlDateWrapper(year, month, dayOfMonth), new SqlDateFormatter());
+	@Deprecated
+	public static DateMatcher<java.sql.Date> before(final int year, final Months month, final int day) {
+		return before(year, month.month(), day);
+	}
+
+	/**
+	 * Creates a matcher that matches when the examined date is before the end of the reference year
+	 * <p/>
+	 * For example:
+	 *
+	 * <pre>
+	 * assertThat(myDate, before(2012, Months.MAY, 12));
+	 * </pre>
+	 *
+	 * @param year the year against which the examined date is checked
+	 * @param month the month against which the examined date is checked
+	 * @param day the day of the month against which the examined date is checked
+	 */
+	public static DateMatcher<java.sql.Date> before(final int year, final Month month, final int day) {
+		return before(LocalDate.of(year, month, day));
 	}
 
 	/**
@@ -297,8 +296,7 @@ public abstract class SqlDateMatchers {
 	 * @param dayOfWeek the reference weekday against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> isDayOfWeek(final DayOfWeek dayOfWeek) {
-		return new IsDayOfWeek<>(new FieldSqlDateWrapper(dayOfWeek.getValue(), ChronoField.DAY_OF_WEEK),
-		        new FieldSqlDateAdaptor(ChronoField.DAY_OF_WEEK));
+		return new IsDayOfWeek<>(SQLDATE_AS_DAYOFWEEK, daysOfWeek(dayOfWeek));
 	}
 
 	/**
@@ -313,8 +311,7 @@ public abstract class SqlDateMatchers {
 	 * @param daysOfWeek the reference weekdays against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> isDayOfWeek(final DayOfWeek... daysOfWeek) {
-		return new AnyOf<>(Stream.of(daysOfWeek).map(SqlDateMatchers::isDayOfWeek),
-		        (d, z) -> "the date is on a " + toDayOfWeek(d).name().toLowerCase());
+		return new IsDayOfWeek<>(SQLDATE_AS_DAYOFWEEK, daysOfWeek(daysOfWeek));
 	}
 
 	/**
@@ -329,8 +326,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> sameDayOfMonth(final Date date) {
-		return new IsDayOfMonth<>(new FieldSqlDateWrapper(date, ChronoField.DAY_OF_MONTH),
-		        new FieldSqlDateAdaptor(ChronoField.DAY_OF_MONTH));
+		return new IsDayOfMonth<>(SQLDATE_AS_DAYOFMONTH, dayOfMonth(date));
 	}
 
 	/**
@@ -345,8 +341,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> sameDayOfMonth(final java.util.Date date) {
-		return new IsDayOfMonth<>(new FieldSqlDateWrapper(date, ChronoField.DAY_OF_MONTH),
-		        new FieldSqlDateAdaptor(ChronoField.DAY_OF_MONTH));
+		return new IsDayOfMonth<>(SQLDATE_AS_DAYOFMONTH, dayOfMonth(date));
 	}
 
 	/**
@@ -361,8 +356,7 @@ public abstract class SqlDateMatchers {
 	 * @param dayOfMonth the expected day of the month
 	 */
 	public static DateMatcher<java.sql.Date> isDayOfMonth(final int dayOfMonth) {
-		return new IsDayOfMonth<>(new FieldSqlDateWrapper(dayOfMonth, ChronoField.DAY_OF_MONTH),
-		        new FieldSqlDateAdaptor(ChronoField.DAY_OF_MONTH));
+		return new IsDayOfMonth<>(SQLDATE_AS_DAYOFMONTH, dayOfMonth(dayOfMonth));
 	}
 
 	/**
@@ -377,7 +371,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> sameDay(final java.sql.Date date) {
-		return new IsSameDay<>(new SqlDateWrapper(date), new SqlDateFormatter());
+		return new IsSameDay<>(SQLDATE_AS_LOCALDATE, localDate(date));
 	}
 
 	/**
@@ -409,7 +403,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> sameDay(final LocalDate date) {
-		return new IsSameDay<>(new SqlDateWrapper(date), new SqlDateFormatter());
+		return new IsSameDay<>(SQLDATE_AS_LOCALDATE, localDate(date));
 	}
 
 	/**
@@ -460,7 +454,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> sameOrBefore(final Date date) {
-		return new IsSameOrBefore<>(new SqlDateWrapper(date), new SqlDateFormatter());
+		return new IsSameOrBefore<>(SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
 	/**
@@ -475,7 +469,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> sameOrBefore(final java.util.Date date) {
-		return new IsSameOrBefore<>(new SqlDateWrapper(date), new SqlDateFormatter());
+		return new IsSameOrBefore<>(SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
 	/**
@@ -490,7 +484,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> sameOrBefore(final LocalDate date) {
-		return new IsSameOrBefore<>(new SqlDateWrapper(date), new SqlDateFormatter());
+		return new IsSameOrBefore<>(SQLDATE_AS_LOCALDATE, localDate(date), LOCALDATE);
 	}
 
 	/**
@@ -545,7 +539,7 @@ public abstract class SqlDateMatchers {
 	 * @param dayOfMonth the day of the month against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> sameOrBefore(final int year, final Month month, final int dayOfMonth) {
-		return new IsSameOrBefore<>(new SqlDateWrapper(LocalDate.of(year, month, dayOfMonth)), new SqlDateFormatter());
+		return sameOrBefore(LocalDate.of(year, month, dayOfMonth));
 	}
 
 	/**
@@ -560,7 +554,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> sameOrAfter(final Date date) {
-		return new IsSameOrAfter<>(new SqlDateWrapper(date), new SqlDateFormatter());
+		return new IsSameOrAfter<>(SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
 	/**
@@ -575,7 +569,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> sameOrAfter(final java.util.Date date) {
-		return new IsSameOrAfter<>(new SqlDateWrapper(date), new SqlDateFormatter());
+		return new IsSameOrAfter<>(SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
 	/**
@@ -590,7 +584,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> sameOrAfter(final LocalDate date) {
-		return new IsSameOrAfter<>(new SqlDateWrapper(date), new SqlDateFormatter());
+		return new IsSameOrAfter<>(SQLDATE_AS_LOCALDATE, localDate(date), LOCALDATE);
 	}
 
 	/**
@@ -643,7 +637,7 @@ public abstract class SqlDateMatchers {
 	 * @param dayOfMonth the day of the month against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> sameOrAfter(final int year, final Month month, final int dayOfMonth) {
-		return new IsSameOrAfter<>(new SqlDateWrapper(year, month, dayOfMonth), new SqlDateFormatter());
+		return sameOrAfter(LocalDate.of(year, month, dayOfMonth));
 	}
 
 	/**
@@ -692,7 +686,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> sameMonthOfYear(final Date date) {
-		return isMonth(toMonth(date));
+		return isMonth(SQLDATE_AS_MONTH.apply(date, ZoneId.systemDefault()));
 	}
 
 	/**
@@ -756,7 +750,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> sameYear(final Date date) {
-		return new IsYear<>(new FieldSqlDateWrapper(date, ChronoField.YEAR), new FieldSqlDateAdaptor(ChronoField.YEAR));
+        return new IsYear<>(SQLDATE_AS_YEAR, year(date));
 	}
 
 	/**
@@ -771,7 +765,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> sameYear(final java.util.Date date) {
-		return new IsYear<>(new FieldSqlDateWrapper(date, ChronoField.YEAR), new FieldSqlDateAdaptor(ChronoField.YEAR));
+        return new IsYear<>(SQLDATE_AS_YEAR, year(date));
 	}
 
 	/**
@@ -786,7 +780,7 @@ public abstract class SqlDateMatchers {
 	 * @param year the reference year against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> isYear(final int year) {
-		return new IsYear<>(new FieldSqlDateWrapper(year, ChronoField.YEAR), new FieldSqlDateAdaptor(ChronoField.YEAR));
+        return new IsYear<>(SQLDATE_AS_YEAR, year(year));
 	}
 
 	/**
@@ -835,7 +829,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> within(final long period, final ChronoUnit unit, final Date date) {
-		return new IsWithin<>(period, unit, new SqlDateWrapper(date), new SqlDateFormatter());
+		return new IsWithin<>(Interval.of(period, unit), SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
 	/**
@@ -852,7 +846,7 @@ public abstract class SqlDateMatchers {
 	public static DateMatcher<java.sql.Date> within(final long period,
 	        final ChronoUnit unit,
 	        final java.util.Date date) {
-		return new IsWithin<>(period, unit, new SqlDateWrapper(date), new SqlDateFormatter());
+		return new IsWithin<>(Interval.of(period, unit), SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
 	/**
@@ -867,7 +861,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static DateMatcher<java.sql.Date> within(final long period, final ChronoUnit unit, final LocalDate date) {
-		return new IsWithin<>(period, unit, new SqlDateWrapper(date), new SqlDateFormatter());
+		return new IsWithin<>(Interval.of(period, unit), SQLDATE_AS_LOCALDATE, localDate(date), LOCALDATE);
 	}
 
 	/**
@@ -1101,11 +1095,7 @@ public abstract class SqlDateMatchers {
 	 * </pre>
 	 */
 	public static DateMatcher<java.sql.Date> isFirstDayOfMonth() {
-		return new IsMinimum<>(ChronoField.DAY_OF_MONTH,
-		        new FieldSqlDateAdaptor(ChronoField.DAY_OF_MONTH),
-		        new FieldSqlDateRangeAdaptor(ChronoField.DAY_OF_MONTH),
-		        new DatePartFormatter(),
-		        () -> "the date is the first day of the month");
+        return new IsFirstDayOfMonth<>(SQLDATE_AS_LOCALDATE);
 	}
 
 	/**
@@ -1121,10 +1111,7 @@ public abstract class SqlDateMatchers {
 	 * @param field the temporal field to check
 	 */
 	public static DateMatcher<java.sql.Date> isMinimum(final ChronoField field) {
-		return new IsMinimum<>(field,
-		        new FieldSqlDateAdaptor(field),
-		        new FieldSqlDateRangeAdaptor(field),
-		        new DatePartFormatter());
+		return new IsMinimum<>(SQLDATE_AS_LOCALDATE, field);
 	}
 
 	/**
@@ -1137,11 +1124,7 @@ public abstract class SqlDateMatchers {
 	 * </pre>
 	 */
 	public static DateMatcher<java.sql.Date> isLastDayOfMonth() {
-		return new IsMaximum<>(ChronoField.DAY_OF_MONTH,
-		        new FieldSqlDateAdaptor(ChronoField.DAY_OF_MONTH),
-		        new FieldSqlDateRangeAdaptor(ChronoField.DAY_OF_MONTH),
-		        new DatePartFormatter(),
-		        () -> "the date is the last day of the month");
+        return new IsLastDayOfMonth<>(SQLDATE_AS_LOCALDATE);
 	}
 
 	/**
@@ -1157,10 +1140,7 @@ public abstract class SqlDateMatchers {
 	 * @param field the temporal field to check
 	 */
 	public static DateMatcher<java.sql.Date> isMaximum(final ChronoField field) {
-		return new IsMaximum<>(field,
-		        new FieldSqlDateAdaptor(field),
-		        new FieldSqlDateRangeAdaptor(field),
-		        new DatePartFormatter());
+		return new IsMaximum<>(SQLDATE_AS_LOCALDATE, field);
 	}
 
 	/**
@@ -1171,10 +1151,11 @@ public abstract class SqlDateMatchers {
 	 * <pre>
 	 * assertThat(myDate, isMonth(Month.AUGUST));
 	 * </pre>
+	 * 
+	 * O
 	 */
 	public static DateMatcher<java.sql.Date> isMonth(final Month month) {
-		return new IsMonth<>(new FieldSqlDateWrapper(month.getValue(), ChronoField.MONTH_OF_YEAR),
-		        new FieldSqlDateAdaptor(ChronoField.MONTH_OF_YEAR));
+		return new IsMonth<>(SQLDATE_AS_MONTH, month(month));
 	}
 
 	/**
@@ -1343,7 +1324,7 @@ public abstract class SqlDateMatchers {
 	 * </pre>
 	 */
 	public static DateMatcher<Date> isLeapYear() {
-		return new IsLeapYear<>((d, x) -> d.toLocalDate(), new SqlDateFormatter());
+		return new IsLeapYear<>(SQLDATE_AS_YEAR);
 	}
 
 	private static ChronoUnit convertUnit(final TimeUnit unit) {
@@ -1370,18 +1351,13 @@ public abstract class SqlDateMatchers {
 	private static DayOfWeek toDayOfWeek(Date date) {
 		return date.toLocalDate().getDayOfWeek();
 	}
-	
-	private static Month toMonth(final Date date) {
-		return date.toLocalDate().getMonth();
-	}
-	
+
 	private static DayOfWeek toDayOfWeek(java.util.Date date, ZoneId zone) {
 		return date.toInstant().atZone(zone).getDayOfWeek();
 	}
-	
+
 	private static Month toMonth(final java.util.Date date, ZoneId zone) {
 		return date.toInstant().atZone(zone).getMonth();
 	}
-
 
 }

@@ -1,6 +1,8 @@
 package org.exparity.hamcrest.date.core;
 
+import java.time.Year;
 import java.time.ZoneId;
+import java.util.Locale;
 
 import org.hamcrest.Description;
 
@@ -12,24 +14,30 @@ import org.hamcrest.Description;
  */
 public class IsYear<T> extends DateMatcher<T> {
 
-	private final TemporalFieldWrapper<T> expected;
-	private final TemporalFieldAdapter<T> accessor;
+	private final TemporalConverter<T, Year> converter;
+	private final TemporalProvider<Year> expected;
+	private final Locale locale;
 	private final ZoneId zone;
 
-	private IsYear(final TemporalFieldWrapper<T> expected, final TemporalFieldAdapter<T> accessor, final ZoneId zone) {
+	public IsYear(TemporalConverter<T, Year> converter,
+	        TemporalProvider<Year> expected,
+	        ZoneId zone,
+	        Locale locale) {
 		this.expected = expected;
-		this.accessor = accessor;
+		this.converter = converter;
+		this.locale = locale;
 		this.zone = zone;
 	}
 
-	public IsYear(final TemporalFieldWrapper<T> expected, final TemporalFieldAdapter<T> accessor) {
-		this(expected, accessor, ZoneId.systemDefault());
+	public IsYear(TemporalConverter<T, Year> converter, TemporalProvider<Year> expected) {
+		this(converter, expected, ZoneId.systemDefault(), Locale.getDefault(Locale.Category.FORMAT));
 	}
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
-		if (!this.expected.isSame(actual)) {
-			mismatchDescription.appendText("the date has the year " + accessor.asTemporalField(actual, zone));
+		Year expectedValue = expected.apply(zone), actualValue = converter.apply(actual, zone);
+		if (!expectedValue.equals(actualValue)) {
+			mismatchDescription.appendText("the date has the year " + actualValue);
 			return false;
 		} else {
 			return true;
@@ -38,12 +46,11 @@ public class IsYear<T> extends DateMatcher<T> {
 
 	@Override
 	public void describeTo(final Description description) {
-		description.appendText("the date has the year " + expected.unwrap());
+		description.appendText("the date has the year " + expected.apply(zone));
 	}
 
 	@Override
 	public DateMatcher<T> atZone(ZoneId zone) {
-		return new IsYear<>(expected.withZone(zone), accessor);
+		return new IsYear<>(converter, expected, zone, locale);
 	}
-
 }

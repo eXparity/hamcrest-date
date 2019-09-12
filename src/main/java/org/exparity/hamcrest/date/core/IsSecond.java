@@ -1,7 +1,9 @@
 package org.exparity.hamcrest.date.core;
 
 import java.time.ZoneId;
+import java.util.Locale;
 
+import org.exparity.hamcrest.date.core.types.Second;
 import org.hamcrest.Description;
 
 /**
@@ -11,24 +13,30 @@ import org.hamcrest.Description;
  */
 public class IsSecond<T> extends DateMatcher<T> {
 
-	private final TemporalFieldWrapper<T> expected;
-	private final TemporalFieldAdapter<T> accessor;
+	private final TemporalConverter<T, Second> converter;
+	private final TemporalProvider<Second> expected;
+	private final Locale locale;
 	private final ZoneId zone;
 
-	private IsSecond(final TemporalFieldWrapper<T> expected, final TemporalFieldAdapter<T> accessor, final ZoneId zone) {
+	public IsSecond(TemporalConverter<T, Second> converter,
+	        TemporalProvider<Second> expected,
+	        ZoneId zone,
+	        Locale locale) {
 		this.expected = expected;
-		this.accessor = accessor;
+		this.converter = converter;
+		this.locale = locale;
 		this.zone = zone;
 	}
 
-	public IsSecond(final TemporalFieldWrapper<T> expected, final TemporalFieldAdapter<T> accessor) {
-		this(expected, accessor, ZoneId.systemDefault());
+	public IsSecond(TemporalConverter<T, Second> converter, TemporalProvider<Second> expected) {
+		this(converter, expected, ZoneId.systemDefault(), Locale.getDefault(Locale.Category.FORMAT));
 	}
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
-		if (!this.expected.isSame(actual)) {
-			mismatchDescription.appendText("the date has the second " + accessor.asTemporalField(actual, zone));
+		Second expectedValue = expected.apply(zone), actualValue = converter.apply(actual, zone);
+		if (!expectedValue.equals(actualValue)) {
+			mismatchDescription.appendText("the date has the second " + actualValue);
 			return false;
 		} else {
 			return true;
@@ -37,12 +45,11 @@ public class IsSecond<T> extends DateMatcher<T> {
 
 	@Override
 	public void describeTo(final Description description) {
-		description.appendText("the date has the second " + expected.unwrap());
+		description.appendText("the date has the second " + expected.apply(zone));
 	}
 
 	@Override
 	public DateMatcher<T> atZone(ZoneId zone) {
-		return new IsSecond<>(expected.withZone(zone), accessor);
+		return new IsSecond<>(converter, expected, zone, locale);
 	}
-
 }

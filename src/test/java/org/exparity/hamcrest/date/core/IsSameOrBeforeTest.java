@@ -177,17 +177,17 @@ public class IsSameOrBeforeTest {
 		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(new DayMonthYear(15, Months.JUNE, 2012)).atZone(UTC));
 	}
 
-	@Test
+    @Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateSameOrBeforeLaterDateTimeOnSameDay() {
 		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(2012, Months.JUNE, 15, 10, 59, 59).atZone(UTC));
 	}
 
-	@Test
+    @Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateSameOrBeforeDateTime() {
 		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(2012, Months.JUNE, 15, 11, 0, 1).atZone(UTC));
 	}
 
-	@Test
+    @Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateSameOrBeforeSameDateTime() {
 		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrBefore(2012, Months.JUNE, 15, 11, 0, 0).atZone(UTC));
 	}

@@ -32,7 +32,7 @@ public class IsSecondTest {
         assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.isSecond(1));
     }
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
     public void isSqlDateSecond() {
         assertThat(AUG_04_2015_AS_SQL, DateMatchers.isSecond(0));
     }
@@ -47,7 +47,7 @@ public class IsSecondTest {
         assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameSecond(1));
     }
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
     public void isSqlDateSameSecond() {
         assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameSecond(0));
     }

@@ -1,15 +1,30 @@
 package org.exparity.hamcrest.date;
 
+import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALTIME_AS_HOUR;
+import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALTIME_AS_LOCALTIME;
+import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALTIME_AS_MINUTE;
+import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALTIME_AS_SECOND;
+import static org.exparity.hamcrest.date.core.TemporalFunctions.LOCALTIME;
+import static org.exparity.hamcrest.date.core.TemporalProviders.hour;
+import static org.exparity.hamcrest.date.core.TemporalProviders.localTime;
+import static org.exparity.hamcrest.date.core.TemporalProviders.minute;
+import static org.exparity.hamcrest.date.core.TemporalProviders.second;
+
 import java.time.LocalTime;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 
-import org.exparity.hamcrest.date.core.*;
-import org.exparity.hamcrest.date.core.format.DatePartFormatter;
-import org.exparity.hamcrest.date.core.format.LocalTimeFormatter;
-import org.exparity.hamcrest.date.core.wrapper.FieldLocalTimeWrapper;
-import org.exparity.hamcrest.date.core.wrapper.LocalTimeWrapper;
-import org.hamcrest.Factory;
+import org.exparity.hamcrest.date.core.IsAfter;
+import org.exparity.hamcrest.date.core.IsBefore;
+import org.exparity.hamcrest.date.core.IsHour;
+import org.exparity.hamcrest.date.core.IsMaximum;
+import org.exparity.hamcrest.date.core.IsMinimum;
+import org.exparity.hamcrest.date.core.IsMinute;
+import org.exparity.hamcrest.date.core.IsSameOrAfter;
+import org.exparity.hamcrest.date.core.IsSameOrBefore;
+import org.exparity.hamcrest.date.core.IsSecond;
+import org.exparity.hamcrest.date.core.IsWithin;
+import org.exparity.hamcrest.date.core.types.Interval;
 import org.hamcrest.Matcher;
 
 /**
@@ -31,7 +46,7 @@ public abstract class LocalTimeMatchers {
      * @param time the reference time against which the examined time is checked
      */
     public static Matcher<LocalTime> after(final LocalTime time) {
-        return new IsAfter<>(new LocalTimeWrapper(time), new LocalTimeFormatter());
+        return new IsAfter<>(LOCALTIME_AS_LOCALTIME, localTime(time), LOCALTIME);
     }
 
     /**
@@ -48,7 +63,7 @@ public abstract class LocalTimeMatchers {
      * @param second the second of the minute
      */
     public static Matcher<LocalTime> after(final int hour, final int minute, final int second) {
-        return new IsAfter<>(new LocalTimeWrapper(hour, minute, second), new LocalTimeFormatter());
+    	return after(LocalTime.of(hour, minute, second));
     }
 
     /**
@@ -63,7 +78,7 @@ public abstract class LocalTimeMatchers {
      * @param time the reference time against which the examined time is checked
      */
     public static Matcher<LocalTime> before(final LocalTime time) {
-        return new IsBefore<>(new LocalTimeWrapper(time), new LocalTimeFormatter());
+        return new IsBefore<>(LOCALTIME_AS_LOCALTIME, localTime(time), LOCALTIME);
     }
 
     /**
@@ -80,7 +95,7 @@ public abstract class LocalTimeMatchers {
      * @param second the second of the minute
      */
     public static Matcher<LocalTime> before(final int hour, final int minute, final int second) {
-        return new IsBefore<>(new LocalTimeWrapper(hour, minute, second), new LocalTimeFormatter());
+    	return before(LocalTime.of(hour, minute, second));
     }
 
     /**
@@ -95,7 +110,7 @@ public abstract class LocalTimeMatchers {
      * @param time the reference time against which the examined time is checked
      */
     public static Matcher<LocalTime> sameOrBefore(final LocalTime time) {
-        return new IsSameOrBefore<>(new LocalTimeWrapper(time), new LocalTimeFormatter());
+        return new IsSameOrBefore<>(LOCALTIME_AS_LOCALTIME, localTime(time), LOCALTIME);
     }
 
     /**
@@ -112,9 +127,8 @@ public abstract class LocalTimeMatchers {
      * @param minute the minute of the hour
      * @param second the second of the minute
      */
-    @Factory
     public static Matcher<LocalTime> sameOrBefore(final int hour, final int minute, final int second) {
-        return new IsSameOrBefore<>(new LocalTimeWrapper(hour, minute, second), new LocalTimeFormatter());
+    	return sameOrBefore(LocalTime.of(hour, minute, second));
     }
 
     /**
@@ -129,7 +143,7 @@ public abstract class LocalTimeMatchers {
      * @param time the reference time against which the examined time is checked
      */
     public static Matcher<LocalTime> sameOrAfter(final LocalTime time) {
-        return new IsSameOrAfter<>(new LocalTimeWrapper(time), new LocalTimeFormatter());
+        return new IsSameOrAfter<>(LOCALTIME_AS_LOCALTIME, localTime(time), LOCALTIME);
     }
 
     /**
@@ -161,7 +175,7 @@ public abstract class LocalTimeMatchers {
      * @param time the reference time against which the examined time is checked
      */
     public static Matcher<LocalTime> within(final long period, final ChronoUnit unit, final LocalTime time) {
-        return new IsWithin<>(period, unit, new LocalTimeWrapper(time), new LocalTimeFormatter());
+        return new IsWithin<>(Interval.of(period, unit), LOCALTIME_AS_LOCALTIME, localTime(time), LOCALTIME);
     }
 
     /**
@@ -184,10 +198,7 @@ public abstract class LocalTimeMatchers {
             final int hour,
             final int minute,
             final int second) {
-        return new IsWithin<>(period,
-            unit,
-            new LocalTimeWrapper(hour, minute, second),
-            new LocalTimeFormatter());
+    	return within(period, unit, LocalTime.of(hour, minute, second));
     }
 
     /**
@@ -203,12 +214,7 @@ public abstract class LocalTimeMatchers {
      * @param field the temporal field to check
      */
     public static Matcher<LocalTime> isMinimum(final ChronoField field) {
-        return new IsMinimum<>(
-            field,
-            (d, z) -> d.get(field),
-            (d, z) -> field.rangeRefinedBy(d),
-            new DatePartFormatter()
-        );
+        return new IsMinimum<>(LOCALTIME_AS_LOCALTIME, field);
     }
 
     /**
@@ -224,12 +230,7 @@ public abstract class LocalTimeMatchers {
      * @param field the temporal field to check
      */
     public static Matcher<LocalTime> isMaximum(final ChronoField field) {
-        return new IsMaximum<>(
-            field,
-            (d, z) -> d.get(field),
-            (d, z) -> field.rangeRefinedBy(d),
-            new DatePartFormatter()
-        );
+        return new IsMaximum<>(LOCALTIME_AS_LOCALTIME, field);
     }
 
     /**
@@ -244,10 +245,7 @@ public abstract class LocalTimeMatchers {
      * @param hour the hour of the day (0-23)
      */
     public static Matcher<LocalTime> isHour(final int hour) {
-        return new IsHour<>(
-            new FieldLocalTimeWrapper(hour, ChronoField.HOUR_OF_DAY),
-            (d, ignored) -> d.getHour()
-        );
+        return new IsHour<>(LOCALTIME_AS_HOUR, hour(hour));
     }
 
     /**
@@ -262,10 +260,7 @@ public abstract class LocalTimeMatchers {
      * @param time the reference time against which the examined time is checked
      */
     public static Matcher<LocalTime> sameHourOfDay(final LocalTime time) {
-        return new IsHour<>(
-            new FieldLocalTimeWrapper(time, ChronoField.HOUR_OF_DAY),
-            (d, ignored) -> d.getHour()
-        );
+        return new IsHour<>(LOCALTIME_AS_HOUR, hour(time));
     }
 
     /**
@@ -280,10 +275,7 @@ public abstract class LocalTimeMatchers {
      * @param minute the minute of the day (0-59)
      */
     public static Matcher<LocalTime> isMinute(final int minute) {
-        return new IsMinute<>(
-            new FieldLocalTimeWrapper(minute, ChronoField.MINUTE_OF_HOUR),
-            (d, ignored) -> d.getMinute()
-        );
+        return new IsMinute<>(LOCALTIME_AS_MINUTE, minute(minute));
     }
 
     /**
@@ -298,10 +290,7 @@ public abstract class LocalTimeMatchers {
      * @param time the reference time against which the examined time is checked
      */
     public static Matcher<LocalTime> sameMinuteOfHour(final LocalTime time) {
-        return new IsMinute<>(
-            new FieldLocalTimeWrapper(time, ChronoField.MINUTE_OF_HOUR),
-            (d, ignored) -> d.getMinute()
-        );
+        return new IsMinute<>(LOCALTIME_AS_MINUTE, minute(time));
     }
 
     /**
@@ -316,10 +305,7 @@ public abstract class LocalTimeMatchers {
      * @param second the second of the day (0-59)
      */
     public static Matcher<LocalTime> isSecond(final int second) {
-        return new IsSecond<>(
-            new FieldLocalTimeWrapper(second, ChronoField.SECOND_OF_MINUTE),
-            (d, ignored) -> d.getSecond()
-        );
+        return new IsSecond<>(LOCALTIME_AS_SECOND, second(second));
     }
 
     /**
@@ -334,9 +320,6 @@ public abstract class LocalTimeMatchers {
      * @param time the reference time against which the examined time is checked
      */
     public static Matcher<LocalTime> sameSecondOfMinute(final LocalTime time) {
-        return new IsSecond<>(
-            new FieldLocalTimeWrapper(time, ChronoField.SECOND_OF_MINUTE),
-            (d, ignored) -> d.getSecond()
-        );
+        return new IsSecond<>(LOCALTIME_AS_SECOND, second(time));
     }
 }

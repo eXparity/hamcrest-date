@@ -1,38 +1,40 @@
 package org.exparity.hamcrest.date;
 
-import static java.time.DayOfWeek.FRIDAY;
-import static java.time.DayOfWeek.MONDAY;
-import static java.time.DayOfWeek.SATURDAY;
-import static java.time.DayOfWeek.SUNDAY;
-import static java.time.DayOfWeek.THURSDAY;
-import static java.time.DayOfWeek.TUESDAY;
-import static java.time.DayOfWeek.WEDNESDAY;
-import static java.time.Month.APRIL;
-import static java.time.Month.AUGUST;
-import static java.time.Month.DECEMBER;
-import static java.time.Month.FEBRUARY;
-import static java.time.Month.JANUARY;
-import static java.time.Month.JULY;
-import static java.time.Month.JUNE;
-import static java.time.Month.MARCH;
-import static java.time.Month.MAY;
-import static java.time.Month.NOVEMBER;
-import static java.time.Month.OCTOBER;
-import static java.time.Month.SEPTEMBER;
+import static java.time.DayOfWeek.*;
+import static java.time.Month.*;
+import static org.exparity.hamcrest.date.core.TemporalConverters.*;
+import static org.exparity.hamcrest.date.core.TemporalFunctions.ZONEDDATETIME;
+import static org.exparity.hamcrest.date.core.TemporalProviders.*;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.Month;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
-import java.util.stream.Stream;
 
-import org.exparity.hamcrest.date.core.*;
-import org.exparity.hamcrest.date.core.format.DatePartFormatter;
-import org.exparity.hamcrest.date.core.format.ZonedDateTimeFormatter;
-import org.exparity.hamcrest.date.core.wrapper.FieldZonedDateTimeWrapper;
-import org.exparity.hamcrest.date.core.wrapper.ZonedDateTimeWrapper;
+import org.exparity.hamcrest.date.core.DateMatcher;
+import org.exparity.hamcrest.date.core.IsAfter;
+import org.exparity.hamcrest.date.core.IsBefore;
+import org.exparity.hamcrest.date.core.IsDayOfMonth;
+import org.exparity.hamcrest.date.core.IsDayOfWeek;
+import org.exparity.hamcrest.date.core.IsFirstDayOfMonth;
+import org.exparity.hamcrest.date.core.IsHour;
+import org.exparity.hamcrest.date.core.IsLastDayOfMonth;
+import org.exparity.hamcrest.date.core.IsLeapYear;
+import org.exparity.hamcrest.date.core.IsMaximum;
+import org.exparity.hamcrest.date.core.IsMinimum;
+import org.exparity.hamcrest.date.core.IsMinute;
+import org.exparity.hamcrest.date.core.IsMonth;
+import org.exparity.hamcrest.date.core.IsSame;
+import org.exparity.hamcrest.date.core.IsSameDay;
+import org.exparity.hamcrest.date.core.IsSameOrAfter;
+import org.exparity.hamcrest.date.core.IsSameOrBefore;
+import org.exparity.hamcrest.date.core.IsSecond;
+import org.exparity.hamcrest.date.core.IsWithin;
+import org.exparity.hamcrest.date.core.IsYear;
+import org.exparity.hamcrest.date.core.types.Interval;
 import org.hamcrest.Factory;
 
 /**
@@ -54,7 +56,7 @@ public abstract class ZonedDateTimeMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<ZonedDateTime> after(final ZonedDateTime date) {
-        return new IsAfter<>(new ZonedDateTimeWrapper(date), new ZonedDateTimeFormatter());
+        return new IsAfter<>(ZONEDDATETIME_AS_ZONEDDATETIME, zonedDateTime(date), ZONEDDATETIME);
     }
 
     /**
@@ -82,9 +84,7 @@ public abstract class ZonedDateTimeMatchers {
             final int second,
             final int nanos,
             final ZoneId tz) {
-        return new IsAfter<>(
-            new ZonedDateTimeWrapper(year, month, dayOfMonth, hour, minute, second, nanos, tz),
-            new ZonedDateTimeFormatter());
+        return after(ZonedDateTime.of(year, month.getValue(), dayOfMonth, hour, minute, second, nanos, tz));
     }
 
     /**
@@ -93,13 +93,13 @@ public abstract class ZonedDateTimeMatchers {
      * For example:
      *
      * <pre>
-     * MatcherAssert.assertThat(myDate, ZonedDateTimeMatchers.before(ZonedDateTime.now()));
+     * MatcherAssert.assertThat(myDate, before(ZonedDateTime.now()));
      * </pre>
      *
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<ZonedDateTime> before(final ZonedDateTime date) {
-        return new IsBefore<>(new ZonedDateTimeWrapper(date), new ZonedDateTimeFormatter());
+        return new IsBefore<>(ZONEDDATETIME_AS_ZONEDDATETIME, zonedDateTime(date), ZONEDDATETIME);
     }
 
     /**
@@ -108,7 +108,7 @@ public abstract class ZonedDateTimeMatchers {
      * For example:
      *
      * <pre>
-     * MatcherAssert.assertThat(myDate, ZonedDateTimeMatchers.before(2012, Month.MAY, 12));
+     * MatcherAssert.assertThat(myDate, before(2012, Month.MAY, 12));
      * </pre>
      *
      * @param year the year against which the examined date is checked
@@ -117,7 +117,7 @@ public abstract class ZonedDateTimeMatchers {
      * @param hour the hour of the day
      * @param minute the minute of the hour
      * @param second the second of the minute
-     * @param nanos the nanoseconds of the second
+     * @param nanos the nanos of the second
      */
     public static DateMatcher<ZonedDateTime> before(final int year,
             final Month month,
@@ -127,8 +127,7 @@ public abstract class ZonedDateTimeMatchers {
             final int second,
             final int nanos,
             final ZoneId tz) {
-        return new IsBefore<>(new ZonedDateTimeWrapper(year, month, dayOfMonth, hour, minute, second, tz),
-            new ZonedDateTimeFormatter());
+        return before(ZonedDateTime.of(year, month.getValue(), dayOfMonth, hour, minute, second, nanos, tz));
     }
 
     /**
@@ -143,7 +142,7 @@ public abstract class ZonedDateTimeMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<ZonedDateTime> sameDay(final ZonedDateTime date) {
-        return new IsSameDay<>(new ZonedDateTimeWrapper(date, ChronoUnit.DAYS), new ZonedDateTimeFormatter());
+        return new IsSameDay<>(ZONEDDATETIME_AS_LOCALDATE, localDate(date));
     }
 
     /**
@@ -152,22 +151,49 @@ public abstract class ZonedDateTimeMatchers {
      * For example:
      *
      * <pre>
-     * assertThat(myDate, sameDay(2012, Month.JAN, 1, ZoneId.systemDefault()))
+     * assertThat(myDate, sameDay(LocalDate.now()))
+     * </pre>
+     *
+     * @param date the reference date against which the examined date is checked
+     */
+    public static DateMatcher<ZonedDateTime> isDay(LocalDate date) {
+        return new IsSameDay<>(ZONEDDATETIME_AS_LOCALDATE, localDate(date));
+    }
+    
+    /**
+     * Creates a matcher that matches when the examined date is on the same day of the year as the reference date
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, sameDay(2012, Month.JAN, 1))
      * </pre>
      *
      * @param dayOfMonth the reference day of the month against which the examined date is checked
      * @param month the reference month against which the examined date is checked
      * @param year the reference year against which the examined date is checked
-     * @param tz the reference time zone
      */
-    public static DateMatcher<ZonedDateTime> isDay(final int year,
-            final Month month,
-            final int dayOfMonth,
-            final ZoneId tz) {
-        return new IsSameDay<>(new ZonedDateTimeWrapper(year, month, dayOfMonth, tz),
-            new ZonedDateTimeFormatter());
+    public static DateMatcher<ZonedDateTime> isDay(final int year, final Month month, final int dayOfMonth) {
+        return isDay(LocalDate.of(year, month, dayOfMonth));
     }
 
+    /**
+     * Creates a matcher that matches when the examined date is on the same day of the year as the reference date
+     * <p/>
+     * For example:
+     *
+     * <pre>
+     * assertThat(myDate, sameDay(2012, Month.JAN, 1))
+     * </pre>
+     *
+     * @param dayOfMonth the reference day of the month against which the examined date is checked
+     * @param month the reference month against which the examined date is checked
+     * @param year the reference year against which the examined date is checked
+     */
+    public static DateMatcher<ZonedDateTime> isDay(final int year, final Month month, final int dayOfMonth, final ZoneId zone) {
+        return isDay(LocalDate.of(year, month, dayOfMonth)).atZone(zone);
+    }
+    
     /**
      * Creates a matcher that matches when the examined date is at the same instant as the reference date
      * <p/>
@@ -180,7 +206,7 @@ public abstract class ZonedDateTimeMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<ZonedDateTime> sameInstant(final ZonedDateTime date) {
-        return new IsSame<>(new ZonedDateTimeWrapper(date), new ZonedDateTimeFormatter());
+        return new IsSame<>(ZONEDDATETIME_AS_ZONEDDATETIME, zonedDateTime(date), ZONEDDATETIME);
     }
 
     /**
@@ -209,9 +235,7 @@ public abstract class ZonedDateTimeMatchers {
             final int second,
             final int nanos,
             final ZoneId tz) {
-        return new IsSame<>(
-            new ZonedDateTimeWrapper(year, month, dayOfMonth, hour, minute, second, nanos, tz),
-            new ZonedDateTimeFormatter());
+        return sameInstant(ZonedDateTime.of(year, month.getValue(), dayOfMonth, hour, minute, second, nanos, tz));
     }
 
     /**
@@ -226,7 +250,7 @@ public abstract class ZonedDateTimeMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<ZonedDateTime> sameOrBefore(final ZonedDateTime date) {
-        return new IsSameOrBefore<>(new ZonedDateTimeWrapper(date), new ZonedDateTimeFormatter());
+        return new IsSameOrBefore<>(ZONEDDATETIME_AS_ZONEDDATETIME, zonedDateTime(date), ZONEDDATETIME);
     }
 
     /**
@@ -257,9 +281,7 @@ public abstract class ZonedDateTimeMatchers {
             final int second,
             final int nanos,
             final ZoneId tz) {
-        return new IsSameOrBefore<>(
-            new ZonedDateTimeWrapper(year, month, day, hour, minute, second, nanos, tz),
-            new ZonedDateTimeFormatter());
+        return sameOrBefore(ZonedDateTime.of(year, month.getValue(), day, hour, minute, second, nanos, tz));
     }
 
     /**
@@ -274,7 +296,7 @@ public abstract class ZonedDateTimeMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<ZonedDateTime> sameOrAfter(final ZonedDateTime date) {
-        return new IsSameOrAfter<>(new ZonedDateTimeWrapper(date), new ZonedDateTimeFormatter());
+        return new IsSameOrAfter<>(ZONEDDATETIME_AS_ZONEDDATETIME, zonedDateTime(date), ZONEDDATETIME);
     }
 
     /**
@@ -305,9 +327,7 @@ public abstract class ZonedDateTimeMatchers {
             final int second,
             final int nanos,
             final ZoneId tz) {
-        return new IsSameOrAfter<>(
-            new ZonedDateTimeWrapper(year, month, day, hour, minute, second, nanos, tz),
-            new ZonedDateTimeFormatter());
+        return sameOrAfter(ZonedDateTime.of(year, month.getValue(), day, hour, minute, second, nanos, tz));
     }
 
     /**
@@ -322,10 +342,7 @@ public abstract class ZonedDateTimeMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<ZonedDateTime> sameMonthOfYear(final ZonedDateTime date) {
-        return new IsMonth<>(
-            new FieldZonedDateTimeWrapper(date, ChronoField.MONTH_OF_YEAR),
-            (d, z) -> ZonedDateTime.ofInstant(d.toInstant(), z).get(ChronoField.MONTH_OF_YEAR)
-        );
+        return new IsMonth<>(ZONEDDATETIME_AS_MONTH, month(date));
     }
 
     /**
@@ -340,10 +357,7 @@ public abstract class ZonedDateTimeMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<ZonedDateTime> sameDayOfMonth(final ZonedDateTime date) {
-        return new IsDayOfMonth<>(
-            new FieldZonedDateTimeWrapper(date, ChronoField.DAY_OF_MONTH),
-            (d, z) -> ZonedDateTime.ofInstant(d.toInstant(), z).get(ChronoField.DAY_OF_MONTH)
-        );
+        return new IsDayOfMonth<>(ZONEDDATETIME_AS_DAYOFMONTH, dayOfMonth(date));
     }
 
     /**
@@ -358,10 +372,7 @@ public abstract class ZonedDateTimeMatchers {
      * @param dayOfMonth the expected day of the month
      */
     public static DateMatcher<ZonedDateTime> isDayOfMonth(final int dayOfMonth) {
-        return new IsDayOfMonth<>(
-            new FieldZonedDateTimeWrapper(dayOfMonth, ChronoField.DAY_OF_MONTH),
-            (d, z) -> ZonedDateTime.ofInstant(d.toInstant(), z).get(ChronoField.DAY_OF_MONTH)
-        );
+        return new IsDayOfMonth<>(ZONEDDATETIME_AS_DAYOFMONTH, dayOfMonth(dayOfMonth));
     }
 
     /**
@@ -391,10 +402,7 @@ public abstract class ZonedDateTimeMatchers {
      * @param year the reference year against which the examined date is checked
      */
     public static DateMatcher<ZonedDateTime> isYear(final int year) {
-        return new IsYear<>(
-            new FieldZonedDateTimeWrapper(year, ChronoField.YEAR),
-            (d, z) -> ZonedDateTime.ofInstant(d.toInstant(), z).get(ChronoField.YEAR)
-        );
+        return new IsYear<>(ZONEDDATETIME_AS_YEAR, year(year));
     }
 
     /**
@@ -408,8 +416,13 @@ public abstract class ZonedDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<ZonedDateTime> within(final long period, final ChronoUnit unit, final ZonedDateTime date) {
-        return new IsWithin<>(period, unit, new ZonedDateTimeWrapper(date), new ZonedDateTimeFormatter());
+    public static DateMatcher<ZonedDateTime> within(final long period,
+            final ChronoUnit unit,
+            final ZonedDateTime date) {
+        return new IsWithin<>(Interval.of(period, unit),
+                ZONEDDATETIME_AS_ZONEDDATETIME,
+                zonedDateTime(date),
+                ZONEDDATETIME);
     }
 
     /**
@@ -442,10 +455,9 @@ public abstract class ZonedDateTimeMatchers {
             final int second,
             final int nanos,
             final ZoneId tz) {
-        return new IsWithin<>(period,
-            unit,
-            new ZonedDateTimeWrapper(year, month, dayofMonth, hour, minute, second, nanos, tz),
-            new ZonedDateTimeFormatter());
+        return within(period,
+                unit,
+                ZonedDateTime.of(year, month.getValue(), dayofMonth, hour, minute, second, nanos, tz));
     }
 
     /**
@@ -512,10 +524,7 @@ public abstract class ZonedDateTimeMatchers {
      * </pre>
      */
     public static DateMatcher<ZonedDateTime> isDayOfWeek(final DayOfWeek dayOfWeek) {
-        return new IsDayOfWeek<>(
-            new FieldZonedDateTimeWrapper(dayOfWeek.getValue(), ChronoField.DAY_OF_WEEK),
-            (d, z) -> ZonedDateTime.ofInstant(d.toInstant(), z).get(ChronoField.DAY_OF_WEEK)
-        );
+        return new IsDayOfWeek<>(ZONEDDATETIME_AS_DAYOFWEEK, daysOfWeek(dayOfWeek));
     }
 
     /**
@@ -528,10 +537,7 @@ public abstract class ZonedDateTimeMatchers {
      * </pre>
      */
     public static DateMatcher<ZonedDateTime> isDayOfWeek(final DayOfWeek... daysOfWeek) {
-        return new AnyOf<>(
-            Stream.of(daysOfWeek).map(ZonedDateTimeMatchers::isDayOfWeek),
-            (d, z) -> "the date is on a " + d.withZoneSameInstant(z).getDayOfWeek().name().toLowerCase()
-        );
+        return new IsDayOfWeek<>(ZONEDDATETIME_AS_DAYOFWEEK, daysOfWeek(daysOfWeek));
     }
 
     /**
@@ -661,11 +667,7 @@ public abstract class ZonedDateTimeMatchers {
      * </pre>
      */
     public static DateMatcher<ZonedDateTime> isFirstDayOfMonth() {
-        return new IsMinimum<>(ChronoField.DAY_OF_MONTH,
-            (d, z) -> d.withZoneSameInstant(z).get(ChronoField.DAY_OF_MONTH),
-            (d, z) -> ChronoField.DAY_OF_MONTH.rangeRefinedBy(d.withZoneSameInstant(z)),
-            new DatePartFormatter(),
-            () -> "the date is the first day of the month");
+        return new IsFirstDayOfMonth<>(ZONEDDATETIME_AS_ZONEDDATETIME);
     }
 
     /**
@@ -681,12 +683,7 @@ public abstract class ZonedDateTimeMatchers {
      * @param field the temporal field to check
      */
     public static DateMatcher<ZonedDateTime> isMinimum(final ChronoField field) {
-        return new IsMinimum<>(
-            field,
-            (d, z) -> d.withZoneSameInstant(z).get(field),
-            (d, z) -> field.rangeRefinedBy(d.withZoneSameInstant(z)),
-            new DatePartFormatter()
-        );
+        return new IsMinimum<>(ZONEDDATETIME_AS_ZONEDDATETIME, field);
     }
 
     /**
@@ -699,13 +696,7 @@ public abstract class ZonedDateTimeMatchers {
      * </pre>
      */
     public static DateMatcher<ZonedDateTime> isLastDayOfMonth() {
-        return new IsMaximum<>(
-            ChronoField.DAY_OF_MONTH,
-            (d, z) -> d.withZoneSameInstant(z).get(ChronoField.DAY_OF_MONTH),
-            (d, z) -> ChronoField.DAY_OF_MONTH.rangeRefinedBy(d.withZoneSameInstant(z)),
-            new DatePartFormatter(),
-            () -> "the date is the last day of the month"
-        );
+        return new IsLastDayOfMonth<>(ZONEDDATETIME_AS_ZONEDDATETIME);
     }
 
     /**
@@ -721,12 +712,7 @@ public abstract class ZonedDateTimeMatchers {
      * @param field the temporal field to check
      */
     public static DateMatcher<ZonedDateTime> isMaximum(final ChronoField field) {
-        return new IsMaximum<>(
-            field,
-            (d, z) -> d.withZoneSameInstant(z).get(field),
-            (d, z) -> field.rangeRefinedBy(d.withZoneSameInstant(z)),
-            new DatePartFormatter()
-        );
+        return new IsMaximum<>(ZONEDDATETIME_AS_ZONEDDATETIME, field);
     }
 
     /**
@@ -739,10 +725,7 @@ public abstract class ZonedDateTimeMatchers {
      * </pre>
      */
     public static DateMatcher<ZonedDateTime> isMonth(final Month month) {
-        return new IsMonth<>(
-            new FieldZonedDateTimeWrapper(month.getValue(), ChronoField.MONTH_OF_YEAR),
-            (d, z) -> ZonedDateTime.ofInstant(d.toInstant(), z).get(ChronoField.MONTH_OF_YEAR)
-        );
+        return new IsMonth<>(ZONEDDATETIME_AS_MONTH, month(month));
     }
 
     /**
@@ -911,10 +894,7 @@ public abstract class ZonedDateTimeMatchers {
      * </pre>
      */
     public static DateMatcher<ZonedDateTime> isLeapYear() {
-        return new IsLeapYear<>(
-            (d, z) -> d.withZoneSameInstant(z),
-            new ZonedDateTimeFormatter()
-        );
+        return new IsLeapYear<>(ZONEDDATETIME_AS_YEAR);
     }
 
     /**
@@ -929,10 +909,7 @@ public abstract class ZonedDateTimeMatchers {
      * @param hour the hour of the day (0-23)
      */
     public static DateMatcher<ZonedDateTime> isHour(final int hour) {
-        return new IsHour<>(
-            new FieldZonedDateTimeWrapper(hour, ChronoField.HOUR_OF_DAY),
-            (d, z) -> ZonedDateTime.ofInstant(d.toInstant(), z).get(ChronoField.HOUR_OF_DAY)
-        );
+        return new IsHour<>(ZONEDDATETIME_AS_HOUR, hour(hour));
     }
 
     /**
@@ -947,10 +924,7 @@ public abstract class ZonedDateTimeMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<ZonedDateTime> sameHourOfDay(final ZonedDateTime date) {
-        return new IsHour<>(
-            new FieldZonedDateTimeWrapper(date, ChronoField.HOUR_OF_DAY),
-            (d, z) -> ZonedDateTime.ofInstant(d.toInstant(), z).get(ChronoField.HOUR_OF_DAY)
-        );
+        return new IsHour<>(ZONEDDATETIME_AS_HOUR, hour(date));
     }
 
     /**
@@ -965,10 +939,7 @@ public abstract class ZonedDateTimeMatchers {
      * @param minute the minute of the day (0-59)
      */
     public static DateMatcher<ZonedDateTime> isMinute(final int minute) {
-        return new IsMinute<>(
-            new FieldZonedDateTimeWrapper(minute, ChronoField.MINUTE_OF_HOUR),
-            (d, z) -> ZonedDateTime.ofInstant(d.toInstant(), z).get(ChronoField.MINUTE_OF_HOUR)
-        );
+        return new IsMinute<>(ZONEDDATETIME_AS_MINUTE, minute(minute));
     }
 
     /**
@@ -983,10 +954,7 @@ public abstract class ZonedDateTimeMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<ZonedDateTime> sameMinuteOfHour(final ZonedDateTime date) {
-        return new IsMinute<>(
-            new FieldZonedDateTimeWrapper(date, ChronoField.MINUTE_OF_HOUR),
-            (d, z) -> ZonedDateTime.ofInstant(d.toInstant(), z).get(ChronoField.MINUTE_OF_HOUR)
-        );
+        return new IsMinute<>(ZONEDDATETIME_AS_MINUTE, minute(date));
     }
 
     /**
@@ -1001,10 +969,7 @@ public abstract class ZonedDateTimeMatchers {
      * @param second the second of the day (0-59)
      */
     public static DateMatcher<ZonedDateTime> isSecond(final int second) {
-        return new IsSecond<>(
-            new FieldZonedDateTimeWrapper(second, ChronoField.SECOND_OF_MINUTE),
-            (d, z) -> ZonedDateTime.ofInstant(d.toInstant(), z).get(ChronoField.SECOND_OF_MINUTE)
-        );
+        return new IsSecond<>(ZONEDDATETIME_AS_SECOND, second(second));
     }
 
     /**
@@ -1019,9 +984,6 @@ public abstract class ZonedDateTimeMatchers {
      * @param date the reference date against which the examined date is checked
      */
     public static DateMatcher<ZonedDateTime> sameSecondOfMinute(final ZonedDateTime date) {
-        return new IsSecond<>(
-            new FieldZonedDateTimeWrapper(date, ChronoField.SECOND_OF_MINUTE),
-            (d, z) -> ZonedDateTime.ofInstant(d.toInstant(), z).get(ChronoField.SECOND_OF_MINUTE)
-        );
+        return new IsSecond<>(ZONEDDATETIME_AS_SECOND, second(date));
     }
 }

@@ -32,7 +32,7 @@ public class IsMinuteTest {
 		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.isMinute(1));
 	}
 	
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateMinute() {
 		assertThat(AUG_04_2015_AS_SQL, DateMatchers.isMinute(0));
 	}
@@ -47,7 +47,7 @@ public class IsMinuteTest {
 		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameMinute(1));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateSameMinute() {
 		assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameMinute(0));
 	}

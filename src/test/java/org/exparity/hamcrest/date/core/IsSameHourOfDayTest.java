@@ -47,13 +47,13 @@ public class IsSameHourOfDayTest {
 		assertThat(other, DateMatchers.sameHour(date));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateSameHour() {
 		Date date = new Date(), other = new java.sql.Date(date.getTime());
 		assertThat(other, DateMatchers.sameHour(date));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isDateSameHourSqlDate() {
 		Date date = new Date();
 		java.sql.Date other = new java.sql.Date(date.getTime());
@@ -88,7 +88,7 @@ public class IsSameHourOfDayTest {
 		assertThat(JAN_01_2012_MIDNIGHT_GMT_AS_DATE, DateMatchers.sameHourOfDay(JAN_01_2012_MIDNIGHT_CET_AS_DATE).atZone(ZoneIds.CET));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isDateSameHourOfDaySqlDate() {
 		Date date = new Date();
 		java.sql.Date other = new java.sql.Date(date.getTime());
