@@ -128,9 +128,9 @@ public class IsSameOrAfterTest {
 		assertThat(JUN_15_2012_11AM_UTC_AS_DATE, DateMatchers.sameOrAfter(JUN_16_2012_11PM_UTC_AS_DATE).atZone(UTC));
 	}
 
-	@Test
+    @Test
 	public void isSqlDateSameOrAfterSameDate() {
-		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrAfter(JUN_15_2012_11PM_UTC_AS_DATE).atZone(UTC));
+		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrAfter(JUN_15_2012_11AM_UTC_AS_DATE).atZone(UTC));
 	}
 
 	@Test
@@ -178,17 +178,17 @@ public class IsSameOrAfterTest {
 		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrAfter(new DayMonthYear(15, Months.JUNE, 2012)).atZone(UTC));
 	}
 
-	@Test
+    @Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateSameOrAfterEarlierDateTime() {
 		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrAfter(2012, Months.JUNE, 15, 10, 59, 59).atZone(UTC));
 	}
 
-	@Test
+    @Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateSameOrAfterLaterDateTimeOnSameDay() {
 		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrAfter(2012, Months.JUNE, 15, 11, 0, 1).atZone(UTC));
 	}
 
-	@Test
+    @Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateSameOrAfterSameDateTime() {
 		assertThat(JUN_15_2012_AS_SQL, DateMatchers.sameOrAfter(2012, Months.JUNE, 15, 11, 0, 0).atZone(UTC));
 	}

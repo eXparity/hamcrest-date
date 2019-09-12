@@ -1,11 +1,14 @@
 package org.exparity.hamcrest.date.core;
 
+import static java.util.stream.Collectors.joining;
+
 import java.time.ZoneId;
 import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalAccessor;
 import java.time.temporal.ValueRange;
-import java.util.function.Supplier;
+import java.util.Locale;
+import java.util.stream.Stream;
 
-import org.exparity.hamcrest.date.core.format.DatePartFormatter;
 import org.hamcrest.Description;
 
 /**
@@ -15,79 +18,47 @@ import org.hamcrest.Description;
  */
 public class IsMinimum<T> extends DateMatcher<T> {
 
-    private final ChronoField datePart;
-    private final TemporalFieldAdapter<T> adapter;
-    private final TemporalFieldRangeAdapter<T> rangeAdapter;
-    private final DatePartFormatter formatter;
-    private final Supplier<String> descriptionSupplier;
-    private final ZoneId zone;
+	private static final String SPLIT_ON_UPPERCASE_REGEX = "(?=[A-Z])";
+	
+	private final TemporalConverter<T, ? extends TemporalAccessor> converter;
+	private final ChronoField field;
+	private final Locale locale;
+	private final ZoneId zone;
 
-    private IsMinimum(final ChronoField datePart,
-                      final TemporalFieldAdapter<T> adapter,
-                      final TemporalFieldRangeAdapter<T> rangeAdapter,
-                      final DatePartFormatter formatter,
-                      final Supplier<String> descriptionSupplier,
-                      final ZoneId zone) {
-        this.datePart = datePart;
-        this.adapter = adapter;
-        this.rangeAdapter = rangeAdapter;
-        this.formatter = formatter;
-        this.descriptionSupplier = descriptionSupplier;
-        this.zone = zone;
-    }
+	public IsMinimum(TemporalConverter<T, ? extends TemporalAccessor> converter, ChronoField field, ZoneId zone, Locale locale) {
+		this.converter = converter;
+		this.field = field;
+		this.locale = locale;
+		this.zone = zone;
+	}
 
-    public IsMinimum(final ChronoField datePart,
-            final TemporalFieldAdapter<T> adapter,
-            final TemporalFieldRangeAdapter<T> rangeAdapter,
-            final DatePartFormatter formatter,
-            final Supplier<String> descriptionSupplier) {
-        this.datePart = datePart;
-        this.adapter = adapter;
-        this.rangeAdapter = rangeAdapter;
-        this.formatter = formatter;
-        this.descriptionSupplier = descriptionSupplier;
-        this.zone = ZoneId.systemDefault();
-    }
+	public IsMinimum(TemporalConverter<T, ? extends TemporalAccessor> converter, ChronoField field) {
+		this(converter, field, ZoneId.systemDefault(), Locale.getDefault(Locale.Category.FORMAT));
+	}
 
-    public IsMinimum(final ChronoField datePart,
-                     final TemporalFieldAdapter<T> adapter,
-                     final TemporalFieldRangeAdapter<T> minimumAdapter,
-                     final DatePartFormatter formatter) {
-        this(datePart, adapter, minimumAdapter, formatter, () -> "the date is the minimum value for " + formatter.describe(datePart));
-    }
+	@Override
+	protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
+		TemporalAccessor actualTemporal = converter.apply(actual, zone);
+		ValueRange actualRange = field.rangeRefinedBy(actualTemporal);
+		long actualValue = field.getFrom(actualTemporal), expectedValue = actualRange.getMinimum();
+		if (expectedValue != actualValue) {
+			mismatchDesc.appendText("date has the value " + actualValue + " instead of " + expectedValue);
+			return false;
+		} else {
+			return true;
+		}
+	}
 
-    @Override
-    protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
-        int actualValue = this.adapter.asTemporalField(actual, zone);
-        ValueRange range = this.rangeAdapter.asTemporalFieldRange(actual, zone);
-        if (range.getMinimum() != actualValue) {
-            mismatchDesc.appendText("date is the " + actualValue
-                    + " "
-                    + this.formatter.describe(this.datePart)
-                    + " instead of "
-                    + range.getMinimum()
-                    + " "
-                    + this.formatter.describe(this.datePart));
-            return false;
-        } else {
-            return true;
-        }
-    }
+	@Override
+	public void describeTo(final Description description) {
+		description.appendText("the date has the minimum value for "
+		        + Stream.of(field.getDisplayName(locale).split(SPLIT_ON_UPPERCASE_REGEX))
+		                .map(String::toLowerCase)
+		                .collect(joining(" ")));
+	}
 
-    @Override
-    public void describeTo(final Description description) {
-        description.appendText(this.descriptionSupplier.get());
-    }
-
-    @Override
-   	public DateMatcher<T> atZone(ZoneId zone) {
-   		return new IsMinimum<>(
-   		    datePart,
-          adapter,
-          rangeAdapter,
-          formatter,
-          descriptionSupplier,
-          zone);
-   	}
-
+	@Override
+	public DateMatcher<T> atZone(ZoneId zone) {
+		return new IsMinimum<>(converter, field, zone, locale);
+	}
 }

@@ -14,7 +14,6 @@ import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
-import org.exparity.hamcrest.date.core.wrapper.DateWrapper;
 import org.exparity.hamcrest.date.testutils.ZoneIds;
 import org.testng.annotations.Test;
 
@@ -273,25 +272,25 @@ public class IsWithinTest {
 		assertThat(AUG_04_2015_AS_SQL, DateMatchers.within(2, ChronoUnit.DAYS, 2015, Month.AUGUST, 7).atZone(UTC));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateWrapper.JAVA_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateWithinSameDayMonthYearTimeUsingDateMatchers() {
 		assertThat(AUG_04_2015_AS_SQL,
 				DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 0).atZone(UTC));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateWrapper.JAVA_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateWithinDayMonthYearTimeInsideLimitUsingDateMatchers() {
 		assertThat(AUG_04_2015_AS_SQL,
 				DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 1).atZone(UTC));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateWrapper.JAVA_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateWithinDayMonthYearTimeEqualLimitUsingDateMatchers() {
 		assertThat(AUG_04_2015_AS_SQL,
 				DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 2).atZone(UTC));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateWrapper.JAVA_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateWithinDayMonthYearTimeOutsideLimitUsingDateMatchers() {
 		assertThat(AUG_04_2015_AS_SQL,
 				DateMatchers.within(2, ChronoUnit.MILLIS, 2015, Month.AUGUST, 4, 12, 0, 0, 3).atZone(UTC));

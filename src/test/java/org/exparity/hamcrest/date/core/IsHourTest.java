@@ -34,7 +34,7 @@ public class IsHourTest {
 		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.isHour(11).atZone(UTC));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateHour() {
 		assertThat(AUG_04_2015_AS_SQL, DateMatchers.isHour(12).atZone(UTC));
 	}
@@ -49,7 +49,7 @@ public class IsHourTest {
 		assertThat(AUG_04_2015_NOON_UTC_AS_DATE, DateMatchers.sameHour(11).atZone(UTC));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateSameHour() {
 		assertThat(AUG_04_2015_AS_SQL, DateMatchers.sameHour(12).atZone(UTC));
 	}

@@ -242,5 +242,4 @@ public class IsSameDayTest {
 	public void isZonedDateTimeSameDayLaterSameDay() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isDay(2015, AUGUST, 4, UTC).atZone(UTC));
 	}
-
 }

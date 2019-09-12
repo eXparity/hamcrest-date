@@ -44,13 +44,13 @@ public class IsSameSecondOfMinuteTest {
 		assertThat(other, DateMatchers.sameSecond(date));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateSameSecond() {
 		Date date = new Date(), other = new java.sql.Date(date.getTime());
 		assertThat(other, DateMatchers.sameSecond(date));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isDateSameSecondSqlDate() {
 		Date date = new Date();
 		java.sql.Date other = new java.sql.Date(date.getTime());
@@ -75,13 +75,13 @@ public class IsSameSecondOfMinuteTest {
 		assertThat(other, DateMatchers.sameSecondOfMinute(date));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateSameSecondOfMinute() {
 		Date date = new Date(), other = new java.sql.Date(date.getTime());
 		assertThat(other, DateMatchers.sameSecondOfMinute(date));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isDateSameSecondOfMinuteSqlDate() {
 		Date date = new Date();
 		java.sql.Date other = new java.sql.Date(date.getTime());

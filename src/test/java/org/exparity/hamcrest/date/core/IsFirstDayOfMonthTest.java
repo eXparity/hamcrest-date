@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
  */
 public class IsFirstDayOfMonthTest {
 
-    private static final String ASSERTION_PATTERN = "\\sExpected: the date is the first day of the month\\s     but: date is the [0-9]+? day of month instead of [0-9]+? day of month";
+    private static final String ASSERTION_PATTERN = "\\sExpected: the date is the first day of the month\\s     but: date is the [0-9]+? day of the month";
 
 	// Date Matchers
 	@Test

@@ -44,13 +44,13 @@ public class IsSameMinuteOfHourTest {
 		assertThat(other, DateMatchers.sameMinute(date));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateSameMinute() {
 		Date date = new Date(), other = new java.sql.Date(date.getTime());
 		assertThat(other, DateMatchers.sameMinute(date));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isDateSameMinuteSqlDate() {
 		Date date = new Date();
 		java.sql.Date other = new java.sql.Date(date.getTime());
@@ -75,13 +75,13 @@ public class IsSameMinuteOfHourTest {
 		assertThat(other, DateMatchers.sameMinuteOfHour(date));
 	}
 	
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSqlDateSameMinuteOfHour() {
 		Date date = new Date(), other = new java.sql.Date(date.getTime());
 		assertThat(other, DateMatchers.sameMinuteOfHour(date));
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = DateMatchers.UNSUPPORTED_SQL_DATE_UNIT)
+	@Test(expectedExceptions = TemporalConversionException.class, expectedExceptionsMessageRegExp = TemporalConverters.UNSUPPORTED_SQL_DATE_UNIT)
 	public void isSameMinuteOfHourSqlDate() {
 		Date date = new Date();
 		java.sql.Date other = new java.sql.Date(date.getTime());

@@ -1,7 +1,9 @@
 package org.exparity.hamcrest.date.core;
 
 import java.time.ZoneId;
+import java.util.Locale;
 
+import org.exparity.hamcrest.date.core.types.DayOfMonth;
 import org.hamcrest.Description;
 
 /**
@@ -11,24 +13,30 @@ import org.hamcrest.Description;
  */
 public class IsDayOfMonth<T> extends DateMatcher<T> {
 
-	private final TemporalFieldWrapper<T> expected;
-	private final TemporalFieldAdapter<T> accessor;
+	private final TemporalConverter<T, DayOfMonth> converter;
+	private final TemporalProvider<DayOfMonth> expected;
+	private final Locale locale;
 	private final ZoneId zone;
 
-	private IsDayOfMonth(final TemporalFieldWrapper<T> expected, final TemporalFieldAdapter<T> accessor, final ZoneId zone) {
+	public IsDayOfMonth(TemporalConverter<T, DayOfMonth> converter,
+	        TemporalProvider<DayOfMonth> expected,
+	        ZoneId zone,
+	        Locale locale) {
 		this.expected = expected;
-		this.accessor = accessor;
+		this.converter = converter;
+		this.locale = locale;
 		this.zone = zone;
 	}
 
-	public IsDayOfMonth(final TemporalFieldWrapper<T> expected, final TemporalFieldAdapter<T> accessor) {
-		this(expected, accessor, ZoneId.systemDefault());
+	public IsDayOfMonth(TemporalConverter<T, DayOfMonth> converter, TemporalProvider<DayOfMonth> expected) {
+		this(converter, expected, ZoneId.systemDefault(), Locale.getDefault(Locale.Category.FORMAT));
 	}
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDescription) {
-		if (!this.expected.isSame(actual)) {
-			mismatchDescription.appendText("the date has the day of month " + accessor.asTemporalField(actual, zone));
+	    DayOfMonth expectedValue = expected.apply(zone), actualValue = converter.apply(actual, zone);
+		if (!expectedValue.equals(actualValue)) {
+			mismatchDescription.appendText("the date has the day of month " + actualValue);
 			return false;
 		} else {
 			return true;
@@ -37,12 +45,12 @@ public class IsDayOfMonth<T> extends DateMatcher<T> {
 
 	@Override
 	public void describeTo(final Description description) {
-		description.appendText("the date has the day of month " + expected.unwrap());
+		description.appendText("the date has the day of month " + expected.apply(zone));
 	}
 
 	@Override
 	public DateMatcher<T> atZone(ZoneId zone) {
-		return new IsDayOfMonth<>(expected.withZone(zone), accessor);
+		return new IsDayOfMonth<>(converter, expected, zone, locale);
 	}
 
 }

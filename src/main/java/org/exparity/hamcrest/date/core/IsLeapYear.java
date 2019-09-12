@@ -1,8 +1,8 @@
 package org.exparity.hamcrest.date.core;
 
-import static java.time.temporal.TemporalQueries.localDate;
-
+import java.time.Year;
 import java.time.ZoneId;
+import java.util.Locale;
 
 import org.hamcrest.Description;
 
@@ -13,26 +13,25 @@ import org.hamcrest.Description;
  */
 public class IsLeapYear<T> extends DateMatcher<T> {
 
-	private final TemporalAdapter<T> adapter;
-	private final TemporalFormatter<T> formatter;
+	private final TemporalConverter<T, Year> converter;
+	private final Locale locale;
 	private final ZoneId zone;
 
-	private IsLeapYear(final TemporalAdapter<T> adapter, final TemporalFormatter<T> formatter, final ZoneId zone) {
-		this.adapter = adapter;
-		this.formatter = formatter;
+	public IsLeapYear(TemporalConverter<T, Year> converter, ZoneId zone, Locale locale) {
+		this.converter = converter;
+		this.locale = locale;
 		this.zone = zone;
 	}
 
-	public IsLeapYear(final TemporalAdapter<T> adapter, final TemporalFormatter<T> formatter) {
-		this.adapter = adapter;
-		this.formatter = formatter;
-		this.zone = ZoneId.systemDefault();
+	public IsLeapYear(TemporalConverter<T, Year> converter) {
+		this(converter, ZoneId.systemDefault(), Locale.getDefault(Locale.Category.FORMAT));
 	}
 
 	@Override
 	protected boolean matchesSafely(final T actual, final Description mismatchDesc) {
-		if (!this.adapter.asTemporal(actual, zone).query(localDate()).isLeapYear()) {
-			mismatchDesc.appendText("the date " + this.formatter.describe(actual) + " is not a leap year");
+		Year actualValue = converter.apply(actual, zone);
+		if (!actualValue.isLeap()) {
+			mismatchDesc.appendText("the year " + actualValue + " is not a leap year");
 			return false;
 		} else {
 			return true;
@@ -46,7 +45,7 @@ public class IsLeapYear<T> extends DateMatcher<T> {
 
 	@Override
 	public DateMatcher<T> atZone(ZoneId zone) {
-		return new IsLeapYear<>(adapter, formatter, zone);
+		return new IsLeapYear<>(converter, zone, locale);
 	}
 
 }
