@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Date;
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
+import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
 
@@ -144,4 +146,24 @@ public class IsSameMinuteOfHourTest {
 		ZonedDateTime date = ZonedDateTime.now(), other = date.plusHours(1);
 		assertThat(other, ZonedDateTimeMatchers.sameMinuteOfHour(date));
 	}
+	
+    // OffsetDateTime Matchers
+    @Test
+    public void isOffsetDateTimeSameMinuteOfHour() {
+        OffsetDateTime date = OffsetDateTime.now(), other = date;
+        assertThat(other, OffsetDateTimeMatchers.sameMinuteOfHour(date));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotSameMinuteOfHour() {
+        OffsetDateTime date = OffsetDateTime.now(), other = date.plusMinutes(1);
+        assertThat(other, OffsetDateTimeMatchers.sameMinuteOfHour(date));
+    }
+
+    @Test
+    public void isOffsetDateTimeSameMinuteOfHourDifferentHour() {
+        OffsetDateTime date = OffsetDateTime.now(), other = date.plusHours(1);
+        assertThat(other, OffsetDateTimeMatchers.sameMinuteOfHour(date));
+    }
+	
 }

@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
 import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
@@ -111,4 +112,21 @@ public class IsSameDayOfMonthTest {
 	public void isZonedDateTimeSameDayOfMonthDifferentMonth() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameDayOfMonth(SEP_04_2015_NOON_UTC));
 	}
+	
+    // OffsetDateTime Matchers
+    @Test
+    public void isOffsetDateTimeSameDayOfMonth() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.sameDayOfMonth(AUG_04_2015_NOON_OFFSET_UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotSameDayOfMonth() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.sameDayOfMonth(AUG_01_2015_NOON_OFFSET_UTC));
+    }
+
+    @Test
+    public void isOffsetDateTimeSameDayOfMonthDifferentMonth() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.sameDayOfMonth(SEP_04_2015_NOON_OFFSET_UTC));
+
+    }
 }

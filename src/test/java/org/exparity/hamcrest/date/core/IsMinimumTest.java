@@ -10,6 +10,7 @@ import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
+import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
 import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
@@ -95,5 +96,16 @@ public class IsMinimumTest {
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
     public void isLocalTimeNotFirstHourOfDay() {
         assertThat(LocalTime.of(1, 0, 0), LocalTimeMatchers.isMinimum(ChronoField.HOUR_OF_DAY));
+    }
+
+    // OffsetDateTime Matchers
+    @Test
+    public void isOffsetDateTimeFirstDayOfMonth() {
+        assertThat(AUG_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotFirstDayOfMonth() {
+        assertThat(AUG_31_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
     }
 }

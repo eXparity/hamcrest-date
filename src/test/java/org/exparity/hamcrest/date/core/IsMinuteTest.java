@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
+import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
 
@@ -85,4 +86,14 @@ public class IsMinuteTest {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isMinute(1));
 	}
 
+    // OffsetDateTime Matchers
+    @Test
+    public void isOffsetDateTimeMinute() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMinute(0));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotMinute() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMinute(1));
+    }
 }

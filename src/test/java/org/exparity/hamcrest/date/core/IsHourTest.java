@@ -9,6 +9,7 @@ import java.time.LocalTime;
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
+import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.exparity.hamcrest.date.testutils.ZoneIds;
 import org.testng.annotations.Test;
@@ -77,6 +78,7 @@ public class IsHourTest {
 	}
 
 	// ZonedDateTime Matchers
+	
 	@Test
 	public void isZonedDateTimeHour() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isHour(12).atZone(ZoneIds.UTC));
@@ -97,4 +99,26 @@ public class IsHourTest {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isHour(11).atZone(ZoneIds.UTC));
 	}
 
+    // OffsetDateTime Matchers
+    
+    @Test
+    public void isOffsetDateTimeHour() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isHour(12).atZone(ZoneIds.UTC));
+    }
+
+    @Test
+    public void isOffsetDateTimeHourOtherZone() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isHour(8).atZone(ZoneIds.EST));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotHourOtherZone() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isHour(12).atZone(ZoneIds.CET));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotHour() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isHour(11).atZone(ZoneIds.UTC));
+    }
+	
 }

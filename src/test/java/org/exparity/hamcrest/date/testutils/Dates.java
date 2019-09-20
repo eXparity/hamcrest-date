@@ -128,6 +128,7 @@ public abstract class Dates {
 	public static final LocalDateTime AUG_03_2015_11PM = LocalDateTime.of(AUG_03_2015, LocalTime.of(23, 0, 0));
 	public static final LocalDateTime AUG_04_2015_1159 = LocalDateTime.of(AUG_04_2015, LocalTime.of(11, 59, 0));
 	public static final LocalDateTime AUG_04_2015_NOON = LocalDateTime.of(AUG_04_2015, NOON);
+    public static final LocalDateTime AUG_04_2015_MIDNIGHT = LocalDateTime.of(AUG_04_2015, MIDNIGHT);
 	public static final LocalDateTime AUG_04_2015_1201 = LocalDateTime.of(AUG_04_2015, LocalTime.of(12, 1, 0));
 	public static final LocalDateTime AUG_05_2015_01AM = LocalDateTime.of(AUG_05_2015, LocalTime.of(1, 0, 0));
 	public static final LocalDateTime AUG_05_2015_NOON = LocalDateTime.of(AUG_05_2015, NOON);
@@ -176,6 +177,41 @@ public abstract class Dates {
 	public static final ZonedDateTime AUG_04_2015_01PM_EST = ZonedDateTime.of(AUG_04_2015_NOON, ZoneIds.EST);
 	public static final ZonedDateTime AUG_04_2015_NOON_CET = ZonedDateTime.of(AUG_04_2015_NOON, ZoneIds.CET);
 	public static final ZonedDateTime AUG_05_2015_01AM_CET = ZonedDateTime.of(AUG_05_2015_01AM, ZoneIds.CET);
+
+    public static final OffsetDateTime JAN_01_2012_MIDNIGHT_OFFSET_CET = OffsetDateTime.of(JAN_01_2012_MIDNIGHT, ZoneOffsets.CET);
+    public static final OffsetDateTime JUN_14_2012_NOON_OFFSET_UTC = OffsetDateTime.of(JUN_14_2012_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime JUN_15_2012_11AM_OFFSET_UTC = OffsetDateTime.of(JUN_15_2012_11AM, ZoneOffsets.UTC);
+    public static final OffsetDateTime JUN_15_2012_NOON_OFFSET_UTC = OffsetDateTime.of(JUN_15_2012_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime JAN_01_2015_NOON_OFFSET_UTC = OffsetDateTime.of(JAN_01_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime FEB_01_2015_NOON_OFFSET_UTC = OffsetDateTime.of(FEB_01_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime MAR_01_2015_NOON_OFFSET_UTC = OffsetDateTime.of(MAR_01_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime APR_01_2015_NOON_OFFSET_UTC = OffsetDateTime.of(APR_01_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime MAY_01_2015_NOON_OFFSET_UTC = OffsetDateTime.of(MAY_01_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime JUN_01_2015_NOON_OFFSET_UTC = OffsetDateTime.of(JUN_01_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime JUL_01_2015_NOON_OFFSET_UTC = OffsetDateTime.of(JUL_01_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime AUG_01_2015_NOON_OFFSET_UTC = OffsetDateTime.of(AUG_01_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime AUG_03_2015_NOON_OFFSET_UTC = OffsetDateTime.of(AUG_03_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime AUG_04_2015_11AM_OFFSET_UTC = OffsetDateTime.of(AUG_04_2015_1159, ZoneOffsets.UTC);
+    public static final OffsetDateTime AUG_04_2015_NOON_OFFSET_UTC = OffsetDateTime.of(AUG_04_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime AUG_04_2015_MIDNIGHT_OFFSET_UTC = OffsetDateTime.of(AUG_04_2015_MIDNIGHT, ZoneOffsets.UTC);
+    public static final OffsetDateTime AUG_04_2015_01PM_OFFSET_UTC = OffsetDateTime.of(AUG_04_2015_1201, ZoneOffsets.UTC);
+    public static final OffsetDateTime AUG_05_2015_NOON_OFFSET_UTC = OffsetDateTime.of(AUG_05_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime AUG_06_2015_NOON_OFFSET_UTC = OffsetDateTime.of(AUG_06_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime AUG_07_2015_NOON_OFFSET_UTC = OffsetDateTime.of(AUG_07_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime AUG_08_2015_NOON_OFFSET_UTC = OffsetDateTime.of(AUG_08_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime AUG_09_2015_NOON_OFFSET_UTC = OffsetDateTime.of(AUG_09_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime AUG_31_2015_NOON_OFFSET_UTC = OffsetDateTime.of(AUG_31_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime SEP_04_2015_NOON_OFFSET_UTC = OffsetDateTime.of(SEP_04_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime SEP_30_2015_NOON_OFFSET_UTC = OffsetDateTime.of(SEP_30_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime OCT_01_2015_NOON_OFFSET_UTC = OffsetDateTime.of(OCT_01_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime NOV_01_2015_NOON_OFFSET_UTC = OffsetDateTime.of(NOV_01_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime DEC_01_2015_NOON_OFFSET_UTC = OffsetDateTime.of(DEC_01_2015_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime AUG_04_2016_NOON_OFFSET_UTC = OffsetDateTime.of(AUG_04_2016_NOON, ZoneOffsets.UTC);
+    public static final OffsetDateTime AUG_03_2015_11PM_OFFSET_EST = OffsetDateTime.of(AUG_03_2015_11PM, ZoneOffsets.EST);
+    public static final OffsetDateTime AUG_04_2015_NOON_OFFSET_EST = OffsetDateTime.of(AUG_04_2015_NOON, ZoneOffsets.EST);
+    public static final OffsetDateTime AUG_04_2015_01PM_OFFSET_EST = OffsetDateTime.of(AUG_04_2015_NOON, ZoneOffsets.EST);
+    public static final OffsetDateTime AUG_04_2015_NOON_OFFSET_CET = OffsetDateTime.of(AUG_04_2015_NOON, ZoneOffsets.CET);
+    public static final OffsetDateTime AUG_05_2015_01AM_OFFSET_CET = OffsetDateTime.of(AUG_05_2015_01AM, ZoneOffsets.CET);
 	
 	// SQL Date
 	public static final java.sql.Date JAN_01_2012_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2012, 1, 1));

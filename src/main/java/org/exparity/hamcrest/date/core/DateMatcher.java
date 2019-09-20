@@ -1,6 +1,7 @@
 package org.exparity.hamcrest.date.core;
 
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
@@ -20,5 +21,15 @@ public abstract class DateMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
      * @return a copy of this matcher based on the new time zone
      */
     public abstract DateMatcher<T> atZone(ZoneId zone);
+
+    /**
+     * Creates a copy of this matcher using a specific time offset.
+     *
+     * @param offset the new time offset
+     * @return a copy of this matcher based on the new time offset
+     */
+    public DateMatcher<T> atOffset(ZoneOffset offset) {
+        return atZone(ZoneId.of(offset.getId()));
+    }
 
 }

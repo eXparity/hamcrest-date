@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.OffsetDateTime;
 import java.time.Year;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -96,14 +97,21 @@ public class TemporalProviders {
 	 * Factory to create a {@link TemporalProvider} for a {@link LocalDate}
 	 */
 	public static TemporalProvider<LocalDate> localDate(ZonedDateTime date) {
-		return (zone) -> date.toLocalDate();
+		return (zone) -> zonedDateTime(date).apply(zone).toLocalDate();
 	}
+
+    /**
+     * Factory to create a {@link TemporalProvider} for a {@link LocalDate}
+     */
+    public static TemporalProvider<LocalDate> localDate(OffsetDateTime date) {
+        return (zone) -> offsetDateTime(date).apply(zone).toLocalDate();
+    }
 	
 	/**
 	 * Factory to create a {@link TemporalProvider} for a {@link LocalDate}
 	 */
 	public static TemporalProvider<LocalDate> localDate(LocalDateTime date) {
-		return (zone) -> date.toLocalDate();
+		return (zone) -> localDateTime(date).apply(zone).toLocalDate();
 	}
 
 	/**
@@ -138,7 +146,7 @@ public class TemporalProviders {
 		if (date instanceof java.sql.Date) {
 			return zonedDateTime((java.sql.Date) date);
 		} else {
-			return (zone) -> ZonedDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).withZoneSameInstant(zone);
+			return (zone) -> zonedDateTime(ZonedDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault())).apply(zone);
 		}
 	}
 
@@ -149,6 +157,31 @@ public class TemporalProviders {
 		throw new TemporalConversionException(UNSUPPORTED_SQL_DATE_UNIT);
 	}
 
+    /**
+     * Factory to create a {@link TemporalProvider} for a {@link OffsetDateTime}
+     */
+    public static TemporalProvider<OffsetDateTime> offsetDateTime(OffsetDateTime date) {
+        return (zone) -> date.withOffsetSameInstant(zone.getRules().getOffset(date.toLocalDateTime()));
+    }
+
+    /**
+     * Factory to create a {@link TemporalProvider} for an {@link OffsetDateTime}
+     */
+    public static TemporalProvider<OffsetDateTime> offsetDateTime(Date date) {
+        if (date instanceof java.sql.Date) {
+            return offsetDateTime((java.sql.Date) date);
+        } else {
+            return (zone) -> offsetDateTime(OffsetDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault())).apply(zone);
+        }
+    }
+
+    /**
+     * Factory to create a {@link TemporalProvider} for an {@link ZonedDateTime}
+     */
+    public static TemporalProvider<OffsetDateTime> offsetDateTime(java.sql.Date date) {
+        throw new TemporalConversionException(UNSUPPORTED_SQL_DATE_UNIT);
+    }
+	
 	/**
 	 * Factory to create a {@link TemporalProvider} for a {@link LocalTime}
 	 */
@@ -160,9 +193,16 @@ public class TemporalProviders {
 	 * Factory to create a {@link TemporalProvider} for a {@link Year}
 	 */
 	public static TemporalProvider<Year> year(ZonedDateTime date) {
-		return (zone) -> Year.from(date.withZoneSameInstant(zone));
+		return (zone) -> Year.from(zonedDateTime(date).apply(zone));
 	}
 
+    /**
+     * Factory to create a {@link TemporalProvider} for a {@link Year}
+     */
+    public static TemporalProvider<Year> year(OffsetDateTime date) {
+        return (zone) -> Year.from(offsetDateTime(date).apply(zone));
+    }
+	
 	/**
 	 * Factory to create a {@link TemporalProvider} for a {@link Year}
 	 */
@@ -191,11 +231,18 @@ public class TemporalProviders {
 		return (zone) -> Year.from(localDate(date).apply(zone));
 	}
 
+    /**
+     * Factory to create a {@link TemporalProvider} for a {@link Month}
+     */
+    public static TemporalProvider<Month> month(OffsetDateTime date) {
+        return (zone) -> offsetDateTime(date).apply(zone).getMonth();
+    }
+	
 	/**
 	 * Factory to create a {@link TemporalProvider} for a {@link Month}
 	 */
 	public static TemporalProvider<Month> month(ZonedDateTime date) {
-		return (zone) -> date.withZoneSameInstant(zone).getMonth();
+		return (zone) -> zonedDateTime(date).apply(zone).getMonth();
 	}
 
 	/**
@@ -230,7 +277,7 @@ public class TemporalProviders {
 	 * Factory to create a {@link TemporalProvider} for a {@link DayOfWeek}
 	 */
 	public static TemporalProvider<List<DayOfWeek>> dayOfWeek(ZonedDateTime date) {
-		return (zone) -> Arrays.asList(date.withZoneSameInstant(zone).getDayOfWeek());
+		return (zone) -> Arrays.asList(zonedDateTime(date).apply(zone).getDayOfWeek());
 	}
 
 	/**
@@ -272,9 +319,16 @@ public class TemporalProviders {
 	 * Factory to create a {@link TemporalProvider} for a {@link DayOfMonth}
 	 */
 	public static TemporalProvider<DayOfMonth> dayOfMonth(ZonedDateTime date) {
-		return (zone) -> DayOfMonth.from(date.withZoneSameInstant(zone));
+		return (zone) -> DayOfMonth.from(zonedDateTime(date).apply(zone));
 	}
 
+    /**
+     * Factory to create a {@link TemporalProvider} for a {@link DayOfMonth}
+     */
+    public static TemporalProvider<DayOfMonth> dayOfMonth(OffsetDateTime date) {
+        return (zone) -> DayOfMonth.from(offsetDateTime(date).apply(zone));
+    }
+	
 	/**
 	 * Factory to create a {@link TemporalProvider} for a {@link DayOfMonth}
 	 */
@@ -328,8 +382,16 @@ public class TemporalProviders {
 	 * Factory to create a {@link TemporalProvider} for a {@link Hour}
 	 */
 	public static TemporalProvider<Hour> hour(ZonedDateTime date) {
-		return (zone) -> Hour.from(date.withZoneSameInstant(zone));
+		return (zone) -> Hour.from(zonedDateTime(date).apply(zone));
 	}
+	
+	   /**
+     * Factory to create a {@link TemporalProvider} for a {@link Hour}
+     */
+    public static TemporalProvider<Hour> hour(OffsetDateTime date) {
+        return (zone) -> Hour.from(offsetDateTime(date).apply(zone));
+    }
+
 
 	/**
 	 * Factory to create a {@link TemporalProvider} for a {@link Hour}
@@ -363,9 +425,16 @@ public class TemporalProviders {
 	 * Factory to create a {@link TemporalProvider} for a {@link Minute}
 	 */
 	public static TemporalProvider<Minute> minute(ZonedDateTime date) {
-		return (zone) -> Minute.from(date.withZoneSameInstant(zone));
+		return (zone) -> Minute.from(zonedDateTime(date).apply(zone));
 	}
 
+    /**
+     * Factory to create a {@link TemporalProvider} for a {@link Minute}
+     */
+    public static TemporalProvider<Minute> minute(OffsetDateTime date) {
+        return (zone) -> Minute.from(offsetDateTime(date).apply(zone));
+    }
+	
 	/**
 	 * Factory to create a {@link TemporalProvider} for a {@link Minute}
 	 */
@@ -405,9 +474,16 @@ public class TemporalProviders {
 	 * Factory to create a {@link TemporalProvider} for a {@link Second}
 	 */
 	public static TemporalProvider<Second> second(ZonedDateTime date) {
-		return (zone) -> Second.from(date.withZoneSameInstant(zone));
+		return (zone) -> Second.from(zonedDateTime(date).apply(zone));
 	}
 
+    /**
+     * Factory to create a {@link TemporalProvider} for a {@link Second}
+     */
+    public static TemporalProvider<Second> second(OffsetDateTime date) {
+        return (zone) -> Second.from(offsetDateTime(date).apply(zone));
+    }
+	
 	/**
 	 * Factory to create a {@link TemporalProvider} for a {@link Millisecond}
 	 */
