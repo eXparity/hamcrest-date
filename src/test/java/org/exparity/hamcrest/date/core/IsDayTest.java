@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,6 +14,7 @@ import java.util.Date;
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
 import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
@@ -209,4 +211,34 @@ public class IsDayTest {
 		assertThat(ZonedDateTime.now(), ZonedDateTimeMatchers.isTomorrow());
 	}
 
+    // OffsetDateTime Matchers
+    @Test
+    public void isOffsetDateTimeToday() {
+        assertThat(OffsetDateTime.now(), OffsetDateTimeMatchers.isToday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotToday() {
+        assertThat(OffsetDateTime.now().plusDays(1), OffsetDateTimeMatchers.isToday());
+    }
+
+    @Test
+    public void isOffsetDateTimeYesterday() {
+        assertThat(OffsetDateTime.now().minusDays(1), OffsetDateTimeMatchers.isYesterday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotYesterday() {
+        assertThat(OffsetDateTime.now(), OffsetDateTimeMatchers.isYesterday());
+    }
+
+    @Test
+    public void isOffsetDateTimeTomorrow() {
+        assertThat(OffsetDateTime.now().plusDays(1), OffsetDateTimeMatchers.isTomorrow());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotTomorrow() {
+        assertThat(OffsetDateTime.now(), OffsetDateTimeMatchers.isTomorrow());
+    }
 }

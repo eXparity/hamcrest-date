@@ -10,6 +10,7 @@ import org.exparity.hamcrest.date.DayMonthYear;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.Months;
+import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.exparity.hamcrest.date.testutils.ZoneIds;
 import org.testng.annotations.Test;
@@ -242,4 +243,46 @@ public class IsSameDayTest {
 	public void isZonedDateTimeSameDayLaterSameDay() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isDay(2015, AUGUST, 4, UTC).atZone(UTC));
 	}
+	
+    // OffsetDateTime Matchers
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeSameDayEarlierOffsetDateTime() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.sameDay(AUG_03_2015_NOON_OFFSET_UTC).atZone(UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeSameDayLaterOffsetDateTime() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.sameDay(AUG_05_2015_NOON_OFFSET_UTC).atZone(UTC));
+    }
+
+    @Test
+    public void isOffsetDateTimeSameDaySameOffsetDateTime() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.sameDay(AUG_04_2015_NOON_OFFSET_UTC).atZone(UTC));
+    }
+
+    @Test
+    public void isOffsetDateTimeSameDayOffsetDateTimePositiveOffset() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.sameDay(AUG_04_2015_NOON_OFFSET_CET).atZone(UTC));
+    }
+
+    @Test
+    public void isOffsetDateTimeSameDayOffsetDateTimeNegativeOffset() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.sameDay(AUG_04_2015_NOON_OFFSET_EST).atZone(UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeSameDayEarlierDay() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isDay(2015, AUGUST, 3, UTC).atZone(UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeSameDayLaterDay() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isDay(2015, AUGUST, 5, UTC).atZone(UTC));
+    }
+
+    @Test
+    public void isOffsetDateTimeSameDayLaterSameDay() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isDay(2015, AUGUST, 4, UTC).atZone(UTC));
+    }
+	
 }

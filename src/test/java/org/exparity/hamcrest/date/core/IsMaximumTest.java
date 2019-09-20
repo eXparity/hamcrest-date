@@ -10,6 +10,7 @@ import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
+import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
 import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
@@ -96,4 +97,16 @@ public class IsMaximumTest {
     public void isLocalTimeNotLastHourOfDay() {
         assertThat(LocalTime.of(22, 0, 0), LocalTimeMatchers.isMaximum(ChronoField.HOUR_OF_DAY));
     }
+    
+    // OffsetDateTime Matchers
+    @Test
+    public void isOffsetDateTimeLastDayOfMonth() {
+        assertThat(AUG_31_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotLastDayOfMonth() {
+        assertThat(AUG_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
+    }
+    
 }

@@ -6,12 +6,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
+import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
 import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.exparity.hamcrest.date.testutils.ZoneIds;
@@ -467,4 +469,50 @@ public class IsWithinTest {
 	public void isLocalTimeWithSameTimeOutsideLimit() {
 		assertThat(LocalTime.NOON, LocalTimeMatchers.within(2, ChronoUnit.SECONDS, 12, 0, 3));
 	}
+	
+    // OffsetDateTime Matchers
+    @Test
+    public void isOffsetDateTimeWithinSameOffsetDateTime() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.within(2, ChronoUnit.DAYS, AUG_04_2015_NOON_OFFSET_UTC));
+    }
+
+    @Test
+    public void isOffsetDateTimeWithinOffsetDateTimeInsideLimit() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.within(2, ChronoUnit.DAYS, AUG_05_2015_NOON_OFFSET_UTC));
+    }
+
+    @Test
+    public void isOffsetDateTimeWithinOffsetDateTimeEqualLimit() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.within(2, ChronoUnit.DAYS, AUG_06_2015_NOON_OFFSET_UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeWithinOffsetDateTimeOutsideLimit() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.within(2, ChronoUnit.DAYS, AUG_07_2015_NOON_OFFSET_UTC));
+    }
+
+    @Test
+    public void isOffsetDateTimeWithinSameDayMonthYear() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC,
+                OffsetDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 0, ZoneOffset.UTC));
+    }
+
+    @Test
+    public void isOffsetDateTimeWithinDayMonthYearInsideLimit() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC,
+                OffsetDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 1, ZoneOffset.UTC));
+    }
+
+    @Test
+    public void isOffsetDateTimeWithinDayMonthYearEqualLimit() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC,
+                OffsetDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 2, ZoneOffset.UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeWithinDayMonthYearOutsideLimit() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC,
+                OffsetDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 3, ZoneOffset.UTC));
+    }
+	
 }

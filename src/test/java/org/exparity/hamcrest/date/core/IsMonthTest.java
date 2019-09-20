@@ -8,6 +8,7 @@ import java.time.Month;
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
 import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
@@ -805,5 +806,135 @@ public class IsMonthTest {
 	public void isZonedDateTimeNotDecember() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isDecember());
 	}
+	
+    // OffsetDateTime Matchers
+    @Test
+    public void isOffsetDateTimeMonth() {
+        assertThat(JAN_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMonth(Month.JANUARY));
+    }
 
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotMonth() {
+        assertThat(JAN_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMonth(Month.FEBRUARY));
+    }
+    
+    @Test
+    public void isOffsetDateTimeJanuary() {
+        assertThat(JAN_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isJanuary());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotJanuary() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isJanuary());
+    }
+
+    @Test
+    public void isOffsetDateTimeFebruary() {
+        assertThat(FEB_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isFebruary());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotFebruary() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isFebruary());
+    }
+
+    @Test
+    public void isOffsetDateTimeMarch() {
+        assertThat(MAR_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMarch());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotMarch() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMarch());
+    }
+
+    @Test
+    public void isOffsetDateTimeApril() {
+        assertThat(APR_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isApril());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotApril() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isApril());
+    }
+
+    @Test
+    public void isOffsetDateTimeMay() {
+        assertThat(MAY_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMay());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotMay() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMay());
+    }
+
+    @Test
+    public void isOffsetDateTimeJune() {
+        assertThat(JUN_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isJune());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotJune() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isJune());
+    }
+
+    @Test
+    public void isOffsetDateTimeJuly() {
+        assertThat(JUL_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isJuly());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotJuly() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isJuly());
+    }
+
+    @Test
+    public void isOffsetDateTimeAugust() {
+        assertThat(AUG_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isAugust());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotAugust() {
+        assertThat(SEP_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isAugust());
+    }
+
+    @Test
+    public void isOffsetDateTimeSeptember() {
+        assertThat(SEP_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isSeptember());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotSeptember() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isSeptember());
+    }
+
+    @Test
+    public void isOffsetDateTimeOctober() {
+        assertThat(OCT_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isOctober());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotOctober() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isOctober());
+    }
+
+    @Test
+    public void isOffsetDateTimeNovember() {
+        assertThat(NOV_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isNovember());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotNovember() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isNovember());
+    }
+
+    @Test
+    public void isOffsetDateTimeDecember() {
+        assertThat(DEC_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isDecember());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotDecember() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isDecember());
+    }
 }

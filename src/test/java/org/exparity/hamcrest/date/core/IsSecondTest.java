@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
+import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
 
@@ -85,4 +86,15 @@ public class IsSecondTest {
         assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isSecond(1));
     }
 
+    // OffsetDateTime Matchers
+    @Test
+    public void isOffsetDateTimeSecond() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isSecond(0));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotSecond() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isSecond(1));
+    }
+    
 }

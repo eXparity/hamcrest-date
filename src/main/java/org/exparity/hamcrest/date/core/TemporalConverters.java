@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.OffsetDateTime;
 import java.time.Year;
 import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
@@ -124,7 +125,7 @@ public class TemporalConverters {
 	public static TemporalConverter<LocalDateTime, Second> LOCALDATETIME_AS_SECOND = (date, zone) -> Second.from(date);
 
 	/**
-	 * LocalDateTime Converters
+	 * ZonedDateTime Converters
 	 */
 	public static TemporalConverter<ZonedDateTime, ZonedDateTime> ZONEDDATETIME_AS_ZONEDDATETIME = (date, zone) -> date.withZoneSameInstant(zone);
 	public static TemporalConverter<ZonedDateTime, LocalDate> ZONEDDATETIME_AS_LOCALDATE = (date, zone) -> ZONEDDATETIME_AS_ZONEDDATETIME.apply(date, zone).toLocalDate();
@@ -140,4 +141,17 @@ public class TemporalConverters {
 	 * DayOfWeek Converters
 	 */
 	public static TemporalConverter<DayOfWeek, DayOfWeek> DAYOFWEEK_TO_DAYOFWEEK = (date, zone) -> date;
+	
+	/**
+     * {@link OffsetDateTime} Converters
+     */
+    public static TemporalConverter<OffsetDateTime, OffsetDateTime> OFFSETDATETIME_AS_OFFSETDATETIME = (date, zone) -> date.withOffsetSameInstant(zone.getRules().getOffset(date.toLocalDateTime()));    
+    public static TemporalConverter<OffsetDateTime, LocalDate> OFFSETDATETIME_AS_LOCALDATE = (date, zone) -> OFFSETDATETIME_AS_OFFSETDATETIME.apply(date, zone).toLocalDate();
+    public static TemporalConverter<OffsetDateTime, Year> OFFSETDATETIME_AS_YEAR = (date, zone) -> Year.from(OFFSETDATETIME_AS_LOCALDATE.apply(date, zone));
+    public static TemporalConverter<OffsetDateTime, Month> OFFSETDATETIME_AS_MONTH = (date, zone) -> OFFSETDATETIME_AS_LOCALDATE.apply(date, zone).getMonth();
+    public static TemporalConverter<OffsetDateTime, DayOfMonth> OFFSETDATETIME_AS_DAYOFMONTH = (date, zone) -> DayOfMonth.from(OFFSETDATETIME_AS_LOCALDATE.apply(date, zone));
+    public static TemporalConverter<OffsetDateTime, DayOfWeek> OFFSETDATETIME_AS_DAYOFWEEK = (date, zone) -> OFFSETDATETIME_AS_LOCALDATE.apply(date, zone).getDayOfWeek();
+    public static TemporalConverter<OffsetDateTime, Hour> OFFSETDATETIME_AS_HOUR = (date, zone) -> Hour.from(OFFSETDATETIME_AS_OFFSETDATETIME.apply(date, zone));
+    public static TemporalConverter<OffsetDateTime, Minute> OFFSETDATETIME_AS_MINUTE = (date, zone) -> Minute.from(OFFSETDATETIME_AS_OFFSETDATETIME.apply(date, zone));
+    public static TemporalConverter<OffsetDateTime, Second> OFFSETDATETIME_AS_SECOND = (date, zone) -> Second.from(OFFSETDATETIME_AS_OFFSETDATETIME.apply(date, zone));    
 }

@@ -7,14 +7,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
-import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
+import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
 import org.exparity.hamcrest.date.testutils.ZoneIds;
 import org.testng.annotations.Test;
 
@@ -127,22 +127,24 @@ public class IsSameHourOfDayTest {
 		assertThat(other, LocalTimeMatchers.sameHourOfDay(date));
 	}
 
-	// ZonedDateTime Matchers
+	// OffsetDateTime Matchers
 	@Test
-	public void isZonedDateTimeSameHourOfDay() {
-		ZonedDateTime date = ZonedDateTime.now(), other = date;
-		assertThat(other, ZonedDateTimeMatchers.sameHourOfDay(date));
+	public void isOffsetDateTimeSameHourOfDay() {
+		OffsetDateTime date = OffsetDateTime.now(), other = date;
+		assertThat(other, OffsetDateTimeMatchers.sameHourOfDay(date));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
-	public void isZonedDateTimeNotSameHourOfDay() {
-		ZonedDateTime date = ZonedDateTime.now(), other = date.plusHours(1);
-		assertThat(other, ZonedDateTimeMatchers.sameHourOfDay(date));
+	public void isOffsetDateTimeNotSameHourOfDay() {
+		OffsetDateTime date = OffsetDateTime.now(), other = date.plusHours(1);
+		assertThat(other, OffsetDateTimeMatchers.sameHourOfDay(date));
 	}
 
 	@Test
-	public void isZonedDateTimeSameHourOfDayDifferentDay() {
-		ZonedDateTime date = ZonedDateTime.now(), other = date.plusDays(1);
-		assertThat(other, ZonedDateTimeMatchers.sameHourOfDay(date));
+	public void isOffsetDateTimeSameHourOfDayDifferentDay() {
+		OffsetDateTime date = OffsetDateTime.now(), other = date.plusDays(1);
+		assertThat(other, OffsetDateTimeMatchers.sameHourOfDay(date));
 	}
+	
+	
 }

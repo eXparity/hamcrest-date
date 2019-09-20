@@ -1,7 +1,6 @@
 package org.exparity.hamcrest.date.core;
 
 import static java.time.Month.AUGUST;
-import static org.exparity.hamcrest.date.ZonedDateTimeMatchers.before;
 import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.exparity.hamcrest.date.testutils.ZoneIds.UTC;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -15,9 +14,11 @@ import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.Months;
+import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
 import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.exparity.hamcrest.date.testutils.ZoneIds;
+import org.exparity.hamcrest.date.testutils.ZoneOffsets;
 import org.testng.annotations.Test;
 
 /**
@@ -292,12 +293,12 @@ public class IsBeforeTest {
 
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
     public void isZonedDateTimeBeforeZonedDateTimeEarlierZone() {
-        assertThat(AUG_04_2015_NOON_UTC, before(AUG_04_2015_NOON_CET));
+        assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.before(AUG_04_2015_NOON_CET));
     }
 
     @Test
     public void isZonedDateTimeBeforeZonedDateTimeLaterZone() {
-        assertThat(AUG_04_2015_NOON_UTC, before(AUG_04_2015_NOON_EST));
+        assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.before(AUG_04_2015_NOON_EST));
     }
 
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
@@ -355,5 +356,62 @@ public class IsBeforeTest {
     @Test
     public void isLocalTimeBeforeLaterTime() {
         assertThat(LocalTime.NOON, LocalTimeMatchers.before(12, 0, 1));
+    }
+    
+    // OffsetDateTime Matchers
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeBeforeLaterOffsetDateTime() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.before(AUG_04_2015_11AM_OFFSET_UTC));
+    }
+
+    @Test
+    public void isOffsetDateTimeBeforeEarlierOffsetDateTime() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.before(AUG_04_2015_01PM_OFFSET_UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeBeforeLaterSameOffsetDateTime() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.before(AUG_04_2015_NOON_OFFSET_UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeBeforeOffsetDateTimePositiveOffset() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.before(AUG_04_2015_NOON_OFFSET_CET));
+    }
+
+    @Test
+    public void isOffsetDateTimeBeforeOffsetDateTimeNegativeOffset() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.before(AUG_04_2015_NOON_OFFSET_EST));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeBeforeLaterDateTime() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.before(2015, AUGUST, 4, 11, 59, 0, 0, ZoneOffsets.UTC));
+    }
+
+    @Test
+    public void isOffsetDateTimeBeforeEarlierDateTime() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.before(2015, AUGUST, 4, 12, 0, 1, 0, ZoneOffsets.UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeBeforeSameDateTime() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.before(2015, AUGUST, 4, 12, 0, 0, 0, ZoneOffsets.UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeBeforeDateTimePositiveOffset() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.before(2015, AUGUST, 4, 12, 0, 0, 0, ZoneOffsets.CET));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeBeforeDateTimeEquivalentOffset() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.before(2015, AUGUST, 4, 7, 0, 0, 0, ZoneOffsets.CET));
+    }
+    
+    @Test
+    public void isOffsetDateTimeBeforeDateTimeNegativeOffset() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.before(2015, AUGUST, 4, 12, 0, 0, 0, ZoneOffsets.EST));
     }
 }

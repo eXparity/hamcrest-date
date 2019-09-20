@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
 import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.exparity.hamcrest.date.testutils.ZoneIds;
@@ -97,13 +98,33 @@ public class IsLeapYearTest {
 	}
 
 	@Test
-	public void isZonedDateLeapYearStartOfYearSameZone() {
+	public void isZonedDateTimeLeapYearStartOfYearSameZone() {
 		assertThat(JAN_01_2012_MIDNIGHT_CET, ZonedDateTimeMatchers.isLeapYear().atZone(ZoneIds.CET));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
-	public void isZonedDateNotLeapYearStartOfYearLaterZone() {
+	public void isZonedDateTimeNotLeapYearStartOfYearLaterZone() {
 		assertThat(JAN_01_2012_MIDNIGHT_CET, ZonedDateTimeMatchers.isLeapYear().atZone(ZoneIds.UTC));
 	}
 
+    // OffsetDateTime Matchers
+    @Test
+    public void isOffsetDateTimeLeapYear() {
+        assertThat(AUG_04_2016_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isLeapYear());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotLeapYear() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isLeapYear());
+    }
+
+    @Test
+    public void isOffsetDateTimeLeapYearStartOfYearSameZone() {
+        assertThat(JAN_01_2012_MIDNIGHT_OFFSET_CET, OffsetDateTimeMatchers.isLeapYear().atZone(ZoneIds.CET));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void issOffsetDateTimeNotLeapYearStartOfYearLaterZone() {
+        assertThat(JAN_01_2012_MIDNIGHT_OFFSET_CET, OffsetDateTimeMatchers.isLeapYear().atZone(ZoneIds.UTC));
+    }
 }

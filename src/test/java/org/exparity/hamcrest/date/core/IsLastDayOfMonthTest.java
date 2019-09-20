@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
 import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
 import org.testng.annotations.Test;
@@ -70,6 +71,7 @@ public class IsLastDayOfMonthTest {
 	}
 
 	// ZonedDateTime Matchers
+	
 	@Test
 	public void isZonedDateTimeLastDayOfMonth() {
 		assertThat(AUG_31_2015_NOON_UTC, ZonedDateTimeMatchers.isLastDayOfMonth());
@@ -79,4 +81,16 @@ public class IsLastDayOfMonthTest {
 	public void isZonedDateTimeNotLastDayOfMonth() {
 		assertThat(AUG_01_2015_NOON_UTC, ZonedDateTimeMatchers.isLastDayOfMonth());
 	}
+	
+    // OffsetDateTime Matchers
+    
+    @Test
+    public void isOffsetDateTimeLastDayOfMonth() {
+        assertThat(AUG_31_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isLastDayOfMonth());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotLastDayOfMonth() {
+        assertThat(AUG_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isLastDayOfMonth());
+    }
 }

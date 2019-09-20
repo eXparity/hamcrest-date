@@ -9,6 +9,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
 import org.exparity.hamcrest.date.SqlDateMatchers;
 import org.exparity.hamcrest.date.Weekdays;
 import org.exparity.hamcrest.date.ZonedDateTimeMatchers;
@@ -708,6 +709,7 @@ public class IsDayOfWeekTest {
     }
 
     // ZonedDateTime Matchers
+    
     @Test
     public void isZonedDateTimeDayOfWeek() {
         assertThat(AUG_03_2015_NOON_UTC, ZonedDateTimeMatchers.isDayOfWeek(MONDAY));
@@ -836,5 +838,136 @@ public class IsDayOfWeekTest {
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
     public void isZonedDateTimeNotWeekendOnFriday() {
         assertThat(AUG_07_2015_NOON_UTC, ZonedDateTimeMatchers.isWeekend());
+    }
+    
+    // OffsetDateTime Matchers
+    @Test
+    public void isOffsetDateTimeDayOfWeek() {
+        assertThat(AUG_03_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isDayOfWeek(MONDAY));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotDayOfWeek() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isDayOfWeek(MONDAY));
+    }
+
+    @Test
+    public void isOffsetDateTimeMonday() {
+        assertThat(AUG_03_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMonday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotMonday() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMonday());
+    }
+
+    @Test
+    public void isOffsetDateTimeTuesday() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isTuesday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotTuesday() {
+        assertThat(AUG_05_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isTuesday());
+    }
+
+    @Test
+    public void isOffsetDateTimeWednesday() {
+        assertThat(AUG_05_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isWednesday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotWednesday() {
+        assertThat(AUG_06_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isWednesday());
+    }
+
+    @Test
+    public void isOffsetDateTimeThursday() {
+        assertThat(AUG_06_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isThursday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotThursday() {
+        assertThat(AUG_07_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isThursday());
+    }
+
+    @Test
+    public void isOffsetDateTimeFriday() {
+        assertThat(AUG_07_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isFriday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotFriday() {
+        assertThat(AUG_08_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isFriday());
+    }
+
+    @Test
+    public void isOffsetDateTimeSaturday() {
+        assertThat(AUG_08_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isSaturday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotSaturday() {
+        assertThat(AUG_09_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isSaturday());
+    }
+
+    @Test
+    public void isOffsetDateTimeSunday() {
+        assertThat(AUG_09_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isSunday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isOffsetDateTimeNotSunday() {
+        assertThat(AUG_03_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isSunday());
+    }
+
+    @Test
+    public void isOffsetDateTimeWeekday() {
+        assertThat(AUG_03_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isWeekday());
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isWeekday());
+        assertThat(AUG_05_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isWeekday());
+        assertThat(AUG_06_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isWeekday());
+        assertThat(AUG_07_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isWeekday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
+    public void isOffsetDateTimeNotWeekdayOnSaturday() {
+        assertThat(AUG_08_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isWeekday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
+    public void isOffsetDateTimeNotWeekdayOnSunday() {
+        assertThat(AUG_09_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isWeekday());
+    }
+
+    @Test
+    public void isOffsetDateTimeWeekend() {
+        assertThat(AUG_08_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isWeekend());
+        assertThat(AUG_09_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isWeekend());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
+    public void isOffsetDateTimeNotWeekendOnMonday() {
+        assertThat(AUG_03_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isWeekend());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
+    public void isOffsetDateTimeNotWeekendOnTuesday() {
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isWeekend());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
+    public void isOffsetDateTimeNotWeekendOnWednesday() {
+        assertThat(AUG_05_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isWeekend());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
+    public void isOffsetDateTimeNotWeekendOnThursday() {
+        assertThat(AUG_06_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isWeekend());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
+    public void isOffsetDateTimeNotWeekendOnFriday() {
+        assertThat(AUG_07_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isWeekend());
     }
 }
