@@ -21,7 +21,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import org.exparity.hamcrest.date.core.DateMatcher;
+import org.exparity.hamcrest.date.core.TemporalMatcher;
 import org.exparity.hamcrest.date.core.IsAfter;
 import org.exparity.hamcrest.date.core.IsBefore;
 import org.exparity.hamcrest.date.core.IsDayOfMonth;
@@ -66,7 +66,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> after(final Date date) {
+    public static TemporalMatcher<Date> after(final Date date) {
 		return new IsAfter<>(JAVADATE_AS_JAVADATE, javaDate(date), new DateFunction());
     }
 
@@ -81,7 +81,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> after(final java.sql.Date date) {
+    public static TemporalMatcher<Date> after(final java.sql.Date date) {
         return new IsAfter<>(JAVADATE_AS_SQLDATE, sqlDate(date), SQLDATE);
     }
     
@@ -98,7 +98,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #after(LocalDate)}
      */
     @Deprecated
-    public static DateMatcher<Date> after(final DayMonthYear date) {
+    public static TemporalMatcher<Date> after(final DayMonthYear date) {
         return after(date.toLocalDate());
     }
 
@@ -113,7 +113,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> after(final LocalDate date) {
+    public static TemporalMatcher<Date> after(final LocalDate date) {
         return new IsAfter<>(JAVADATE_AS_LOCALDATE, localDate(date), LOCALDATE);
     }
     
@@ -128,7 +128,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> after(final LocalDateTime date) {
+    public static TemporalMatcher<Date> after(final LocalDateTime date) {
         return new IsAfter<>(JAVADATE_AS_LOCALDATETIME, localDateTime(date), LOCALDATETIME);
     }
 
@@ -143,7 +143,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> after(final Instant date) {
+    public static TemporalMatcher<Date> after(final Instant date) {
         return new IsAfter<>(JAVADATE_AS_INSTANT, instant(date), INSTANT);
     }
     
@@ -162,7 +162,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #after(int, Month, int)}
      */
     @Deprecated
-    public static DateMatcher<Date> after(final int year, final Months month, final int day) {
+    public static TemporalMatcher<Date> after(final int year, final Months month, final int day) {
         return after(year, month.month(), day);
     }
 
@@ -179,7 +179,7 @@ public abstract class DateMatchers {
      * @param month the month against which the examined date is checked
      * @param day the day of the month against which the examined date is checked
      */
-    public static DateMatcher<Date> after(final int year, final Month month, final int day) {
+    public static TemporalMatcher<Date> after(final int year, final Month month, final int day) {
         return after(LocalDate.of(year, month, day));
     }
 
@@ -201,7 +201,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #after(int, Month, int, int, int, int)}
      */
     @Deprecated
-    public static DateMatcher<Date> after(final int year,
+    public static TemporalMatcher<Date> after(final int year,
             final Months month,
             final int dayOfMonth,
             final int hour,
@@ -226,7 +226,7 @@ public abstract class DateMatchers {
      * @param minute the minute of the hour against which the examined date is checked
      * @param second the second of the minute against which the examined date is checked
      */
-    public static DateMatcher<Date> after(final int year,
+    public static TemporalMatcher<Date> after(final int year,
             final Month month,
             final int dayOfMonth,
             final int hour,
@@ -246,7 +246,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> before(final Date date) {
+    public static TemporalMatcher<Date> before(final Date date) {
 		return new IsBefore<>(JAVADATE_AS_JAVADATE, javaDate(date), new DateFunction());
     }
 
@@ -261,7 +261,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> before(final java.sql.Date date) {
+    public static TemporalMatcher<Date> before(final java.sql.Date date) {
         return new IsBefore<>(JAVADATE_AS_SQLDATE, sqlDate(date), SQLDATE);
     }
     
@@ -278,7 +278,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #before(LocalDate)}
      */
     @Deprecated
-    public static DateMatcher<Date> before(final DayMonthYear date) {
+    public static TemporalMatcher<Date> before(final DayMonthYear date) {
         return before(date.toLocalDate());
     }
 
@@ -293,7 +293,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> before(final LocalDate date) {
+    public static TemporalMatcher<Date> before(final LocalDate date) {
         return new IsBefore<>(JAVADATE_AS_LOCALDATE, localDate(date), LOCALDATE);
     }
     
@@ -308,7 +308,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> before(final LocalDateTime date) {
+    public static TemporalMatcher<Date> before(final LocalDateTime date) {
         return new IsBefore<>(JAVADATE_AS_LOCALDATETIME, localDateTime(date), LOCALDATETIME);
     }
 
@@ -323,7 +323,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> before(final Instant date) {
+    public static TemporalMatcher<Date> before(final Instant date) {
         return new IsBefore<>(JAVADATE_AS_INSTANT, instant(date), INSTANT);
     }
     
@@ -342,7 +342,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #before(int, Month, int)}
      */
     @Deprecated
-    public static DateMatcher<Date> before(final int year, final Months month, final int day) {
+    public static TemporalMatcher<Date> before(final int year, final Months month, final int day) {
         return before(year, month.month(), day);
     }
 
@@ -359,7 +359,7 @@ public abstract class DateMatchers {
      * @param month the month against which the examined date is checked
      * @param day the day of the month against which the examined date is checked
      */
-    public static DateMatcher<Date> before(final int year, final Month month, final int day) {
+    public static TemporalMatcher<Date> before(final int year, final Month month, final int day) {
         return before(LocalDate.of(year, month, day));
     }
 
@@ -381,7 +381,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #before(int, Month, int, int, int, int)}
      */
     @Deprecated
-    public static DateMatcher<Date> before(final int year,
+    public static TemporalMatcher<Date> before(final int year,
             final Months month,
             final int dayOfMonth,
             final int hour,
@@ -406,7 +406,7 @@ public abstract class DateMatchers {
      * @param minute the minute of the hour against which the examined date is checked
      * @param second the second of the minute against which the examined date is checked
      */
-    public static DateMatcher<Date> before(final int year,
+    public static TemporalMatcher<Date> before(final int year,
             final Month month,
             final int dayOfMonth,
             final int hour,
@@ -426,7 +426,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameDayOfWeek(final Date date) {
+    public static TemporalMatcher<Date> sameDayOfWeek(final Date date) {
         return isDayOfWeek(toDayOfWeek(date, ZoneId.systemDefault()));
     }
 
@@ -441,7 +441,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameDayOfWeek(final java.sql.Date date) {
+    public static TemporalMatcher<Date> sameDayOfWeek(final java.sql.Date date) {
         return isDayOfWeek(date.toLocalDate().getDayOfWeek());
     }
     
@@ -458,7 +458,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #isDayOfWeek(DayOfWeek...)}
      */
     @Deprecated
-    public static DateMatcher<Date> isDayOfWeek(final Weekdays dayOfWeek) {
+    public static TemporalMatcher<Date> isDayOfWeek(final Weekdays dayOfWeek) {
         return isDayOfWeek(dayOfWeek.getAsDayOfWeek());
     }
 
@@ -473,7 +473,7 @@ public abstract class DateMatchers {
      *
      * @param dayOfWeek the reference weekday against which the examined date is checked
      */
-    public static DateMatcher<Date> isDayOfWeek(final DayOfWeek dayOfWeek) {
+    public static TemporalMatcher<Date> isDayOfWeek(final DayOfWeek dayOfWeek) {
         return new IsDayOfWeek<>(JAVADATE_AS_DAYOFWEEK, daysOfWeek(dayOfWeek));
     }
 
@@ -488,7 +488,7 @@ public abstract class DateMatchers {
      *
      * @param daysOfWeek the reference weekdays against which the examined date is checked
      */
-    public static DateMatcher<Date> isDayOfWeek(final DayOfWeek... daysOfWeek) {
+    public static TemporalMatcher<Date> isDayOfWeek(final DayOfWeek... daysOfWeek) {
         return new IsDayOfWeek<>(JAVADATE_AS_DAYOFWEEK, daysOfWeek(daysOfWeek));
     }
     
@@ -503,7 +503,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameDayOfMonth(final Date date) {
+    public static TemporalMatcher<Date> sameDayOfMonth(final Date date) {
         return new IsDayOfMonth<>(JAVADATE_AS_DAYOFMONTH, dayOfMonth(date));
     }
     
@@ -518,7 +518,7 @@ public abstract class DateMatchers {
      *
      * @param dayOfMonth the expected day of the month
      */
-    public static DateMatcher<Date> isDayOfMonth(final int dayOfMonth) {
+    public static TemporalMatcher<Date> isDayOfMonth(final int dayOfMonth) {
         return new IsDayOfMonth<>(JAVADATE_AS_DAYOFMONTH, dayOfMonth(dayOfMonth));
     }
 
@@ -533,7 +533,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameDay(final Date date) {
+    public static TemporalMatcher<Date> sameDay(final Date date) {
         return new IsSameDay<>(JAVADATE_AS_LOCALDATE, localDate(date));
     }
 
@@ -548,7 +548,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameDay(final java.sql.Date date) {
+    public static TemporalMatcher<Date> sameDay(final java.sql.Date date) {
         return new IsSameDay<>(JAVADATE_AS_LOCALDATE, localDate(date));
     }
     
@@ -565,7 +565,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #sameDay(LocalDate)}
      */
     @Deprecated
-    public static DateMatcher<Date> sameDay(final DayMonthYear date) {
+    public static TemporalMatcher<Date> sameDay(final DayMonthYear date) {
         return sameDay(date.toLocalDate());
     }
 
@@ -580,7 +580,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameDay(final LocalDate date) {
+    public static TemporalMatcher<Date> sameDay(final LocalDate date) {
         return new IsSameDay<>(JAVADATE_AS_LOCALDATE, localDate(date));
     }
 
@@ -599,7 +599,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #isDay(int, Month, int)}
      */
     @Deprecated
-    public static DateMatcher<Date> sameDay(final int year, final Months month, final int day) {
+    public static TemporalMatcher<Date> sameDay(final int year, final Months month, final int day) {
         return isDay(year, month.month(), day);
     }
 
@@ -616,7 +616,7 @@ public abstract class DateMatchers {
      * @param month the reference month against which the examined date is checked
      * @param year the reference year against which the examined date is checked
      */
-    public static DateMatcher<Date> isDay(final int year, final Month month, final int dayOfMonth) {
+    public static TemporalMatcher<Date> isDay(final int year, final Month month, final int dayOfMonth) {
         return sameDay(LocalDate.of(year, month, dayOfMonth));
     }
 
@@ -633,7 +633,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #sameHourOfDay(Date)} instead
      */
     @Deprecated
-    public static DateMatcher<Date> sameHour(final Date date) {
+    public static TemporalMatcher<Date> sameHour(final Date date) {
         return sameHourOfDay(date);
     }
     
@@ -644,7 +644,7 @@ public abstract class DateMatchers {
 	 * @throws TemporalConversionException
 	 */
 	@Deprecated
-    public static DateMatcher<Date> sameHour(final java.sql.Date date) {
+    public static TemporalMatcher<Date> sameHour(final java.sql.Date date) {
     	throw new TemporalConversionException(UNSUPPORTED_SQL_DATE_UNIT);
     }
 	
@@ -659,7 +659,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameHourOfDay(final Date date) {
+    public static TemporalMatcher<Date> sameHourOfDay(final Date date) {
         return new IsHour<>(JAVADATE_AS_HOUR, hour(date));
     }
 
@@ -669,7 +669,7 @@ public abstract class DateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 * @throws TemporalConversionException
 	 */
-    public static DateMatcher<Date> sameHourOfDay(final java.sql.Date date) {
+    public static TemporalMatcher<Date> sameHourOfDay(final java.sql.Date date) {
     	throw new TemporalConversionException(UNSUPPORTED_SQL_DATE_UNIT);
     }
     
@@ -686,7 +686,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #isHour(int)} instead
      */
     @Deprecated
-    public static DateMatcher<Date> sameHour(final int hour) {
+    public static TemporalMatcher<Date> sameHour(final int hour) {
         return isHour(hour);
     }
 
@@ -701,7 +701,7 @@ public abstract class DateMatchers {
      *
      * @param hour the reference hour against which the examined date is checked
      */
-    public static DateMatcher<Date> isHour(final int hour) {
+    public static TemporalMatcher<Date> isHour(final int hour) {
         return new IsHour<>(JAVADATE_AS_HOUR, hour(hour));
     }
 
@@ -716,7 +716,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameInstant(final Date date) {
+    public static TemporalMatcher<Date> sameInstant(final Date date) {
         return new IsSame<>(JAVADATE_AS_INSTANT, instant(date), INSTANT);
     }
 
@@ -727,7 +727,7 @@ public abstract class DateMatchers {
 	 * @throws TemporalConversionException
 	 */
 	@Deprecated
-    public static DateMatcher<Date> sameInstant(final java.sql.Date date) {
+    public static TemporalMatcher<Date> sameInstant(final java.sql.Date date) {
     	throw new TemporalConversionException(UNSUPPORTED_SQL_DATE_UNIT);
     }
 
@@ -743,7 +743,7 @@ public abstract class DateMatchers {
      *
      * @param timestamp the time as milliseconds since the Unix epoch time
      */
-    public static DateMatcher<Date> sameInstant(final Instant instant) {
+    public static TemporalMatcher<Date> sameInstant(final Instant instant) {
         return new IsSame<>(JAVADATE_AS_INSTANT, instant(instant), INSTANT);
     }
 	
@@ -759,7 +759,7 @@ public abstract class DateMatchers {
      *
      * @param timestamp the time as milliseconds since the Unix epoch time
      */
-    public static DateMatcher<Date> sameInstant(final long timestamp) {
+    public static TemporalMatcher<Date> sameInstant(final long timestamp) {
         return sameInstant(Instant.ofEpochMilli(timestamp));
     }
 
@@ -782,7 +782,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #isInstant(int, Month, int, int, int, int, int)}
      */
     @Deprecated
-    public static DateMatcher<Date> sameInstant(final int year,
+    public static TemporalMatcher<Date> sameInstant(final int year,
             final Months month,
             final int dayOfMonth,
             final int hour,
@@ -809,7 +809,7 @@ public abstract class DateMatchers {
      * @param second the second of the minute against which the examined date is checked
      * @param milliseconds the milliseconds of the second against which the examined date is checked
      */
-    public static DateMatcher<Date> isInstant(final int year,
+    public static TemporalMatcher<Date> isInstant(final int year,
             final Month month,
             final int dayOfMonth,
             final int hour,
@@ -832,7 +832,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameOrBefore(final Date date) {
+    public static TemporalMatcher<Date> sameOrBefore(final Date date) {
         return new IsSameOrBefore<>(JAVADATE_AS_JAVADATE, javaDate(date), JAVADATE);
     }
 
@@ -847,7 +847,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameOrBefore(final java.sql.Date date) {
+    public static TemporalMatcher<Date> sameOrBefore(final java.sql.Date date) {
         return new IsSameOrBefore<>(JAVADATE_AS_SQLDATE, sqlDate(date), SQLDATE);
     }
     
@@ -862,7 +862,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameOrBefore(final LocalDate date) {
+    public static TemporalMatcher<Date> sameOrBefore(final LocalDate date) {
         return new IsSameOrBefore<>(JAVADATE_AS_LOCALDATE, localDate(date), LOCALDATE);
     }
 
@@ -877,7 +877,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameOrBefore(final LocalDateTime date) {
+    public static TemporalMatcher<Date> sameOrBefore(final LocalDateTime date) {
         return new IsSameOrBefore<>(JAVADATE_AS_LOCALDATETIME, localDateTime(date), LOCALDATETIME);
     }
     
@@ -894,7 +894,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #sameOrBefore(LocalDate)}
      */
     @Deprecated
-    public static DateMatcher<Date> sameOrBefore(final DayMonthYear date) {
+    public static TemporalMatcher<Date> sameOrBefore(final DayMonthYear date) {
         return sameOrBefore(date.toLocalDate());
     }
 
@@ -914,7 +914,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #sameOrBefore(int, Month, int)}
      */
     @Deprecated
-    public static DateMatcher<Date> sameOrBefore(final int year, final Months month, final int dayOfMonth) {
+    public static TemporalMatcher<Date> sameOrBefore(final int year, final Months month, final int dayOfMonth) {
         return sameOrBefore(year, month.month(), dayOfMonth);
     }
 
@@ -932,7 +932,7 @@ public abstract class DateMatchers {
      * @param month the month against which the examined date is checked
      * @param dayOfMonth the day of the month against which the examined date is checked
      */
-    public static DateMatcher<Date> sameOrBefore(final int year, final Month month, final int dayOfMonth) {
+    public static TemporalMatcher<Date> sameOrBefore(final int year, final Month month, final int dayOfMonth) {
         return sameOrBefore(LocalDate.of(year, month, dayOfMonth));
     }
 
@@ -955,7 +955,7 @@ public abstract class DateMatchers {
      * @deprecated See {@link #sameOrBefore(int, Month, int, int, int, int)}
      */
     @Deprecated
-    public static DateMatcher<Date> sameOrBefore(final int year,
+    public static TemporalMatcher<Date> sameOrBefore(final int year,
             final Months month,
             final int dayOfMonth,
             final int hour,
@@ -981,7 +981,7 @@ public abstract class DateMatchers {
      * @param minute the minute of the hour against which the examined date is checked
      * @param second the second of the minute against which the examined date is checked
      */
-    public static DateMatcher<Date> sameOrBefore(final int year,
+    public static TemporalMatcher<Date> sameOrBefore(final int year,
             final Month month,
             final int dayOfMonth,
             final int hour,
@@ -1001,7 +1001,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameOrAfter(final Date date) {
+    public static TemporalMatcher<Date> sameOrAfter(final Date date) {
         return new IsSameOrAfter<>(JAVADATE_AS_JAVADATE, javaDate(date), JAVADATE);
     }
 
@@ -1016,7 +1016,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameOrAfter(final java.sql.Date date) {
+    public static TemporalMatcher<Date> sameOrAfter(final java.sql.Date date) {
         return new IsSameOrAfter<>(JAVADATE_AS_SQLDATE, sqlDate(date), SQLDATE);
     }
     
@@ -1031,7 +1031,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameOrAfter(final LocalDate date) {
+    public static TemporalMatcher<Date> sameOrAfter(final LocalDate date) {
         return new IsSameOrAfter<>(JAVADATE_AS_LOCALDATE, localDate(date), LOCALDATE);
     }
 
@@ -1046,7 +1046,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameOrAfter(final LocalDateTime date) {
+    public static TemporalMatcher<Date> sameOrAfter(final LocalDateTime date) {
         return new IsSameOrAfter<>(JAVADATE_AS_LOCALDATETIME, localDateTime(date), LOCALDATETIME);
     }
 
@@ -1063,7 +1063,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #sameOrAfter(LocalDate)}
      */
     @Deprecated
-    public static DateMatcher<Date> sameOrAfter(final DayMonthYear date) {
+    public static TemporalMatcher<Date> sameOrAfter(final DayMonthYear date) {
         return sameOrAfter(date.toLocalDate());
     }
 
@@ -1082,7 +1082,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #sameOrAfter(int, Month, int)
      */
     @Deprecated
-    public static DateMatcher<Date> sameOrAfter(final int year, final Months month, final int dayOfMonth) {
+    public static TemporalMatcher<Date> sameOrAfter(final int year, final Months month, final int dayOfMonth) {
         return sameOrAfter(year, month.month(), dayOfMonth);
     }
 
@@ -1099,7 +1099,7 @@ public abstract class DateMatchers {
      * @param month the month against which the examined date is checked
      * @param dayOfMonth the day of the month against which the examined date is checked
      */
-    public static DateMatcher<Date> sameOrAfter(final int year, final Month month, final int dayOfMonth) {
+    public static TemporalMatcher<Date> sameOrAfter(final int year, final Month month, final int dayOfMonth) {
         return sameOrAfter(LocalDate.of(year, month, dayOfMonth));
     }
 
@@ -1122,7 +1122,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #sameOrAfter(int, Month, int, int, int, int)}
      */
     @Deprecated
-    public static DateMatcher<Date> sameOrAfter(final int year,
+    public static TemporalMatcher<Date> sameOrAfter(final int year,
             final Months month,
             final int dayOfMonth,
             final int hour,
@@ -1148,7 +1148,7 @@ public abstract class DateMatchers {
      * @param minute the minute of the hour against which the examined date is checked
      * @param second the second of the minute against which the examined date is checked
      */
-    public static DateMatcher<Date> sameOrAfter(final int year,
+    public static TemporalMatcher<Date> sameOrAfter(final int year,
             final Month month,
             final int dayOfMonth,
             final int hour,
@@ -1170,7 +1170,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #sameMinuteOfHour(Date)} instead
      */
     @Deprecated
-    public static DateMatcher<Date> sameMinute(final Date date) {
+    public static TemporalMatcher<Date> sameMinute(final Date date) {
         return sameMinuteOfHour(date);
     }
 
@@ -1181,7 +1181,7 @@ public abstract class DateMatchers {
 	 * @throws TemporalConversionException
 	 */
 	@Deprecated
-    public static DateMatcher<Date> sameMinute(final java.sql.Date date) {
+    public static TemporalMatcher<Date> sameMinute(final java.sql.Date date) {
     	throw new TemporalConversionException(UNSUPPORTED_SQL_DATE_UNIT);
     }
     
@@ -1196,7 +1196,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameMinuteOfHour(final Date date) {
+    public static TemporalMatcher<Date> sameMinuteOfHour(final Date date) {
         return new IsMinute<>(JAVADATE_AS_MINUTE, minute(date));
     }
 
@@ -1207,7 +1207,7 @@ public abstract class DateMatchers {
 	 * @throws TemporalConversionException
 	 */
 	@Deprecated
-    public static DateMatcher<Date> sameMinuteOfHour(final java.sql.Date date) {
+    public static TemporalMatcher<Date> sameMinuteOfHour(final java.sql.Date date) {
     	throw new TemporalConversionException(UNSUPPORTED_SQL_DATE_UNIT);
     }
     
@@ -1224,7 +1224,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #isMinute(int)} instead
      */
     @Deprecated
-    public static DateMatcher<Date> sameMinute(final int minute) {
+    public static TemporalMatcher<Date> sameMinute(final int minute) {
         return isMinute(minute);
     }
 
@@ -1239,7 +1239,7 @@ public abstract class DateMatchers {
      *
      * @param minute the reference minute against which the examined date is checked
      */
-    public static DateMatcher<Date> isMinute(final int minute) {
+    public static TemporalMatcher<Date> isMinute(final int minute) {
         return new IsMinute<>(JAVADATE_AS_MINUTE, minute(minute));
     }
 
@@ -1256,7 +1256,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #sameMonthOfYear(Date)} instead
      */
     @Deprecated
-    public static DateMatcher<Date> sameMonth(final Date date) {
+    public static TemporalMatcher<Date> sameMonth(final Date date) {
         return sameMonthOfYear(date);
     }
 
@@ -1273,7 +1273,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #sameMonthOfYear(Date)} instead
      */
     @Deprecated
-    public static DateMatcher<Date> sameMonth(final java.sql.Date date) {
+    public static TemporalMatcher<Date> sameMonth(final java.sql.Date date) {
         return sameMonthOfYear(date);
     }
 
@@ -1288,7 +1288,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameMonthOfYear(final Date date) {
+    public static TemporalMatcher<Date> sameMonthOfYear(final Date date) {
         return new IsMonth<>(JAVADATE_AS_MONTH, month(date));
     }
     
@@ -1303,7 +1303,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameMonthOfYear(final java.sql.Date date) {
+    public static TemporalMatcher<Date> sameMonthOfYear(final java.sql.Date date) {
         return new IsMonth<>(JAVADATE_AS_MONTH, month(date));
     }
 
@@ -1320,7 +1320,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #sameMonthOfYear(Months)} instead
      */
     @Deprecated
-    public static DateMatcher<Date> sameMonth(final Months month) {
+    public static TemporalMatcher<Date> sameMonth(final Months month) {
         return sameMonthOfYear(month);
     }
 
@@ -1337,7 +1337,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #isMonth(Month)}
      */
     @Deprecated
-    public static DateMatcher<Date> sameMonthOfYear(final Months month) {
+    public static TemporalMatcher<Date> sameMonthOfYear(final Months month) {
         return isMonth(month.month());
     }
 
@@ -1354,7 +1354,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #sameSecondOfMinute(Date)} instead
      */
     @Deprecated
-    public static DateMatcher<Date> sameSecond(final Date date) {
+    public static TemporalMatcher<Date> sameSecond(final Date date) {
         return sameSecondOfMinute(date);
     }
 
@@ -1365,7 +1365,7 @@ public abstract class DateMatchers {
 	 * @throws TemporalConversionException
 	 */
 	@Deprecated
-	public static DateMatcher<Date> sameSecond(final java.sql.Date date) {
+	public static TemporalMatcher<Date> sameSecond(final java.sql.Date date) {
 		return sameSecondOfMinute(date);
 	}
     
@@ -1380,7 +1380,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameSecondOfMinute(final Date date) {
+    public static TemporalMatcher<Date> sameSecondOfMinute(final Date date) {
         return new IsSecond<>(JAVADATE_AS_SECOND, second(date));
     }
 
@@ -1391,7 +1391,7 @@ public abstract class DateMatchers {
 	 * @throws TemporalConversionException
 	 */
 	@Deprecated
-    public static DateMatcher<Date> sameSecondOfMinute(final java.sql.Date date) {
+    public static TemporalMatcher<Date> sameSecondOfMinute(final java.sql.Date date) {
     	throw new TemporalConversionException(UNSUPPORTED_SQL_DATE_UNIT);
     }
     
@@ -1408,7 +1408,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #isSecond(int)} instead
      */
     @Deprecated
-    public static DateMatcher<Date> sameSecond(final int second) {
+    public static TemporalMatcher<Date> sameSecond(final int second) {
         return isSecond(second);
     }
 
@@ -1423,7 +1423,7 @@ public abstract class DateMatchers {
      *
      * @param second the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> isSecond(final int second) {
+    public static TemporalMatcher<Date> isSecond(final int second) {
         return new IsSecond<>(JAVADATE_AS_SECOND, second(second));
     }
 
@@ -1440,7 +1440,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #sameMillisecondOfSecond(Date)} instead
      */
     @Deprecated
-    public static DateMatcher<Date> sameMillisecond(final Date date) {
+    public static TemporalMatcher<Date> sameMillisecond(final Date date) {
         return sameMillisecondOfSecond(date);
     }
 
@@ -1451,7 +1451,7 @@ public abstract class DateMatchers {
 	 * @throws TemporalConversionException
 	 */
 	@Deprecated
-    public static DateMatcher<Date> sameMillisecond(final java.sql.Date date) {
+    public static TemporalMatcher<Date> sameMillisecond(final java.sql.Date date) {
     	throw new TemporalConversionException(UNSUPPORTED_SQL_DATE_UNIT);
     }
 	
@@ -1466,7 +1466,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameMillisecondOfSecond(final Date date) {
+    public static TemporalMatcher<Date> sameMillisecondOfSecond(final Date date) {
         return new IsMillisecond<>(JAVADATE_AS_MILLISECOND, millisecondOfMinute(date));
     }
 
@@ -1477,7 +1477,7 @@ public abstract class DateMatchers {
 	 * @throws TemporalConversionException
 	 */
 	@Deprecated
-    public static DateMatcher<Date> sameMillisecondOfSecond(final java.sql.Date date) {
+    public static TemporalMatcher<Date> sameMillisecondOfSecond(final java.sql.Date date) {
     	throw new TemporalConversionException(UNSUPPORTED_SQL_DATE_UNIT);
     }
     
@@ -1494,7 +1494,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #isMillisecond(int)} instead
      */
     @Deprecated
-    public static DateMatcher<Date> sameMillisecond(final int millisecond) {
+    public static TemporalMatcher<Date> sameMillisecond(final int millisecond) {
         return isMillisecond(millisecond);
     }
 
@@ -1509,7 +1509,7 @@ public abstract class DateMatchers {
      *
      * @param millisecond the millisecond against which the examined date is checked
      */
-    public static DateMatcher<Date> isMillisecond(final int millisecond) {
+    public static TemporalMatcher<Date> isMillisecond(final int millisecond) {
         return new IsMillisecond<>(JAVADATE_AS_MILLISECOND, millisecondOfMinute(millisecond));
     }
 
@@ -1524,7 +1524,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameYear(final Date date) {
+    public static TemporalMatcher<Date> sameYear(final Date date) {
         return new IsYear<>(JAVADATE_AS_YEAR, year(date));
     }
 
@@ -1539,7 +1539,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> sameYear(final java.sql.Date date) {
+    public static TemporalMatcher<Date> sameYear(final java.sql.Date date) {
         return new IsYear<>(JAVADATE_AS_YEAR, year(date));
     }
     
@@ -1554,7 +1554,7 @@ public abstract class DateMatchers {
      *
      * @param year the reference year against which the examined date is checked
      */
-    public static DateMatcher<Date> isYear(final int year) {
+    public static TemporalMatcher<Date> isYear(final int year) {
         return new IsYear<>(JAVADATE_AS_YEAR, year(year));
     }
 
@@ -1571,7 +1571,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #within(long, ChronoUnit, Date)}
      */
     @Deprecated
-    public static DateMatcher<Date> within(final long period, final TimeUnit unit, final Date date) {
+    public static TemporalMatcher<Date> within(final long period, final TimeUnit unit, final Date date) {
         return within(period, convertUnit(unit), date);
     }
 
@@ -1586,7 +1586,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> within(final long period, final ChronoUnit unit, final Date date) {
+    public static TemporalMatcher<Date> within(final long period, final ChronoUnit unit, final Date date) {
         return new IsWithin<>(Interval.of(period, unit), JAVADATE_AS_JAVADATE, javaDate(date), JAVADATE);
     }
 
@@ -1603,7 +1603,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #within(long, ChronoUnit, Date)}
      */
     @Deprecated
-    public static DateMatcher<Date> within(final long period, final TimeUnit unit, final java.sql.Date date) {
+    public static TemporalMatcher<Date> within(final long period, final TimeUnit unit, final java.sql.Date date) {
         return within(period, convertUnit(unit), date);
     }
 
@@ -1618,7 +1618,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> within(final long period, final ChronoUnit unit, final java.sql.Date date) {
+    public static TemporalMatcher<Date> within(final long period, final ChronoUnit unit, final java.sql.Date date) {
         return new IsWithin<>(Interval.of(period, unit), JAVADATE_AS_SQLDATE, sqlDate(date), SQLDATE);
     }
     
@@ -1633,7 +1633,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> within(final long period, final ChronoUnit unit, final LocalDate date) {
+    public static TemporalMatcher<Date> within(final long period, final ChronoUnit unit, final LocalDate date) {
         return new IsWithin<>(Interval.of(period, unit), JAVADATE_AS_LOCALDATE, localDate(date), LOCALDATE);
     }
 
@@ -1648,7 +1648,7 @@ public abstract class DateMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<Date> within(final long period, final ChronoUnit unit, final LocalDateTime date) {
+    public static TemporalMatcher<Date> within(final long period, final ChronoUnit unit, final LocalDateTime date) {
         return new IsWithin<>(Interval.of(period, unit), JAVADATE_AS_LOCALDATETIME, localDateTime(date), LOCALDATETIME);
     }
     
@@ -1665,7 +1665,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #within(long, ChronoUnit, LocalDate)}
      */
     @Deprecated
-    public static DateMatcher<Date> within(final long period, final TimeUnit unit, final DayMonthYear date) {
+    public static TemporalMatcher<Date> within(final long period, final TimeUnit unit, final DayMonthYear date) {
         return within(period, convertUnit(unit), date.toLocalDate());
     }
 
@@ -1686,7 +1686,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #within(long, ChronoUnit, int, Month, int)}
      */
     @Deprecated
-    public static DateMatcher<Date> within(final long period,
+    public static TemporalMatcher<Date> within(final long period,
             final TimeUnit unit,
             final int year,
             final Months month,
@@ -1709,7 +1709,7 @@ public abstract class DateMatchers {
      * @param month the month against which the examined date is checked
      * @param dayOfMonth the day of the month against which the examined date is checked
      */
-    public static DateMatcher<Date> within(final long period,
+    public static TemporalMatcher<Date> within(final long period,
             final ChronoUnit unit,
             final int year,
             final Month month,
@@ -1738,7 +1738,7 @@ public abstract class DateMatchers {
      * @deprecated Use {@link #within(long, ChronoUnit, int, Month, int, int, int, int, int)}
      */
     @Deprecated
-    public static DateMatcher<Date> within(final long period,
+    public static TemporalMatcher<Date> within(final long period,
             final TimeUnit unit,
             final int year,
             final Months month,
@@ -1769,7 +1769,7 @@ public abstract class DateMatchers {
      * @param second the second of the minute against which the examined date is checked
      * @param milliseconds the millisecond of the second against which the examined date is checked
      */
-    public static DateMatcher<Date> within(final long period,
+    public static TemporalMatcher<Date> within(final long period,
             final ChronoUnit unit,
             final int year,
             final Month month,
@@ -1790,7 +1790,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isToday());
      * </pre>
      */
-    public static DateMatcher<Date> isYesterday() {
+    public static TemporalMatcher<Date> isYesterday() {
         return sameDay(LocalDate.now().minusDays(1));
     }
 
@@ -1803,7 +1803,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isToday());
      * </pre>
      */
-    public static DateMatcher<Date> isToday() {
+    public static TemporalMatcher<Date> isToday() {
         return sameDay(LocalDate.now());
     }
 
@@ -1816,7 +1816,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isTomorrow());
      * </pre>
      */
-    public static DateMatcher<Date> isTomorrow() {
+    public static TemporalMatcher<Date> isTomorrow() {
         return sameDay(LocalDate.now().plusDays(1));
     }
 
@@ -1829,7 +1829,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isMonday());
      * </pre>
      */
-    public static DateMatcher<Date> isMonday() {
+    public static TemporalMatcher<Date> isMonday() {
         return isDayOfWeek(DayOfWeek.MONDAY);
     }
 
@@ -1842,7 +1842,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isTuesday());
      * </pre>
      */
-    public static DateMatcher<Date> isTuesday() {
+    public static TemporalMatcher<Date> isTuesday() {
         return isDayOfWeek(DayOfWeek.TUESDAY);
     }
 
@@ -1855,7 +1855,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isWednesday());
      * </pre>
      */
-    public static DateMatcher<Date> isWednesday() {
+    public static TemporalMatcher<Date> isWednesday() {
         return isDayOfWeek(DayOfWeek.WEDNESDAY);
     }
 
@@ -1868,7 +1868,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isThursday());
      * </pre>
      */
-    public static DateMatcher<Date> isThursday() {
+    public static TemporalMatcher<Date> isThursday() {
         return isDayOfWeek(DayOfWeek.THURSDAY);
     }
 
@@ -1881,7 +1881,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isFriday());
      * </pre>
      */
-    public static DateMatcher<Date> isFriday() {
+    public static TemporalMatcher<Date> isFriday() {
         return isDayOfWeek(DayOfWeek.FRIDAY);
     }
 
@@ -1894,7 +1894,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isSaturday());
      * </pre>
      */
-    public static DateMatcher<Date> isSaturday() {
+    public static TemporalMatcher<Date> isSaturday() {
         return isDayOfWeek(DayOfWeek.SATURDAY);
     }
 
@@ -1907,7 +1907,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isSunday());
      * </pre>
      */
-    public static DateMatcher<Date> isSunday() {
+    public static TemporalMatcher<Date> isSunday() {
         return isDayOfWeek(DayOfWeek.SUNDAY);
     }
 
@@ -1920,7 +1920,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isWeekday());
      * </pre>
      */
-    public static DateMatcher<Date> isWeekday() {
+    public static TemporalMatcher<Date> isWeekday() {
         return isDayOfWeek(MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY);
     }
 
@@ -1933,7 +1933,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isWeekend());
      * </pre>
      */
-    public static DateMatcher<Date> isWeekend() {
+    public static TemporalMatcher<Date> isWeekend() {
         return isDayOfWeek(SATURDAY, SUNDAY);
     }
 
@@ -1946,7 +1946,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isFirstDayOfMonth());
      * </pre>
      */
-    public static DateMatcher<Date> isFirstDayOfMonth() {
+    public static TemporalMatcher<Date> isFirstDayOfMonth() {
         return new IsFirstDayOfMonth<>(JAVADATE_AS_TEMPORAL);
     }
 
@@ -1962,7 +1962,7 @@ public abstract class DateMatchers {
      *
      * @param field the temporal field to check
      */
-    public static DateMatcher<Date> isMinimum(final ChronoField field) {
+    public static TemporalMatcher<Date> isMinimum(final ChronoField field) {
         return new IsMinimum<>(JAVADATE_AS_TEMPORAL, field);
     }
 
@@ -1975,7 +1975,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isFirstDayOfMonth());
      * </pre>
      */
-    public static DateMatcher<Date> isLastDayOfMonth() {
+    public static TemporalMatcher<Date> isLastDayOfMonth() {
         return new IsLastDayOfMonth<>(JAVADATE_AS_TEMPORAL);
     }
 
@@ -1991,7 +1991,7 @@ public abstract class DateMatchers {
      *
      * @param field the temporal field to check
      */
-    public static DateMatcher<Date> isMaximum(final ChronoField field) {
+    public static TemporalMatcher<Date> isMaximum(final ChronoField field) {
         return new IsMaximum<>(JAVADATE_AS_TEMPORAL, field);
     }
 
@@ -2004,7 +2004,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isMonth(Month.AUGUST));
      * </pre>
      */
-    public static DateMatcher<Date> isMonth(final Month month) {
+    public static TemporalMatcher<Date> isMonth(final Month month) {
         return new IsMonth<>(JAVADATE_AS_MONTH, month(month));
     }
 
@@ -2017,7 +2017,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isJanuary());
      * </pre>
      */
-    public static DateMatcher<Date> isJanuary() {
+    public static TemporalMatcher<Date> isJanuary() {
         return isMonth(JANUARY);
     }
 
@@ -2030,7 +2030,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isFebruary());
      * </pre>
      */
-    public static DateMatcher<Date> isFebruary() {
+    public static TemporalMatcher<Date> isFebruary() {
         return isMonth(FEBRUARY);
     }
 
@@ -2043,7 +2043,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isMarch());
      * </pre>
      */
-    public static DateMatcher<Date> isMarch() {
+    public static TemporalMatcher<Date> isMarch() {
         return isMonth(MARCH);
     }
 
@@ -2056,7 +2056,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isApril());
      * </pre>
      */
-    public static DateMatcher<Date> isApril() {
+    public static TemporalMatcher<Date> isApril() {
         return isMonth(APRIL);
     }
 
@@ -2069,7 +2069,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isMay());
      * </pre>
      */
-    public static DateMatcher<Date> isMay() {
+    public static TemporalMatcher<Date> isMay() {
         return isMonth(MAY);
     }
 
@@ -2082,7 +2082,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isJune());
      * </pre>
      */
-    public static DateMatcher<Date> isJune() {
+    public static TemporalMatcher<Date> isJune() {
         return isMonth(JUNE);
     }
 
@@ -2095,7 +2095,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isJuly());
      * </pre>
      */
-    public static DateMatcher<Date> isJuly() {
+    public static TemporalMatcher<Date> isJuly() {
         return isMonth(JULY);
     }
 
@@ -2108,7 +2108,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isAugust());
      * </pre>
      */
-    public static DateMatcher<Date> isAugust() {
+    public static TemporalMatcher<Date> isAugust() {
         return isMonth(AUGUST);
     }
 
@@ -2121,7 +2121,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isSeptember());
      * </pre>
      */
-    public static DateMatcher<Date> isSeptember() {
+    public static TemporalMatcher<Date> isSeptember() {
         return isMonth(SEPTEMBER);
     }
 
@@ -2134,7 +2134,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isOctober());
      * </pre>
      */
-    public static DateMatcher<Date> isOctober() {
+    public static TemporalMatcher<Date> isOctober() {
         return isMonth(OCTOBER);
     }
 
@@ -2147,7 +2147,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isNovember());
      * </pre>
      */
-    public static DateMatcher<Date> isNovember() {
+    public static TemporalMatcher<Date> isNovember() {
         return isMonth(NOVEMBER);
     }
 
@@ -2160,7 +2160,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isDecember());
      * </pre>
      */
-    public static DateMatcher<Date> isDecember() {
+    public static TemporalMatcher<Date> isDecember() {
         return isMonth(DECEMBER);
     }
 
@@ -2173,7 +2173,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, isLeapYear());
      * </pre>
      */
-    public static DateMatcher<Date> isLeapYear() {
+    public static TemporalMatcher<Date> isLeapYear() {
         return new IsLeapYear<>(JAVADATE_AS_YEAR);
     }
 

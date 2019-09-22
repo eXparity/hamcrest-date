@@ -11,7 +11,7 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsDayOfMonth<T> extends DateMatcher<T> {
+public class IsDayOfMonth<T> extends TemporalMatcher<T> {
 
 	private final TemporalConverter<T, DayOfMonth> converter;
 	private final TemporalProvider<DayOfMonth> expected;
@@ -49,7 +49,7 @@ public class IsDayOfMonth<T> extends DateMatcher<T> {
 	}
 
 	@Override
-	public DateMatcher<T> atZone(ZoneId zone) {
+	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsDayOfMonth<>(converter, expected, zone, locale);
 	}
 

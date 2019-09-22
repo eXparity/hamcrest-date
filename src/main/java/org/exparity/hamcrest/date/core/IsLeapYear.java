@@ -11,7 +11,7 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsLeapYear<T> extends DateMatcher<T> {
+public class IsLeapYear<T> extends TemporalMatcher<T> {
 
 	private final TemporalConverter<T, Year> converter;
 	private final Locale locale;
@@ -44,7 +44,7 @@ public class IsLeapYear<T> extends DateMatcher<T> {
 	}
 
 	@Override
-	public DateMatcher<T> atZone(ZoneId zone) {
+	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsLeapYear<>(converter, zone, locale);
 	}
 

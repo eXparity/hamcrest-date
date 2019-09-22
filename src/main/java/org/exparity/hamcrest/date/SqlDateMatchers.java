@@ -16,7 +16,7 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
 
-import org.exparity.hamcrest.date.core.DateMatcher;
+import org.exparity.hamcrest.date.core.TemporalMatcher;
 import org.exparity.hamcrest.date.core.IsAfter;
 import org.exparity.hamcrest.date.core.IsBefore;
 import org.exparity.hamcrest.date.core.IsDayOfMonth;
@@ -52,7 +52,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> after(final Date date) {
+	public static TemporalMatcher<java.sql.Date> after(final Date date) {
 		return new IsAfter<>(SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
@@ -67,7 +67,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> after(final java.util.Date date) {
+	public static TemporalMatcher<java.sql.Date> after(final java.util.Date date) {
 		return new IsAfter<>(SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
@@ -84,7 +84,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #after(LocalDate)}
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> after(final DayMonthYear date) {
+	public static TemporalMatcher<java.sql.Date> after(final DayMonthYear date) {
 		return after(date.toLocalDate());
 	}
 
@@ -99,7 +99,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> after(final LocalDate date) {
+	public static TemporalMatcher<java.sql.Date> after(final LocalDate date) {
 		return new IsAfter<>(SQLDATE_AS_LOCALDATE, localDate(date), LOCALDATE);
 	}
 
@@ -118,7 +118,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #after(int, Month, int)}
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> after(final int year, final Months month, final int day) {
+	public static TemporalMatcher<java.sql.Date> after(final int year, final Months month, final int day) {
 		return after(year, month.month(), day);
 	}
 
@@ -135,7 +135,7 @@ public abstract class SqlDateMatchers {
 	 * @param month the month against which the examined date is checked
 	 * @param day the day of the month against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> after(final int year, final Month month, final int day) {
+	public static TemporalMatcher<java.sql.Date> after(final int year, final Month month, final int day) {
 		return after(LocalDate.of(year, month, day));
 	}
 
@@ -150,7 +150,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> before(final Date date) {
+	public static TemporalMatcher<java.sql.Date> before(final Date date) {
 		return new IsBefore<>(SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
@@ -165,7 +165,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> before(final java.util.Date date) {
+	public static TemporalMatcher<java.sql.Date> before(final java.util.Date date) {
 		return new IsBefore<>(SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
@@ -182,7 +182,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #before(LocalDate)}
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> before(final DayMonthYear date) {
+	public static TemporalMatcher<java.sql.Date> before(final DayMonthYear date) {
 		return before(date.toLocalDate());
 	}
 
@@ -197,7 +197,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> before(final LocalDate date) {
+	public static TemporalMatcher<java.sql.Date> before(final LocalDate date) {
 		return new IsBefore<>(SQLDATE_AS_LOCALDATE, localDate(date), LOCALDATE);
 	}
 
@@ -216,7 +216,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #before(int, Month, int)}
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> before(final int year, final Months month, final int day) {
+	public static TemporalMatcher<java.sql.Date> before(final int year, final Months month, final int day) {
 		return before(year, month.month(), day);
 	}
 
@@ -233,7 +233,7 @@ public abstract class SqlDateMatchers {
 	 * @param month the month against which the examined date is checked
 	 * @param day the day of the month against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> before(final int year, final Month month, final int day) {
+	public static TemporalMatcher<java.sql.Date> before(final int year, final Month month, final int day) {
 		return before(LocalDate.of(year, month, day));
 	}
 
@@ -248,7 +248,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameDayOfWeek(final Date date) {
+	public static TemporalMatcher<java.sql.Date> sameDayOfWeek(final Date date) {
 		return isDayOfWeek(toDayOfWeek(date));
 	}
 
@@ -263,7 +263,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameDayOfWeek(final java.util.Date date) {
+	public static TemporalMatcher<java.sql.Date> sameDayOfWeek(final java.util.Date date) {
 		return isDayOfWeek(toDayOfWeek(date, ZoneId.systemDefault()));
 	}
 
@@ -280,7 +280,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #isDayOfWeek(DayOfWeek...)}
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> isDayOfWeek(final Weekdays dayOfWeek) {
+	public static TemporalMatcher<java.sql.Date> isDayOfWeek(final Weekdays dayOfWeek) {
 		return isDayOfWeek(dayOfWeek.getAsDayOfWeek());
 	}
 
@@ -295,7 +295,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param dayOfWeek the reference weekday against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> isDayOfWeek(final DayOfWeek dayOfWeek) {
+	public static TemporalMatcher<java.sql.Date> isDayOfWeek(final DayOfWeek dayOfWeek) {
 		return new IsDayOfWeek<>(SQLDATE_AS_DAYOFWEEK, daysOfWeek(dayOfWeek));
 	}
 
@@ -310,7 +310,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param daysOfWeek the reference weekdays against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> isDayOfWeek(final DayOfWeek... daysOfWeek) {
+	public static TemporalMatcher<java.sql.Date> isDayOfWeek(final DayOfWeek... daysOfWeek) {
 		return new IsDayOfWeek<>(SQLDATE_AS_DAYOFWEEK, daysOfWeek(daysOfWeek));
 	}
 
@@ -325,7 +325,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameDayOfMonth(final Date date) {
+	public static TemporalMatcher<java.sql.Date> sameDayOfMonth(final Date date) {
 		return new IsDayOfMonth<>(SQLDATE_AS_DAYOFMONTH, dayOfMonth(date));
 	}
 
@@ -340,7 +340,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameDayOfMonth(final java.util.Date date) {
+	public static TemporalMatcher<java.sql.Date> sameDayOfMonth(final java.util.Date date) {
 		return new IsDayOfMonth<>(SQLDATE_AS_DAYOFMONTH, dayOfMonth(date));
 	}
 
@@ -355,7 +355,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param dayOfMonth the expected day of the month
 	 */
-	public static DateMatcher<java.sql.Date> isDayOfMonth(final int dayOfMonth) {
+	public static TemporalMatcher<java.sql.Date> isDayOfMonth(final int dayOfMonth) {
 		return new IsDayOfMonth<>(SQLDATE_AS_DAYOFMONTH, dayOfMonth(dayOfMonth));
 	}
 
@@ -370,7 +370,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameDay(final java.sql.Date date) {
+	public static TemporalMatcher<java.sql.Date> sameDay(final java.sql.Date date) {
 		return new IsSameDay<>(SQLDATE_AS_LOCALDATE, localDate(date));
 	}
 
@@ -387,7 +387,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #sameDay(LocalDate)}
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> sameDay(final DayMonthYear date) {
+	public static TemporalMatcher<java.sql.Date> sameDay(final DayMonthYear date) {
 		return sameDay(date.toLocalDate());
 	}
 
@@ -402,7 +402,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameDay(final LocalDate date) {
+	public static TemporalMatcher<java.sql.Date> sameDay(final LocalDate date) {
 		return new IsSameDay<>(SQLDATE_AS_LOCALDATE, localDate(date));
 	}
 
@@ -421,7 +421,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #isDay(int, Month, int)}
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> sameDay(final int year, final Months month, final int day) {
+	public static TemporalMatcher<java.sql.Date> sameDay(final int year, final Months month, final int day) {
 		return isDay(year, month.month(), day);
 	}
 
@@ -438,7 +438,7 @@ public abstract class SqlDateMatchers {
 	 * @param month the reference month against which the examined date is checked
 	 * @param year the reference year against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> isDay(final int year, final Month month, final int dayOfMonth) {
+	public static TemporalMatcher<java.sql.Date> isDay(final int year, final Month month, final int dayOfMonth) {
 		return sameDay(LocalDate.of(year, month, dayOfMonth));
 	}
 
@@ -453,7 +453,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameOrBefore(final Date date) {
+	public static TemporalMatcher<java.sql.Date> sameOrBefore(final Date date) {
 		return new IsSameOrBefore<>(SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
@@ -468,7 +468,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameOrBefore(final java.util.Date date) {
+	public static TemporalMatcher<java.sql.Date> sameOrBefore(final java.util.Date date) {
 		return new IsSameOrBefore<>(SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
@@ -483,7 +483,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameOrBefore(final LocalDate date) {
+	public static TemporalMatcher<java.sql.Date> sameOrBefore(final LocalDate date) {
 		return new IsSameOrBefore<>(SQLDATE_AS_LOCALDATE, localDate(date), LOCALDATE);
 	}
 
@@ -500,7 +500,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #sameOrBefore(LocalDate)}
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> sameOrBefore(final DayMonthYear date) {
+	public static TemporalMatcher<java.sql.Date> sameOrBefore(final DayMonthYear date) {
 		return sameOrBefore(date.toLocalDate());
 	}
 
@@ -520,7 +520,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #sameOrBefore(int, Month, int)}
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> sameOrBefore(final int year, final Months month, final int dayOfMonth) {
+	public static TemporalMatcher<java.sql.Date> sameOrBefore(final int year, final Months month, final int dayOfMonth) {
 		return sameOrBefore(year, month.month(), dayOfMonth);
 	}
 
@@ -538,7 +538,7 @@ public abstract class SqlDateMatchers {
 	 * @param month the month against which the examined date is checked
 	 * @param dayOfMonth the day of the month against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameOrBefore(final int year, final Month month, final int dayOfMonth) {
+	public static TemporalMatcher<java.sql.Date> sameOrBefore(final int year, final Month month, final int dayOfMonth) {
 		return sameOrBefore(LocalDate.of(year, month, dayOfMonth));
 	}
 
@@ -553,7 +553,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameOrAfter(final Date date) {
+	public static TemporalMatcher<java.sql.Date> sameOrAfter(final Date date) {
 		return new IsSameOrAfter<>(SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
@@ -568,7 +568,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameOrAfter(final java.util.Date date) {
+	public static TemporalMatcher<java.sql.Date> sameOrAfter(final java.util.Date date) {
 		return new IsSameOrAfter<>(SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
@@ -583,7 +583,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameOrAfter(final LocalDate date) {
+	public static TemporalMatcher<java.sql.Date> sameOrAfter(final LocalDate date) {
 		return new IsSameOrAfter<>(SQLDATE_AS_LOCALDATE, localDate(date), LOCALDATE);
 	}
 
@@ -600,7 +600,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #sameOrAfter(LocalDate)}
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> sameOrAfter(final DayMonthYear date) {
+	public static TemporalMatcher<java.sql.Date> sameOrAfter(final DayMonthYear date) {
 		return sameOrAfter(date.toLocalDate());
 	}
 
@@ -619,7 +619,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #sameOrAfter(int, Month, int)
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> sameOrAfter(final int year, final Months month, final int dayOfMonth) {
+	public static TemporalMatcher<java.sql.Date> sameOrAfter(final int year, final Months month, final int dayOfMonth) {
 		return sameOrAfter(year, month.month(), dayOfMonth);
 	}
 
@@ -636,7 +636,7 @@ public abstract class SqlDateMatchers {
 	 * @param month the month against which the examined date is checked
 	 * @param dayOfMonth the day of the month against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameOrAfter(final int year, final Month month, final int dayOfMonth) {
+	public static TemporalMatcher<java.sql.Date> sameOrAfter(final int year, final Month month, final int dayOfMonth) {
 		return sameOrAfter(LocalDate.of(year, month, dayOfMonth));
 	}
 
@@ -653,7 +653,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #sameMonthOfYear(Date)} instead
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> sameMonth(final Date date) {
+	public static TemporalMatcher<java.sql.Date> sameMonth(final Date date) {
 		return sameMonthOfYear(date);
 	}
 
@@ -670,7 +670,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #sameMonthOfYear(Date)} instead
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> sameMonth(final java.util.Date date) {
+	public static TemporalMatcher<java.sql.Date> sameMonth(final java.util.Date date) {
 		return sameMonthOfYear(date);
 	}
 
@@ -685,7 +685,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameMonthOfYear(final Date date) {
+	public static TemporalMatcher<java.sql.Date> sameMonthOfYear(final Date date) {
 		return isMonth(SQLDATE_AS_MONTH.apply(date, ZoneId.systemDefault()));
 	}
 
@@ -700,7 +700,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameMonthOfYear(final java.util.Date date) {
+	public static TemporalMatcher<java.sql.Date> sameMonthOfYear(final java.util.Date date) {
 		return isMonth(toMonth(date, ZoneId.systemDefault()));
 	}
 
@@ -717,7 +717,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #sameMonthOfYear(Months)} instead
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> sameMonth(final Months month) {
+	public static TemporalMatcher<java.sql.Date> sameMonth(final Months month) {
 		return sameMonthOfYear(month);
 	}
 
@@ -734,7 +734,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #isMonth(Month)}
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> sameMonthOfYear(final Months month) {
+	public static TemporalMatcher<java.sql.Date> sameMonthOfYear(final Months month) {
 		return isMonth(month.month());
 	}
 
@@ -749,7 +749,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameYear(final Date date) {
+	public static TemporalMatcher<java.sql.Date> sameYear(final Date date) {
         return new IsYear<>(SQLDATE_AS_YEAR, year(date));
 	}
 
@@ -764,7 +764,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> sameYear(final java.util.Date date) {
+	public static TemporalMatcher<java.sql.Date> sameYear(final java.util.Date date) {
         return new IsYear<>(SQLDATE_AS_YEAR, year(date));
 	}
 
@@ -779,7 +779,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param year the reference year against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> isYear(final int year) {
+	public static TemporalMatcher<java.sql.Date> isYear(final int year) {
         return new IsYear<>(SQLDATE_AS_YEAR, year(year));
 	}
 
@@ -796,7 +796,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #within(long, ChronoUnit, Date)}
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> within(final long period, final TimeUnit unit, final Date date) {
+	public static TemporalMatcher<java.sql.Date> within(final long period, final TimeUnit unit, final Date date) {
 		return within(period, convertUnit(unit), date);
 	}
 
@@ -813,7 +813,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #within(long, ChronoUnit, Date)}
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> within(final long period, final TimeUnit unit, final java.util.Date date) {
+	public static TemporalMatcher<java.sql.Date> within(final long period, final TimeUnit unit, final java.util.Date date) {
 		return within(period, convertUnit(unit), date);
 	}
 
@@ -828,7 +828,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> within(final long period, final ChronoUnit unit, final Date date) {
+	public static TemporalMatcher<java.sql.Date> within(final long period, final ChronoUnit unit, final Date date) {
 		return new IsWithin<>(Interval.of(period, unit), SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
 	}
 
@@ -843,7 +843,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> within(final long period,
+	public static TemporalMatcher<java.sql.Date> within(final long period,
 	        final ChronoUnit unit,
 	        final java.util.Date date) {
 		return new IsWithin<>(Interval.of(period, unit), SQLDATE_AS_SQLDATE, sqlDate(date), SQLDATE);
@@ -860,7 +860,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param date the reference date against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> within(final long period, final ChronoUnit unit, final LocalDate date) {
+	public static TemporalMatcher<java.sql.Date> within(final long period, final ChronoUnit unit, final LocalDate date) {
 		return new IsWithin<>(Interval.of(period, unit), SQLDATE_AS_LOCALDATE, localDate(date), LOCALDATE);
 	}
 
@@ -877,7 +877,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #within(long, ChronoUnit, LocalDate)}
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> within(final long period, final TimeUnit unit, final DayMonthYear date) {
+	public static TemporalMatcher<java.sql.Date> within(final long period, final TimeUnit unit, final DayMonthYear date) {
 		return within(period, convertUnit(unit), date.toLocalDate());
 	}
 
@@ -898,7 +898,7 @@ public abstract class SqlDateMatchers {
 	 * @deprecated Use {@link #within(long, ChronoUnit, int, Month, int)}
 	 */
 	@Deprecated
-	public static DateMatcher<java.sql.Date> within(final long period,
+	public static TemporalMatcher<java.sql.Date> within(final long period,
 	        final TimeUnit unit,
 	        final int year,
 	        final Months month,
@@ -921,7 +921,7 @@ public abstract class SqlDateMatchers {
 	 * @param month the month against which the examined date is checked
 	 * @param dayOfMonth the day of the month against which the examined date is checked
 	 */
-	public static DateMatcher<java.sql.Date> within(final long period,
+	public static TemporalMatcher<java.sql.Date> within(final long period,
 	        final ChronoUnit unit,
 	        final int year,
 	        final Month month,
@@ -938,7 +938,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isToday());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isYesterday() {
+	public static TemporalMatcher<java.sql.Date> isYesterday() {
 		return sameDay(LocalDate.now().minusDays(1));
 	}
 
@@ -951,7 +951,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isToday());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isToday() {
+	public static TemporalMatcher<java.sql.Date> isToday() {
 		return sameDay(LocalDate.now());
 	}
 
@@ -964,7 +964,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isTomorrow());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isTomorrow() {
+	public static TemporalMatcher<java.sql.Date> isTomorrow() {
 		return sameDay(LocalDate.now().plusDays(1));
 	}
 
@@ -977,7 +977,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isMonday());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isMonday() {
+	public static TemporalMatcher<java.sql.Date> isMonday() {
 		return isDayOfWeek(DayOfWeek.MONDAY);
 	}
 
@@ -990,7 +990,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isTuesday());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isTuesday() {
+	public static TemporalMatcher<java.sql.Date> isTuesday() {
 		return isDayOfWeek(DayOfWeek.TUESDAY);
 	}
 
@@ -1003,7 +1003,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isWednesday());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isWednesday() {
+	public static TemporalMatcher<java.sql.Date> isWednesday() {
 		return isDayOfWeek(DayOfWeek.WEDNESDAY);
 	}
 
@@ -1016,7 +1016,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isThursday());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isThursday() {
+	public static TemporalMatcher<java.sql.Date> isThursday() {
 		return isDayOfWeek(DayOfWeek.THURSDAY);
 	}
 
@@ -1029,7 +1029,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isFriday());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isFriday() {
+	public static TemporalMatcher<java.sql.Date> isFriday() {
 		return isDayOfWeek(DayOfWeek.FRIDAY);
 	}
 
@@ -1042,7 +1042,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isSaturday());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isSaturday() {
+	public static TemporalMatcher<java.sql.Date> isSaturday() {
 		return isDayOfWeek(DayOfWeek.SATURDAY);
 	}
 
@@ -1055,7 +1055,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isSunday());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isSunday() {
+	public static TemporalMatcher<java.sql.Date> isSunday() {
 		return isDayOfWeek(DayOfWeek.SUNDAY);
 	}
 
@@ -1068,7 +1068,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isWeekday());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isWeekday() {
+	public static TemporalMatcher<java.sql.Date> isWeekday() {
 		return isDayOfWeek(MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY);
 	}
 
@@ -1081,7 +1081,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isWeekend());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isWeekend() {
+	public static TemporalMatcher<java.sql.Date> isWeekend() {
 		return isDayOfWeek(SATURDAY, SUNDAY);
 	}
 
@@ -1094,7 +1094,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isFirstDayOfMonth());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isFirstDayOfMonth() {
+	public static TemporalMatcher<java.sql.Date> isFirstDayOfMonth() {
         return new IsFirstDayOfMonth<>(SQLDATE_AS_LOCALDATE);
 	}
 
@@ -1110,7 +1110,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param field the temporal field to check
 	 */
-	public static DateMatcher<java.sql.Date> isMinimum(final ChronoField field) {
+	public static TemporalMatcher<java.sql.Date> isMinimum(final ChronoField field) {
 		return new IsMinimum<>(SQLDATE_AS_LOCALDATE, field);
 	}
 
@@ -1123,7 +1123,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isFirstDayOfMonth());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isLastDayOfMonth() {
+	public static TemporalMatcher<java.sql.Date> isLastDayOfMonth() {
         return new IsLastDayOfMonth<>(SQLDATE_AS_LOCALDATE);
 	}
 
@@ -1139,7 +1139,7 @@ public abstract class SqlDateMatchers {
 	 *
 	 * @param field the temporal field to check
 	 */
-	public static DateMatcher<java.sql.Date> isMaximum(final ChronoField field) {
+	public static TemporalMatcher<java.sql.Date> isMaximum(final ChronoField field) {
 		return new IsMaximum<>(SQLDATE_AS_LOCALDATE, field);
 	}
 
@@ -1154,7 +1154,7 @@ public abstract class SqlDateMatchers {
 	 * 
 	 * O
 	 */
-	public static DateMatcher<java.sql.Date> isMonth(final Month month) {
+	public static TemporalMatcher<java.sql.Date> isMonth(final Month month) {
 		return new IsMonth<>(SQLDATE_AS_MONTH, month(month));
 	}
 
@@ -1167,7 +1167,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isJanuary());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isJanuary() {
+	public static TemporalMatcher<java.sql.Date> isJanuary() {
 		return isMonth(JANUARY);
 	}
 
@@ -1180,7 +1180,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isFebruary());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isFebruary() {
+	public static TemporalMatcher<java.sql.Date> isFebruary() {
 		return isMonth(FEBRUARY);
 	}
 
@@ -1193,7 +1193,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isMarch());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isMarch() {
+	public static TemporalMatcher<java.sql.Date> isMarch() {
 		return isMonth(MARCH);
 	}
 
@@ -1206,7 +1206,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isApril());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isApril() {
+	public static TemporalMatcher<java.sql.Date> isApril() {
 		return isMonth(APRIL);
 	}
 
@@ -1219,7 +1219,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isMay());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isMay() {
+	public static TemporalMatcher<java.sql.Date> isMay() {
 		return isMonth(MAY);
 	}
 
@@ -1232,7 +1232,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isJune());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isJune() {
+	public static TemporalMatcher<java.sql.Date> isJune() {
 		return isMonth(JUNE);
 	}
 
@@ -1245,7 +1245,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isJuly());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isJuly() {
+	public static TemporalMatcher<java.sql.Date> isJuly() {
 		return isMonth(JULY);
 	}
 
@@ -1258,7 +1258,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isAugust());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isAugust() {
+	public static TemporalMatcher<java.sql.Date> isAugust() {
 		return isMonth(AUGUST);
 	}
 
@@ -1271,7 +1271,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isSeptember());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isSeptember() {
+	public static TemporalMatcher<java.sql.Date> isSeptember() {
 		return isMonth(SEPTEMBER);
 	}
 
@@ -1284,7 +1284,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isOctober());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isOctober() {
+	public static TemporalMatcher<java.sql.Date> isOctober() {
 		return isMonth(OCTOBER);
 	}
 
@@ -1297,7 +1297,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isNovember());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isNovember() {
+	public static TemporalMatcher<java.sql.Date> isNovember() {
 		return isMonth(NOVEMBER);
 	}
 
@@ -1310,7 +1310,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isDecember());
 	 * </pre>
 	 */
-	public static DateMatcher<java.sql.Date> isDecember() {
+	public static TemporalMatcher<java.sql.Date> isDecember() {
 		return isMonth(DECEMBER);
 	}
 
@@ -1323,7 +1323,7 @@ public abstract class SqlDateMatchers {
 	 * assertThat(myDate, isLeapYear());
 	 * </pre>
 	 */
-	public static DateMatcher<Date> isLeapYear() {
+	public static TemporalMatcher<Date> isLeapYear() {
 		return new IsLeapYear<>(SQLDATE_AS_YEAR);
 	}
 

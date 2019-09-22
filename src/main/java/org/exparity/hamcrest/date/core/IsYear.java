@@ -12,7 +12,7 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsYear<T> extends DateMatcher<T> {
+public class IsYear<T> extends TemporalMatcher<T> {
 
 	private final TemporalConverter<T, Year> converter;
 	private final TemporalProvider<Year> expected;
@@ -50,7 +50,7 @@ public class IsYear<T> extends DateMatcher<T> {
 	}
 
 	@Override
-	public DateMatcher<T> atZone(ZoneId zone) {
+	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsYear<>(converter, expected, zone, locale);
 	}
 }

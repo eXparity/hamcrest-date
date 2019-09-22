@@ -15,7 +15,7 @@ import java.time.OffsetDateTime;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 
-import org.exparity.hamcrest.date.core.DateMatcher;
+import org.exparity.hamcrest.date.core.TemporalMatcher;
 import org.exparity.hamcrest.date.core.IsAfter;
 import org.exparity.hamcrest.date.core.IsBefore;
 import org.exparity.hamcrest.date.core.IsDayOfMonth;
@@ -56,7 +56,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> after(final OffsetDateTime date) {
+    public static TemporalMatcher<OffsetDateTime> after(final OffsetDateTime date) {
         return new IsAfter<>(OFFSETDATETIME_AS_OFFSETDATETIME, offsetDateTime(date), OFFSETDATETIME);
     }
 
@@ -77,7 +77,7 @@ public abstract class OffsetDateTimeMatchers {
      * @param second the second of the minute
      * @param nanos the nanos of the second
      */
-    public static DateMatcher<OffsetDateTime> after(final int year,
+    public static TemporalMatcher<OffsetDateTime> after(final int year,
             final Month month,
             final int dayOfMonth,
             final int hour,
@@ -99,7 +99,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> before(final OffsetDateTime date) {
+    public static TemporalMatcher<OffsetDateTime> before(final OffsetDateTime date) {
         return new IsBefore<>(OFFSETDATETIME_AS_OFFSETDATETIME, offsetDateTime(date), OFFSETDATETIME);
     }
 
@@ -120,7 +120,7 @@ public abstract class OffsetDateTimeMatchers {
      * @param second the second of the minute
      * @param nanos the nanos of the second
      */
-    public static DateMatcher<OffsetDateTime> before(final int year,
+    public static TemporalMatcher<OffsetDateTime> before(final int year,
             final Month month,
             final int dayOfMonth,
             final int hour,
@@ -142,7 +142,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> sameDay(final OffsetDateTime date) {
+    public static TemporalMatcher<OffsetDateTime> sameDay(final OffsetDateTime date) {
         return new IsSameDay<>(OFFSETDATETIME_AS_LOCALDATE, localDate(date));
     }
 
@@ -157,7 +157,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> isDay(LocalDate date) {
+    public static TemporalMatcher<OffsetDateTime> isDay(LocalDate date) {
         return new IsSameDay<>(OFFSETDATETIME_AS_LOCALDATE, localDate(date));
     }
     
@@ -174,7 +174,7 @@ public abstract class OffsetDateTimeMatchers {
      * @param month the reference month against which the examined date is checked
      * @param year the reference year against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> isDay(final int year, final Month month, final int dayOfMonth) {
+    public static TemporalMatcher<OffsetDateTime> isDay(final int year, final Month month, final int dayOfMonth) {
         return isDay(LocalDate.of(year, month, dayOfMonth));
     }
 
@@ -191,7 +191,7 @@ public abstract class OffsetDateTimeMatchers {
      * @param month the reference month against which the examined date is checked
      * @param year the reference year against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> isDay(final int year, final Month month, final int dayOfMonth, final ZoneId zone) {
+    public static TemporalMatcher<OffsetDateTime> isDay(final int year, final Month month, final int dayOfMonth, final ZoneId zone) {
         return isDay(LocalDate.of(year, month, dayOfMonth)).atZone(zone);
     }
     
@@ -206,7 +206,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> sameInstant(final OffsetDateTime date) {
+    public static TemporalMatcher<OffsetDateTime> sameInstant(final OffsetDateTime date) {
         return new IsSame<>(OFFSETDATETIME_AS_OFFSETDATETIME, offsetDateTime(date), OFFSETDATETIME);
     }
 
@@ -228,7 +228,7 @@ public abstract class OffsetDateTimeMatchers {
      * @param nanos the nanosecond of the second
      * @param tz the timezone
      */
-    public static DateMatcher<OffsetDateTime> isInstant(final int year,
+    public static TemporalMatcher<OffsetDateTime> isInstant(final int year,
             final Month month,
             final int dayOfMonth,
             final int hour,
@@ -250,7 +250,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> sameOrBefore(final OffsetDateTime date) {
+    public static TemporalMatcher<OffsetDateTime> sameOrBefore(final OffsetDateTime date) {
         return new IsSameOrBefore<>(OFFSETDATETIME_AS_OFFSETDATETIME, offsetDateTime(date), OFFSETDATETIME);
     }
 
@@ -274,7 +274,7 @@ public abstract class OffsetDateTimeMatchers {
      * @param tz the time zone of the date to check against
      */
     @Factory
-    public static DateMatcher<OffsetDateTime> sameOrBefore(final int year,
+    public static TemporalMatcher<OffsetDateTime> sameOrBefore(final int year,
             final Month month,
             final int day,
             final int hour,
@@ -296,7 +296,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> sameOrAfter(final OffsetDateTime date) {
+    public static TemporalMatcher<OffsetDateTime> sameOrAfter(final OffsetDateTime date) {
         return new IsSameOrAfter<>(OFFSETDATETIME_AS_OFFSETDATETIME, offsetDateTime(date), OFFSETDATETIME);
     }
 
@@ -320,7 +320,7 @@ public abstract class OffsetDateTimeMatchers {
      * @param tz the time zone of the date to check against
      */
     @Factory
-    public static DateMatcher<OffsetDateTime> sameOrAfter(final int year,
+    public static TemporalMatcher<OffsetDateTime> sameOrAfter(final int year,
             final Month month,
             final int day,
             final int hour,
@@ -342,7 +342,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> sameMonthOfYear(final OffsetDateTime date) {
+    public static TemporalMatcher<OffsetDateTime> sameMonthOfYear(final OffsetDateTime date) {
         return new IsMonth<>(OFFSETDATETIME_AS_MONTH, month(date));
     }
 
@@ -357,7 +357,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> sameDayOfMonth(final OffsetDateTime date) {
+    public static TemporalMatcher<OffsetDateTime> sameDayOfMonth(final OffsetDateTime date) {
         return new IsDayOfMonth<>(OFFSETDATETIME_AS_DAYOFMONTH, dayOfMonth(date));
     }
 
@@ -372,7 +372,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param dayOfMonth the expected day of the month
      */
-    public static DateMatcher<OffsetDateTime> isDayOfMonth(final int dayOfMonth) {
+    public static TemporalMatcher<OffsetDateTime> isDayOfMonth(final int dayOfMonth) {
         return new IsDayOfMonth<>(OFFSETDATETIME_AS_DAYOFMONTH, dayOfMonth(dayOfMonth));
     }
 
@@ -387,7 +387,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> sameYear(final OffsetDateTime date) {
+    public static TemporalMatcher<OffsetDateTime> sameYear(final OffsetDateTime date) {
         return isYear(date.getYear());
     }
 
@@ -402,7 +402,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param year the reference year against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> isYear(final int year) {
+    public static TemporalMatcher<OffsetDateTime> isYear(final int year) {
         return new IsYear<>(OFFSETDATETIME_AS_YEAR, year(year));
     }
 
@@ -417,7 +417,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> within(final long period,
+    public static TemporalMatcher<OffsetDateTime> within(final long period,
             final ChronoUnit unit,
             final OffsetDateTime date) {
         return new IsWithin<>(Interval.of(period, unit),
@@ -446,7 +446,7 @@ public abstract class OffsetDateTimeMatchers {
      * @param nanos the nanoseconds of the second
      * @param tz the time zone of the reference date
      */
-    public static DateMatcher<OffsetDateTime> within(final long period,
+    public static TemporalMatcher<OffsetDateTime> within(final long period,
             final ChronoUnit unit,
             final int year,
             final Month month,
@@ -470,7 +470,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isToday());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isYesterday() {
+    public static TemporalMatcher<OffsetDateTime> isYesterday() {
         return sameDay(OffsetDateTime.now().plusDays(-1));
     }
 
@@ -483,7 +483,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isToday());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isToday() {
+    public static TemporalMatcher<OffsetDateTime> isToday() {
         return sameDay(OffsetDateTime.now());
     }
 
@@ -496,7 +496,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isTomorrow());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isTomorrow() {
+    public static TemporalMatcher<OffsetDateTime> isTomorrow() {
         return sameDay(OffsetDateTime.now().plusDays(1));
     }
 
@@ -511,7 +511,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> sameDayOfWeek(final OffsetDateTime date) {
+    public static TemporalMatcher<OffsetDateTime> sameDayOfWeek(final OffsetDateTime date) {
         return isDayOfWeek(DayOfWeek.from(date));
     }
 
@@ -524,7 +524,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isMonday());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isDayOfWeek(final DayOfWeek dayOfWeek) {
+    public static TemporalMatcher<OffsetDateTime> isDayOfWeek(final DayOfWeek dayOfWeek) {
         return new IsDayOfWeek<>(OFFSETDATETIME_AS_DAYOFWEEK, daysOfWeek(dayOfWeek));
     }
 
@@ -537,7 +537,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isMonday());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isDayOfWeek(final DayOfWeek... daysOfWeek) {
+    public static TemporalMatcher<OffsetDateTime> isDayOfWeek(final DayOfWeek... daysOfWeek) {
         return new IsDayOfWeek<>(OFFSETDATETIME_AS_DAYOFWEEK, daysOfWeek(daysOfWeek));
     }
 
@@ -550,7 +550,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isMonday());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isMonday() {
+    public static TemporalMatcher<OffsetDateTime> isMonday() {
         return isDayOfWeek(MONDAY);
     }
 
@@ -563,7 +563,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isTuesday());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isTuesday() {
+    public static TemporalMatcher<OffsetDateTime> isTuesday() {
         return isDayOfWeek(TUESDAY);
     }
 
@@ -576,7 +576,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isWednesday());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isWednesday() {
+    public static TemporalMatcher<OffsetDateTime> isWednesday() {
         return isDayOfWeek(WEDNESDAY);
     }
 
@@ -589,7 +589,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isThursday());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isThursday() {
+    public static TemporalMatcher<OffsetDateTime> isThursday() {
         return isDayOfWeek(THURSDAY);
     }
 
@@ -602,7 +602,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isFriday());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isFriday() {
+    public static TemporalMatcher<OffsetDateTime> isFriday() {
         return isDayOfWeek(FRIDAY);
     }
 
@@ -615,7 +615,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isSaturday());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isSaturday() {
+    public static TemporalMatcher<OffsetDateTime> isSaturday() {
         return isDayOfWeek(SATURDAY);
     }
 
@@ -628,7 +628,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isSunday());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isSunday() {
+    public static TemporalMatcher<OffsetDateTime> isSunday() {
         return isDayOfWeek(SUNDAY);
     }
 
@@ -641,7 +641,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isWeekday());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isWeekday() {
+    public static TemporalMatcher<OffsetDateTime> isWeekday() {
         return isDayOfWeek(MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY);
     }
 
@@ -654,7 +654,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isWeekend());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isWeekend() {
+    public static TemporalMatcher<OffsetDateTime> isWeekend() {
         return isDayOfWeek(SATURDAY, SUNDAY);
     }
 
@@ -667,7 +667,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isFirstDayOfMonth());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isFirstDayOfMonth() {
+    public static TemporalMatcher<OffsetDateTime> isFirstDayOfMonth() {
         return new IsFirstDayOfMonth<>(OFFSETDATETIME_AS_OFFSETDATETIME);
     }
 
@@ -683,7 +683,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param field the temporal field to check
      */
-    public static DateMatcher<OffsetDateTime> isMinimum(final ChronoField field) {
+    public static TemporalMatcher<OffsetDateTime> isMinimum(final ChronoField field) {
         return new IsMinimum<>(OFFSETDATETIME_AS_OFFSETDATETIME, field);
     }
 
@@ -696,7 +696,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isFirstDayOfMonth());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isLastDayOfMonth() {
+    public static TemporalMatcher<OffsetDateTime> isLastDayOfMonth() {
         return new IsLastDayOfMonth<>(OFFSETDATETIME_AS_OFFSETDATETIME);
     }
 
@@ -712,7 +712,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param field the temporal field to check
      */
-    public static DateMatcher<OffsetDateTime> isMaximum(final ChronoField field) {
+    public static TemporalMatcher<OffsetDateTime> isMaximum(final ChronoField field) {
         return new IsMaximum<>(OFFSETDATETIME_AS_OFFSETDATETIME, field);
     }
 
@@ -725,7 +725,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isMonth(Month.AUGUST));
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isMonth(final Month month) {
+    public static TemporalMatcher<OffsetDateTime> isMonth(final Month month) {
         return new IsMonth<>(OFFSETDATETIME_AS_MONTH, month(month));
     }
 
@@ -738,7 +738,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isJanuary());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isJanuary() {
+    public static TemporalMatcher<OffsetDateTime> isJanuary() {
         return isMonth(JANUARY);
     }
 
@@ -751,7 +751,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isFebruary());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isFebruary() {
+    public static TemporalMatcher<OffsetDateTime> isFebruary() {
         return isMonth(FEBRUARY);
     }
 
@@ -764,7 +764,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isMarch());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isMarch() {
+    public static TemporalMatcher<OffsetDateTime> isMarch() {
         return isMonth(MARCH);
     }
 
@@ -777,7 +777,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isApril());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isApril() {
+    public static TemporalMatcher<OffsetDateTime> isApril() {
         return isMonth(APRIL);
     }
 
@@ -790,7 +790,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isMay());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isMay() {
+    public static TemporalMatcher<OffsetDateTime> isMay() {
         return isMonth(MAY);
     }
 
@@ -803,7 +803,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isJune());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isJune() {
+    public static TemporalMatcher<OffsetDateTime> isJune() {
         return isMonth(JUNE);
     }
 
@@ -816,7 +816,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isJuly());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isJuly() {
+    public static TemporalMatcher<OffsetDateTime> isJuly() {
         return isMonth(JULY);
     }
 
@@ -829,7 +829,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isAugust());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isAugust() {
+    public static TemporalMatcher<OffsetDateTime> isAugust() {
         return isMonth(AUGUST);
     }
 
@@ -842,7 +842,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isSeptember());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isSeptember() {
+    public static TemporalMatcher<OffsetDateTime> isSeptember() {
         return isMonth(SEPTEMBER);
     }
 
@@ -855,7 +855,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isOctober());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isOctober() {
+    public static TemporalMatcher<OffsetDateTime> isOctober() {
         return isMonth(OCTOBER);
     }
 
@@ -868,7 +868,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isNovember());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isNovember() {
+    public static TemporalMatcher<OffsetDateTime> isNovember() {
         return isMonth(NOVEMBER);
     }
 
@@ -881,7 +881,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isDecember());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isDecember() {
+    public static TemporalMatcher<OffsetDateTime> isDecember() {
         return isMonth(DECEMBER);
     }
 
@@ -894,7 +894,7 @@ public abstract class OffsetDateTimeMatchers {
      * assertThat(myDate, isLeapYear());
      * </pre>
      */
-    public static DateMatcher<OffsetDateTime> isLeapYear() {
+    public static TemporalMatcher<OffsetDateTime> isLeapYear() {
         return new IsLeapYear<>(OFFSETDATETIME_AS_YEAR);
     }
 
@@ -909,7 +909,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param hour the hour of the day (0-23)
      */
-    public static DateMatcher<OffsetDateTime> isHour(final int hour) {
+    public static TemporalMatcher<OffsetDateTime> isHour(final int hour) {
         return new IsHour<>(OFFSETDATETIME_AS_HOUR, hour(hour));
     }
 
@@ -924,7 +924,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> sameHourOfDay(final OffsetDateTime date) {
+    public static TemporalMatcher<OffsetDateTime> sameHourOfDay(final OffsetDateTime date) {
         return new IsHour<>(OFFSETDATETIME_AS_HOUR, hour(date));
     }
 
@@ -939,7 +939,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param minute the minute of the day (0-59)
      */
-    public static DateMatcher<OffsetDateTime> isMinute(final int minute) {
+    public static TemporalMatcher<OffsetDateTime> isMinute(final int minute) {
         return new IsMinute<>(OFFSETDATETIME_AS_MINUTE, minute(minute));
     }
 
@@ -954,7 +954,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> sameMinuteOfHour(final OffsetDateTime date) {
+    public static TemporalMatcher<OffsetDateTime> sameMinuteOfHour(final OffsetDateTime date) {
         return new IsMinute<>(OFFSETDATETIME_AS_MINUTE, minute(date));
     }
 
@@ -969,7 +969,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param second the second of the day (0-59)
      */
-    public static DateMatcher<OffsetDateTime> isSecond(final int second) {
+    public static TemporalMatcher<OffsetDateTime> isSecond(final int second) {
         return new IsSecond<>(OFFSETDATETIME_AS_SECOND, second(second));
     }
 
@@ -984,7 +984,7 @@ public abstract class OffsetDateTimeMatchers {
      *
      * @param date the reference date against which the examined date is checked
      */
-    public static DateMatcher<OffsetDateTime> sameSecondOfMinute(final OffsetDateTime date) {
+    public static TemporalMatcher<OffsetDateTime> sameSecondOfMinute(final OffsetDateTime date) {
         return new IsSecond<>(OFFSETDATETIME_AS_SECOND, second(date));
     }
 }

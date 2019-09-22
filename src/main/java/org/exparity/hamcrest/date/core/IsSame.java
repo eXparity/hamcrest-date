@@ -10,7 +10,7 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsSame<T, E> extends DateMatcher<T> {
+public class IsSame<T, E> extends TemporalMatcher<T> {
 
 	private final TemporalProvider<E> expected;
 	private final TemporalConverter<T, E> converter;
@@ -51,7 +51,7 @@ public class IsSame<T, E> extends DateMatcher<T> {
 	}
 
 	@Override
-	public DateMatcher<T> atZone(ZoneId zone) {
+	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsSame<>(converter, expected, functions, zone, locale);
 	}
 

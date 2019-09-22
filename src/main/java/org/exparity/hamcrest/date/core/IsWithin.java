@@ -11,7 +11,7 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsWithin<T, E> extends DateMatcher<T> {
+public class IsWithin<T, E> extends TemporalMatcher<T> {
 
 	private final Interval expectedInterval;
 	private final TemporalProvider<E> reference;
@@ -66,7 +66,7 @@ public class IsWithin<T, E> extends DateMatcher<T> {
 	}
 
 	@Override
-	public DateMatcher<T> atZone(ZoneId zone) {
+	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsWithin<>(expectedInterval, converter, reference, functions, zone, locale);
 	}
 

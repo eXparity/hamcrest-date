@@ -12,7 +12,7 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsSameDay<T> extends DateMatcher<T> {
+public class IsSameDay<T> extends TemporalMatcher<T> {
 
 	private final TemporalProvider<LocalDate> expected;
 	private final TemporalConverter<T, LocalDate> converter;
@@ -50,7 +50,7 @@ public class IsSameDay<T> extends DateMatcher<T> {
 	}
 
 	@Override
-	public DateMatcher<T> atZone(ZoneId zone) {
+	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsSameDay<>(converter, expected, zone, locale);
 	}
 	

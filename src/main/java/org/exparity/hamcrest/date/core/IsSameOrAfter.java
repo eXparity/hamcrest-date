@@ -11,7 +11,7 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsSameOrAfter<T,E> extends DateMatcher<T> {
+public class IsSameOrAfter<T,E> extends TemporalMatcher<T> {
 
 	private final TemporalProvider<E> expected;
 	private final TemporalConverter<T, E> converter;
@@ -52,7 +52,7 @@ public class IsSameOrAfter<T,E> extends DateMatcher<T> {
 	}
 
 	@Override
-	public DateMatcher<T> atZone(ZoneId zone) {
+	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsSameOrAfter<>(converter, expected, functions, zone, locale);
 	}
 }

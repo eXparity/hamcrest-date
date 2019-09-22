@@ -13,7 +13,7 @@ import org.hamcrest.Description;
  * @param <T> the test type
  * @param <T> the expected type
  */
-public class IsBefore<T, E> extends DateMatcher<T> {
+public class IsBefore<T, E> extends TemporalMatcher<T> {
 
 	private final TemporalProvider<E> expected;
 	private final TemporalConverter<T, E> converter;
@@ -54,7 +54,7 @@ public class IsBefore<T, E> extends DateMatcher<T> {
 	}
 
 	@Override
-	public DateMatcher<T> atZone(ZoneId zone) {
+	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsBefore<>(converter, expected, functions, zone, locale);
 	}
 }

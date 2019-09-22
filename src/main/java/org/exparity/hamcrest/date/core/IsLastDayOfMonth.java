@@ -13,7 +13,7 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsLastDayOfMonth<T> extends DateMatcher<T> {
+public class IsLastDayOfMonth<T> extends TemporalMatcher<T> {
 
 	private final TemporalConverter<T, ? extends TemporalAccessor> converter;
 	private final Locale locale;
@@ -48,7 +48,7 @@ public class IsLastDayOfMonth<T> extends DateMatcher<T> {
 	}
 
 	@Override
-	public DateMatcher<T> atZone(ZoneId zone) {
+	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsLastDayOfMonth<>(converter, zone, locale);
 	}
 }

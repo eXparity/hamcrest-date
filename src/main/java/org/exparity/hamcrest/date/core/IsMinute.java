@@ -11,7 +11,7 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsMinute<T> extends DateMatcher<T> {
+public class IsMinute<T> extends TemporalMatcher<T> {
 
 	private final TemporalConverter<T, Minute> converter;
 	private final TemporalProvider<Minute> expected;
@@ -49,7 +49,7 @@ public class IsMinute<T> extends DateMatcher<T> {
 	}
 
 	@Override
-	public DateMatcher<T> atZone(ZoneId zone) {
+	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsMinute<>(converter, expected, zone, locale);
 	}
 }

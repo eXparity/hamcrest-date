@@ -26,7 +26,7 @@ import org.exparity.hamcrest.date.core.types.Second;
  * Static repository of {@link TemporalProvider} instances which provide a temporal type from another temporal type e.g.
  * given a {@link LocalDate} returns the hour, or given a {@link java.sql.Date} returns a {@link LocalDate}.
  * No-operation providers e.g. LocalDate -> LocalDate are present to keep a consistent usage pattern in the
- * {@link DateMatcher} implementations
+ * {@link TemporalMatcher} implementations
  */
 public class TemporalProviders {
     

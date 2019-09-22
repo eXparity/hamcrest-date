@@ -16,7 +16,7 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsMaximum<T> extends DateMatcher<T> {
+public class IsMaximum<T> extends TemporalMatcher<T> {
 
 	private static final String SPLIT_ON_UPPERCASE_REGEX = "(?=[A-Z])";
 
@@ -61,7 +61,7 @@ public class IsMaximum<T> extends DateMatcher<T> {
 	}
 
 	@Override
-	public DateMatcher<T> atZone(ZoneId zone) {
+	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsMaximum<>(converter, field, zone, locale);
 	}
 }

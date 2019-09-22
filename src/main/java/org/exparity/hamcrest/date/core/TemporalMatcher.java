@@ -12,7 +12,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  *
  * @author Thomas Naskali
  */
-public abstract class DateMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
+public abstract class TemporalMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
 
     /**
      * Creates a copy of this matcher using a specific time zone.
@@ -20,7 +20,7 @@ public abstract class DateMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
      * @param zone the new time zone
      * @return a copy of this matcher based on the new time zone
      */
-    public abstract DateMatcher<T> atZone(ZoneId zone);
+    public abstract TemporalMatcher<T> atZone(ZoneId zone);
 
     /**
      * Creates a copy of this matcher using a specific time offset.
@@ -28,7 +28,7 @@ public abstract class DateMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
      * @param offset the new time offset
      * @return a copy of this matcher based on the new time offset
      */
-    public DateMatcher<T> atOffset(ZoneOffset offset) {
+    public TemporalMatcher<T> atOffset(ZoneOffset offset) {
         return atZone(ZoneId.of(offset.getId()));
     }
 

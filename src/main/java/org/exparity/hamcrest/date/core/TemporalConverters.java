@@ -22,7 +22,7 @@ import org.exparity.hamcrest.date.core.types.Second;
  * Static repository of {@link TemporalConverter} instances which convert a temporal type from another temporal type
  * e.g. given a {@link LocalDate} returns the hour, or given a {@link java.sql.Date} returns a {@link LocalDate}.
  * No-operation conversions e.g. LocalDate to LocalDate are present to keep a consistent usage pattern in the
- * {@link DateMatcher} implementations.
+ * {@link TemporalMatcher} implementations.
  * </p>
  * The temporal converters generally "down-cast" a temporal type to another and are used to support testing the actual
  * type against the reference type where the reference type is an equal or less accurate temporal unit e.g. comparing if

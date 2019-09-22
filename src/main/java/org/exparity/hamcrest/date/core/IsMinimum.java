@@ -16,7 +16,7 @@ import org.hamcrest.Description;
  *
  * @author Stewart Bissett
  */
-public class IsMinimum<T> extends DateMatcher<T> {
+public class IsMinimum<T> extends TemporalMatcher<T> {
 
 	private static final String SPLIT_ON_UPPERCASE_REGEX = "(?=[A-Z])";
 	
@@ -58,7 +58,7 @@ public class IsMinimum<T> extends DateMatcher<T> {
 	}
 
 	@Override
-	public DateMatcher<T> atZone(ZoneId zone) {
+	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsMinimum<>(converter, field, zone, locale);
 	}
 }
