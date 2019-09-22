@@ -51,4 +51,9 @@ public class IsLastDayOfMonth<T> extends TemporalMatcher<T> {
 	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsLastDayOfMonth<>(converter, zone, locale);
 	}
+	
+    @Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsLastDayOfMonth<>(converter, zone, locale);
+    }
 }

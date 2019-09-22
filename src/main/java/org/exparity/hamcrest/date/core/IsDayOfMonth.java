@@ -53,4 +53,9 @@ public class IsDayOfMonth<T> extends TemporalMatcher<T> {
 		return new IsDayOfMonth<>(converter, expected, zone, locale);
 	}
 
+    @Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsDayOfMonth<>(converter, expected, zone, locale);
+    }
+
 }

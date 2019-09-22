@@ -64,4 +64,9 @@ public class IsMaximum<T> extends TemporalMatcher<T> {
 	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsMaximum<>(converter, field, zone, locale);
 	}
+	
+    @Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsMaximum<>(converter, field, zone, locale);
+    }
 }

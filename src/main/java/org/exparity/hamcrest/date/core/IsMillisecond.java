@@ -53,4 +53,8 @@ public class IsMillisecond<T> extends TemporalMatcher<T> {
 		return new IsMillisecond<>(converter, expected, zone, locale);
 	}
 
+    @Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsMillisecond<>(converter, expected, zone, locale);
+    }
 }

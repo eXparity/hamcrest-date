@@ -6,6 +6,8 @@ import static java.time.DayOfWeek.SUNDAY;
 import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.util.Locale;
+
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
@@ -467,6 +469,11 @@ public class IsDayOfWeekTest {
         assertThat(AUG_04_2015, LocalDateMatchers.isMonday());
     }
 
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = "\\sExpected: the date is on a lundi+?\\s     but: the date is on a mardi+")
+    public void isLocalDateNotMondayInDifferentLocale() {
+        assertThat(AUG_04_2015, LocalDateMatchers.isMonday().atLocale(Locale.FRENCH));
+    }
+
     @Test
     public void isLocalDateTuesday() {
         assertThat(AUG_04_2015, LocalDateMatchers.isTuesday());
@@ -477,6 +484,11 @@ public class IsDayOfWeekTest {
         assertThat(AUG_05_2015, LocalDateMatchers.isTuesday());
     }
 
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = "\\sExpected: the date is on a mardi+?\\s     but: the date is on a mercredi+")
+    public void isLocalDateNotTuesdayInDifferentLocale() {
+        assertThat(AUG_05_2015, LocalDateMatchers.isTuesday().atLocale(Locale.FRENCH));
+    }
+    
     @Test
     public void isLocalDateWednesday() {
         assertThat(AUG_05_2015, LocalDateMatchers.isWednesday());
@@ -485,6 +497,11 @@ public class IsDayOfWeekTest {
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
     public void isLocalDateNotWednesday() {
         assertThat(AUG_06_2015, LocalDateMatchers.isWednesday());
+    }
+
+    @Test//(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isLocalDateNotWednesdayInDifferentLocale() {
+        assertThat(AUG_05_2015, LocalDateMatchers.isWednesday().atLocale(Locale.FRENCH));
     }
 
     @Test
@@ -497,6 +514,11 @@ public class IsDayOfWeekTest {
         assertThat(AUG_07_2015, LocalDateMatchers.isThursday());
     }
 
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = "\\sExpected: the date is on a jeudi+?\\s     but: the date is on a mercredi+")
+    public void isLocalDateNotThursdayInDifferentLocale() {
+        assertThat(AUG_05_2015, LocalDateMatchers.isThursday().atLocale(Locale.FRENCH));
+    }
+    
     @Test
     public void isLocalDateFriday() {
         assertThat(AUG_07_2015, LocalDateMatchers.isFriday());
@@ -507,6 +529,11 @@ public class IsDayOfWeekTest {
         assertThat(AUG_08_2015, LocalDateMatchers.isFriday());
     }
 
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = "\\sExpected: the date is on a vendredi+?\\s     but: the date is on a mercredi+")
+    public void isLocalDateNotFridayInDifferentLocale() {
+        assertThat(AUG_05_2015, LocalDateMatchers.isFriday().atLocale(Locale.FRENCH));
+    }
+    
     @Test
     public void isLocalDateSaturday() {
         assertThat(AUG_08_2015, LocalDateMatchers.isSaturday());
@@ -517,6 +544,11 @@ public class IsDayOfWeekTest {
         assertThat(AUG_09_2015, LocalDateMatchers.isSaturday());
     }
 
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = "\\sExpected: the date is on a samedi+?\\s     but: the date is on a mercredi+")
+    public void isLocalDateNotSaturdayInDifferentLocale() {
+        assertThat(AUG_05_2015, LocalDateMatchers.isSaturday().atLocale(Locale.FRENCH));
+    }
+    
     @Test
     public void isLocalDateSunday() {
         assertThat(AUG_09_2015, LocalDateMatchers.isSunday());
@@ -527,6 +559,11 @@ public class IsDayOfWeekTest {
         assertThat(AUG_03_2015, LocalDateMatchers.isSunday());
     }
 
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = "\\sExpected: the date is on a dimanche+?\\s     but: the date is on a mercredi+")
+    public void isLocalDateNotSundayInDifferentLocale() {
+        assertThat(AUG_05_2015, LocalDateMatchers.isSunday().atLocale(Locale.FRENCH));
+    }
+    
     @Test
     public void isLocalDateWeekday() {
         assertThat(AUG_03_2015, LocalDateMatchers.isWeekday());

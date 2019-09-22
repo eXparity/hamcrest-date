@@ -61,4 +61,9 @@ public class IsMinimum<T> extends TemporalMatcher<T> {
 	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsMinimum<>(converter, field, zone, locale);
 	}
+
+	@Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsMinimum<>(converter, field, zone, locale);
+    }
 }

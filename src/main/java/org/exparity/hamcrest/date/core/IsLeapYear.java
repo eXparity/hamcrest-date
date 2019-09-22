@@ -48,4 +48,8 @@ public class IsLeapYear<T> extends TemporalMatcher<T> {
 		return new IsLeapYear<>(converter, zone, locale);
 	}
 
+    @Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsLeapYear<>(converter, zone, locale);
+    }
 }

@@ -52,4 +52,9 @@ public class IsSecond<T> extends TemporalMatcher<T> {
 	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsSecond<>(converter, expected, zone, locale);
 	}
+
+	@Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsSecond<>(converter, expected, zone, locale);
+    }
 }

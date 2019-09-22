@@ -2,6 +2,7 @@ package org.exparity.hamcrest.date.core;
 
 import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.util.Locale;
 
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
@@ -17,11 +18,19 @@ public abstract class TemporalMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
     /**
      * Creates a copy of this matcher using a specific time zone.
      *
-     * @param zone the new time zone
+     * @param zone a {@link ZoneId}
      * @return a copy of this matcher based on the new time zone
      */
     public abstract TemporalMatcher<T> atZone(ZoneId zone);
 
+    /**
+     * Creates a copy of this matcher using a specific locale.
+     *
+     * @param locale a {@link Locale}
+     * @return a copy of this matcher using the new locale
+     */
+    public abstract TemporalMatcher<T> atLocale(Locale locale);
+    
     /**
      * Creates a copy of this matcher using a specific time offset.
      *
