@@ -9,7 +9,7 @@ import org.exparity.hamcrest.date.core.TemporalFunction;
 import org.exparity.hamcrest.date.core.types.Interval;
 
 /**
- * Implementation of {@link TemporalWrapper} to wrap {@link Date} objects.
+ * Implementation of {@link TemporalFunction} to wrap {@link Date} objects.
  *
  * @author Stewart Bissett
  */

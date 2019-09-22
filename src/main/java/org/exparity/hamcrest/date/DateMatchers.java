@@ -741,7 +741,7 @@ public abstract class DateMatchers {
      * assertThat(myDate, sameInstant(Instant.now()))
      * </pre>
      *
-     * @param timestamp the time as milliseconds since the Unix epoch time
+     * @param instant the {@link Instant}
      */
     public static TemporalMatcher<Date> sameInstant(final Instant instant) {
         return new IsSame<>(JAVADATE_AS_INSTANT, instant(instant), INSTANT);

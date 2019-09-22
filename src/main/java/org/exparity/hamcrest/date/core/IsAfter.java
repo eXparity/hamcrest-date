@@ -11,7 +11,7 @@ import org.hamcrest.Description;
  * @author Stewart Bissett
  * 
  * @param <T> the test type
- * @param <T> the expected type
+ * @param <E> the expected type
  */
 public class IsAfter<T, E> extends TemporalMatcher<T> {
 
