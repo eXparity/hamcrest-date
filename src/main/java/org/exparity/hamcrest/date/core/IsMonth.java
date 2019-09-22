@@ -54,6 +54,11 @@ public class IsMonth<T> extends TemporalMatcher<T> {
 		return new IsMonth<>(converter, expected, zone, locale);
 	}
 
+    @Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsMonth<>(converter, expected, zone, locale);
+    }
+
 	private String describe(Month actualValue) {
 		return actualValue.getDisplayName(TextStyle.FULL, locale);
 	}

@@ -53,4 +53,9 @@ public class IsYear<T> extends TemporalMatcher<T> {
 	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsYear<>(converter, expected, zone, locale);
 	}
+
+    @Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsYear<>(converter, expected, zone, locale);
+    }
 }

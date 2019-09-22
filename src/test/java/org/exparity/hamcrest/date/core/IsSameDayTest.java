@@ -5,6 +5,8 @@ import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.exparity.hamcrest.date.testutils.ZoneIds.UTC;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.util.Locale;
+
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.DayMonthYear;
 import org.exparity.hamcrest.date.LocalDateMatchers;
@@ -71,7 +73,7 @@ public class IsSameDayTest {
 	public void isDateSameDayLaterLocalDate() {
 		assertThat(JUN_15_2012_11AM_UTC_AS_DATE, DateMatchers.sameDay(JUN_16_2012).atZone(UTC));
 	}
-
+	
 	@Test
 	public void isDateSameDaySameLocalDate() {
 		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.sameDay(JUN_15_2012).atZone(UTC));
@@ -284,5 +286,4 @@ public class IsSameDayTest {
     public void isOffsetDateTimeSameDayLaterSameDay() {
         assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isDay(2015, AUGUST, 4, UTC).atZone(UTC));
     }
-	
 }

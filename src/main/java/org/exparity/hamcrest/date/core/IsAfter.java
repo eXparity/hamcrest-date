@@ -57,4 +57,10 @@ public class IsAfter<T, E> extends TemporalMatcher<T> {
 	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsAfter<>(converter, expected, functions, zone, locale);
 	}
+
+    @Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsAfter<>(converter, expected, functions, zone, locale);
+    }
+	
 }

@@ -70,4 +70,8 @@ public class IsWithin<T, E> extends TemporalMatcher<T> {
 		return new IsWithin<>(expectedInterval, converter, reference, functions, zone, locale);
 	}
 
+    @Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsWithin<>(expectedInterval, converter, reference, functions, zone, locale);
+    }
 }

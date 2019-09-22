@@ -51,4 +51,9 @@ public class IsFirstDayOfMonth<T> extends TemporalMatcher<T> {
 	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsFirstDayOfMonth<>(converter, zone, locale);
 	}
+	
+    @Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsFirstDayOfMonth<>(converter, zone, locale);
+    }
 }

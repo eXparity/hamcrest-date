@@ -55,4 +55,9 @@ public class IsSameOrBefore<T,E> extends TemporalMatcher<T> {
 	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsSameOrBefore<>(converter, expected, functions, zone, locale);
 	}
+	
+    @Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsSameOrBefore<>(converter, expected, functions, zone, locale);
+    }
 }

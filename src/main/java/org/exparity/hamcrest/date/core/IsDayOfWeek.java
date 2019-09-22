@@ -66,6 +66,11 @@ public class IsDayOfWeek<T> extends TemporalMatcher<T> {
 	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsDayOfWeek<>(converter, expected, zone, locale);
 	}
+	
+    @Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsDayOfWeek<>(converter, expected, zone, locale);
+    }
 
 	private String describe(DayOfWeek actualValue) {
 		return actualValue.getDisplayName(TextStyle.FULL, locale);

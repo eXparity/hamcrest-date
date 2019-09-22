@@ -57,4 +57,9 @@ public class IsBefore<T, E> extends TemporalMatcher<T> {
 	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsBefore<>(converter, expected, functions, zone, locale);
 	}
+	
+    @Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsBefore<>(converter, expected, functions, zone, locale);
+    }
 }

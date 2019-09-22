@@ -52,4 +52,9 @@ public class IsHour<T> extends TemporalMatcher<T> {
 	public TemporalMatcher<T> atZone(ZoneId zone) {
 		return new IsHour<>(converter, expected, zone, locale);
 	}
+	
+    @Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsHour<>(converter, expected, zone, locale);
+    }
 }

@@ -54,6 +54,11 @@ public class IsSameDay<T> extends TemporalMatcher<T> {
 		return new IsSameDay<>(converter, expected, zone, locale);
 	}
 	
+    @Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsSameDay<>(converter, expected, zone, locale);
+    }
+    
 	private String describe(LocalDate actualValue) {
 		return TemporalFunctions.LOCALDATE.describe(actualValue, locale);
 	}

@@ -55,4 +55,8 @@ public class IsSame<T, E> extends TemporalMatcher<T> {
 		return new IsSame<>(converter, expected, functions, zone, locale);
 	}
 
+    @Override
+    public TemporalMatcher<T> atLocale(Locale locale) {
+        return new IsSame<>(converter, expected, functions, zone, locale);
+    }
 }
