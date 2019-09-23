@@ -3,7 +3,7 @@
 
 	<groupId>org.exparity</groupId>
 	<artifactId>hamcrest-date</artifactId>
-	<version>2.0.6-SNAPSHOT</version>
+	<version>2.0.6</version>
 
 	<name>Hamcrest Date</name>
 	<url>https://github.com/exparity/hamcrest-date</url>
