@@ -18,7 +18,7 @@ A maven project
     <dependency>
         <groupId>org.exparity</groupId>
         <artifactId>hamcrest-date</artifactId>
-        <version>2.0.5</version>
+        <version>2.0.6</version>
     </dependency>
 
 Versions 2.x.x onwards require Java 8. If you are using an earlier version of Java 8 then include version
@@ -36,7 +36,7 @@ Hamcrest Date has a single binary, hamcrest-date.jar, which contains all the dat
 Usage
 -------------
 
-The matchers are exposed as static methods on the LocalDateMatchers, LocalTimeMatchers, LocalDateTimeMatchers, ZonedDateTimeMatchers, SqlDateMatchers and DateMatchers class. For example
+The matchers are exposed as static methods on the LocalDateMatchers, LocalTimeMatchers, LocalDateTimeMatchers, ZonedDateTimeMatchers, OffsetDateTimeMatchers, SqlDateMatchers and DateMatchers class. For example
 
     LocalDate today = LocalDate.now(); myBirthday = LocalDate.of(2015, AUGUST, 9);
     MatcherAssert.assertThat(today, LocalDateMatchers.sameDay(myBirthday));
@@ -60,6 +60,11 @@ or to match ZonedDateTime values:
 
     ZonedDateTime myAppointment = ZonedDateTime.of(LocalDateTime.of(2015, AUGUST, 9, 10, 30, 0), ZoneId.of("UTC"));
     assertThat(ZonedDateTime.now(), within(15, MINUTES, myAppointment));
+
+or to match OffsetDateTime values:
+
+    OffsetDateTime myAppointment = OffsetDateTime.of(LocalDateTime.of(2015, AUGUST, 9, 10, 30, 0), ZoneOffset.UTC);
+    assertThat(OffsetDateTime.now(), within(15, MINUTES, myAppointment));
 
 or to match LocalTime values:
 
@@ -134,6 +139,8 @@ The source includes a pom.xml for building with Maven
 Release Notes
 -------------
 Changes 2.0.5 -> 2.0.6
+  * Fix Issue 21 - Add support for changing Locale
+  * Fix Issue 24 - Add OffsetDateTimeMatchers
   * Fix Issue 27 - (UnsupportedOperationException with java.sql.Date)
   * Handle java.sql.Date in DateMatchers
   * Add SqlDateMatchers
