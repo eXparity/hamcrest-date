@@ -28,21 +28,23 @@ public class IsSameInstantTest {
 
 	// Date Matchers
 
-	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    @Test(expectedExceptions = AssertionError.class, 
+            expectedExceptionsMessageRegExp = "\\sExpected: the same date as 2012-06-15T11:00:00Z?\\s     but: the date is 2012-06-15T23:00:00Z")
 	public void isDateSameInstantEarlierDate() {
 		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.sameInstant(JUN_15_2012_11AM_UTC_AS_DATE).atZone(UTC));
 	}
 
-	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    @Test(expectedExceptions = AssertionError.class, 
+            expectedExceptionsMessageRegExp = "\\sExpected: the same date as 2012-06-15T23:00:00Z?\\s     but: the date is 2012-06-15T11:00:00Z")
 	public void isDateSameInstantLaterDate() {
 		assertThat(JUN_15_2012_11AM_UTC_AS_DATE, DateMatchers.sameInstant(JUN_15_2012_11PM_UTC_AS_DATE).atZone(UTC));
 	}
 
-	@Test
-	public void isDateSameInstantSameDate() {
-		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.sameInstant(JUN_15_2012_11PM_UTC_AS_DATE).atZone(UTC));
-	}
-
+    @Test
+    public void isDateSameInstantSameDate() {
+        assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.sameInstant(JUN_15_2012_11PM_UTC_AS_DATE).atZone(UTC));
+    }
+    
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
 	public void isDateSameInstantSameDateDifferentTimeZone() {
 		assertThat(JAN_01_2012_11AM_PST_AS_DATE, DateMatchers.sameInstant(JAN_01_2012_11AM_GMT_AS_DATE).atZone(UTC));
@@ -164,12 +166,14 @@ public class IsSameInstantTest {
 
 	// ZonedDateTime Matchers
 
-	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    @Test(expectedExceptions = AssertionError.class, 
+            expectedExceptionsMessageRegExp = "\\sExpected: the same date as Tue, 04 Aug 2015 11:59:00.000 (am|AM) \\+0000?\\s     but: the date is Tue, 04 Aug 2015 12:00:00.000 (pm|PM) \\+0000")
 	public void isZonedDateTimeSameInstantEarlierZonedDateTime() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameInstant(AUG_04_2015_11AM_UTC));
 	}
 
-	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    @Test(expectedExceptions = AssertionError.class, 
+            expectedExceptionsMessageRegExp = "\\sExpected: the same date as Tue, 04 Aug 2015 12:01:00.000 (pm|PM) \\+0000?\\s     but: the date is Tue, 04 Aug 2015 12:00:00.000 (pm|PM) \\+0000")
 	public void isZonedDateTimeSameInstantLaterZonedDateTime() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameInstant(AUG_04_2015_01PM_UTC));
 	}
@@ -178,13 +182,15 @@ public class IsSameInstantTest {
 	public void isZonedDateTimeSameInstantSameZonedDateTime() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameInstant(AUG_04_2015_NOON_UTC));
 	}
-
-	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+	
+    @Test(expectedExceptions = AssertionError.class, 
+            expectedExceptionsMessageRegExp = "\\sExpected: the same date as Tue, 04 Aug 2015 12:00:00.000 (pm|PM) \\+0100?\\s     but: the date is Tue, 04 Aug 2015 12:00:00.000 (pm|PM) \\+0000")
 	public void isZonedDateTimeSameInstantZonedDateTimeEarlierZone() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameInstant(AUG_04_2015_NOON_CET));
 	}
 
-	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    @Test(expectedExceptions = AssertionError.class, 
+            expectedExceptionsMessageRegExp = "\\sExpected: the same date as Tue, 04 Aug 2015 12:00:00.000 (pm|PM) -0500?\\s     but: the date is Tue, 04 Aug 2015 12:00:00.000 (pm|PM) \\+0000")
 	public void isZonedDateTimeSameInstantZonedDateTimeLaterZone() {
 		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.sameInstant(AUG_04_2015_NOON_EST));
 	}

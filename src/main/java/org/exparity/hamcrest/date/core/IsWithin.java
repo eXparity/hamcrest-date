@@ -2,6 +2,7 @@ package org.exparity.hamcrest.date.core;
 
 import java.time.ZoneId;
 import java.util.Locale;
+import java.util.Optional;
 
 import org.exparity.hamcrest.date.core.types.Interval;
 import org.hamcrest.Description;
@@ -18,13 +19,13 @@ public class IsWithin<T, E> extends TemporalMatcher<T> {
 	private final TemporalConverter<T, E> converter;
 	private final TemporalFunction<E> functions;
 	private final Locale locale;
-	private final ZoneId zone;
+	private final Optional<ZoneId> zone;
 
 	public IsWithin(Interval interval,
 	        TemporalConverter<T, E> converter,
 	        TemporalProvider<E> reference,
 	        TemporalFunction<E> functions,
-	        ZoneId zone,
+	        Optional<ZoneId> zone,
 	        Locale locale) {
 		this.expectedInterval = interval;
 		this.converter = converter;
@@ -42,7 +43,7 @@ public class IsWithin<T, E> extends TemporalMatcher<T> {
 		        converter,
 		        reference,
 		        functions,
-		        ZoneId.systemDefault(),
+		        Optional.empty(),
 		        Locale.getDefault(Locale.Category.FORMAT));
 	}
 
@@ -67,7 +68,7 @@ public class IsWithin<T, E> extends TemporalMatcher<T> {
 
 	@Override
 	public TemporalMatcher<T> atZone(ZoneId zone) {
-		return new IsWithin<>(expectedInterval, converter, reference, functions, zone, locale);
+		return new IsWithin<>(expectedInterval, converter, reference, functions, Optional.of(zone), locale);
 	}
 
     @Override

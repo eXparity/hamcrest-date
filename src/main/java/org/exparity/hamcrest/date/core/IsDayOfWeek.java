@@ -7,6 +7,7 @@ import java.time.ZoneId;
 import java.time.format.TextStyle;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 import org.hamcrest.Description;
 
@@ -20,11 +21,11 @@ public class IsDayOfWeek<T> extends TemporalMatcher<T> {
 	private final TemporalConverter<T, DayOfWeek> converter;
 	private final TemporalProvider<List<DayOfWeek>> expected;
 	private final Locale locale;
-	private final ZoneId zone;
+	private final Optional<ZoneId> zone;
 
 	public IsDayOfWeek(TemporalConverter<T, DayOfWeek> converter,
 	        TemporalProvider<List<DayOfWeek>> expected,
-	        ZoneId zone,
+	        Optional<ZoneId> zone,
 	        Locale locale) {
 		this.expected = expected;
 		this.converter = converter;
@@ -33,7 +34,7 @@ public class IsDayOfWeek<T> extends TemporalMatcher<T> {
 	}
 
 	public IsDayOfWeek(TemporalConverter<T, DayOfWeek> converter, TemporalProvider<List<DayOfWeek>> expected) {
-		this(converter, expected, ZoneId.systemDefault(), Locale.getDefault(Locale.Category.FORMAT));
+		this(converter, expected, Optional.empty(), Locale.getDefault(Locale.Category.FORMAT));
 	}
 
 	@Override
@@ -64,7 +65,7 @@ public class IsDayOfWeek<T> extends TemporalMatcher<T> {
 
 	@Override
 	public TemporalMatcher<T> atZone(ZoneId zone) {
-		return new IsDayOfWeek<>(converter, expected, zone, locale);
+		return new IsDayOfWeek<>(converter, expected, Optional.of(zone), locale);
 	}
 	
     @Override

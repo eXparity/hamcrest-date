@@ -2,6 +2,7 @@ package org.exparity.hamcrest.date.core;
 
 import java.time.ZoneId;
 import java.util.Locale;
+import java.util.Optional;
 
 import org.hamcrest.Description;
 
@@ -17,12 +18,12 @@ public class IsSameOrAfter<T,E> extends TemporalMatcher<T> {
 	private final TemporalConverter<T, E> converter;
 	private final TemporalFunction<E> functions;
 	private final Locale locale;
-	private final ZoneId zone;
+	private final Optional<ZoneId> zone;
 
 	public IsSameOrAfter(TemporalConverter<T, E> converter,
 	        TemporalProvider<E> expected,
 	        TemporalFunction<E> functions,
-	        ZoneId zone,
+	        Optional<ZoneId> zone,
 	        Locale locale) {
 		this.expected = expected;
 		this.converter = converter;
@@ -32,7 +33,7 @@ public class IsSameOrAfter<T,E> extends TemporalMatcher<T> {
 	}
 
 	public IsSameOrAfter(TemporalConverter<T, E> converter, TemporalProvider<E> expected, TemporalFunction<E> functions) {
-		this(converter, expected, functions, ZoneId.systemDefault(), Locale.getDefault(Locale.Category.FORMAT));
+		this(converter, expected, functions, Optional.empty(), Locale.getDefault(Locale.Category.FORMAT));
 	}
 	
 	@Override
@@ -53,7 +54,7 @@ public class IsSameOrAfter<T,E> extends TemporalMatcher<T> {
 
 	@Override
 	public TemporalMatcher<T> atZone(ZoneId zone) {
-		return new IsSameOrAfter<>(converter, expected, functions, zone, locale);
+		return new IsSameOrAfter<>(converter, expected, functions, Optional.of(zone), locale);
 	}
 
 	@Override

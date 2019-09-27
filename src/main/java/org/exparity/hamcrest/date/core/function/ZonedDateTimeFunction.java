@@ -30,7 +30,7 @@ public class ZonedDateTimeFunction implements TemporalFunction<ZonedDateTime> {
 
 	@Override
 	public boolean isSame(final ZonedDateTime expected, final ZonedDateTime actual) {
-		return expected.equals(actual);
+		return expected.isEqual(actual);
 	}
 
 	@Override

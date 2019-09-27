@@ -86,7 +86,7 @@ public class IsHourTest {
 
 	@Test
 	public void isZonedDateTimeHourOtherZone() {
-		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isHour(8).atZone(ZoneIds.EST));
+		assertThat(AUG_04_2015_NOON_UTC, ZonedDateTimeMatchers.isHour(7).atZone(ZoneIds.EST));
 	}
 
 	@Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
@@ -108,7 +108,7 @@ public class IsHourTest {
 
     @Test
     public void isOffsetDateTimeHourOtherZone() {
-        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isHour(8).atZone(ZoneIds.EST));
+        assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isHour(7).atZone(ZoneIds.EST));
     }
 
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)

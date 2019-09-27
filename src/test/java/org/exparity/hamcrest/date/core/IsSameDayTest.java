@@ -5,7 +5,12 @@ import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.exparity.hamcrest.date.testutils.ZoneIds.UTC;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import java.util.Locale;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Month;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
 
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.DayMonthYear;
@@ -108,6 +113,16 @@ public class IsSameDayTest {
 	public void isDateSameDaySameDayMonthYear() {
 		assertThat(JUN_15_2012_11PM_UTC_AS_DATE, DateMatchers.sameDay(new DayMonthYear(15, Months.JUNE, 2012)).atZone(UTC));
 	}
+	
+    @Test
+    public void isDay_WhenStartOfDayInGmtPlus1_ThenOffsetShouldBeIgnored() {
+        LocalDate firstDayOf2018 = LocalDate.of(2018, Month.JANUARY, 1); // January 1st 2018
+        ZonedDateTime startOfFirstDayOf2018InGmtPlus1 = ZonedDateTime.of(firstDayOf2018, LocalTime.MIDNIGHT, ZoneId.of("GMT+1")); // 
+        Date dateToCompare = Date.from(startOfFirstDayOf2018InGmtPlus1.toInstant()); // Local TZ (If GMT then 31st December 
+        assertThat(dateToCompare,
+                DateMatchers
+                        .isDay(firstDayOf2018.getYear(), firstDayOf2018.getMonth(), firstDayOf2018.getDayOfMonth()).atZone(ZoneId.of("GMT+1")));
+    }
 
 	// java.sql.Date Matchers
 

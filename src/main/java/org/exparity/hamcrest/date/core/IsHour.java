@@ -2,6 +2,7 @@ package org.exparity.hamcrest.date.core;
 
 import java.time.ZoneId;
 import java.util.Locale;
+import java.util.Optional;
 
 import org.exparity.hamcrest.date.core.types.Hour;
 import org.hamcrest.Description;
@@ -16,11 +17,11 @@ public class IsHour<T> extends TemporalMatcher<T> {
 	private final TemporalConverter<T, Hour> converter;
 	private final TemporalProvider<Hour> expected;
 	private final Locale locale;
-	private final ZoneId zone;
+	private final Optional<ZoneId> zone;
 
 	public IsHour(TemporalConverter<T, Hour> converter,
 	        TemporalProvider<Hour> expected,
-	        ZoneId zone,
+	        Optional<ZoneId> zone,
 	        Locale locale) {
 		this.expected = expected;
 		this.converter = converter;
@@ -29,7 +30,7 @@ public class IsHour<T> extends TemporalMatcher<T> {
 	}
 
 	public IsHour(TemporalConverter<T, Hour> converter, TemporalProvider<Hour> expected) {
-		this(converter, expected, ZoneId.systemDefault(), Locale.getDefault(Locale.Category.FORMAT));
+		this(converter, expected, Optional.empty(), Locale.getDefault(Locale.Category.FORMAT));
 	}
 
 	@Override
@@ -50,7 +51,7 @@ public class IsHour<T> extends TemporalMatcher<T> {
 
 	@Override
 	public TemporalMatcher<T> atZone(ZoneId zone) {
-		return new IsHour<>(converter, expected, zone, locale);
+		return new IsHour<>(converter, expected, Optional.of(zone), locale);
 	}
 	
     @Override

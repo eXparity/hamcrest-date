@@ -2,6 +2,7 @@ package org.exparity.hamcrest.date.core;
 
 import java.time.ZoneId;
 import java.util.Locale;
+import java.util.Optional;
 
 import org.exparity.hamcrest.date.core.types.Second;
 import org.hamcrest.Description;
@@ -16,11 +17,11 @@ public class IsSecond<T> extends TemporalMatcher<T> {
 	private final TemporalConverter<T, Second> converter;
 	private final TemporalProvider<Second> expected;
 	private final Locale locale;
-	private final ZoneId zone;
+	private final Optional<ZoneId> zone;
 
 	public IsSecond(TemporalConverter<T, Second> converter,
 	        TemporalProvider<Second> expected,
-	        ZoneId zone,
+	        Optional<ZoneId> zone,
 	        Locale locale) {
 		this.expected = expected;
 		this.converter = converter;
@@ -29,7 +30,7 @@ public class IsSecond<T> extends TemporalMatcher<T> {
 	}
 
 	public IsSecond(TemporalConverter<T, Second> converter, TemporalProvider<Second> expected) {
-		this(converter, expected, ZoneId.systemDefault(), Locale.getDefault(Locale.Category.FORMAT));
+		this(converter, expected, Optional.empty(), Locale.getDefault(Locale.Category.FORMAT));
 	}
 
 	@Override
@@ -50,7 +51,7 @@ public class IsSecond<T> extends TemporalMatcher<T> {
 
 	@Override
 	public TemporalMatcher<T> atZone(ZoneId zone) {
-		return new IsSecond<>(converter, expected, zone, locale);
+		return new IsSecond<>(converter, expected, Optional.of(zone), locale);
 	}
 
 	@Override
