@@ -76,7 +76,7 @@ public class TemporalProviders {
 	 * Factory to create a {@link TemporalProvider} for an {@link Instant}
 	 */
 	public static TemporalProvider<Instant> instant(Instant instant) {
-		return (zone) -> instant.atZone(zone).toInstant();
+		return (zone) -> zone.map(z -> instant.atZone(z).toInstant()).orElse(instant);
 	}
 
 	/**
@@ -129,14 +129,14 @@ public class TemporalProviders {
 	 * Factory to create a {@link TemporalProvider} for a {@link LocalDateTime}
 	 */
 	public static TemporalProvider<LocalDateTime> localDateTime(LocalDateTime date) {
-		return (zone) -> date.atZone(zone).toLocalDateTime();
+		return (zone) -> date;
 	}
 
 	/**
 	 * Factory to create a {@link TemporalProvider} for a {@link ZonedDateTime}
 	 */
 	public static TemporalProvider<ZonedDateTime> zonedDateTime(ZonedDateTime date) {
-		return (zone) -> date.withZoneSameInstant(zone);
+		return (zone) -> zone.map( z -> date.withZoneSameInstant(z)).orElse(date);
 	}
 
 	/**
@@ -161,7 +161,8 @@ public class TemporalProviders {
      * Factory to create a {@link TemporalProvider} for a {@link OffsetDateTime}
      */
     public static TemporalProvider<OffsetDateTime> offsetDateTime(OffsetDateTime date) {
-        return (zone) -> date.withOffsetSameInstant(zone.getRules().getOffset(date.toLocalDateTime()));
+        return (zone) -> zone.map(z -> date.withOffsetSameInstant(z.getRules().getOffset(date.toLocalDateTime())))
+                .orElse(date);
     }
 
     /**

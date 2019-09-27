@@ -686,7 +686,7 @@ public abstract class SqlDateMatchers {
 	 * @param date the reference date against which the examined date is checked
 	 */
 	public static TemporalMatcher<java.sql.Date> sameMonthOfYear(final Date date) {
-		return isMonth(SQLDATE_AS_MONTH.apply(date, ZoneId.systemDefault()));
+		return new IsMonth<Date>(SQLDATE_AS_MONTH, month(date));
 	}
 
 	/**

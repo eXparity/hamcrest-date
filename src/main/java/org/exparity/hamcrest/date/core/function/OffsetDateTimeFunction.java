@@ -30,7 +30,7 @@ public class OffsetDateTimeFunction implements TemporalFunction<OffsetDateTime> 
 
 	@Override
 	public boolean isSame(final OffsetDateTime expected, final OffsetDateTime actual) {
-		return expected.equals(actual);
+		return expected.isEqual(actual);
 	}
 
 	@Override

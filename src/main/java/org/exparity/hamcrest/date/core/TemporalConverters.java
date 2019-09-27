@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.time.OffsetDateTime;
 import java.time.Year;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Date;
@@ -48,13 +49,6 @@ public class TemporalConverters {
 	/**
 	 * Java Date Converters
 	 */
-	public static TemporalConverter<Date, java.sql.Date> JAVADATE_AS_SQLDATE = (date, zone) -> {
-		if (date instanceof java.sql.Date) {
-			return (java.sql.Date) date;
-		} else {
-			return new java.sql.Date(date.getTime());
-		}
-	};
 
 	public static TemporalConverter<Date, Instant> JAVADATE_AS_INSTANT = (date, zone) -> {
 		if (date instanceof java.sql.Date) {
@@ -64,7 +58,7 @@ public class TemporalConverters {
 		}
 	};
 
-	public static TemporalConverter<Date, ZonedDateTime> JAVADATE_AS_ZONEDDATETIME = (date, zone) -> JAVADATE_AS_INSTANT.apply(date, zone).atZone(zone);
+	public static TemporalConverter<Date, ZonedDateTime> JAVADATE_AS_ZONEDDATETIME = (date, zone) -> JAVADATE_AS_INSTANT.apply(date, zone).atZone(zone.orElse(ZoneId.systemDefault()));
 	public static TemporalConverter<Date, LocalDateTime> JAVADATE_AS_LOCALDATETIME = (date, zone) -> JAVADATE_AS_ZONEDDATETIME.apply(date, zone).toLocalDateTime();
 
 	public static TemporalConverter<Date, LocalDate> JAVADATE_AS_LOCALDATE = (date, zone) -> {
@@ -83,6 +77,13 @@ public class TemporalConverters {
 		}
 	};
 	
+    public static TemporalConverter<Date, java.sql.Date> JAVADATE_AS_SQLDATE = (date, zone) -> {
+        if (date instanceof java.sql.Date) {
+            return (java.sql.Date) date;
+        } else {
+            return new java.sql.Date(date.getTime());
+        }
+    };
 
 	public static TemporalConverter<Date, Date> JAVADATE_AS_JAVADATE = (date, zone) -> date;
 	public static TemporalConverter<Date, Year> JAVADATE_AS_YEAR = (date, zone) -> Year.from(JAVADATE_AS_LOCALDATE.apply(date, zone));
@@ -127,7 +128,7 @@ public class TemporalConverters {
 	/**
 	 * ZonedDateTime Converters
 	 */
-	public static TemporalConverter<ZonedDateTime, ZonedDateTime> ZONEDDATETIME_AS_ZONEDDATETIME = (date, zone) -> date.withZoneSameInstant(zone);
+	public static TemporalConverter<ZonedDateTime, ZonedDateTime> ZONEDDATETIME_AS_ZONEDDATETIME = (date, zone) -> zone.map(z -> date.withZoneSameInstant(z)).orElse(date);
 	public static TemporalConverter<ZonedDateTime, LocalDate> ZONEDDATETIME_AS_LOCALDATE = (date, zone) -> ZONEDDATETIME_AS_ZONEDDATETIME.apply(date, zone).toLocalDate();
 	public static TemporalConverter<ZonedDateTime, Year> ZONEDDATETIME_AS_YEAR = (date, zone) -> Year.from(ZONEDDATETIME_AS_LOCALDATE.apply(date, zone));
 	public static TemporalConverter<ZonedDateTime, Month> ZONEDDATETIME_AS_MONTH = (date, zone) -> ZONEDDATETIME_AS_LOCALDATE.apply(date, zone).getMonth();
@@ -145,7 +146,7 @@ public class TemporalConverters {
 	/**
      * {@link OffsetDateTime} Converters
      */
-    public static TemporalConverter<OffsetDateTime, OffsetDateTime> OFFSETDATETIME_AS_OFFSETDATETIME = (date, zone) -> date.withOffsetSameInstant(zone.getRules().getOffset(date.toLocalDateTime()));    
+	public static TemporalConverter<OffsetDateTime, OffsetDateTime> OFFSETDATETIME_AS_OFFSETDATETIME = (date, zone) -> zone.map(z -> date.withOffsetSameInstant(z.getRules().getOffset(date.toLocalDateTime()))).orElse(date);    
     public static TemporalConverter<OffsetDateTime, LocalDate> OFFSETDATETIME_AS_LOCALDATE = (date, zone) -> OFFSETDATETIME_AS_OFFSETDATETIME.apply(date, zone).toLocalDate();
     public static TemporalConverter<OffsetDateTime, Year> OFFSETDATETIME_AS_YEAR = (date, zone) -> Year.from(OFFSETDATETIME_AS_LOCALDATE.apply(date, zone));
     public static TemporalConverter<OffsetDateTime, Month> OFFSETDATETIME_AS_MONTH = (date, zone) -> OFFSETDATETIME_AS_LOCALDATE.apply(date, zone).getMonth();

@@ -7,6 +7,7 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.ValueRange;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.hamcrest.Description;
@@ -23,11 +24,11 @@ public class IsMaximum<T> extends TemporalMatcher<T> {
 	private final TemporalConverter<T, ? extends TemporalAccessor> converter;
 	private final ChronoField field;
 	private final Locale locale;
-	private final ZoneId zone;
+	private final Optional<ZoneId> zone;
 
 	public IsMaximum(TemporalConverter<T, ? extends TemporalAccessor> converter,
 	        ChronoField field,
-	        ZoneId zone,
+	        Optional<ZoneId> zone,
 	        Locale locale) {
 		this.converter = converter;
 		this.field = field;
@@ -36,7 +37,7 @@ public class IsMaximum<T> extends TemporalMatcher<T> {
 	}
 
 	public IsMaximum(TemporalConverter<T, ? extends TemporalAccessor> converter, ChronoField field) {
-		this(converter, field, ZoneId.systemDefault(), Locale.getDefault(Locale.Category.FORMAT));
+		this(converter, field, Optional.empty(), Locale.getDefault(Locale.Category.FORMAT));
 	}
 
 	@Override
@@ -62,7 +63,7 @@ public class IsMaximum<T> extends TemporalMatcher<T> {
 
 	@Override
 	public TemporalMatcher<T> atZone(ZoneId zone) {
-		return new IsMaximum<>(converter, field, zone, locale);
+		return new IsMaximum<>(converter, field, Optional.of(zone), locale);
 	}
 	
     @Override

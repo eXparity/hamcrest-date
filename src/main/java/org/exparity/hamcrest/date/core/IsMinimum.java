@@ -7,6 +7,7 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.ValueRange;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.hamcrest.Description;
@@ -23,9 +24,9 @@ public class IsMinimum<T> extends TemporalMatcher<T> {
 	private final TemporalConverter<T, ? extends TemporalAccessor> converter;
 	private final ChronoField field;
 	private final Locale locale;
-	private final ZoneId zone;
+	private final Optional<ZoneId> zone;
 
-	public IsMinimum(TemporalConverter<T, ? extends TemporalAccessor> converter, ChronoField field, ZoneId zone, Locale locale) {
+	public IsMinimum(TemporalConverter<T, ? extends TemporalAccessor> converter, ChronoField field, Optional<ZoneId> zone, Locale locale) {
 		this.converter = converter;
 		this.field = field;
 		this.locale = locale;
@@ -33,7 +34,7 @@ public class IsMinimum<T> extends TemporalMatcher<T> {
 	}
 
 	public IsMinimum(TemporalConverter<T, ? extends TemporalAccessor> converter, ChronoField field) {
-		this(converter, field, ZoneId.systemDefault(), Locale.getDefault(Locale.Category.FORMAT));
+		this(converter, field, Optional.empty(), Locale.getDefault(Locale.Category.FORMAT));
 	}
 
 	@Override
@@ -59,7 +60,7 @@ public class IsMinimum<T> extends TemporalMatcher<T> {
 
 	@Override
 	public TemporalMatcher<T> atZone(ZoneId zone) {
-		return new IsMinimum<>(converter, field, zone, locale);
+		return new IsMinimum<>(converter, field, Optional.of(zone), locale);
 	}
 
 	@Override

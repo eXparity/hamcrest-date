@@ -2,6 +2,7 @@ package org.exparity.hamcrest.date.core;
 
 import java.time.ZoneId;
 import java.util.Locale;
+import java.util.Optional;
 
 import org.exparity.hamcrest.date.core.types.Millisecond;
 import org.hamcrest.Description;
@@ -16,11 +17,11 @@ public class IsMillisecond<T> extends TemporalMatcher<T> {
 	private final TemporalConverter<T, Millisecond> converter;
 	private final TemporalProvider<Millisecond> expected;
 	private final Locale locale;
-	private final ZoneId zone;
+	private final Optional<ZoneId> zone;
 
 	public IsMillisecond(TemporalConverter<T, Millisecond> converter,
 	        TemporalProvider<Millisecond> expected,
-	        ZoneId zone,
+	        Optional<ZoneId> zone,
 	        Locale locale) {
 		this.expected = expected;
 		this.converter = converter;
@@ -29,7 +30,7 @@ public class IsMillisecond<T> extends TemporalMatcher<T> {
 	}
 
 	public IsMillisecond(TemporalConverter<T, Millisecond> converter, TemporalProvider<Millisecond> expected) {
-		this(converter, expected, ZoneId.systemDefault(), Locale.getDefault(Locale.Category.FORMAT));
+		this(converter, expected, Optional.empty(), Locale.getDefault(Locale.Category.FORMAT));
 	}
 
 	@Override
@@ -50,7 +51,7 @@ public class IsMillisecond<T> extends TemporalMatcher<T> {
 
 	@Override
 	public TemporalMatcher<T> atZone(ZoneId zone) {
-		return new IsMillisecond<>(converter, expected, zone, locale);
+		return new IsMillisecond<>(converter, expected, Optional.of(zone), locale);
 	}
 
     @Override

@@ -3,6 +3,7 @@ package org.exparity.hamcrest.date.core;
 import java.time.Year;
 import java.time.ZoneId;
 import java.util.Locale;
+import java.util.Optional;
 
 import org.hamcrest.Description;
 
@@ -15,16 +16,16 @@ public class IsLeapYear<T> extends TemporalMatcher<T> {
 
 	private final TemporalConverter<T, Year> converter;
 	private final Locale locale;
-	private final ZoneId zone;
+	private final Optional<ZoneId> zone;
 
-	public IsLeapYear(TemporalConverter<T, Year> converter, ZoneId zone, Locale locale) {
+	public IsLeapYear(TemporalConverter<T, Year> converter, Optional<ZoneId> zone, Locale locale) {
 		this.converter = converter;
 		this.locale = locale;
 		this.zone = zone;
 	}
 
 	public IsLeapYear(TemporalConverter<T, Year> converter) {
-		this(converter, ZoneId.systemDefault(), Locale.getDefault(Locale.Category.FORMAT));
+		this(converter, Optional.empty(), Locale.getDefault(Locale.Category.FORMAT));
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class IsLeapYear<T> extends TemporalMatcher<T> {
 
 	@Override
 	public TemporalMatcher<T> atZone(ZoneId zone) {
-		return new IsLeapYear<>(converter, zone, locale);
+		return new IsLeapYear<>(converter, Optional.of(zone), locale);
 	}
 
     @Override

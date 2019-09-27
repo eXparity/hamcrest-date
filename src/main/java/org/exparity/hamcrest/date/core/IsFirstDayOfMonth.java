@@ -5,6 +5,7 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.ValueRange;
 import java.util.Locale;
+import java.util.Optional;
 
 import org.hamcrest.Description;
 
@@ -17,16 +18,16 @@ public class IsFirstDayOfMonth<T> extends TemporalMatcher<T> {
 
 	private final TemporalConverter<T, ? extends TemporalAccessor> converter;
 	private final Locale locale;
-	private final ZoneId zone;
+	private final Optional<ZoneId> zone;
 
-	public IsFirstDayOfMonth(TemporalConverter<T, ? extends TemporalAccessor> converter, ZoneId zone, Locale locale) {
+	public IsFirstDayOfMonth(TemporalConverter<T, ? extends TemporalAccessor> converter, Optional<ZoneId> zone, Locale locale) {
 		this.converter = converter;
 		this.locale = locale;
 		this.zone = zone;
 	}
 
 	public IsFirstDayOfMonth(TemporalConverter<T, ? extends TemporalAccessor> converter) {
-		this(converter, ZoneId.systemDefault(), Locale.getDefault(Locale.Category.FORMAT));
+		this(converter, Optional.empty(), Locale.getDefault(Locale.Category.FORMAT));
 	}
 
 	@Override
@@ -49,7 +50,7 @@ public class IsFirstDayOfMonth<T> extends TemporalMatcher<T> {
 
 	@Override
 	public TemporalMatcher<T> atZone(ZoneId zone) {
-		return new IsFirstDayOfMonth<>(converter, zone, locale);
+		return new IsFirstDayOfMonth<>(converter, Optional.of(zone), locale);
 	}
 	
     @Override

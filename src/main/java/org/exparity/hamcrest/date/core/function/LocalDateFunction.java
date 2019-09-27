@@ -29,7 +29,7 @@ public class LocalDateFunction implements TemporalFunction<LocalDate> {
 
 	@Override
 	public boolean isSame(final LocalDate expected, final LocalDate actual) {
-		return expected.equals(actual);
+		return expected.isEqual(actual);
 	}
 	
 	@Override
