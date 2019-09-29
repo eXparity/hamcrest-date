@@ -18,7 +18,7 @@ A maven project
     <dependency>
         <groupId>org.exparity</groupId>
         <artifactId>hamcrest-date</artifactId>
-        <version>2.0.6</version>
+        <version>2.0.7</version>
     </dependency>
 
 Versions 2.x.x onwards require Java 8. If you are using an earlier version of Java 8 then include version
@@ -138,6 +138,10 @@ The source includes a pom.xml for building with Maven
 
 Release Notes
 -------------
+Changes 2.0.6 -> 2.0.7
+  * Fix Issue 26 - Use licence consistently in release jar files
+  * Fix Issue 32 - Fix assertion errors for temporals with timezones
+  
 Changes 2.0.5 -> 2.0.6
   * Fix Issue 21 - Add support for changing Locale
   * Fix Issue 24 - Add OffsetDateTimeMatchers
