@@ -15,68 +15,104 @@ You can obtain Hamcrest Date binaries from [maven central][]. To include in your
 
 A maven project
 
-    <dependency>
-        <groupId>org.exparity</groupId>
-        <artifactId>hamcrest-date</artifactId>
-        <version>2.0.7</version>
-    </dependency>
+```xml
+<dependency>
+    <groupId>org.exparity</groupId>
+    <artifactId>hamcrest-date</artifactId>
+    <version>2.0.7</version>
+</dependency>
+```
 
 Versions 2.x.x onwards require Java 8. If you are using an earlier version of Java 8 then include version
 
-    <dependency>
-        <groupId>org.exparity</groupId>
-        <artifactId>hamcrest-date</artifactId>
-        <version>1.1.0</version>
-    </dependency>
-            
+```xml
+<dependency>
+    <groupId>org.exparity</groupId>
+    <artifactId>hamcrest-date</artifactId>
+    <version>1.1.0</version>
+</dependency>
+```
+
 Binaries
 --------
-Hamcrest Date has a single binary, hamcrest-date.jar, which contains all the date matchers. Sources and JavaDoc jars are available.
+Hamcrest Date has a single binary, `hamcrest-date.jar`, which contains all the date matchers. Sources and JavaDoc jars are available.
 
 Usage
 -------------
 
-The matchers are exposed as static methods on the LocalDateMatchers, LocalTimeMatchers, LocalDateTimeMatchers, ZonedDateTimeMatchers, OffsetDateTimeMatchers, SqlDateMatchers and DateMatchers class. For example
+The matchers are exposed as static methods on the LocalDateMatchers, LocalTimeMatchers, LocalDateTimeMatchers, ZonedDateTimeMatchers, OffsetDateTimeMatchers, SqlDateMatchers and DateMatchers class.
 
-    LocalDate today = LocalDate.now(); myBirthday = LocalDate.of(2015, AUGUST, 9);
-    MatcherAssert.assertThat(today, LocalDateMatchers.sameDay(myBirthday));
+Units of time are imported from the `ChronoUnit` class:
 
-or to test if you're getting closer to your birthday
+```java
+import static java.time.temporal.ChronoUnit.*;
+```
 
-    LocalDate today = LocalDate.now(); myBirthday = LocalDate.of(2015, AUGUST, 9);
-    MatcherAssert.assertThat(today, LocalDateMatchers.within(1, ChronoUnit.DAY, myBirthday));
+Each matcher can be imported statically (preferred) or normally:
+```java
+// static, makes sameDay, within, etc available
+import static org.exparity.hamcrest.date.LocalDateMatchers.*;
+// non-static, must use qualified LocalDateMatchers.sameDay, etc.
+import org.exparity.hamcrest.date.LocalDateMatchers;
+```
 
-or after static importing
+For example, with non-static imports:
 
-    LocalDate today = LocalDate.now(); myBirthday = LocalDate.of(2015, AUGUST, 9);
-    assertThat(today, within(1, DAY, myBirthday));
+```java
+LocalDate today = LocalDate.now(); myBirthday = LocalDate.of(2015, AUGUST, 9);
+MatcherAssert.assertThat(today, LocalDateMatchers.sameDay(myBirthday));
+```
+
+or to test if you're getting closer to your birthday:
+
+```java
+LocalDate today = LocalDate.now(); myBirthday = LocalDate.of(2015, AUGUST, 9);
+MatcherAssert.assertThat(today, LocalDateMatchers.within(1, ChronoUnit.DAY, myBirthday));
+```
+
+or with static importing:
+
+```java
+LocalDate today = LocalDate.now(); myBirthday = LocalDate.of(2015, AUGUST, 9);
+assertThat(today, within(1, DAY, myBirthday));
+```
 
 The same matchers are available for all date types so to match LocalDateTime values: 
 
-    LocalDateTime myAppointment = LocalDateTime.of(2015, AUGUST, 9, 10, 30, 0);
-    assertThat(LocalDateTime.now(), within(15, MINUTES, myAppointment));
+```java
+LocalDateTime myAppointment = LocalDateTime.of(2015, AUGUST, 9, 10, 30, 0);
+assertThat(LocalDateTime.now(), within(15, MINUTES, myAppointment));
+```
 
 or to match ZonedDateTime values:
 
-    ZonedDateTime myAppointment = ZonedDateTime.of(LocalDateTime.of(2015, AUGUST, 9, 10, 30, 0), ZoneId.of("UTC"));
-    assertThat(ZonedDateTime.now(), within(15, MINUTES, myAppointment));
+```java
+ZonedDateTime myAppointment = ZonedDateTime.of(LocalDateTime.of(2015, AUGUST, 9, 10, 30, 0), ZoneId.of("UTC"));
+assertThat(ZonedDateTime.now(), within(15, MINUTES, myAppointment));
+```
 
 or to match OffsetDateTime values:
 
-    OffsetDateTime myAppointment = OffsetDateTime.of(LocalDateTime.of(2015, AUGUST, 9, 10, 30, 0), ZoneOffset.UTC);
-    assertThat(OffsetDateTime.now(), within(15, MINUTES, myAppointment));
+```java
+OffsetDateTime myAppointment = OffsetDateTime.of(LocalDateTime.of(2015, AUGUST, 9, 10, 30, 0), ZoneOffset.UTC);
+assertThat(OffsetDateTime.now(), within(15, MINUTES, myAppointment));
+```
 
 or to match LocalTime values:
 
-    LocalTime myAppointment = LocalTime.NOON;
-    assertThat(LocalTime.now(), within(15, MINUTES, myAppointment));
+```java
+LocalTime myAppointment = LocalTime.NOON;
+assertThat(LocalTime.now(), within(15, MINUTES, myAppointment));
+```
 
 or to match java.sql.Date values:
 
-    java.sql.Date myAppointment = java.sql.Date.valueOf(LocalDate.of(2015, AUGUST, 9);
-    assertThat(new java.sql.Date(), within(15, MINUTES, myAppointment));
+```java
+java.sql.Date myAppointment = java.sql.Date.valueOf(LocalDate.of(2015, AUGUST, 9);
+assertThat(new java.sql.Date(), within(15, MINUTES, myAppointment));
+```
 
-The libary includes date matchers for:
+The library includes date matchers for:
 
 * __after__ - Test if the actual date is after the reference date
 * __before__ - Test if the actual date is before the reference date
