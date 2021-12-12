@@ -14,6 +14,7 @@ import java.util.Date;
 
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.DayMonthYear;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.Months;
@@ -301,4 +302,46 @@ public class IsSameDayTest {
     public void isOffsetDateTimeSameDayLaterSameDay() {
         assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isDay(2015, AUGUST, 4, UTC).atZone(UTC));
     }
+
+    // Instant Matchers
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantSameDayEarlierInstant() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.sameDay(AUG_03_2015_NOON_INSTANT_UTC).atZone(UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantSameDayLaterInstant() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.sameDay(AUG_05_2015_NOON_INSTANT_UTC).atZone(UTC));
+    }
+
+    @Test
+    public void isInstantSameDaySameInstant() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.sameDay(AUG_04_2015_NOON_INSTANT_UTC).atZone(UTC));
+    }
+
+    @Test
+    public void isInstantSameDayInstantPositiveOffset() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.sameDay(AUG_04_2015_NOON_INSTANT_CET).atZone(UTC));
+    }
+
+    @Test
+    public void isInstantSameDayInstantNegativeOffset() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.sameDay(AUG_04_2015_NOON_INSTANT_EST).atZone(UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantSameDayEarlierDay() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isDay(2015, AUGUST, 3, UTC).atZone(UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantSameDayLaterDay() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isDay(2015, AUGUST, 5, UTC).atZone(UTC));
+    }
+
+    @Test
+    public void isInstantSameDayLaterSameDay() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isDay(2015, AUGUST, 4, UTC).atZone(UTC));
+    }
+
 }

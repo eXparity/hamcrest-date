@@ -3,14 +3,17 @@ package org.exparity.hamcrest.date.core;
 import static org.exparity.hamcrest.date.testutils.DateMatcherTestUtils.addDateField;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
@@ -165,5 +168,24 @@ public class IsSameSecondOfMinuteTest {
         OffsetDateTime date = OffsetDateTime.now(), other = date.plusMinutes(1);
         assertThat(other, OffsetDateTimeMatchers.sameSecondOfMinute(date));
     }
-	
+
+    // Instant Matchers
+    @Test
+    public void isInstantSameSecondOfMinute() {
+        Instant date = Instant.now(), other = date;
+        assertThat(other, InstantMatchers.sameSecondOfMinute(date));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotSameSecondOfMinute() {
+        Instant date = Instant.now(), other = date.plus(1, ChronoUnit.SECONDS);
+        assertThat(other, InstantMatchers.sameSecondOfMinute(date));
+    }
+
+    @Test
+    public void isInstantSameSecondOfMinuteDifferentMinute() {
+        Instant date = Instant.now(), other = date.plus(1, ChronoUnit.MINUTES);
+        assertThat(other, InstantMatchers.sameSecondOfMinute(date));
+    }
+
 }

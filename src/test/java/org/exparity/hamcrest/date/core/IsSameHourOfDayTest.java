@@ -5,13 +5,16 @@ import static org.exparity.hamcrest.date.testutils.Dates.JAN_01_2012_MIDNIGHT_CE
 import static org.exparity.hamcrest.date.testutils.Dates.JAN_01_2012_MIDNIGHT_GMT_AS_DATE;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
@@ -146,5 +149,22 @@ public class IsSameHourOfDayTest {
 		assertThat(other, OffsetDateTimeMatchers.sameHourOfDay(date));
 	}
 	
-	
+    // Instant Matchers
+    @Test
+    public void isInstantSameHourOfDay() {
+        Instant date = Instant.now(), other = date;
+        assertThat(other, InstantMatchers.sameHourOfDay(date));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotSameHourOfDay() {
+        Instant date = Instant.now(), other = date.plus(1, ChronoUnit.HOURS);
+        assertThat(other, InstantMatchers.sameHourOfDay(date));
+    }
+
+    @Test
+    public void isInstantSameHourOfDayDifferentDay() {
+        Instant date = Instant.now(), other = date.plus(1, ChronoUnit.DAYS);
+        assertThat(other, InstantMatchers.sameHourOfDay(date));
+    }
 }

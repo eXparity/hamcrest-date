@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.time.LocalTime;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
@@ -96,5 +97,16 @@ public class IsSecondTest {
     public void isOffsetDateTimeNotSecond() {
         assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isSecond(1));
     }
-    
+
+    // Instant Matchers
+    @Test
+    public void isInstantSecond() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isSecond(0));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotSecond() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isSecond(1));
+    }
+
 }

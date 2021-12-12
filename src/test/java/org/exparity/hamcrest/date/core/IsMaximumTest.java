@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoField;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
@@ -99,6 +100,7 @@ public class IsMaximumTest {
     }
     
     // OffsetDateTime Matchers
+    
     @Test
     public void isOffsetDateTimeLastDayOfMonth() {
         assertThat(AUG_31_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
@@ -109,4 +111,15 @@ public class IsMaximumTest {
         assertThat(AUG_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
     }
     
+    // Instant Matchers
+    
+    @Test
+    public void isInstantLastDayOfMonth() {
+        assertThat(AUG_31_2015_NOON_INSTANT_UTC, InstantMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotLastDayOfMonth() {
+        assertThat(AUG_01_2015_NOON_INSTANT_UTC, InstantMatchers.isMaximum(ChronoField.DAY_OF_MONTH));
+    }
 }

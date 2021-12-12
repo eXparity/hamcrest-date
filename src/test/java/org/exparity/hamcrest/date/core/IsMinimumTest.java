@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoField;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
@@ -107,5 +108,17 @@ public class IsMinimumTest {
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
     public void isOffsetDateTimeNotFirstDayOfMonth() {
         assertThat(AUG_31_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
+    }
+    
+    // Instant Matchers
+    
+    @Test
+    public void isInstantFirstDayOfMonth() {
+        assertThat(AUG_01_2015_NOON_INSTANT_UTC, InstantMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotFirstDayOfMonth() {
+        assertThat(AUG_31_2015_NOON_INSTANT_UTC, InstantMatchers.isMinimum(ChronoField.DAY_OF_MONTH));
     }
 }

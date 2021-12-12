@@ -10,6 +10,7 @@ import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
@@ -515,4 +516,49 @@ public class IsWithinTest {
                 OffsetDateTimeMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 3, ZoneOffset.UTC));
     }
 	
+    // Instant Matchers
+    @Test
+    public void isInstantWithinSameInstant() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.within(2, ChronoUnit.DAYS, AUG_04_2015_NOON_INSTANT_UTC));
+    }
+
+    @Test
+    public void isInstantWithinInstantInsideLimit() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.within(2, ChronoUnit.DAYS, AUG_05_2015_NOON_INSTANT_UTC));
+    }
+
+    @Test
+    public void isInstantWithinInstantEqualLimit() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.within(2, ChronoUnit.DAYS, AUG_06_2015_NOON_INSTANT_UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantWithinInstantOutsideLimit() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.within(2, ChronoUnit.DAYS, AUG_07_2015_NOON_INSTANT_UTC));
+    }
+
+    @Test
+    public void isInstantWithinSameDayMonthYear() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC,
+                InstantMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 0, ZoneOffset.UTC));
+    }
+
+    @Test
+    public void isInstantWithinDayMonthYearInsideLimit() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC,
+                InstantMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 1, ZoneOffset.UTC));
+    }
+
+    @Test
+    public void isInstantWithinDayMonthYearEqualLimit() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC,
+                InstantMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 2, ZoneOffset.UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantWithinDayMonthYearOutsideLimit() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC,
+                InstantMatchers.within(2, ChronoUnit.NANOS, 2015, Month.AUGUST, 4, 12, 0, 0, 3, ZoneOffset.UTC));
+    }
+
 }

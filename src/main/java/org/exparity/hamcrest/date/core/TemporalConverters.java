@@ -155,4 +155,19 @@ public class TemporalConverters {
     public static TemporalConverter<OffsetDateTime, Hour> OFFSETDATETIME_AS_HOUR = (date, zone) -> Hour.from(OFFSETDATETIME_AS_OFFSETDATETIME.apply(date, zone));
     public static TemporalConverter<OffsetDateTime, Minute> OFFSETDATETIME_AS_MINUTE = (date, zone) -> Minute.from(OFFSETDATETIME_AS_OFFSETDATETIME.apply(date, zone));
     public static TemporalConverter<OffsetDateTime, Second> OFFSETDATETIME_AS_SECOND = (date, zone) -> Second.from(OFFSETDATETIME_AS_OFFSETDATETIME.apply(date, zone));    
+    
+    /**
+     * Instant Converters
+     */
+    public static TemporalConverter<Instant, Instant> INSTANT_AS_INSTANT = (date, zone) -> date;
+    public static TemporalConverter<Instant, ZonedDateTime> INSTANT_AS_ZONEDDATETIME = (date, zone) -> zone.map(z -> date.atZone(z)).orElse(date.atZone(ZoneId.systemDefault()));
+    public static TemporalConverter<Instant, LocalDate> INSTANT_AS_LOCALDATE = (date, zone) -> INSTANT_AS_ZONEDDATETIME.apply(date, zone).toLocalDate();
+    public static TemporalConverter<Instant, Year> INSTANT_AS_YEAR = (date, zone) -> Year.from(INSTANT_AS_LOCALDATE.apply(date, zone));
+    public static TemporalConverter<Instant, Month> INSTANT_AS_MONTH = (date, zone) -> INSTANT_AS_LOCALDATE.apply(date, zone).getMonth();
+    public static TemporalConverter<Instant, DayOfMonth> INSTANT_AS_DAYOFMONTH = (date, zone) -> DayOfMonth.from(INSTANT_AS_LOCALDATE.apply(date, zone));
+    public static TemporalConverter<Instant, DayOfWeek> INSTANT_AS_DAYOFWEEK = (date, zone) -> INSTANT_AS_LOCALDATE.apply(date, zone).getDayOfWeek();
+    public static TemporalConverter<Instant, Hour> INSTANT_AS_HOUR = (date, zone) -> Hour.from(INSTANT_AS_ZONEDDATETIME.apply(date, zone));
+    public static TemporalConverter<Instant, Minute> INSTANT_AS_MINUTE = (date, zone) -> Minute.from(INSTANT_AS_ZONEDDATETIME.apply(date, zone));
+    public static TemporalConverter<Instant, Second> INSTANT_AS_SECOND = (date, zone) -> Second.from(INSTANT_AS_ZONEDDATETIME.apply(date, zone));
+
 }

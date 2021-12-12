@@ -5,6 +5,7 @@ import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.junit.Assert.assertThat;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
@@ -16,7 +17,7 @@ import org.testng.annotations.Test;
 /**
  * Unit test for {@link IsLeapYear}
  *
- * @author Stewart Bissett
+ * @author Stewart Bisett
  */
 public class IsLeapYearTest {
 
@@ -108,6 +109,7 @@ public class IsLeapYearTest {
 	}
 
     // OffsetDateTime Matchers
+	
     @Test
     public void isOffsetDateTimeLeapYear() {
         assertThat(AUG_04_2016_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isLeapYear());
@@ -124,7 +126,29 @@ public class IsLeapYearTest {
     }
 
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
-    public void issOffsetDateTimeNotLeapYearStartOfYearLaterZone() {
+    public void isOffsetDateTimeNotLeapYearStartOfYearLaterZone() {
         assertThat(JAN_01_2012_MIDNIGHT_OFFSET_CET, OffsetDateTimeMatchers.isLeapYear().atZone(ZoneIds.UTC));
+    }
+    
+    // Instant Matchers
+    
+    @Test
+    public void isInstantLeapYear() {
+        assertThat(AUG_04_2016_NOON_INSTANT_UTC, InstantMatchers.isLeapYear());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotLeapYear() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isLeapYear());
+    }
+
+    @Test
+    public void isInstantLeapYearStartOfYearSameZone() {
+        assertThat(JAN_01_2012_MIDNIGHT_INSTANT_CET, InstantMatchers.isLeapYear().atZone(ZoneIds.CET));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotLeapYearStartOfYearLaterZone() {
+        assertThat(JAN_01_2012_MIDNIGHT_INSTANT_CET, InstantMatchers.isLeapYear().atZone(ZoneIds.UTC));
     }
 }

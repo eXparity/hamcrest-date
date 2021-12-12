@@ -5,6 +5,7 @@ import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.junit.Assert.assertThat;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
@@ -96,4 +97,16 @@ public class IsYearTest {
     public void isOffsetDateTimeNotYear() {
         assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isYear(2016));
     }
+    
+    // Instant Matchers
+    @Test
+    public void isInstantYear() {
+        assertThat(AUG_04_2016_NOON_INSTANT_UTC, InstantMatchers.isYear(2016));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotYear() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isYear(2016));
+    }
+
 }

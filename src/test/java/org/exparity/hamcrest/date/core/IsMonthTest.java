@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.time.Month;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
@@ -808,7 +809,8 @@ public class IsMonthTest {
 	}
 	
     // OffsetDateTime Matchers
-    @Test
+    
+	@Test
     public void isOffsetDateTimeMonth() {
         assertThat(JAN_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMonth(Month.JANUARY));
     }
@@ -936,5 +938,137 @@ public class IsMonthTest {
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
     public void isOffsetDateTimeNotDecember() {
         assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isDecember());
+    }
+    
+    // Instant Matchers
+    
+    @Test
+    public void isInstantMonth() {
+        assertThat(JAN_01_2015_NOON_INSTANT_UTC, InstantMatchers.isMonth(Month.JANUARY));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotMonth() {
+        assertThat(JAN_01_2015_NOON_INSTANT_UTC, InstantMatchers.isMonth(Month.FEBRUARY));
+    }
+    
+    @Test
+    public void isInstantJanuary() {
+        assertThat(JAN_01_2015_NOON_INSTANT_UTC, InstantMatchers.isJanuary());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotJanuary() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isJanuary());
+    }
+
+    @Test
+    public void isInstantFebruary() {
+        assertThat(FEB_01_2015_NOON_INSTANT_UTC, InstantMatchers.isFebruary());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotFebruary() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isFebruary());
+    }
+
+    @Test
+    public void isInstantMarch() {
+        assertThat(MAR_01_2015_NOON_INSTANT_UTC, InstantMatchers.isMarch());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotMarch() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isMarch());
+    }
+
+    @Test
+    public void isInstantApril() {
+        assertThat(APR_01_2015_NOON_INSTANT_UTC, InstantMatchers.isApril());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotApril() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isApril());
+    }
+
+    @Test
+    public void isInstantMay() {
+        assertThat(MAY_01_2015_NOON_INSTANT_UTC, InstantMatchers.isMay());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotMay() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isMay());
+    }
+
+    @Test
+    public void isInstantJune() {
+        assertThat(JUN_01_2015_NOON_INSTANT_UTC, InstantMatchers.isJune());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotJune() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isJune());
+    }
+
+    @Test
+    public void isInstantJuly() {
+        assertThat(JUL_01_2015_NOON_INSTANT_UTC, InstantMatchers.isJuly());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotJuly() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isJuly());
+    }
+
+    @Test
+    public void isInstantAugust() {
+        assertThat(AUG_01_2015_NOON_INSTANT_UTC, InstantMatchers.isAugust());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotAugust() {
+        assertThat(SEP_04_2015_NOON_INSTANT_UTC, InstantMatchers.isAugust());
+    }
+
+    @Test
+    public void isInstantSeptember() {
+        assertThat(SEP_04_2015_NOON_INSTANT_UTC, InstantMatchers.isSeptember());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotSeptember() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isSeptember());
+    }
+
+    @Test
+    public void isInstantOctober() {
+        assertThat(OCT_01_2015_NOON_INSTANT_UTC, InstantMatchers.isOctober());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotOctober() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isOctober());
+    }
+
+    @Test
+    public void isInstantNovember() {
+        assertThat(NOV_01_2015_NOON_INSTANT_UTC, InstantMatchers.isNovember());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotNovember() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isNovember());
+    }
+
+    @Test
+    public void isInstantDecember() {
+        assertThat(DEC_01_2015_NOON_INSTANT_UTC, InstantMatchers.isDecember());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotDecember() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isDecember());
     }
 }

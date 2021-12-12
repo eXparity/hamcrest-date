@@ -9,6 +9,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.util.Locale;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
@@ -1007,4 +1008,136 @@ public class IsDayOfWeekTest {
     public void isOffsetDateTimeNotWeekendOnFriday() {
         assertThat(AUG_07_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isWeekend());
     }
+    
+    // Instant Matchers
+    @Test
+    public void isInstantDayOfWeek() {
+        assertThat(AUG_03_2015_NOON_INSTANT_UTC, InstantMatchers.isDayOfWeek(MONDAY));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotDayOfWeek() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isDayOfWeek(MONDAY));
+    }
+
+    @Test
+    public void isInstantMonday() {
+        assertThat(AUG_03_2015_NOON_INSTANT_UTC, InstantMatchers.isMonday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotMonday() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isMonday());
+    }
+
+    @Test
+    public void isInstantTuesday() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isTuesday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotTuesday() {
+        assertThat(AUG_05_2015_NOON_INSTANT_UTC, InstantMatchers.isTuesday());
+    }
+
+    @Test
+    public void isInstantWednesday() {
+        assertThat(AUG_05_2015_NOON_INSTANT_UTC, InstantMatchers.isWednesday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotWednesday() {
+        assertThat(AUG_06_2015_NOON_INSTANT_UTC, InstantMatchers.isWednesday());
+    }
+
+    @Test
+    public void isInstantThursday() {
+        assertThat(AUG_06_2015_NOON_INSTANT_UTC, InstantMatchers.isThursday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotThursday() {
+        assertThat(AUG_07_2015_NOON_INSTANT_UTC, InstantMatchers.isThursday());
+    }
+
+    @Test
+    public void isInstantFriday() {
+        assertThat(AUG_07_2015_NOON_INSTANT_UTC, InstantMatchers.isFriday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotFriday() {
+        assertThat(AUG_08_2015_NOON_INSTANT_UTC, InstantMatchers.isFriday());
+    }
+
+    @Test
+    public void isInstantSaturday() {
+        assertThat(AUG_08_2015_NOON_INSTANT_UTC, InstantMatchers.isSaturday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotSaturday() {
+        assertThat(AUG_09_2015_NOON_INSTANT_UTC, InstantMatchers.isSaturday());
+    }
+
+    @Test
+    public void isInstantSunday() {
+        assertThat(AUG_09_2015_NOON_INSTANT_UTC, InstantMatchers.isSunday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotSunday() {
+        assertThat(AUG_03_2015_NOON_INSTANT_UTC, InstantMatchers.isSunday());
+    }
+
+    @Test
+    public void isInstantWeekday() {
+        assertThat(AUG_03_2015_NOON_INSTANT_UTC, InstantMatchers.isWeekday());
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isWeekday());
+        assertThat(AUG_05_2015_NOON_INSTANT_UTC, InstantMatchers.isWeekday());
+        assertThat(AUG_06_2015_NOON_INSTANT_UTC, InstantMatchers.isWeekday());
+        assertThat(AUG_07_2015_NOON_INSTANT_UTC, InstantMatchers.isWeekday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
+    public void isInstantNotWeekdayOnSaturday() {
+        assertThat(AUG_08_2015_NOON_INSTANT_UTC, InstantMatchers.isWeekday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
+    public void isInstantNotWeekdayOnSunday() {
+        assertThat(AUG_09_2015_NOON_INSTANT_UTC, InstantMatchers.isWeekday());
+    }
+
+    @Test
+    public void isInstantWeekend() {
+        assertThat(AUG_08_2015_NOON_INSTANT_UTC, InstantMatchers.isWeekend());
+        assertThat(AUG_09_2015_NOON_INSTANT_UTC, InstantMatchers.isWeekend());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
+    public void isInstantNotWeekendOnMonday() {
+        assertThat(AUG_03_2015_NOON_INSTANT_UTC, InstantMatchers.isWeekend());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
+    public void isInstantNotWeekendOnTuesday() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isWeekend());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
+    public void isInstantNotWeekendOnWednesday() {
+        assertThat(AUG_05_2015_NOON_INSTANT_UTC, InstantMatchers.isWeekend());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
+    public void isInstantNotWeekendOnThursday() {
+        assertThat(AUG_06_2015_NOON_INSTANT_UTC, InstantMatchers.isWeekend());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN_MULTIPLE_DAYS)
+    public void isInstantNotWeekendOnFriday() {
+        assertThat(AUG_07_2015_NOON_INSTANT_UTC, InstantMatchers.isWeekend());
+    }
+
 }

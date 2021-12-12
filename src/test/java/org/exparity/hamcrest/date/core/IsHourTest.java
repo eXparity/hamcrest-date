@@ -7,6 +7,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.time.LocalTime;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
@@ -121,4 +122,25 @@ public class IsHourTest {
         assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isHour(11).atZone(ZoneIds.UTC));
     }
 	
+    // Instant Matchers
+    
+    @Test
+    public void isInstantHour() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isHour(12).atZone(ZoneIds.UTC));
+    }
+
+    @Test
+    public void isInstantHourOtherZone() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isHour(7).atZone(ZoneIds.EST));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotHourOtherZone() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isHour(12).atZone(ZoneIds.CET));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotHour() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isHour(11).atZone(ZoneIds.UTC));
+    }
 }

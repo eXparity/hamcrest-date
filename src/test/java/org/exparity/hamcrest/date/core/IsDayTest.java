@@ -4,14 +4,17 @@ package org.exparity.hamcrest.date.core;
 import static org.exparity.hamcrest.date.testutils.DateMatcherTestUtils.addDateField;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
@@ -241,4 +244,36 @@ public class IsDayTest {
     public void isOffsetDateTimeNotTomorrow() {
         assertThat(OffsetDateTime.now(), OffsetDateTimeMatchers.isTomorrow());
     }
+    
+    // Instant Matchers
+    @Test
+    public void isInstantToday() {
+        assertThat(Instant.now(), InstantMatchers.isToday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotToday() {
+        assertThat(Instant.now().plus(1, ChronoUnit.DAYS), InstantMatchers.isToday());
+    }
+
+    @Test
+    public void isInstantYesterday() {
+        assertThat(Instant.now().minus(1, ChronoUnit.DAYS), InstantMatchers.isYesterday());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotYesterday() {
+        assertThat(Instant.now(), InstantMatchers.isYesterday());
+    }
+
+    @Test
+    public void isInstantTomorrow() {
+        assertThat(Instant.now().plus(1, ChronoUnit.DAYS), InstantMatchers.isTomorrow());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotTomorrow() {
+        assertThat(Instant.now(), InstantMatchers.isTomorrow());
+    }
+
 }
