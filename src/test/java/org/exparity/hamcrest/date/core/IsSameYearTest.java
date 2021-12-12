@@ -3,12 +3,16 @@ package org.exparity.hamcrest.date.core;
 import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
@@ -135,5 +139,18 @@ public class IsSameYearTest {
     public void isOffsetDateTimeNotSameYear() {
         OffsetDateTime date = OffsetDateTime.now(), other = date.plusYears(1);
         assertThat(other, OffsetDateTimeMatchers.sameYear(date));
+    }
+
+    // Instant Matchers
+    @Test
+    public void isInstantSameYear() {
+        Instant date = Instant.now(), other = date;
+        assertThat(other, InstantMatchers.sameYear(date));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotSameYear() {
+        Instant date = Instant.now(), other = ZonedDateTime.ofInstant(date, ZoneId.systemDefault()).plusYears(1).toInstant();
+        assertThat(other, InstantMatchers.sameYear(date));
     }
 }

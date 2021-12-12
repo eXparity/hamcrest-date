@@ -10,6 +10,7 @@ import java.time.Month;
 
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.DayMonthYear;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
@@ -413,5 +414,61 @@ public class IsBeforeTest {
     @Test
     public void isOffsetDateTimeBeforeDateTimeNegativeOffset() {
         assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.before(2015, AUGUST, 4, 12, 0, 0, 0, ZoneOffsets.EST));
+    }
+    // Instant Matchers
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantBeforeLaterInstant() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.before(AUG_04_2015_11AM_INSTANT_UTC));
+    }
+
+    @Test
+    public void isInstantBeforeEarlierInstant() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.before(AUG_04_2015_01PM_INSTANT_UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantBeforeLaterSameInstant() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.before(AUG_04_2015_NOON_INSTANT_UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantBeforeInstantPositiveOffset() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.before(AUG_04_2015_NOON_INSTANT_CET));
+    }
+
+    @Test
+    public void isInstantBeforeInstantNegativeOffset() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.before(AUG_04_2015_NOON_INSTANT_EST));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantBeforeLaterDateTime() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.before(2015, AUGUST, 4, 11, 59, 0, 0, ZoneOffsets.UTC));
+    }
+
+    @Test
+    public void isInstantBeforeEarlierDateTime() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.before(2015, AUGUST, 4, 12, 0, 1, 0, ZoneOffsets.UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantBeforeSameDateTime() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.before(2015, AUGUST, 4, 12, 0, 0, 0, ZoneOffsets.UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantBeforeDateTimePositiveOffset() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.before(2015, AUGUST, 4, 12, 0, 0, 0, ZoneOffsets.CET));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantBeforeDateTimeEquivalentOffset() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.before(2015, AUGUST, 4, 7, 0, 0, 0, ZoneOffsets.CET));
+    }
+    
+    @Test
+    public void isInstantBeforeDateTimeNegativeOffset() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.before(2015, AUGUST, 4, 12, 0, 0, 0, ZoneOffsets.EST));
     }
 }

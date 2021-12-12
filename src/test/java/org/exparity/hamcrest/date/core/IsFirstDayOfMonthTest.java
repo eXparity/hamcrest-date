@@ -4,6 +4,7 @@ import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
@@ -93,5 +94,16 @@ public class IsFirstDayOfMonthTest {
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
     public void isOffsetDateTimeNotFirstDayOfMonth() {
         assertThat(AUG_31_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isFirstDayOfMonth());
+    }
+    
+    // Instant Matchers
+    @Test
+    public void isInstantFirstDayOfMonth() {
+        assertThat(AUG_01_2015_NOON_INSTANT_UTC, InstantMatchers.isFirstDayOfMonth());
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotFirstDayOfMonth() {
+        assertThat(AUG_31_2015_NOON_INSTANT_UTC, InstantMatchers.isFirstDayOfMonth());
     }
 }

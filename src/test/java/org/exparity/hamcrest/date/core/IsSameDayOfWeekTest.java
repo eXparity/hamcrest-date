@@ -4,6 +4,7 @@ import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
@@ -159,4 +160,20 @@ public class IsSameDayOfWeekTest {
         assertThat(AUG_07_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.sameDayOfWeek(SEP_04_2015_NOON_OFFSET_UTC));
     }
 	
+    // Instant Matchers
+    @Test
+    public void isInstantSameDayOfWeek() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.sameDayOfWeek(AUG_04_2015_NOON_INSTANT_UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotSameDayOfWeek() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.sameDayOfWeek(AUG_01_2015_NOON_INSTANT_UTC));
+    }
+
+    @Test
+    public void isInstantSameDayOfWeekDifferentMonth() {
+        assertThat(AUG_07_2015_NOON_INSTANT_UTC, InstantMatchers.sameDayOfWeek(SEP_04_2015_NOON_INSTANT_UTC));
+    }
+    
 }

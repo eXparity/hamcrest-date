@@ -3,14 +3,17 @@ package org.exparity.hamcrest.date.core;
 import static org.exparity.hamcrest.date.testutils.DateMatcherTestUtils.addDateField;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
@@ -165,5 +168,24 @@ public class IsSameMinuteOfHourTest {
         OffsetDateTime date = OffsetDateTime.now(), other = date.plusHours(1);
         assertThat(other, OffsetDateTimeMatchers.sameMinuteOfHour(date));
     }
-	
+
+    // Instant Matchers
+    @Test
+    public void isInstantSameMinuteOfHour() {
+        Instant date = Instant.now(), other = date;
+        assertThat(other, InstantMatchers.sameMinuteOfHour(date));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotSameMinuteOfHour() {
+        Instant date = Instant.now(), other = date.plus(1, ChronoUnit.MINUTES);
+        assertThat(other, InstantMatchers.sameMinuteOfHour(date));
+    }
+
+    @Test
+    public void isInstantSameMinuteOfHourDifferentHour() {
+        Instant date = Instant.now(), other = date.plus(1, ChronoUnit.HOURS);
+        assertThat(other, InstantMatchers.sameMinuteOfHour(date));
+    }
+
 }

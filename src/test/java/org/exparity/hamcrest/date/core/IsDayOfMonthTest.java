@@ -4,6 +4,7 @@ import static org.exparity.hamcrest.date.testutils.Dates.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
@@ -163,5 +164,26 @@ public class IsDayOfMonthTest {
     public void isOffsetDateTimeNotLastDayOfMonth() {
         assertThat(AUG_01_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isDayOfMonth(31));
     }
-	
+
+    // Instant Matchers
+    @Test
+    public void isInstantFirstDayOfMonth() {
+        assertThat(AUG_01_2015_NOON_INSTANT_UTC, InstantMatchers.isDayOfMonth(1));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotFirstDayOfMonth() {
+        assertThat(AUG_31_2015_NOON_INSTANT_UTC, InstantMatchers.isDayOfMonth(1));
+    }
+
+    @Test
+    public void isInstantLastDayOfMonth() {
+        assertThat(AUG_31_2015_NOON_INSTANT_UTC, InstantMatchers.isDayOfMonth(31));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotLastDayOfMonth() {
+        assertThat(AUG_01_2015_NOON_INSTANT_UTC, InstantMatchers.isDayOfMonth(31));
+    }
+
 }

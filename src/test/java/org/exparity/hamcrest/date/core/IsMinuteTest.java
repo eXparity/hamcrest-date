@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.time.LocalTime;
 
 import org.exparity.hamcrest.date.DateMatchers;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.exparity.hamcrest.date.OffsetDateTimeMatchers;
@@ -87,6 +88,7 @@ public class IsMinuteTest {
 	}
 
     // OffsetDateTime Matchers
+	
     @Test
     public void isOffsetDateTimeMinute() {
         assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMinute(0));
@@ -95,5 +97,17 @@ public class IsMinuteTest {
     @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
     public void isOffsetDateTimeNotMinute() {
         assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.isMinute(1));
+    }
+
+    // Instant Matchers
+    
+    @Test
+    public void isInstantMinute() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isMinute(0));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantNotMinute() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.isMinute(1));
     }
 }

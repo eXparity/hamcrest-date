@@ -9,6 +9,7 @@ import java.time.LocalTime;
 
 import org.exparity.hamcrest.date.DateMatchers;
 import org.exparity.hamcrest.date.DayMonthYear;
+import org.exparity.hamcrest.date.InstantMatchers;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
@@ -394,5 +395,58 @@ public class IsSameOrBeforeTest {
     public void isOffsetDateTimeSameOrBeforeDateTimeLaterZone() {
         assertThat(AUG_04_2015_NOON_OFFSET_UTC, OffsetDateTimeMatchers.sameOrBefore(2015, AUGUST, 4, 12, 0, 0, 0, ZoneOffsets.EST));
     }
-	
+
+    // Instant Matchers
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantSameOrBeforeLaterInstant() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.sameOrBefore(AUG_04_2015_11AM_INSTANT_UTC));
+    }
+
+    @Test
+    public void isInstantSameOrBeforeInstant() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.sameOrBefore(AUG_04_2015_01PM_INSTANT_UTC));
+    }
+
+    @Test
+    public void isInstantSameOrBeforeSameInstant() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.sameOrBefore(AUG_04_2015_NOON_INSTANT_UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantSameOrBeforeInstantEarlierZone() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.sameOrBefore(AUG_04_2015_NOON_INSTANT_CET));
+    }
+
+    @Test
+    public void isInstantSameOrBeforeLaterInstantLaterZone() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.sameOrBefore(AUG_04_2015_NOON_INSTANT_EST));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantSameOrBeforeLaterDateTime() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC,
+                InstantMatchers.sameOrBefore(2015, AUGUST, 4, 11, 59, 0, 0, ZoneOffsets.UTC));
+    }
+
+    @Test
+    public void isInstantSameOrBeforeDateTime() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.sameOrBefore(2015, AUGUST, 4, 12, 0, 1, 0, ZoneOffsets.UTC));
+    }
+
+    @Test
+    public void isInstantSameOrBeforeSameDateTime() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.sameOrBefore(2015, AUGUST, 4, 12, 0, 0, 0, ZoneOffsets.UTC));
+    }
+
+    @Test(expectedExceptions = AssertionError.class, expectedExceptionsMessageRegExp = ASSERTION_PATTERN)
+    public void isInstantSameOrBeforeDateTimeEarlierZone() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.sameOrBefore(2015, AUGUST, 4, 12, 0, 0, 0, ZoneOffsets.CET));
+    }
+
+    @Test
+    public void isInstantSameOrBeforeDateTimeLaterZone() {
+        assertThat(AUG_04_2015_NOON_INSTANT_UTC, InstantMatchers.sameOrBefore(2015, AUGUST, 4, 12, 0, 0, 0, ZoneOffsets.EST));
+    }
+    
 }

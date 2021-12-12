@@ -93,6 +93,13 @@ public class TemporalProviders {
 		return (zone) -> date;
 	}
 
+	   /**
+     * Factory to create a {@link TemporalProvider} for a {@link LocalDate}
+     */
+    public static TemporalProvider<LocalDate> localDate(Instant date) {
+        return (zone) -> TemporalConverters.INSTANT_AS_LOCALDATE.apply(date, zone);
+    }
+
 	/**
 	 * Factory to create a {@link TemporalProvider} for a {@link LocalDate}
 	 */
@@ -225,6 +232,13 @@ public class TemporalProviders {
 		return (zone) -> Year.of(year);
 	}
 
+	   /**
+     * Factory to create a {@link TemporalProvider} for a {@link Year}
+     */
+    public static TemporalProvider<Year> year(Instant instant) {
+        return (zone) ->  TemporalConverters.INSTANT_AS_YEAR.apply(instant, zone);
+    }
+
 	/**
 	 * Factory to create a {@link TemporalProvider} for a {@link Year}
 	 */
@@ -238,7 +252,14 @@ public class TemporalProviders {
     public static TemporalProvider<Month> month(OffsetDateTime date) {
         return (zone) -> offsetDateTime(date).apply(zone).getMonth();
     }
-	
+
+    /**
+     * Factory to create a {@link TemporalProvider} for a {@link Month}
+     */
+    public static TemporalProvider<Month> month(Instant date) {
+        return (zone) -> TemporalConverters.INSTANT_AS_MONTH.apply(date, zone);
+    }
+
 	/**
 	 * Factory to create a {@link TemporalProvider} for a {@link Month}
 	 */
@@ -323,6 +344,13 @@ public class TemporalProviders {
 		return (zone) -> DayOfMonth.from(zonedDateTime(date).apply(zone));
 	}
 
+	   /**
+     * Factory to create a {@link TemporalProvider} for a {@link DayOfMonth}
+     */
+    public static TemporalProvider<DayOfMonth> dayOfMonth(Instant date) {
+        return (zone) -> TemporalConverters.INSTANT_AS_DAYOFMONTH.apply(date, zone);
+    }
+
     /**
      * Factory to create a {@link TemporalProvider} for a {@link DayOfMonth}
      */
@@ -364,6 +392,13 @@ public class TemporalProviders {
 	public static TemporalProvider<Hour> hour(Date date) {
 		return (zone) -> Hour.from(zonedDateTime(date).apply(zone));
 	}
+
+	   /**
+     * Factory to create a {@link TemporalProvider} for a {@link Hour}
+     */
+    public static TemporalProvider<Hour> hour(Instant date) {
+        return (zone) -> TemporalConverters.INSTANT_AS_HOUR.apply(date, zone);
+    }
 
 	/**
 	 * Factory to create a {@link TemporalProvider} for a {@link Hour}
@@ -443,12 +478,26 @@ public class TemporalProviders {
 		return (zone) -> Minute.from(time);
 	}
 
+    /**
+     * Factory to create a {@link TemporalProvider} for a {@link Second}
+     */
+    public static TemporalProvider<Minute> minute(Instant date) {
+        return (zone) -> TemporalConverters.INSTANT_AS_MINUTE.apply(date, zone);
+    }
+	
 	/**
 	 * Factory to create a {@link TemporalProvider} for a {@link Second}
 	 */
 	public static TemporalProvider<Second> second(Date date) {
 		return (zone) -> Second.from(zonedDateTime(date).apply(zone));
 	}
+
+    /**
+     * Factory to create a {@link TemporalProvider} for a {@link Second}
+     */
+    public static TemporalProvider<Second> second(Instant date) {
+        return (zone) -> TemporalConverters.INSTANT_AS_SECOND.apply(date, zone);
+    }
 
 	/**
 	 * Factory to create a {@link TemporalProvider} for a {@link Second}

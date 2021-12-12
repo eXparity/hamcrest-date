@@ -4,9 +4,18 @@ package org.exparity.hamcrest.date.testutils;
 import static java.time.LocalTime.MIDNIGHT;
 import static java.time.LocalTime.NOON;
 import static org.exparity.dates.en.FluentDateTime.*;
-import static org.exparity.hamcrest.date.testutils.TimeZones.*;
+import static org.exparity.hamcrest.date.testutils.TimeZones.CET_AS_TZ;
+import static org.exparity.hamcrest.date.testutils.TimeZones.EST_AS_TZ;
+import static org.exparity.hamcrest.date.testutils.TimeZones.GMT_AS_TZ;
+import static org.exparity.hamcrest.date.testutils.TimeZones.PST_AS_TZ;
 
-import java.time.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
+import java.time.OffsetDateTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -212,7 +221,42 @@ public abstract class Dates {
     public static final OffsetDateTime AUG_04_2015_01PM_OFFSET_EST = OffsetDateTime.of(AUG_04_2015_NOON, ZoneOffsets.EST);
     public static final OffsetDateTime AUG_04_2015_NOON_OFFSET_CET = OffsetDateTime.of(AUG_04_2015_NOON, ZoneOffsets.CET);
     public static final OffsetDateTime AUG_05_2015_01AM_OFFSET_CET = OffsetDateTime.of(AUG_05_2015_01AM, ZoneOffsets.CET);
-	
+
+    public static final Instant JAN_01_2012_MIDNIGHT_INSTANT_CET = JAN_01_2012_MIDNIGHT.toInstant(ZoneOffsets.CET);
+    public static final Instant JUN_14_2012_NOON_INSTANT_UTC = JUN_14_2012_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant JUN_15_2012_11AM_INSTANT_UTC = JUN_15_2012_11AM.toInstant(ZoneOffsets.UTC);
+    public static final Instant JUN_15_2012_NOON_INSTANT_UTC = JUN_15_2012_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant JAN_01_2015_NOON_INSTANT_UTC = JAN_01_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant FEB_01_2015_NOON_INSTANT_UTC = FEB_01_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant MAR_01_2015_NOON_INSTANT_UTC = MAR_01_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant APR_01_2015_NOON_INSTANT_UTC = APR_01_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant MAY_01_2015_NOON_INSTANT_UTC = MAY_01_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant JUN_01_2015_NOON_INSTANT_UTC = JUN_01_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant JUL_01_2015_NOON_INSTANT_UTC = JUL_01_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant AUG_01_2015_NOON_INSTANT_UTC = AUG_01_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant AUG_03_2015_NOON_INSTANT_UTC = AUG_03_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant AUG_04_2015_11AM_INSTANT_UTC = AUG_04_2015_1159.toInstant(ZoneOffsets.UTC);
+    public static final Instant AUG_04_2015_NOON_INSTANT_UTC = AUG_04_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant AUG_04_2015_MIDNIGHT_INSTANT_UTC = AUG_04_2015_MIDNIGHT.toInstant(ZoneOffsets.UTC);
+    public static final Instant AUG_04_2015_01PM_INSTANT_UTC = AUG_04_2015_1201.toInstant(ZoneOffsets.UTC);
+    public static final Instant AUG_05_2015_NOON_INSTANT_UTC = AUG_05_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant AUG_06_2015_NOON_INSTANT_UTC = AUG_06_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant AUG_07_2015_NOON_INSTANT_UTC = AUG_07_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant AUG_08_2015_NOON_INSTANT_UTC = AUG_08_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant AUG_09_2015_NOON_INSTANT_UTC = AUG_09_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant AUG_31_2015_NOON_INSTANT_UTC = AUG_31_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant SEP_04_2015_NOON_INSTANT_UTC = SEP_04_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant SEP_30_2015_NOON_INSTANT_UTC = SEP_30_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant OCT_01_2015_NOON_INSTANT_UTC = OCT_01_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant NOV_01_2015_NOON_INSTANT_UTC = NOV_01_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant DEC_01_2015_NOON_INSTANT_UTC = DEC_01_2015_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant AUG_04_2016_NOON_INSTANT_UTC = AUG_04_2016_NOON.toInstant(ZoneOffsets.UTC);
+    public static final Instant AUG_03_2015_11PM_INSTANT_EST = AUG_03_2015_11PM.toInstant(ZoneOffsets.EST);
+    public static final Instant AUG_04_2015_NOON_INSTANT_EST = AUG_04_2015_NOON.toInstant(ZoneOffsets.EST);
+    public static final Instant AUG_04_2015_01PM_INSTANT_EST = AUG_04_2015_NOON.toInstant(ZoneOffsets.EST);
+    public static final Instant AUG_04_2015_NOON_INSTANT_CET = AUG_04_2015_NOON.toInstant(ZoneOffsets.CET);
+    public static final Instant AUG_05_2015_01AM_INSTANT_CET = AUG_05_2015_01AM.toInstant(ZoneOffsets.CET);
+    
 	// SQL Date
 	public static final java.sql.Date JAN_01_2012_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2012, 1, 1));
 	public static final java.sql.Date JAN_02_2012_AS_SQL = java.sql.Date.valueOf(LocalDate.of(2012, 1, 2));
