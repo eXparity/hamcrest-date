@@ -19,7 +19,7 @@ A maven project
 <dependency>
     <groupId>org.exparity</groupId>
     <artifactId>hamcrest-date</artifactId>
-    <version>2.0.7</version>
+    <version>2.0.8</version>
 </dependency>
 ```
 
@@ -89,6 +89,13 @@ or to match ZonedDateTime values:
 ```java
 ZonedDateTime myAppointment = ZonedDateTime.of(LocalDateTime.of(2015, AUGUST, 9, 10, 30, 0), ZoneId.of("UTC"));
 assertThat(ZonedDateTime.now(), within(15, MINUTES, myAppointment));
+```
+
+or to match Instant values:
+
+```java
+Instant instant = Instant.now();
+assertThat(instant, within(1, SECONDS, Instant.now());
 ```
 
 or to match OffsetDateTime values:
@@ -174,6 +181,9 @@ The source includes a pom.xml for building with Maven
 
 Release Notes
 -------------
+Changes 2.0.7 -> 2.0.8
+  * Fix Issue 37 - Add support for InstantMatchers
+  
 Changes 2.0.6 -> 2.0.7
   * Fix Issue 26 - Use licence consistently in release jar files
   * Fix Issue 32 - Fix assertion errors for temporals with timezones
