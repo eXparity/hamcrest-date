@@ -38,18 +38,20 @@ import org.exparity.hamcrest.date.core.IsYear;
 import org.exparity.hamcrest.date.core.TemporalConverters;
 import org.exparity.hamcrest.date.core.TemporalMatcher;
 import org.exparity.hamcrest.date.core.types.Interval;
-import org.hamcrest.Factory;
+
 
 /**
  * Static factory for creating {@link org.hamcrest.Matcher} instances for comparing {@link ZonedDateTime} instances
  *
  * @author Stewart Bissett
  */
-public abstract class InstantMatchers {
+public final class InstantMatchers {
 
+    private InstantMatchers(){}
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is after the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -63,8 +65,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is after the end of the reference year
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -91,8 +94,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is before the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -106,8 +110,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is before the end of the reference year
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -134,8 +139,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the same day of the year as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -149,8 +155,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the same day of the year as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -164,8 +171,9 @@ public abstract class InstantMatchers {
     }
     
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the same day of the year as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -181,8 +189,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the same day of the year as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -198,8 +207,9 @@ public abstract class InstantMatchers {
     }
     
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is at the same instant as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -213,8 +223,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is at the same specified instance down to the second
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -242,8 +253,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is at the same instant or before the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -257,9 +269,10 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the same day or before the start of the reference
      * date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -275,7 +288,6 @@ public abstract class InstantMatchers {
      * @param nanos the nanosecond of the second
      * @param tz the time zone of the date to check against
      */
-    @Factory
     public static TemporalMatcher<Instant> sameOrBefore(final int year,
             final Month month,
             final int day,
@@ -288,8 +300,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is at the same instant or after the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -303,9 +316,10 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the same day or before the start of the reference
      * date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -321,7 +335,6 @@ public abstract class InstantMatchers {
      * @param nanos the nanosecond of the second
      * @param tz the time zone of the date to check against
      */
-    @Factory
     public static TemporalMatcher<Instant> sameOrAfter(final int year,
             final Month month,
             final int day,
@@ -334,8 +347,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the same month as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -349,8 +363,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the same day of the month as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -364,8 +379,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the expected day of the month
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -379,8 +395,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the same year as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -394,8 +411,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the same year as the reference year
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -409,8 +427,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is within a defined period the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -429,8 +448,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is within a given period of the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -464,8 +484,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is yesterday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -477,8 +498,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is today
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -490,8 +512,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is tomorrow
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -503,8 +526,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the same day of the week as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -518,8 +542,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the same day of the week as the supplied day
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -531,8 +556,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the same day of the week as any of the supplied days
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -544,8 +570,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on a monday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -557,8 +584,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on a tuesday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -570,8 +598,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on a wednesday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -583,8 +612,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on a thursday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -596,8 +626,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on a friday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -609,8 +640,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on a saturday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -622,8 +654,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on a sunday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -635,8 +668,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on a weekday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -648,8 +682,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on a weekend
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -661,8 +696,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the first day of the month
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -674,9 +710,10 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the maximum value of the given date part in its
      * period
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -690,8 +727,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the first day of the month
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -703,9 +741,10 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the maximum value of the given date part in its
      * period
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -719,8 +758,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is in the expected month
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -732,8 +772,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is in January
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -745,8 +786,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is in February
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -758,8 +800,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is in March
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -771,8 +814,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is in April
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -784,8 +828,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is in May
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -797,8 +842,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is in June
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -810,8 +856,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is in July
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -823,8 +870,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is in August
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -836,8 +884,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is in September
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -849,8 +898,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is in October
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -862,8 +912,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is in November
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -875,8 +926,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is in December
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -888,8 +940,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is a leap year
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -901,8 +954,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the expected hour (0-23)
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -916,8 +970,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the same hour as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -931,8 +986,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the expected minute (0-59)
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -946,8 +1002,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the same minute as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -961,8 +1018,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the expected second (0-59)
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -976,8 +1034,9 @@ public abstract class InstantMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the same second as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
