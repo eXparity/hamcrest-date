@@ -4,6 +4,9 @@
 .classpath
 .project
 
+# IDEA Files #
+.idea
+
 # Package Files #
 *.jar
 *.war

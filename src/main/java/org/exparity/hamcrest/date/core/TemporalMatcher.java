@@ -7,7 +7,7 @@ import java.util.Locale;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * Abstract {@link org.hamcrest.Matcher<T>} for temporal objects allowing for time zone manipulation.
+ * Abstract {@link org.hamcrest.Matcher} for temporal objects allowing for time zone manipulation.
  *
  * @param <T> the type of objects handled by this matcher
  *

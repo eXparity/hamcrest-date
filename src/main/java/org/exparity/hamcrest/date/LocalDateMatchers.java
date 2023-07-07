@@ -38,11 +38,14 @@ import org.exparity.hamcrest.date.core.types.Interval;
  *
  * @author Stewart Bissett
  */
-public abstract class LocalDateMatchers {
+public final class LocalDateMatchers {
+
+    private LocalDateMatchers(){}
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is after the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -56,8 +59,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is after the end of the reference year
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -73,8 +77,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is before the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -88,8 +93,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is before the end of the reference year
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -105,8 +111,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on the same day of the year as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -120,8 +127,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on the same day of the year as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -137,8 +145,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is at the same instant or before the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -152,9 +161,10 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on the same day or before the start of the reference
      * date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -170,8 +180,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is at the same instant or after the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -185,8 +196,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on the same day or after the start of the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -202,8 +214,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on the same month as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -217,8 +230,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on the same day of the month as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -232,8 +246,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on the expected day of the month
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -247,8 +262,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on the same year as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -262,8 +278,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on the same year as the reference year
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -277,8 +294,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is within a defined period the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -292,8 +310,9 @@ public abstract class LocalDateMatchers {
     }
     
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is within a defined period the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -307,8 +326,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is within a given period of the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -330,8 +350,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is yesterday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -343,8 +364,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is today
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -356,8 +378,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is tomorrow
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -369,8 +392,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on the same day of the week as the reference date
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -384,8 +408,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on a monday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -397,8 +422,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on a monday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -410,8 +436,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on a monday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -423,8 +450,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on a tuesday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -436,8 +464,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on a wednesday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -449,8 +478,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on a thursday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -462,8 +492,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on a friday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -475,8 +506,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on a saturday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -488,8 +520,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on a sunday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -501,8 +534,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on a weekday
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -514,8 +548,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on a weekend
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -527,8 +562,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on the first day of the month
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -540,9 +576,10 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on the maximum value of the given date part in its
      * period
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -556,8 +593,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on the first day of the month
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -569,9 +607,10 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is on the maximum value of the given date part in its
      * period
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -585,8 +624,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is in the expected month
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -598,8 +638,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is in January
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -611,8 +652,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is in February
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -624,8 +666,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is in March
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -637,8 +680,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is in April
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -650,8 +694,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is in May
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -663,8 +708,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is in June
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -676,8 +722,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is in July
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -689,8 +736,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is in August
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -702,8 +750,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is in September
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -715,8 +764,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is in October
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -728,8 +778,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is in November
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -741,8 +792,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is in December
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -754,8 +806,9 @@ public abstract class LocalDateMatchers {
     }
 
     /**
+     *<p>
      * Creates a matcher that matches when the examined date is a leap year
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>

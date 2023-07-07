@@ -32,11 +32,14 @@ import org.hamcrest.Matcher;
  *
  * @author Stewart Bissett
  */
-public abstract class LocalTimeMatchers {
+public final class LocalTimeMatchers {
+
+    private LocalTimeMatchers(){}
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined time is after the reference time
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -50,8 +53,9 @@ public abstract class LocalTimeMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined time is after the end of the reference year
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -67,8 +71,9 @@ public abstract class LocalTimeMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined time is before the reference time
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -82,8 +87,9 @@ public abstract class LocalTimeMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined time is before the end of the reference year
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -99,8 +105,9 @@ public abstract class LocalTimeMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined time is at the same instant or before the reference time
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -114,9 +121,10 @@ public abstract class LocalTimeMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined time is on the same day or before the start of the reference
      * time
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -132,8 +140,9 @@ public abstract class LocalTimeMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined time is at the same instant or after the reference time
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -147,8 +156,9 @@ public abstract class LocalTimeMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined time is on the same day or after the start of the reference time
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -164,8 +174,9 @@ public abstract class LocalTimeMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined time is within a defined period the reference time
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -179,8 +190,9 @@ public abstract class LocalTimeMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined time is within a given period of the reference time
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -202,9 +214,10 @@ public abstract class LocalTimeMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the maximum value of the given date part in its
      * period
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -218,9 +231,10 @@ public abstract class LocalTimeMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined date is on the maximum value of the given date part in its
      * period
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -234,8 +248,9 @@ public abstract class LocalTimeMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined time is on the expected hour (0-23)
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -249,8 +264,9 @@ public abstract class LocalTimeMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined time is on the same hour as the reference time
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -264,8 +280,9 @@ public abstract class LocalTimeMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined time is on the expected minute (0-59)
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -279,8 +296,9 @@ public abstract class LocalTimeMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined time is on the same minute as the reference time
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -294,8 +312,9 @@ public abstract class LocalTimeMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined time is on the expected second (0-59)
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
@@ -309,8 +328,9 @@ public abstract class LocalTimeMatchers {
     }
 
     /**
+     * <p>
      * Creates a matcher that matches when the examined time is on the same second as the reference time
-     * <p/>
+     * </p>
      * For example:
      *
      * <pre>
